@@ -18,7 +18,9 @@ export class CoursePageComponent {
     { id: 'animation', label: 'Animation' },
     { id: 'modeling', label: 'Modeling' },
     { id: 'conceptArt', label: 'Concept Art' },
-    { id: 'visualEffects', label: 'Visual Effects' }
+    { id: 'visualEffects', label: 'Visual Effects' },
+    { id: 'gameDesign', label: 'Game Development' }
+
   ];
 
   selectedTab = 'all';
@@ -27,30 +29,215 @@ export class CoursePageComponent {
 
   courses = [
     {
-      title: 'Real-time Virtual Production',
+      title: '3D Animation',
       category: 'animation',
       imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
       description: 'This is a wider card with supporting text...',
       time: '9 mins'
     },
     {
-      title: 'Concept Art Fundamentals',
+      title: '3D Animation',
+      category: 'animation',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: '3D Animation',
+      category: 'animation',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: '3D Animation',
+      category: 'animation',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: '3D Animation',
+      category: 'animation',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: '3D Modeling',
+      category: 'modeling',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: '3D Modeling',
+      category: 'modeling',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: '3D Modeling',
+      category: 'modeling',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+     {
+      title: '3D Modeling',
+      category: 'modeling',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: '3D Modeling',
+      category: 'modeling',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Art Concept',
       category: 'conceptArt',
-      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp',
-      description: 'Learn the basics of concept art...',
-      time: '12 mins'
-    }
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Art Concept',
+      category: 'conceptArt',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Art Concept',
+      category: 'conceptArt',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Art Concept',
+      category: 'conceptArt',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Art Concept',
+      category: 'conceptArt',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'VFX',
+      category: 'visualEffects',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'VFX',
+      category: 'visualEffects',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'VFX',
+      category: 'visualEffects',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'VFX',
+      category: 'visualEffects',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'VFX',
+      category: 'visualEffects',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Gaming',
+      category: 'gameDesign',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Gaming',
+      category: 'gameDesign',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Gaming',
+      category: 'gameDesign',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Gaming',
+      category: 'gameDesign',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+    {
+      title: 'Gaming',
+      category: 'gameDesign',
+      imageUrl: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1735393677/real-time-virtual-production-diploma-course-tile_mrfff0.webp',
+      description: 'This is a wider card with supporting text...',
+      time: '9 mins'
+    },
+
+
+
+
     // more courses...
   ];
 
   selectTab(tabId: string) {
     this.selectedTab = tabId;
   }
-
-  getCoursesByCategory(categoryId: string) {
-    if (categoryId === 'all') return this.courses;
-    return this.courses.filter(course => course.category === categoryId);
+  getCoursesByCategory(categoryId: string): any[] {
+    if (categoryId === 'all') {
+      return this.courses;
+    } else {
+      return this.courses.filter(course => course.category === categoryId);
+    }
   }
+
+
+
+
+  // onCategoryChange(categoryId: string) {
+  //   this.selectedCategory = categoryId;
+  //   this.selectedTab = categoryId;
+
+  //   setTimeout(() => {
+  //     const carouselElement = document.getElementById('carousel-' + categoryId);
+  //     if (carouselElement) {
+  //       new bootstrap.Carousel(carouselElement);
+  //     }
+  //   }, 0);
+
+
+  // }
+
 
   // This method will be triggered when the tab or dropdown changes
   onCategoryChange(categoryId: string) {
@@ -67,5 +254,23 @@ export class CoursePageComponent {
     this.router.navigateByUrl(`courses/courseName`);
 
   }
+  getCarouselSlides(categoryId: string): any[][] {
+    let filteredCourses = this.courses;
+
+    if (categoryId !== 'all') {
+      filteredCourses = this.courses.filter(course => course.category === categoryId);
+    }
+
+    const slides: any[][] = [];
+    for (let i = 0; i < filteredCourses.length; i += 3) {
+      slides.push(filteredCourses.slice(i, i + 3));
+    }
+    return slides;
+  }
+
+
+
+
+
 
 }

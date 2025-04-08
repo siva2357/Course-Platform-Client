@@ -9,22 +9,6 @@ body {
 
 
 
-/* Carousel base class */
-.carousel {
-  margin-bottom: 4rem;
-}
-/* Since positioning the image, we need to help out the caption */
-.carousel-caption {
-  bottom: 3rem;
-  z-index: 10;
-}
-
-/* Declare heights because of positioning of img element */
-.carousel-item {
-  height: 32rem;
-}
-
-
 
 .nav-tabs .nav-link {
   color: black;
@@ -49,3 +33,32 @@ body {
 .nav-tabs .nav-item {
   margin-right: 12px;
 }
+
+
+
+
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  padding: 0 10px;
+  z-index: 1;
+}
+
+.carousel-control-prev {
+  left: -30px;
+}
+
+.carousel-control-next {
+  right: -30px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
+  padding: 10px;
+}
+
