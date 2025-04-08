@@ -5,14 +5,16 @@ import { DatePipe } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
 
-import { AppFooterComponent } from '../../app-footer/app-footer.component';
-import { AppHeaderComponent } from '../../app-header/app-header.component';
+import { AppFooterComponent } from './app-footer/app-footer.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
+import { LearnerNavbarComponent } from './learner-navbar/learner-navbar.component';
 
 @NgModule({
   declarations: [
 
     AppHeaderComponent,
-    AppFooterComponent
+    AppFooterComponent,
+    LearnerNavbarComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { AppHeaderComponent } from '../../app-header/app-header.component';
   ],
  exports: [
     AppHeaderComponent,
-    AppFooterComponent
+    AppFooterComponent,
+    LearnerNavbarComponent
   ],
   providers: [DatePipe],
 })

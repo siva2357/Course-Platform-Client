@@ -8,23 +8,15 @@ body {
 }
 
 
-
-/* Carousel base class */
-.carousel {
-  margin-bottom: 4rem;
-}
-/* Since positioning the image, we need to help out the caption */
-.carousel-caption {
-  bottom: 3rem;
-  z-index: 10;
+body {
+  scroll-behavior: smooth;
+  padding-top: 60px;
 }
 
-/* Declare heights because of positioning of img element */
-.carousel-item {
-  height: 32rem;
+section {
+  padding: 100px 20px;
+  min-height: 100vh;
 }
-
-
 
 .nav-tabs .nav-link {
   color: black;
@@ -40,12 +32,15 @@ body {
 }
 
 .nav-tabs .nav-link.active {
+  font-weight: bold;
   color: #0d6efd !important;
   border-bottom: 2px solid #0d6efd;
-  background-color: transparent;
 }
 
-/* Extra spacing between tabs */
 .nav-tabs .nav-item {
   margin-right: 12px;
+}
+
+html {
+  scroll-padding-top: 70px;
 }
