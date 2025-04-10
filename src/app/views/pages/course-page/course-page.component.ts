@@ -8,10 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CoursePageComponent {
 
-
-
   constructor(private router:Router) { }
-
 
   categories = [
     { id: 'all', label: 'All' },
@@ -24,7 +21,7 @@ export class CoursePageComponent {
   ];
 
   selectedTab = 'all';
-  selectedCategory: string = 'all'; // or default category ID like 'all'
+  selectedCategory: string = 'all';
 
 
   courses = [
@@ -221,25 +218,6 @@ export class CoursePageComponent {
     }
   }
 
-
-
-
-  // onCategoryChange(categoryId: string) {
-  //   this.selectedCategory = categoryId;
-  //   this.selectedTab = categoryId;
-
-  //   setTimeout(() => {
-  //     const carouselElement = document.getElementById('carousel-' + categoryId);
-  //     if (carouselElement) {
-  //       new bootstrap.Carousel(carouselElement);
-  //     }
-  //   }, 0);
-
-
-  // }
-
-
-  // This method will be triggered when the tab or dropdown changes
   onCategoryChange(categoryId: string) {
     this.selectedCategory = categoryId;
     this.selectedTab = categoryId;
@@ -270,7 +248,9 @@ export class CoursePageComponent {
 
 
 
-
+  goToRegistrationPage(){
+    this.router.navigate(['learner/registration-page']);
+  }
 
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teaching-page',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./teaching-page.component.css']
 })
 export class TeachingPageComponent {
+
+  constructor( private router: Router) {}
+
+
+  goToRegistrationPage(){
+    this.router.navigate(['educator/registration-page']);
+  }
 
 }

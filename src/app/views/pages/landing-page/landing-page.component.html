@@ -2,9 +2,9 @@
 
 
 <div class="container-fluid col-xxl-8 p-5">
-  <div class="row flex-lg-row-reverse align-items-center g-5 p-5 mt-5 mb-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 p-5  mb-5">
     <div class="col-10 col-sm-8 col-lg-6">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169962/12145601_Wavy_Edu-04_Single-05_f7arfo.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
     </div>
     <div class="col-lg-6">
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
@@ -35,54 +35,101 @@
 </div>
 
 
-<!-- Course Features -->
-<div class="container-fluid p-5 bg-body-secondary" id="custom-cards">
-  <h2 class="pb-2 border-bottom">Choose your path</h2>
-  <p  class="pb-2 fw-semibold">Specialized online courses and mentorship to prepare you for a career in the film, <br> animation, visualization and gaming industries</p>
 
-  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-    <div class="col">
-      <div class="card card-cover  overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://res.cloudinary.com/dpp8aspqs/image/upload/v1743944891/degrees-diplomas-nav-tile_jdtop4.webp'); height: 30rem;" >
-        <div class="d-flex flex-column  p-5 pb-3 text-white text-shadow-1">
-          <h3 class="pt-5 mt-5 mb-4  lh-1 fw-bold" style="text-decoration: underline;">Course Heading</h3>
-          <p>This is a wider card with supporting text below as a natural lead-in to additional content. This
-            content is a little bit longer.</p>
-          <a href="courses" class="text-white" style="text-decoration: none;"><h4 class="mt-5">DISCOVER MORE <i class="bi bi-arrow-right" style="font-size: 2rem; margin-left: 10px;"></i></h4></a>
+<div class="container-fluid p-5 bg-body-secondary">
 
-        </div>
+  <!-- DEGREES & DIPLOMA-->
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-12 col-md-8 mx-auto">
+        <h3 class="fw-semibold">All the skills you need in one place</h3>
+        <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the
+          creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+
       </div>
     </div>
+  </section>
 
-    <div class="col">
-      <div class="card card-cover  overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://res.cloudinary.com/dpp8aspqs/image/upload/v1743944891/career-tracks-nav-tile_aes8zg.webp'); height: 30rem;" >
-        <div class="d-flex flex-column  p-5 pb-3 text-white text-shadow-1">
-          <h3 class="pt-5 mt-5 mb-4  lh-1 fw-bold" style="text-decoration: underline;">Course Heading</h3>
-          <p>This is a wider card with supporting text below as a natural lead-in to additional content. This
-            content is a little bit longer.</p>
-          <a href="courses" class="text-white" style="text-decoration: none;"><h4 class="mt-5">DISCOVER MORE <i class="bi bi-arrow-right" style="font-size: 2rem; margin-left: 10px;"></i></h4></a>
 
+
+
+
+  <div class="mb-4 d-block d-md-none">
+    <select class="form-select" style="font-size: 14px;" [(ngModel)]="selectedCategory"
+      (change)="onCategoryChange(selectedCategory)">
+
+      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.label }}</option>
+    </select>
+  </div>
+
+
+
+  <!-- Tabs for desktop -->
+  <ul class="nav nav-tabs  d-none d-md-flex">
+    <li class="nav-item" *ngFor="let cat of categories">
+      <a class="nav-link" [class.active]="selectedCategory === cat.id" (click)="onCategoryChange(cat.id)"
+        style="cursor: pointer;">
+        {{ cat.label }}
+      </a>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" *ngFor="let cat of categories" [hidden]="selectedCategory !== cat.id">
+      <div class="album mt-5 bg-body-tertiary">
+        <!-- Carousel -->
+        <div class="position-relative">
+          <div [id]="'carousel-' + cat.id" class="carousel slide mb-6 " data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item" *ngFor="let slide of getCarouselSlides(cat.id); let i = index"
+                [class.active]="i === 0">
+                <div class="row">
+                  <div class="col-md-4" *ngFor="let course of slide">
+                    <div class="card h-100 shadow-sm mx-2">
+                      <img [src]="course.imageUrl" class="card-img-top" [alt]="course.title"
+                        style="height: 225px; object-fit: cover;">
+                      <div class="card-body">
+                        <h5>{{ course.title }}</h5>
+                        <p class="card-text">{{ course.description }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="goToCoursePage()">View
+                            more</button>
+                          <small class="text-body-secondary">{{ course.time }}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel-' + cat.id"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel-' + cat.id"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+
+
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col">
-      <div class="card card-cover  overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://res.cloudinary.com/dpp8aspqs/image/upload/v1743944546/7567b0ea-a7c6-4e90-8d7f-7049d919da1a_pff3zx.png'); height: 30rem;" >
-        <div class="d-flex flex-column  p-5 pb-3 text-white text-shadow-1">
-          <h3 class="pt-5 mt-5 mb-4  lh-1 fw-bold" style="text-decoration: underline;">Course Heading</h3>
-          <p>This is a wider card with supporting text below as a natural lead-in to additional content. This
-            content is a little bit longer.</p>
-          <a href="courses" class="text-white" style="text-decoration: none;"><h4 class="mt-5">DISCOVER MORE <i class="bi bi-arrow-right" style="font-size: 2rem; margin-left: 10px;"></i></h4></a>
 
-        </div>
+
       </div>
+
     </div>
   </div>
 
 
 
-
-
-  <div class="col d-flex justify-content-center">
+  <div class="col mt-5 d-flex justify-content-center">
     <a href="courses">
     <button class="btn btn-outline-primary px-4 py-3 text-center">
       BROWSE ALL COURSES
@@ -93,12 +140,81 @@
 </div>
 
 
+<section id="feature-section">
+  <div class="container-fluid p-5 bg-white">
+    <p class="text-center text-dark fs-5 fw-bold mt-5">Immersive learning</p>
+    <h3 class="text-center text-dark mb-5">
+      Reimagine Learning And Development With Creative-Hub
+    </h3>
+
+    <div class="container mt-5 mb-5 p-3">
+      <div class="row g-4 justify-content-center">
+
+        <!-- Feature Card Template -->
+        <div class="col-lg-3 col-md-6 col-sm-12 d-flex align-items-stretch">
+          <div class="card  rounded-4 shadow-lg text-center w-100 h-100" style="transition: 0.3s ease; border: 1px solid black; cursor: pointer;">
+
+            <div class="card-body d-flex flex-column align-items-center justify-content-between">
+
+              <div class="feature-icon mb-3 fs-2 text-primary">
+                <i class="bi bi-journal-code"></i>
+              </div>
+
+              <h5 class="text-dark">Training</h5>
+              <p class="text-secondary">With more than 1000 training content pieces, learn all on the same platform.</p>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Repeat other cards similarly -->
+        <div class="col-lg-3 col-md-6 col-sm-12 d-flex align-items-stretch">
+          <div class="card  rounded-4 shadow-lg text-center  w-100 h-100" style="transition: 0.3s ease; border: 1px solid black; cursor: pointer;">
+            <div class="card-body d-flex flex-column align-items-center justify-content-between">
+              <div class="feature-icon mb-3 fs-2 text-primary">
+                <i class="bi bi-book"></i>
+              </div>
+              <h5 class="text-dark">Digital Learning</h5>
+              <p class="text-secondary">Train immersively with industry-grade tools in a life-like job environment.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12 d-flex align-items-stretch">
+          <div class="card  rounded-4 shadow-lg text-center  w-100 h-100" style="transition: 0.3s ease; border: 1px solid black; cursor: pointer;">
+            <div class="card-body d-flex flex-column align-items-center justify-content-between">
+              <div class="feature-icon mb-3 fs-2 text-primary">
+                <i class="bi bi-shield-lock"></i>
+              </div>
+              <h5 class="text-dark">More Practice</h5>
+              <p class="text-secondary">Practice as many times as needed, until you ace the skills.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12 d-flex align-items-stretch">
+          <div class="card  rounded-4 shadow-lg text-center  w-100 h-100" style="transition: 0.3s ease; border: 1px solid black; cursor: pointer;">
+            <div class="card-body d-flex flex-column align-items-center justify-content-between">
+              <div class="feature-icon mb-3 fs-2 text-primary">
+                <i class="bi bi-graph-up"></i>
+              </div>
+              <h5 class="text-dark">Real time Analysis</h5>
+              <p class="text-secondary">Detailed analytics to assess performance and highlight areas for improvement.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 <div class="container-fluid col-xxl-8 p-5">
   <div class="row flex-lg-row-reverse align-items-center g-5 p-5 mt-5 mb-5">
     <div class="col-10 col-sm-8 col-lg-6">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744170029/26196026_top_management_15_qdqj4g.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
     </div>
     <div class="col-lg-6">
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
@@ -113,58 +229,6 @@
 
 
 
-<div id="testimonials" class="container py-5">
-  <div class="text-center mb-5">
-    <h2>Why people choose Coursera for their career</h2>
-  </div>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-    <!-- Testimonial 1 -->
-    <div class="col">
-      <div class="card h-100 text-center p-3">
-        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera_assets.s3.amazonaws.com/growth_testimonials/passionate_learner/Felipe_Moitta.png?auto=format%2Ccompress&dpr=1&w=64&h=64&fit=crop"
-             class="rounded-circle mx-auto mb-3" alt="Felipe M.">
-        <h5 class="mb-1">Felipe M.</h5>
-        <p class="text-muted">Learner since 2018</p>
-        <p class="fst-italic">"To be able to take courses at my own pace and rhythm has been an amazing experience. I can learn whenever it fits my schedule and mood."</p>
-      </div>
-    </div>
-
-    <!-- Testimonial 2 -->
-    <div class="col">
-      <div class="card h-100 text-center p-3">
-        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera_assets.s3.amazonaws.com/growth_testimonials/passionate_learner/Jennifer_John.png?auto=format%2Ccompress&dpr=1&w=64&h=64&fit=crop"
-             class="rounded-circle mx-auto mb-3" alt="Jennifer J.">
-        <h5 class="mb-1">Jennifer J.</h5>
-        <p class="text-muted">Learner since 2020</p>
-        <p class="fst-italic">"I directly applied the concepts and skills I learned from my courses to an exciting new project at work."</p>
-      </div>
-    </div>
-
-    <!-- Testimonial 3 -->
-    <div class="col">
-      <div class="card h-100 text-center p-3">
-        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera_assets.s3.amazonaws.com/growth_testimonials/passionate_learner/Larry_Tao_Wang_1.png?auto=format%2Ccompress&dpr=1&w=64&h=64&fit=crop"
-             class="rounded-circle mx-auto mb-3" alt="Larry W.">
-        <h5 class="mb-1">Larry W.</h5>
-        <p class="text-muted">Learner since 2021</p>
-        <p class="fst-italic">"When I need courses on topics that my university doesn't offer, Coursera is one of the best places to go."</p>
-      </div>
-    </div>
-
-    <!-- Testimonial 4 -->
-    <div class="col">
-      <div class="card h-100 text-center p-3">
-        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera_assets.s3.amazonaws.com/growth_testimonials/passionate_learner/Chaitanya_Anand.png?auto=format%2Ccompress&dpr=1&w=64&h=64&fit=crop"
-             class="rounded-circle mx-auto mb-3" alt="Chaitanya A.">
-        <h5 class="mb-1">Chaitanya A.</h5>
-        <p class="text-muted">Learner</p>
-        <p class="fst-italic">"Learning isn't just about being better at your job: it's so much more than that. Coursera allows me to learn without limits."</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 
-
-
-<!-- <app-app-footer></app-app-footer> -->
+<app-app-footer></app-app-footer>
