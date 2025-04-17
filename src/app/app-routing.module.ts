@@ -19,8 +19,8 @@ const routes: Routes = [
   { path: 'courses/courseName', component: CoursePageDetailsComponent, title: 'Course page' },
   { path: 'courses/category', component: CourseCategoryComponent, title: 'Course page' },
   { path: 'learning', component:  LearningPageComponent, title: 'Course page' },
-
   { path: 'teaching', component:  TeachingPageComponent, title: 'Course page' },
+
   { path: 'educator/registration-page', component:  EducatorRegistrationPageComponent, title: 'Course page' },
   { path: 'educator/login-page', component:  EducatorLoginPageComponent, title: 'Course page' },
 

@@ -19,6 +19,8 @@ import { EducatorRegistrationPageComponent } from './views/pages/educator/educat
 import { CourseCategoryComponent } from './views/pages/course-category/course-category.component';
 import { LearnerLoginPageComponent } from './views/pages/leaner/learner-login-page/learner-login-page.component';
 import { EducatorLoginPageComponent } from './views/pages/educator/educator-login-page/educator-login-page.component';
+import { EducatorCreateCoursePageComponent } from './educator-create-course-page/educator-create-course-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,8 @@ import { EducatorLoginPageComponent } from './views/pages/educator/educator-logi
     CourseCategoryComponent,
     LearnerLoginPageComponent,
     EducatorLoginPageComponent,
+    EducatorCreateCoursePageComponent,
+
   ],
   imports: [
     BrowserModule,

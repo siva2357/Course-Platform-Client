@@ -85,10 +85,10 @@
               <div class="carousel-item" *ngFor="let slide of getCarouselSlides(cat.id); let i = index"
                 [class.active]="i === 0">
                 <div class="row">
-                  <div class="col-md-4" *ngFor="let course of slide">
-                    <div class="card h-100 shadow-sm mx-2">
+                  <div class="col-md-3" *ngFor="let course of slide">
+                    <div class="card  shadow-sm mx-2" style="width:300px;">
                       <img [src]="course.imageUrl" class="card-img-top" [alt]="course.title"
-                        style="height: 225px; object-fit: cover;">
+                        style="object-fit: cover;">
                       <div class="card-body">
                         <h5>{{ course.title }}</h5>
                         <p class="card-text">{{ course.description }}</p>

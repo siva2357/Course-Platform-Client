@@ -240,8 +240,8 @@ export class LandingPageComponent {
     }
 
     const slides: any[][] = [];
-    for (let i = 0; i < filteredCourses.length; i += 3) {
-      slides.push(filteredCourses.slice(i, i + 3));
+    for (let i = 0; i < filteredCourses.length; i += 4) {
+      slides.push(filteredCourses.slice(i, i + 4));
     }
     return slides;
   }
