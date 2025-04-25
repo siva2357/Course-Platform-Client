@@ -49,17 +49,17 @@
 }
 
 .carousel-control-prev {
-  left: -30px;
+  left: -50px;
 }
 
 .carousel-control-next {
-  right: -30px;
+  right: -50px;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-color: black;
-  font-size: 1.0rem;
+  font-size: 0.8rem;
   padding: 10px;
 }
 

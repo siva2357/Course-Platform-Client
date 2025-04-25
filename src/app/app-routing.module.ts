@@ -20,14 +20,10 @@ const routes: Routes = [
   { path: 'courses/category', component: CourseCategoryComponent, title: 'Course page' },
   { path: 'learning', component:  LearningPageComponent, title: 'Course page' },
   { path: 'teaching', component:  TeachingPageComponent, title: 'Course page' },
-
   { path: 'educator/registration-page', component:  EducatorRegistrationPageComponent, title: 'Course page' },
   { path: 'educator/login-page', component:  EducatorLoginPageComponent, title: 'Course page' },
-
   { path: 'learner/registration-page', component:  LearnerRegistrationPageComponent, title: 'Course page' },
   { path: 'learner/login-page', component:  LearnerLoginPageComponent, title: 'Course page' },
-
-
   { path: '**', redirectTo: 'landing-page' }, // Fallback rou
 
 ];

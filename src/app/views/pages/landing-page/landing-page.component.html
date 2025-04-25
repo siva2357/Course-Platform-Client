@@ -77,7 +77,7 @@
 
   <div class="tab-content mt-3">
     <div class="tab-pane fade show active" *ngFor="let cat of categories" [hidden]="selectedCategory !== cat.id">
-      <div class="album mt-5 bg-body-tertiary">
+      <div class="album mt-5 ">
         <!-- Carousel -->
         <div class="position-relative">
           <div [id]="'carousel-' + cat.id" class="carousel slide mb-6 " data-bs-ride="carousel">
@@ -86,15 +86,14 @@
                 [class.active]="i === 0">
                 <div class="row">
                   <div class="col-md-3" *ngFor="let course of slide">
-                    <div class="card  shadow-sm mx-2" style="width:300px;">
+                    <div class="card shadow-sm " style="width: 300px;">
                       <img [src]="course.imageUrl" class="card-img-top" [alt]="course.title"
                         style="object-fit: cover;">
                       <div class="card-body">
                         <h5>{{ course.title }}</h5>
                         <p class="card-text">{{ course.description }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="goToCoursePage()">View
-                            more</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="goToCoursePage()">View more</button>
                           <small class="text-body-secondary">{{ course.time }}</small>
                         </div>
                       </div>
