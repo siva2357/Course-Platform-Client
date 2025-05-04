@@ -1,37 +1,28 @@
-<nav class="navbar navbar-expand-lg bg-white fixed-top shadow-lg" style="height: 65px;">
+<nav class="navbar navbar-expand-lg bg-white fixed-top shadow" style="height: 60px;">
   <div class="container-fluid">
 
       <!-- Brand -->
       <a href="#" class="navbar-brand d-flex align-items-center">
-        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg"
-             alt="logo" width="45" height="45" class="me-2">
-        <span>Creative Hub</span>
+        <span>Course Hub</span>
       </a>
 
-      <div class="mega-menu-wrapper"
-      (mouseenter)="onMenuEnter()"
-      (mouseleave)="onMenuLeave()">
+      <div class="mega-menu-wrapper"  (mouseenter)="onMenuEnter()" (mouseleave)="onMenuLeave()">
 
-   <button class="btn btn-outline-light text-dark" style="margin-right: 30px;">Explore</button>
+   <button class="btn btn-outline-primary text-dark" style="margin-right: 30px; font-size: 14px;">Explore</button>
 
    <div class="mega-menu-dropdown mt-3" *ngIf="showMenu">
      <!-- Main Categories -->
      <div class="category-column">
-       <div *ngFor="let category of mainCategories"
-            class="category-item"
-            [ngClass]="{'active': activeCategory === category}"
-            (mouseenter)="activeCategory = category">
+       <div *ngFor="let category of mainCategories"  class="category-item" [ngClass]="{'active': activeCategory === category}" (mouseenter)="activeCategory = category" style="font-size: 14px;">
          {{ category.name }}
        </div>
      </div>
 
      <!-- Subcategories -->
 <!-- Subcategories -->
-<div class="subcategory-column"
-     *ngIf="activeCategory?.subcategories?.length > 0">
-  <div class="subcategory-title">{{ activeCategory.name }}</div>
+<div class="subcategory-column" *ngIf="activeCategory?.subcategories?.length > 0">
   <div *ngFor="let sub of activeCategory.subcategories">
-    <a href="courses/category" class="subcategory-link">{{ sub }}</a>
+    <a href="courses/category" class="subcategory-link" style="font-size: 14px;">{{ sub }}</a>
   </div>
 </div>
 
@@ -49,21 +40,24 @@
           class="form-control ps-5 rounded-4"
           placeholder="Search for anyting"
           aria-label="Search"
-          style="width: 500px;"
+          style="width: 500px; font-size: 14px;"
         >
         <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
       </form>
 
 
 
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0" >
+      <ul class="navbar-nav  mb-2 mb-lg-0" style="font-size: 14px;">
         <li class="nav-item mx-3">
           <a routerLink="/teaching" [ngClass]="{'active': isActive('/teaching')}" class="nav-link text-dark">Teach with us</a>
         </li>
 
         <li class="nav-item mx-3">
-          <a routerLink="/learning" [ngClass]="{'active': isActive('/learning')}" class="nav-link text-dark">Learn with us</a>
+          <a routerLink="/learning" [ngClass]="{'active': isActive('/learning')}" class="nav-link  text-dark">Learn with us</a>
         </li>
+
+        <button class="nav-item mx-3  px-3 btn btn-outline-primary btn-sm" >Log in</button>
+        <button class="nav-item mx-3  px-3 btn btn-primary btn-sm" >Sign up</button>
       </ul>
 
 
@@ -73,10 +67,9 @@
 
 
     <!-- Mobile toggler -->
-    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
-    aria-controls="mobileMenu">
-<span class="navbar-toggler-icon"></span>
-</button>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
 
     <!-- Offcanvas Mobile Menu -->
