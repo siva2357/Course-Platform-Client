@@ -1,0 +1,64 @@
+
+
+
+
+<div class="container-fluid p-5 ">
+
+
+  <div class="mb-3">
+    <button (click)="goToCoursePage()">back</button>
+  </div>
+
+  <div class="row d-flex">
+
+      <div class="col-2">
+        <div class="nav flex-column nav-tabs" role="tablist" aria-orientation="vertical">
+          <button class="nav-link mb-2 btn-outline-primary" [class.active]="activeTab === 'Plan your course'" (click)="setActiveTab('Plan your course')">Plan your course</button>
+          <button class="nav-link mb-2  btn-outline-primary" [class.active]="activeTab === 'Create your content'" (click)="setActiveTab('Create your content')">Create your content</button>
+          <button class="nav-link mb-2 " [class.active]="activeTab === 'Publish your course'" (click)="setActiveTab('Publish your course')">Publish your course</button>
+        </div>
+      </div>
+
+      <div class="col-10">
+
+        <div [ngSwitch]="activeTab">
+
+          <!-- Village -->
+          <div *ngSwitchCase="'Plan your course'">
+            <div class="card shadow-lg rounded-0">
+              <div class="card-body">
+                <p>Plan your course Section works!</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Branch -->
+          <div *ngSwitchCase="'Create your content'">
+            <div class="card shadow-lg rounded-0">
+              <div class="card-body">
+                <p>Create your content Section works!</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Stage -->
+          <div *ngSwitchCase="'Publish your course'">
+            <div class="card shadow-lg rounded-0">
+              <div class="card-body">
+                <p>Publish your course works!</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+
+
+
+
+</div>

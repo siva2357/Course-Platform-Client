@@ -10,8 +10,10 @@ import { CoursePageDetailsComponent } from './views/pages/course-page-details/co
 import { TeachingPageComponent } from './views/pages/teaching-page/teaching-page.component';
 import { LearningPageComponent } from './views/pages/learning-page/learning-page.component';
 import { CourseCategoryComponent } from './views/pages/course-category/course-category.component';
-import { EducatorCreateCoursePageComponent } from './educator-create-course-page/educator-create-course-page.component';
 
+import { InstrutorPageModule } from './views/pages/instructor/instructor-pages.module';
+import { InstructorSingupPageComponent } from './views/pages/instructor-singup-page/instructor-singup-page.component';
+import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,8 @@ import { EducatorCreateCoursePageComponent } from './educator-create-course-page
     TeachingPageComponent,
     LearningPageComponent,
     CourseCategoryComponent,
-    EducatorCreateCoursePageComponent,
+    InstructorSingupPageComponent,
+    InstructorLoginPageComponent,
 
   ],
   imports: [
@@ -29,7 +32,8 @@ import { EducatorCreateCoursePageComponent } from './educator-create-course-page
     AppRoutingModule,
     LayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InstrutorPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

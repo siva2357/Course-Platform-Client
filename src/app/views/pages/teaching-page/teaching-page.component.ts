@@ -12,7 +12,7 @@ export class TeachingPageComponent {
 
 
   goToRegistrationPage(){
-    this.router.navigate(['educator/registration-page']);
+    this.router.navigate(['instrutor/registration-page']);
   }
 
 }
