@@ -11,9 +11,10 @@
 
   <div class="row d-flex">
 
-      <div class="col-2 bg-body-secondary">
+      <div class="col-2 ">
         <div class="nav flex-column nav-tabs" role="tablist" aria-orientation="vertical">
-          <button class="nav-link mb-2 btn-outline-primary mt-3" [class.active]="activeTab === 'Plan your course'" (click)="setActiveTab('Plan your course')">Plan your course</button>
+          <button class="nav-link mb-2 btn-outline-primary " [class.active]="activeTab === 'Course landing page'" (click)="setActiveTab('Course landing page')">Course landing page</button>
+          <button class="nav-link mb-2 btn-outline-primary " [class.active]="activeTab === 'Plan your course'" (click)="setActiveTab('Plan your course')">Plan your course</button>
           <button class="nav-link mb-2  btn-outline-primary" [class.active]="activeTab === 'Create your content'" (click)="setActiveTab('Create your content')">Create your content</button>
           <button class="nav-link mb-2 btn-outline-primary" [class.active]="activeTab === 'Publish your course'" (click)="setActiveTab('Publish your course')">Publish your course</button>
         </div>
@@ -23,12 +24,12 @@
 
         <div [ngSwitch]="activeTab">
 
-          <!-- Village -->
-          <div *ngSwitchCase="'Plan your course'">
-            <div class="card shadow-lg rounded-0">
+          <div *ngSwitchCase="'Course landing page'">
+            <div class="card shadow-sm rounded-0">
               <div class="card-body p-5">
                 <h3>Course landing page</h3>
                 <hr>
+
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label fw-bold">Course Title</label>
                   <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Course Title">
@@ -36,8 +37,17 @@
 
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label fw-bold">Course category</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                  <div class="input-group mb-3">
+                    <select class="form-select" id="inputGroupSelect02">
+                      <option selected>Choose...</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+
                 </div>
+
 
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label fw-bold">Course description</label>
@@ -45,6 +55,62 @@
                     placeholder="Course description"></textarea>
                 </div>
 
+
+
+
+                <div class="container col-xxl-8 px-4 py-5">
+                  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-6" style="border: 1px solid black;">
+                      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744170029/26196026_top_management_15_qdqj4g.jpg"
+                        class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                      <p class="fs-6">Upload your course image here. It must meet our course image quality standards to be accepted.
+                        Important guidelines: 750x422 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.</p>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+
+                        <div class="input-group mt-5">
+                          <input type="file" class="form-control form-control-sm" id="inputGroupFile04"
+                            aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <div class="container col-xxl-8 px-4 py-5">
+                  <div class="row flex-lg-row align-items-center g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-6" style="border: 1px solid black;">
+                      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744170029/26196026_top_management_15_qdqj4g.jpg"
+                        class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                      <p class="fs-6">Your promo video is a quick and compelling way for students to preview what they’ll learn in your course. Students considering your course are more likely to enroll if your promo video is well-made. Learn how to make your promo video awesome!</p>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+
+                        <div class="input-group mt-5">
+                          <input type="file" class="form-control form-control-sm" id="inputGroupFile04"
+                            aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+
+          <div *ngSwitchCase="'Plan your course'">
+            <div class="card shadow-sm rounded-0">
+              <div class="card-body p-5">
+                <h3>Intended learners</h3>
+                <hr>
 
                 <p class="fw-bold">What will students learn in your course?</p>
                 <p>You must enter at least 4 learning objectives or outcomes that learners can expect to achieve after
@@ -68,20 +134,14 @@
                   <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="course description">
                 </div>
 
-                <div class="input-group mt-3">
-                  <input type="file" class="form-control form-control-sm" id="inputGroupFile04"
-                    aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                </div>
-
 
               </div>
             </div>
 
           </div>
 
-          <!-- Branch -->
           <div *ngSwitchCase="'Create your content'">
-            <div class="card shadow-lg rounded-0">
+            <div class="card shadow-sm rounded-0">
               <div class="card-body p-5">
                 <h3>Curriculum</h3>
                 <hr>
@@ -128,9 +188,8 @@
 
           </div>
 
-          <!-- Stage -->
           <div *ngSwitchCase="'Publish your course'">
-            <div class="card shadow-lg rounded-0">
+            <div class="card shadow-sm rounded-0">
               <div class="card-body p-5">
                 <p>Publish your course!</p>
               </div>

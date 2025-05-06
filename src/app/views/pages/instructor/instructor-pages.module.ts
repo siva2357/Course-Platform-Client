@@ -10,13 +10,19 @@ import { InstructorCreateCoursePageComponent } from './instructor-create-course-
 import { InstructorComponent } from './instructor.component';
 import { InstrutorPagesRoutingModule } from './instrutor-pages-routing.module';
 import { LayoutModule } from '../../layouts/layout.module';
+import { EditYourCourseComponent } from './edit-your-course/edit-your-course.component';
+import { ManageYourCourseComponent } from './manage-your-course/manage-your-course.component';
+import { InstructorCourseLearnersComponent } from './instructor-course-learners/instructor-course-learners.component';
 
 @NgModule({
   declarations: [
     InstructorComponent,
     InstructorCoursePageComponent,
     InstructorDashboardPageComponent,
-    InstructorCreateCoursePageComponent
+    InstructorCreateCoursePageComponent,
+    EditYourCourseComponent,
+    ManageYourCourseComponent,
+    InstructorCourseLearnersComponent
   ],
   imports: [
     CommonModule,

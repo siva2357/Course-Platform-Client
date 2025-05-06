@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class InstructorCreateCoursePageComponent {
 
-  activeTab: string = 'Plan your course';
+  activeTab: string = 'Course landing page';
 
   constructor( public router:Router){}
 

@@ -13,6 +13,8 @@ export class InstructorComponent {
     // { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid' },
     { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-person-circle' },
     { label: 'Courses', link: 'course', icon: 'bi bi-plus-square' },
+    { label: 'Manage Courses', link: 'manage-courses', icon: 'bi bi-pencil-square' },
+    { label: 'Course learners', link: 'course-learners', icon: 'bi bi-people-fill' },
   ];
 
   sidebarOpen: boolean = true;
