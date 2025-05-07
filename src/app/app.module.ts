@@ -26,8 +26,6 @@ import { InstructorLoginPageComponent } from './views/pages/instructor-login-pag
     CourseCategoryComponent,
     InstructorSingupPageComponent,
     InstructorLoginPageComponent,
-
-
   ],
   imports: [
     BrowserModule,

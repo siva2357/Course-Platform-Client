@@ -13,7 +13,7 @@ import { LayoutModule } from '../../layouts/layout.module';
 import { EditYourCourseComponent } from './edit-your-course/edit-your-course.component';
 import { ManageYourCourseComponent } from './manage-your-course/manage-your-course.component';
 import { InstructorCourseLearnersComponent } from './instructor-course-learners/instructor-course-learners.component';
-
+import { InstructorTransactionPageComponent } from './instructor-transaction-page/instructor-transaction-page.component';
 @NgModule({
   declarations: [
     InstructorComponent,
@@ -22,7 +22,8 @@ import { InstructorCourseLearnersComponent } from './instructor-course-learners/
     InstructorCreateCoursePageComponent,
     EditYourCourseComponent,
     ManageYourCourseComponent,
-    InstructorCourseLearnersComponent
+    InstructorCourseLearnersComponent,
+    InstructorTransactionPageComponent
   ],
   imports: [
     CommonModule,

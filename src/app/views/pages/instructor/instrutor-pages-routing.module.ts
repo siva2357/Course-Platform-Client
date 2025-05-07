@@ -7,6 +7,11 @@ import { InstructorCreateCoursePageComponent } from './instructor-create-course-
 import { ManageYourCourseComponent } from './manage-your-course/manage-your-course.component';
 import { EditYourCourseComponent } from './edit-your-course/edit-your-course.component';
 import { InstructorCourseLearnersComponent } from './instructor-course-learners/instructor-course-learners.component';
+import { InstructorTransactionPageComponent } from './instructor-transaction-page/instructor-transaction-page.component';
+
+
+
+
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -20,6 +25,7 @@ const routes: Routes = [
 		{ path: 'course', component:InstructorCoursePageComponent, title:"Recruiter profile page"},
     { path: 'manage-courses', component:ManageYourCourseComponent, title:"Recruiter profile page"},
     { path: 'course-learners', component:InstructorCourseLearnersComponent, title:"Recruiter profile page"},
+    { path: 'payments', component:InstructorTransactionPageComponent, title:"Recruiter profile page"},
 
 
 	  ]
