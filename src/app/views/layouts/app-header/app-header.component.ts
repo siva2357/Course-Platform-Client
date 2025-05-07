@@ -36,20 +36,28 @@ onMenuLeave() {
 
   mainCategories = [
     {
-      name: 'Web Development',
-      subcategories: ['HTML', 'CSS', 'Angular', 'React', 'Vue', 'Next.js']
+      name: 'Graphic Design',
+      subcategories: ['Adobe Photoshop', 'Adobe Illustrator', 'Figma', 'Sketch', 'InDesign', 'Canva','Pro create', 'Digital painting']
     },
     {
-      name: 'AI / Machine Learning',
-      subcategories: ['Python ML', 'TensorFlow', 'PyTorch', 'Scikit-Learn']
-    },
-    {
-      name: 'Mobile Development',
-      subcategories: ['Flutter', 'React Native', 'Swift', 'Kotlin']
+      name: 'User Experience Design',
+      subcategories: ['Figma', 'Adobe XD', 'Sketch',  'Web design', 'Product design', 'Design thinking']
     },
     {
       name: 'Game Development',
-      subcategories: ['Unity', 'Unreal Engine', 'Godot']
+      subcategories: ['Unity', 'Unreal Engine', 'Godot Engine', 'GameMaker Studio 2', 'Construct 3', 'RPG Maker', 'c++ Programming language ', 'Audacity (sound editing)','Maya (For 3D Animation)', '2D Game development']
+    },
+    {
+      name: '3D Animation',
+      subcategories: [ 'Autodesk Maya', 'Blender', 'Cinema 4D','3ds Max','Houdini','ZBrush','Marvelous Designer', 'Substance Painter']
+    },
+    {
+      name: 'Architectural Design',
+      subcategories: ['AutoCAD', 'Autodesk Revit','SketchUp', 'Rhino 3D','ArchiCAD','Grasshopper','Autodesk 3ds Max','Lumion (for rendering)','Twinmotion','V-Ray','Enscape']
+    },
+    {
+      name: 'VFX & SFX',
+      subcategories: [ 'Adobe After Effects', 'Nuke (Foundry)','Houdini','Mocha Pro','DaVinci Resolve Fusion','PFTrack (3D camera tracking)', 'Autodesk Flame', 'Blender (for VFX compositing)']
     }
   ];
 
