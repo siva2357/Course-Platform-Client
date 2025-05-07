@@ -19,13 +19,13 @@ const routes: Routes = [
     { path: 'dashboard', component: InstructorDashboardPageComponent, title: 'Post Jobpost Page'  } ,// Hire Seeker page route
 		{ path: 'course', component:InstructorCoursePageComponent, title:"Recruiter profile page"},
     { path: 'manage-courses', component:ManageYourCourseComponent, title:"Recruiter profile page"},
-    { path: 'edit-course/:id', component:EditYourCourseComponent, title:"Recruiter profile page"},
     { path: 'course-learners', component:InstructorCourseLearnersComponent, title:"Recruiter profile page"},
 
 
 	  ]
 	},
   { path: 'course/create', component:InstructorCreateCoursePageComponent, title:"Recruiter profile page"},
+  { path: 'edit-course/:id', component:EditYourCourseComponent, title:"Recruiter profile page"},
 
   ];
 
