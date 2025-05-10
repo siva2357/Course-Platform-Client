@@ -13,7 +13,7 @@ export class ManageYourCourseComponent {
   }
 
   goToEditCourse(){
-    this.router.navigate(['instrutor/edit-course/:id'])
+    this.router.navigate(['instructor/edit-course/:id'])
   }
 
 }

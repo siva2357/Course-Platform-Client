@@ -1,13 +1,12 @@
 
 
+<div class=" col mt-3 px-5">
+  <button class="btn btn-sm btn-outline-secondary px-3 rounded-0" (click)="goToCoursePage()">back</button>
+</div>
 
 
 <div class="container-fluid p-5 ">
 
-
-  <div class="mb-3">
-    <button class="btn btn-sm btn-outline-secondary px-3 rounded-0" (click)="goToCoursePage()">back</button>
-  </div>
 
   <div class="row d-flex">
 
@@ -25,7 +24,7 @@
         <div [ngSwitch]="activeTab">
 
           <div *ngSwitchCase="'Course landing page'">
-            <div class="card shadow-sm rounded-0">
+            <div class="card shadow-lg rounded-0">
               <div class="card-body p-5">
                 <h4>Course landing page</h4>
                 <hr>
@@ -119,7 +118,7 @@
           </div>
 
           <div *ngSwitchCase="'Plan your course'">
-            <div class="card shadow-sm rounded-0">
+            <div class="card shadow-lg rounded-0">
               <div class="card-body p-5">
                 <h4>Intended learners</h4>
                 <hr>
@@ -192,7 +191,7 @@
           </div>
 
           <div *ngSwitchCase="'Create your content'">
-            <div class="card shadow-sm rounded-0">
+            <div class="card shadow-lg rounded-0">
               <div class="card-body p-5">
                 <h4>Curriculum</h4>
                 <hr>
@@ -244,7 +243,7 @@
           </div>
 
           <div *ngSwitchCase="'Publish your course'">
-            <div class="card shadow-sm rounded-0">
+            <div class="card shadow-lg rounded-0">
               <div class="card-body p-5">
                 <p>Publish your course!</p>
               </div>
@@ -258,6 +257,6 @@
       </div>
 
 
-
+</div>
 
 </div>

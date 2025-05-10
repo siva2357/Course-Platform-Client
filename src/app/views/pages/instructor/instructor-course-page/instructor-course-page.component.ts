@@ -14,7 +14,7 @@ export class InstructorCoursePageComponent {
 
   goToCreateCourse()
   {
-    this.router.navigate(['instrutor/course/create'])
+    this.router.navigate(['instructor/course/create'])
   }
 
 }

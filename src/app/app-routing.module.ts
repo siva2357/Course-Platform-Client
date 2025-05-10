@@ -19,10 +19,10 @@ const routes: Routes = [
   { path: 'courses/category', component: CourseCategoryComponent, title: 'Course page' },
   { path: 'learning', component:  LearningPageComponent, title: 'Course page' },
   { path: 'teaching', component:  TeachingPageComponent, title: 'Course page' },
-  { path: 'instrutor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
+  { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
   { path: 'login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
 
-  { path: 'instrutor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstrutorPageModule)},
+  { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstrutorPageModule)},
 
   { path: '**', redirectTo: 'main' }, // Fallback rou
 
