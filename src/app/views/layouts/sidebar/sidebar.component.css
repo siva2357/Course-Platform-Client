@@ -12,9 +12,9 @@
   top: 0;
   height: 100vh;
   width: 65px;
-
   align-items: center;
   z-index: 99;
+  background-color: #16161d;
 }
 
 .sidebar.open {
@@ -36,11 +36,12 @@
 }
 
 .sidebar i {
-  color: black;
+  color: white;
   height: 45px;
   min-width: 45px;
   text-align: center;
   line-height: 50px;
+
 }
 
 .sidebar .nav-list {
@@ -91,25 +92,25 @@
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #fff;
+
 
 }
 
 /* Add styles for the active link */
 .sidebar li a.active {
 background: #FFF;    /* Change background for active link */
-color: #0469ec;      /* Change text color for contrast */
+color: black;     /* Change text color for contrast */
 transition: all 0.3s ease;
 }
 
 /* Ensure active link labels are visible even when sidebar is collapsed */
 .sidebar li a.active .links_name {
-color: #0469ec;
+  color: black;
 }
 
 /* Ensure active link labels are visible even when sidebar is collapsed */
 .sidebar li a.active i {
-color: #0469ec;
+  color: black;
 }
 
 
@@ -119,7 +120,7 @@ color: #0469ec;
 }
 
 .sidebar li a .links_name {
-  color: black;
+  color: white;
   font-size: 14px;
   font-weight: 400;
   white-space: nowrap;
@@ -136,7 +137,7 @@ color: #0469ec;
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
   transition: all 0.5s ease;
-  color: #0469ec;
+  color: black;
 }
 
 

@@ -31,12 +31,12 @@
 
 
 
-<div class="sidebar bg-body-secondary " [ngClass]="{'open': sidebarOpen}">
+<div class="sidebar shadow-lg" [ngClass]="{'open': sidebarOpen}">
 
 
 <div [class.centered]="!sidebarOpen" [class.left-aligned]="sidebarOpen" style="height: 60px;">
   <i class="bi bi-justify" id="btn" (click)="toggle()" style="font-size: 1.5rem; cursor: pointer;"></i>
-  <p *ngIf="sidebarOpen" class="label-text">Course-Hub</p>
+  <p *ngIf="sidebarOpen" class="label-text" style="color: white;">Course-Hub</p>
 </div>
 
 
