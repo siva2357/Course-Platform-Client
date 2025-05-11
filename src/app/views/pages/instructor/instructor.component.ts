@@ -15,7 +15,7 @@ export class InstructorComponent {
     { label: 'Courses', link: 'course', icon: 'bi bi-play-btn' },
     { label: 'Manage Courses', link: 'manage-courses', icon: 'bi bi-pencil-square' },
     { label: 'Course learners', link: 'course-learners', icon: 'bi bi-people-fill' },
-    { label: 'Transactions', link: 'payments', icon: 'bi bi-bank' },
+    { label: 'Earnings', link: 'payments', icon: 'bi bi-cash-stack' },
 
   ];
 

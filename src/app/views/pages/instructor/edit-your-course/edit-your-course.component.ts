@@ -18,7 +18,7 @@ export class EditYourCourseComponent {
     }
 
     goToCoursePage(){
-      this.router.navigate(['instructor/course'])
+      this.router.navigate(['instructor/manage-courses'])
     }
 
 

@@ -14,6 +14,8 @@ import { CourseCategoryComponent } from './views/pages/course-category/course-ca
 import { InstrutorPageModule } from './views/pages/instructor/instructor-pages.module';
 import { InstructorSingupPageComponent } from './views/pages/instructor-singup-page/instructor-singup-page.component';
 import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
+import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { InstructorLoginPageComponent } from './views/pages/instructor-login-pag
     CourseCategoryComponent,
     InstructorSingupPageComponent,
     InstructorLoginPageComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,8 @@ import { InstructorLoginPageComponent } from './views/pages/instructor-login-pag
     LayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    InstrutorPageModule
+    InstrutorPageModule,
+    LearnerPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
