@@ -29,7 +29,6 @@ import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
     InstructorSingupPageComponent,
     InstructorLoginPageComponent,
 
-
   ],
   imports: [
     BrowserModule,

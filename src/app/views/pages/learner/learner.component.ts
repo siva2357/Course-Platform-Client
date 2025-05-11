@@ -13,7 +13,7 @@ export class LearnerComponent {
       { label: 'Home', link: 'home', icon: 'bi bi-grid' },
       { label: 'My Courses', link: 'my-courses', icon: 'bi bi-play-btn' },
       { label: 'My Wishlist', link: 'my-wishlist', icon: 'bi bi-pencil-square' },
-      { label: 'My Accomplishments', link: 'my-certifications', icon: 'bi bi-people-fill' },
+      { label: 'My Certifications', link: 'my-certifications', icon: 'bi bi-people-fill' },
       { label: 'My Purchases', link: 'my-purchases', icon: 'bi bi-cash-stack' },
 
     ];

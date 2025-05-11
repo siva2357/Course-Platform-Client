@@ -22,8 +22,10 @@ const routes: Routes = [
   { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
   { path: 'login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
 
+  { path: 'admin',loadChildren: () => import('./views/pages/admin/admin-pages.module').then((m) => m.AdminPageModule)},
   { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstrutorPageModule)},
   { path: 'learner',loadChildren: () => import('./views/pages/learner/learner-pages.module').then((m) => m.LearnerPageModule)},
+
 
   { path: '**', redirectTo: 'main' }, // Fallback rou
 

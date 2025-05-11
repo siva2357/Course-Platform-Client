@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class LearnerPurchasesComponent {
 
+  activeTab: string = 'courses';
+
+  setActiveTab(tab: string): void {
+		this.activeTab = tab;
+	}
+
 }
