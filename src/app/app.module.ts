@@ -15,6 +15,7 @@ import { InstrutorPageModule } from './views/pages/instructor/instructor-pages.m
 import { InstructorSingupPageComponent } from './views/pages/instructor-singup-page/instructor-singup-page.component';
 import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
 import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
+import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
     CourseCategoryComponent,
     InstructorSingupPageComponent,
     InstructorLoginPageComponent,
+    CartPageComponent,
 
   ],
   imports: [

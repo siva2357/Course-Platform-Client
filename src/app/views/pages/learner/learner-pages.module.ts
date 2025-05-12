@@ -19,7 +19,7 @@ import { LearnerPurchasesComponent } from './learner-purchases/learner-purchases
     LearnerCertificationsComponent,
     LearnerMyCoursesComponent,
     LearnerWishlistComponent,
-    LearnerPurchasesComponent
+    LearnerPurchasesComponent,
   ],
   imports: [
     CommonModule,
