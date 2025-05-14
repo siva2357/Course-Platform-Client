@@ -12,6 +12,7 @@ import { LearningPageComponent } from './views/pages/learning-page/learning-page
 import { InstructorSingupPageComponent } from './views/pages/instructor-singup-page/instructor-singup-page.component';
 import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
 import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
+import { CheckoutPageComponent } from './views/pages/checkout-page/checkout-page.component';
 const routes: Routes = [
   // Public routes
   { path: 'main', component:  LandingPageComponent, title: 'Main page' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
   { path: 'login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
   { path: 'cart', component:CartPageComponent, title:"Recruiter profile page"},
+  { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
 
   { path: 'admin',loadChildren: () => import('./views/pages/admin/admin-pages.module').then((m) => m.AdminPageModule)},
   { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstrutorPageModule)},
