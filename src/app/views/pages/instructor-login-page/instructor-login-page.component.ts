@@ -47,7 +47,7 @@ export class InstructorLoginPageComponent  {
          }
 
          signUp(): void {
-           this.router.navigate(['instrutor/registration-page']);
+           this.router.navigate(['instructor/registration-page']);
          }
 
 

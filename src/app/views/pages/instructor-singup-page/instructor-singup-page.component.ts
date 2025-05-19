@@ -53,7 +53,7 @@
    }
 
    login(): void {
-     this.router.navigate(['login-page']);
+     this.router.navigate(['instructor/login-page']);
    }
 
 

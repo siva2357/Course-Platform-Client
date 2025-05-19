@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'learning', component:  LearningPageComponent, title: 'Course page' },
   { path: 'teaching', component:  TeachingPageComponent, title: 'Course page' },
   { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
-  { path: 'login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
+  { path: 'instructor/login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
   { path: 'cart', component:CartPageComponent, title:"Recruiter profile page"},
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
 
