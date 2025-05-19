@@ -1,0 +1,10 @@
+.nav-underline .nav-link {
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-underline .nav-link.active {
+  color: black; /* Bootstrap primary blue */
+  border-color: black;
+  font-weight: 500;
+}
