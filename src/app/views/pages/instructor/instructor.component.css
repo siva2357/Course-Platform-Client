@@ -8,4 +8,3 @@
     margin-left: 200px; /* Shift when sidebar is open */
     width: calc(100% - 200px); /* Adjust width based on sidebar open state */
   }
-

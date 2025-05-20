@@ -7,16 +7,15 @@ import { RouterModule } from '@angular/router';
 
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
-import { LearnerNavbarComponent } from './learner-navbar/learner-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { CourseHeaderComponent } from './course-header/course-header.component';
 @NgModule({
   declarations: [
 
     AppHeaderComponent,
     AppFooterComponent,
-    LearnerNavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    CourseHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -26,8 +25,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
  exports: [
     AppHeaderComponent,
     AppFooterComponent,
-    LearnerNavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    CourseHeaderComponent
   ],
   providers: [DatePipe],
 })

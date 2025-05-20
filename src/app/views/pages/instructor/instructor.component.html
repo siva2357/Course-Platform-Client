@@ -1,5 +1,6 @@
 <div class="container-fluid">
-    <app-sidebar [menuItems]="menu" [sidebarOpen]="!sidebarOpen"  (toggleSidebar)="toggleSidebar()"  ></app-sidebar>
+  <app-course-header (toggleSidebar)="toggleSidebar()" [sidebarOpen]="!sidebarOpen" ></app-course-header>
+    <app-sidebar [menuItems]="menu" [sidebarOpen]="!sidebarOpen"  (toggleSidebar)="toggleSidebar()" ></app-sidebar>
     <div class=" main-content " [ngClass]="{'shifted': !sidebarOpen}">
       <router-outlet class="main-content"></router-outlet>
     </div>

@@ -8,6 +8,7 @@ import { ManageYourCourseComponent } from './manage-your-course/manage-your-cour
 import { EditYourCourseComponent } from './edit-your-course/edit-your-course.component';
 import { InstructorCourseLearnersComponent } from './instructor-course-learners/instructor-course-learners.component';
 import { InstructorTransactionPageComponent } from './instructor-transaction-page/instructor-transaction-page.component';
+import { InstructorProfilePageComponent } from './instructor-profile-page/instructor-profile-page.component';
 
 
 
@@ -32,6 +33,7 @@ const routes: Routes = [
 	},
   { path: 'course/create', component:InstructorCreateCoursePageComponent, title:"Recruiter profile page"},
   { path: 'edit-course/:id', component:EditYourCourseComponent, title:"Recruiter profile page"},
+  { path: 'profile-page', component:InstructorProfilePageComponent, title:"Instructor profile page"},
 
   ];
 

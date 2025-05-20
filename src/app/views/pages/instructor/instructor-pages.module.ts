@@ -14,6 +14,7 @@ import { EditYourCourseComponent } from './edit-your-course/edit-your-course.com
 import { ManageYourCourseComponent } from './manage-your-course/manage-your-course.component';
 import { InstructorCourseLearnersComponent } from './instructor-course-learners/instructor-course-learners.component';
 import { InstructorTransactionPageComponent } from './instructor-transaction-page/instructor-transaction-page.component';
+import { InstructorProfilePageComponent } from './instructor-profile-page/instructor-profile-page.component';
 @NgModule({
   declarations: [
     InstructorComponent,
@@ -23,7 +24,8 @@ import { InstructorTransactionPageComponent } from './instructor-transaction-pag
     EditYourCourseComponent,
     ManageYourCourseComponent,
     InstructorCourseLearnersComponent,
-    InstructorTransactionPageComponent
+    InstructorTransactionPageComponent,
+    InstructorProfilePageComponent
   ],
   imports: [
     CommonModule,

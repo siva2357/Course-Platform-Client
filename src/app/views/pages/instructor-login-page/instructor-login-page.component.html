@@ -14,23 +14,27 @@
 
 
          <main class="form-signin w-100 m-auto">
-           <form>
-             <h2 class=" mb-3 fw-bold text-center">Welcome Back</h2>
+            <h2 class=" mb-3 fw-bold text-center">Welcome Back</h2>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
              <div class="form-floating mt-3">
-               <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+               <input  [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}"  type="email" id="floatingInput"   class="form-control" formControlName="email" placeholder="name@example.com">
                <label for="floatingPassword">Email</label>
+               <small *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']" class="text-danger">Email is required.</small>
+
              </div>
              <div class="form-floating mt-3">
-               <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+               <input [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" type="password" id="floatingPassword" class="form-control" formControlName="password"  placeholder="Password">
                <label for="floatingPassword">Password</label>
+               <small *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']" class="text-danger">Password is required.</small>
+
              </div>
 
              <button class="btn btn-primary w-100 mt-5 rounded-0" type="submit">Sign Up</button>
            </form>
 
-           <p class="mb-0 text-center mt-3 poppins-regular">Already have an account? <span class="text-primary fw-bold"
-               (click)="signUp()" style="cursor: pointer; text-decoration: underline;">SignUp</span></p>
+           <p class="mb-0 text-center mt-3 poppins-regular">Already have an account? <span class="text-primary fw-bold" (click)="signUp()" style="cursor: pointer; text-decoration: underline;">SignUp</span></p>
 
          </main>
 

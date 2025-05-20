@@ -18,6 +18,7 @@ import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
 import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,6 @@ import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
     InstructorSingupPageComponent,
     InstructorLoginPageComponent,
     CartPageComponent,
-
   ],
   imports: [
     BrowserModule,
