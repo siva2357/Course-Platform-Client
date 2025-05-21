@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-
 // Public and Shared Components
 import { LandingPageComponent } from './views/pages/landing-page/landing-page.component';
 import { CoursePageComponent } from './views/pages/course-page/course-page.component';
@@ -13,6 +11,12 @@ import { InstructorSingupPageComponent } from './views/pages/instructor-singup-p
 import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
 import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
 import { CheckoutPageComponent } from './views/pages/checkout-page/checkout-page.component';
+import { ForgotPasswordPageComponent } from './views/pages/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordOtpPageComponent } from './views/pages/reset-password-otp-page/reset-password-otp-page.component';
+import { ResetPasswordPageComponent } from './views/pages/reset-password-page/reset-password-page.component';
+import { ChangePasswordPageComponent } from './views/pages/change-password-page/change-password-page.component';
+import { OtpVerificationComponent } from './views/pages/otp-verification/otp-verification.component';
+import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
 const routes: Routes = [
   // Public routes
   { path: 'main', component:  LandingPageComponent, title: 'Main page' },
@@ -21,6 +25,16 @@ const routes: Routes = [
   { path: 'courses/category', component: CourseCategoryComponent, title: 'Course page' },
   { path: 'learning', component:  LearningPageComponent, title: 'Course page' },
   { path: 'teaching', component:  TeachingPageComponent, title: 'Course page' },
+  { path: 'forgot-password', component:  ForgotPasswordPageComponent }, // Profile page route
+  { path: 'forgotPassword-otp-verification', component:  ResetPasswordOtpPageComponent}, // Profile page route
+  { path: 'reset-password', component:  ResetPasswordPageComponent}, // Profile page route
+  { path: 'change-password/:id', component:  ChangePasswordPageComponent}, // Profile page route
+  { path: 'otp-verification', component:  OtpVerificationComponent }, // Profile page route
+  { path: 'confirmation-page', component: AccountConfirmationPageComponent }, // Profile page route
+
+
+
+
   { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
   { path: 'instructor/login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
   { path: 'cart', component:CartPageComponent, title:"Recruiter profile page"},

@@ -116,7 +116,7 @@ handleError(error: any) {
       return;
     }
     const rolePath = userRole.toLowerCase(); // Ensure lowercase for consistency
-    this.router.navigate([`talent-page/${rolePath}/account-settings/${userId}`]);
+    this.router.navigate([`/${rolePath}/account-settings/${userId}`]);
   }
 
 

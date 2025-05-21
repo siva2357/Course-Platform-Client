@@ -9,32 +9,28 @@ import { EditYourCourseComponent } from './edit-your-course/edit-your-course.com
 import { InstructorCourseLearnersComponent } from './instructor-course-learners/instructor-course-learners.component';
 import { InstructorTransactionPageComponent } from './instructor-transaction-page/instructor-transaction-page.component';
 import { InstructorProfilePageComponent } from './instructor-profile-page/instructor-profile-page.component';
-
+import { InstructorAccountSettingsPageComponent } from './instructor-account-settings-page/instructor-account-settings-page.component';
+import { InstructorEditProfilePageComponent } from './instructor-edit-profile-page/instructor-edit-profile-page.component';
 
 
 
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-
-	// { path: 'profile-form', component: RecruiterProfileFormComponent, title: 'Recruiter Fill Profile Page' },
-
-
-	{ path: '', component: InstructorComponent, // Main layout component with sidebar
+  { path: 'profile-page', component:InstructorProfilePageComponent, title:"Instructor profile page"},
+  { path: 'account-settings/:id', component: InstructorAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
+  { path: 'edit-profile/:id', component: InstructorEditProfilePageComponent, title: 'Recruiter Edit Profile Page' },
+	{ path: '', component: InstructorComponent,
 	  children: [
-    { path: 'dashboard', component: InstructorDashboardPageComponent, title: 'Post Jobpost Page'  } ,// Hire Seeker page route
+    { path: 'dashboard', component: InstructorDashboardPageComponent, title: 'Post Jobpost Page'  },
 		{ path: 'course', component:InstructorCoursePageComponent, title:"Recruiter profile page"},
     { path: 'manage-courses', component:ManageYourCourseComponent, title:"Recruiter profile page"},
     { path: 'course-learners', component:InstructorCourseLearnersComponent, title:"Recruiter profile page"},
     { path: 'payments', component:InstructorTransactionPageComponent, title:"Recruiter profile page"},
-
-
 	  ]
 	},
   { path: 'course/create', component:InstructorCreateCoursePageComponent, title:"Recruiter profile page"},
   { path: 'edit-course/:id', component:EditYourCourseComponent, title:"Recruiter profile page"},
-  { path: 'profile-page', component:InstructorProfilePageComponent, title:"Instructor profile page"},
-
   ];
 
 
