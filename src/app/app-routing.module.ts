@@ -32,9 +32,6 @@ const routes: Routes = [
   { path: 'otp-verification', component:  OtpVerificationComponent }, // Profile page route
   { path: 'confirmation-page', component: AccountConfirmationPageComponent }, // Profile page route
 
-
-
-
   { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
   { path: 'instructor/login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
   { path: 'cart', component:CartPageComponent, title:"Recruiter profile page"},

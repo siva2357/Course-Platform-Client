@@ -32,39 +32,52 @@ export class InstructorLoginPageComponent {
     return this.loginForm.controls;
   }
 
-  onSubmit() {
+   onSubmit() {
     this.submitted = true;
+
     console.log('Form Submitted:', this.loginForm.value);
     if (this.loginForm.invalid) {
-      console.log('Form is invalid');
-      Object.keys(this.loginForm.controls).forEach((controlName) => {
-        this.loginForm.get(controlName)?.markAsTouched();
-      });
-      return;
+        console.log('Form is invalid');
+        Object.keys(this.loginForm.controls).forEach(controlName => {
+            this.loginForm.get(controlName)?.markAsTouched();
+        });
+        return;
     }
 
     this.isLoading = true;
 
     this.authService.login(this.loginForm.value).subscribe(
-      (response) => {
-        console.log('Login response:', response);
-        this.loginSuccess = true;
-        this.isLoading = false;
+        response => {
+            console.log('Login response:', response);
+            this.loginSuccess = true;
 
-        if (response.role === 'instructor') {
-          this.router.navigate(['instructor']);
-        } else {
-          console.warn('Unknown user role:', response.role);
+            if (response.token) {
+                localStorage.setItem('Authorization', response.token);
+                localStorage.setItem('userRole', response.role);
+                localStorage.setItem('userId', response.userId);
+                localStorage.setItem('userData', JSON.stringify(response));
+                const userType = response.role;
+                this.authService.setUserRole(userType);
+            }
+            setTimeout(() => {
+              this.isLoading = false;
+              if (response.role === 'instructor') {
+                this.router.navigate(response.profileComplete ?
+                  ['instructor'] :
+                  ['instructor/profile-form-page']);
+              } else {
+                console.warn('Unknown user role:', response.role);
+              }
+            }, 2000);
+        },
+        error => {
+            console.error('Login error:', error);
+            this.errorMessage = 'Invalid credentials';
+            this.isLoading = false;
+            this.loginSuccess = false;
         }
-      },
-      (error) => {
-        console.error('Login error:', error);
-        this.errorMessage = 'Invalid credentials';
-        this.isLoading = false;
-        this.loginSuccess = false;
-      }
     );
-  }
+}
 
   goBack(): void {
     this.router.navigate(['learning']);

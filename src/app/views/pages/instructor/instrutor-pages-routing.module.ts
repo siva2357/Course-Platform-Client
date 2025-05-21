@@ -11,6 +11,7 @@ import { InstructorTransactionPageComponent } from './instructor-transaction-pag
 import { InstructorProfilePageComponent } from './instructor-profile-page/instructor-profile-page.component';
 import { InstructorAccountSettingsPageComponent } from './instructor-account-settings-page/instructor-account-settings-page.component';
 import { InstructorEditProfilePageComponent } from './instructor-edit-profile-page/instructor-edit-profile-page.component';
+import { InstructorProfileformPageComponent } from './instructor-profileform-page/instructor-profileform-page.component';
 
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'profile-page', component:InstructorProfilePageComponent, title:"Instructor profile page"},
+  { path: 'profile-form-page', component:InstructorProfileformPageComponent, title:"Instructor profile page"},
   { path: 'account-settings/:id', component: InstructorAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
   { path: 'edit-profile/:id', component: InstructorEditProfilePageComponent, title: 'Recruiter Edit Profile Page' },
 	{ path: '', component: InstructorComponent,

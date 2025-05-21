@@ -17,6 +17,7 @@ import { InstructorTransactionPageComponent } from './instructor-transaction-pag
 import { InstructorProfilePageComponent } from './instructor-profile-page/instructor-profile-page.component';
 import { InstructorAccountSettingsPageComponent } from './instructor-account-settings-page/instructor-account-settings-page.component';
 import { InstructorEditProfilePageComponent } from './instructor-edit-profile-page/instructor-edit-profile-page.component';
+import { InstructorProfileformPageComponent } from './instructor-profileform-page/instructor-profileform-page.component';
 @NgModule({
   declarations: [
     InstructorComponent,
@@ -29,7 +30,8 @@ import { InstructorEditProfilePageComponent } from './instructor-edit-profile-pa
     InstructorTransactionPageComponent,
     InstructorProfilePageComponent,
     InstructorAccountSettingsPageComponent,
-    InstructorEditProfilePageComponent
+    InstructorEditProfilePageComponent,
+    InstructorProfileformPageComponent
   ],
   imports: [
     CommonModule,

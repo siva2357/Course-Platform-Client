@@ -105,7 +105,7 @@ handleError(error: any) {
       return;
     }
     const rolePath = userRole.toLowerCase(); // Ensure lowercase for consistency
-    this.router.navigate([`talent-page/change-password/${userId}`]); // Redirect to change-password page
+    this.router.navigate([`change-password/${userId}`]); // Redirect to change-password page
   }
 
   goToAccountSettingsPage(): void {

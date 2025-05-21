@@ -60,8 +60,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
         (response: any) => {
           console.log('Registration successful', response);
           this.registrationSuccess = true;
-            this.isLoading = false;
-            this.router.navigate(['instructor/login-page']);
+          this.isLoading = false;
+            this.router.navigate(['otp-verification'], {
+              queryParams: { email: instructorData.registrationDetails.email }
+            });
         },
         (error: any) => {
           this.isLoading = false;

@@ -38,8 +38,8 @@ export class ProfileService {
   }
 
 
-  postInstructorProfile(profileData: InstructorProfile, instructorId: string): Observable<InstructorProfile> {
-    return this.http.post<InstructorProfile>(`${this.baseUrl}/instructor/${instructorId}/profile-details`, profileData, { headers: this.getHeaders() })
+  postInstructorProfile(profileData: InstructorProfile): Observable<InstructorProfile> {
+    return this.http.post<InstructorProfile>(`${this.baseUrl}/instructor/profile-details`, profileData, { headers: this.getHeaders() })
       .pipe(catchError(error => this.handleError(error)));
   }
 
