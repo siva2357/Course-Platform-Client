@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SOCIAL_URL_PATTERNS, SocialPlatform } from 'src/app/core/enums/socialMedia.enum';
@@ -8,6 +7,9 @@ import { Instructor, InstructorProfile } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Folder } from 'src/app/core/enums/folder.enum';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-instructor-profileform-page',
@@ -22,6 +24,7 @@ export class InstructorProfileformPageComponent implements OnInit{
   successMessage: string = '';
   instructorId!: string;
   public instructorDetails! :Instructor;
+  public userName!:string;
 
   ifPreview = false;
   uploadedFileData: { fileName: string; url: string; filePath: string } | null = null;
@@ -41,6 +44,8 @@ export class InstructorProfileformPageComponent implements OnInit{
     private router: Router,
     private profileService:ProfileService,
     private userService:UserService,
+    private storage: AngularFireStorage,  // CRUD Service
+    private domSanitizer: DomSanitizer
 
   ) {
   }
@@ -49,6 +54,8 @@ export class InstructorProfileformPageComponent implements OnInit{
         // Get the userId and role from localStorage or AuthService
         this.instructorId = localStorage.getItem('userId') || this.authService.getUserId() || '';
         const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
+        this.userName = this.authService.getUserName() ||''  // e.g. "Jane Doe"
+
 
         console.log("User ID:", this.instructorId);
         console.log("User Role:", role); // Log the user role for debugging
@@ -78,13 +85,78 @@ export class InstructorProfileformPageComponent implements OnInit{
   }
 
 
-      onFileChange(event: any): void {
+    getFileType(file: File): string {
+      const mimeType = file.type;
 
+      if (mimeType.startsWith('image/')) {
+        return 'image';
+      } else if (mimeType.startsWith('video/')) {
+        return 'video';
+      } else if (mimeType === 'application/pdf') {
+        return 'pdf';
+      } else if (mimeType.startsWith('audio/')) {
+        return 'audio';
+      } else {
+        return 'unknown'; // For other file types (could be handled further)
+      }
     }
 
+onFileChange(event: any): void {
+  const file = event.target.files && event.target.files[0];
+  if (file) {
+    // Use username instead of uid
+    const userName = this.userName;
 
-  deletePreview(){
+const filePath = `${Folder.Main_Folder}/${Folder.Instructor_Folder}/${this.userName}/${Folder.Instructor_Sub_Folder_1}/${file.name}`;
 
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    this.previewURL = this.domSanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(file));
+    this.fileType = this.getFileType(file);
+    this.fileUploadProgress = task.percentageChanges();
+    this.ifPreview = true;
+
+    task.snapshotChanges().subscribe({
+      next: (snapshot) => {
+        if (snapshot?.state === 'success') {
+          fileRef.getDownloadURL().subscribe((url) => {
+            console.log('File uploaded successfully. URL:', url);
+            this.uploadedFileData = { fileName: file.name, url: url, filePath: filePath };
+            this.uploadComplete = true;
+          });
+        }
+      },
+      error: (error) => {
+        console.error('Upload error:', error);
+        this.errorMessage = 'File upload failed. Please try again.';
+      }
+    });
+  }
+}
+
+
+  deletePreview(): void {
+    this.previewURL = null;
+    this.fileType = null;
+    this.fileUploadProgress = undefined;
+    this.uploadComplete =false;
+
+    if (this.uploadedFileData) {
+      const { filePath } = this.uploadedFileData;
+
+      this.storage.ref(filePath).delete().subscribe({
+        next: () => {
+          console.log('File deleted from Firebase Storage');
+          this.uploadedFileData = null;
+          this.ifPreview = false;
+        },
+        error: (error) => {
+          console.error('Error deleting file from Firebase Storage:', error);
+          this.errorMessage = 'Failed to delete the file. Please try again.';
+        }
+      });
+    }
   }
 
   loadInstructorProfile() {
@@ -111,47 +183,50 @@ export class InstructorProfileformPageComponent implements OnInit{
   }
 
 
-    submitProfile() {
-      if (this.profileDetailsForm.invalid) {
-          console.log("Form is invalid:", this.profileDetailsForm.value);
-          this.errorMessage = 'Please fill in all required fields correctly.';
-          return;
-      }
-
-      // Construct the profile data correctly
-      const profileData: InstructorProfile = {
-          profileDetails: {
-                  firstName: this.profileDetailsForm.value.firstName,
-                  lastName: this.profileDetailsForm.value.lastName,
-                  email: this.profileDetailsForm.value.email,
-                  gender: this.profileDetailsForm.value.gender,
-                  bioDescription: this.profileDetailsForm.value.bioDescription,
-                  profilePicture: this.uploadedFileData || { fileName: '', url: ''}, // Provide a default value when null
-            }
-      };
-
-      this.isSubmitting = true;
-      this.successMessage = '';
-      this.errorMessage = '';
-
-      this.profileService.postInstructorProfile(profileData).subscribe({
-          next: () => {
-              this.profileDetailsForm.reset();
-              this.uploadedFileData = null;
-              this.isSubmitting = false;
-              this.previewURL = null;
-              this.ifPreview = false;
-              this.uploadComplete = false;
-              this.fileUploadProgress = undefined;
-              this.router.navigate(['talent-page/recruiter']);
-          },
-          error: (error) => {
-              console.error('Error updating profile', error);
-              this.errorMessage = 'Failed to update profile. Please try again.';
-              this.isSubmitting = false;
-          }
-      });
+submitProfile() {
+  if (this.profileDetailsForm.invalid) {
+    this.errorMessage = 'Please fill in all required fields correctly.';
+    return;
   }
+
+  const formValue = this.profileDetailsForm.value;
+  const email = this.profileDetailsForm.get('email')?.value;
+
+  const profileData: InstructorProfile = {
+    profileDetails: {
+      firstName: formValue.firstName,
+      lastName: formValue.lastName,
+      email: email,
+      gender: formValue.gender,
+      socialMedia: formValue.socialLinks,
+      bioDescription: formValue.bioDescription,
+      profilePicture: this.uploadedFileData || { fileName: '', url: '' },
+    }
+  };
+
+  this.isSubmitting = true;
+  this.errorMessage = '';
+  this.successMessage = '';
+
+  this.profileService.postInstructorProfile(profileData).subscribe({
+    next: () => {
+      this.profileDetailsForm.reset();
+      this.uploadedFileData = null;
+      this.isSubmitting = false;
+      this.previewURL = null;
+      this.ifPreview = false;
+      this.uploadComplete = false;
+      this.fileUploadProgress = undefined;
+      this.router.navigate(['instructor']);
+    },
+    error: (error) => {
+      console.error('Error updating profile', error);
+      this.errorMessage = 'Failed to update profile. Please try again.';
+      this.isSubmitting = false;
+    }
+  });
+}
+
 
 
   confirmDiscard() {

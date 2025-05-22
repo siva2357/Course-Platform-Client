@@ -44,18 +44,20 @@ export interface Student {
 export interface InstructorProfile {
   _id?: string;
   profileDetails: {
-    profilePicture: { fileName: string; url: string;};
-      firstName: string;
-      lastName: string;
-      email?: string;
-      gender: string;
-      bioDescription: string;
-      sanitizedBioDescription?: SafeHtml;
+    profilePicture: { fileName: string; url: string; };
+    firstName: string;
+    lastName: string;
+    email?: string;
+    gender: string;
+    socialMedia: [{ platform: string; url: string }];
+    bioDescription: string;
+    sanitizedBioDescription?: SafeHtml;
   };
   createdAt?: string;
   updatedAt?: string;
   __v?: number;
 }
+
 
 
 

@@ -23,6 +23,9 @@ import { ResetPasswordPageComponent } from './views/pages/reset-password-page/re
 import { ResetPasswordOtpPageComponent } from './views/pages/reset-password-otp-page/reset-password-otp-page.component';
 import { OtpVerificationComponent } from './views/pages/otp-verification/otp-verification.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { OtpVerificationComponent } from './views/pages/otp-verification/otp-ver
     FormsModule,
     ReactiveFormsModule,
     InstrutorPageModule,
-    LearnerPageModule
+    LearnerPageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Use legacy compatibility mode
+    AngularFireStorageModule, // Use storage services
   ],
   providers: [],
   bootstrap: [AppComponent]
