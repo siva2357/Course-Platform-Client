@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { SOCIAL_URL_PATTERNS, SocialPlatform } from 'src/app/core/enums/socialMedia.enum';
 import { Instructor, InstructorProfile } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
@@ -32,7 +33,7 @@ export class InstructorProfileformPageComponent implements OnInit{
 
 
 
-
+  platforms = Object.values(SocialPlatform);
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +42,8 @@ export class InstructorProfileformPageComponent implements OnInit{
     private profileService:ProfileService,
     private userService:UserService,
 
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
         // Get the userId and role from localStorage or AuthService
@@ -67,23 +69,12 @@ export class InstructorProfileformPageComponent implements OnInit{
       _id: [null],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      userName: ['', Validators.required],
       email: [{ value: '', disabled: true }],
       gender: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      phoneNumber: ['', [Validators.required]],
-      streetAddress: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      country: ['', Validators.required],
-      pincode: ['', [Validators.required]],
-      companyName: ['', Validators.required],
-      designation: ['', Validators.required],
-      experience: ['', [Validators.required]],
-      employeeCode: ['', Validators.required],
       bioDescription: ['', [Validators.required]],
-      profilePicture: [null, Validators.required] // Consider handling file upload separately
-    });
+      profilePicture: [null, Validators.required], // Consider handling file upload separately
+      socialLinks: this.fb.array([ this.createSocialLink()])
+     });
   }
 
 
@@ -132,15 +123,8 @@ export class InstructorProfileformPageComponent implements OnInit{
           profileDetails: {
                   firstName: this.profileDetailsForm.value.firstName,
                   lastName: this.profileDetailsForm.value.lastName,
-                  userName: this.profileDetailsForm.value.userName,
                   email: this.profileDetailsForm.value.email,
                   gender: this.profileDetailsForm.value.gender,
-                  dateOfBirth: this.profileDetailsForm.value.dateOfBirth,
-                  phoneNumber: this.profileDetailsForm.value.phoneNumber,
-                  city: this.profileDetailsForm.value.city,
-                  state: this.profileDetailsForm.value.state,
-                  country: this.profileDetailsForm.value.country,
-                  pincode: this.profileDetailsForm.value.pincode,
                   bioDescription: this.profileDetailsForm.value.bioDescription,
                   profilePicture: this.uploadedFileData || { fileName: '', url: ''}, // Provide a default value when null
             }
@@ -182,5 +166,42 @@ export class InstructorProfileformPageComponent implements OnInit{
     this.uploadedFileData = null;
     this.previewURL = null;
   }
+
+
+get socialLinks(): FormArray {
+  return this.profileDetailsForm.get('socialLinks') as FormArray;
+}
+
+
+createSocialLink(): FormGroup {
+  return this.fb.group({
+    platform: ['', [Validators.required]],
+    url: ['', [Validators.required]]
+  });
+}
+
+
+addSocialLink(): void {
+  this.socialLinks.push(this.createSocialLink());
+}
+
+removeSocialLink(index: number): void {
+  this.socialLinks.removeAt(index);
+}
+
+
+validateUrl(index: number): void {
+  const controlGroup = this.socialLinks.at(index);
+  const platform = controlGroup.get('platform')?.value;
+  const url = controlGroup.get('url')?.value;
+
+  if (platform && url && SOCIAL_URL_PATTERNS[platform as SocialPlatform]) {
+    const pattern = SOCIAL_URL_PATTERNS[platform as SocialPlatform];
+    const isValid = pattern.test(url);
+    controlGroup.get('url')?.setErrors(isValid ? null : { invalidUrl: true });
+  }
+}
+
+
 
 }

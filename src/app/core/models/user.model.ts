@@ -47,15 +47,8 @@ export interface InstructorProfile {
     profilePicture: { fileName: string; url: string;};
       firstName: string;
       lastName: string;
-      userName: string;
       email?: string;
       gender: string;
-      dateOfBirth: string;
-      phoneNumber: string;
-      city: string;
-      state: string;
-      country: string;
-      pincode: string;
       bioDescription: string;
       sanitizedBioDescription?: SafeHtml;
   };

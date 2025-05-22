@@ -47,4 +47,39 @@ export class PasswordService {
     }
     return throwError(() => new Error(error.message || 'API Error'));
   }
+
+
+  sendForgotPasswordCode(email: string): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/auth/forgot-password-code`, { email })
+      .pipe(catchError(error => {
+        throw error;
+      }));
+  }
+
+  verifyForgotPasswordCode(providedCode: string, email: string): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/auth/verify-forgotPassword-code`,  {
+      email,
+      providedCode
+    })
+    .pipe(catchError(error => this.handleError(error)));
+  }
+
+
+   // Function to resend OTP to the user's email
+ resendOtp(email: string): Observable<any> {
+  return this.http.patch(`${this.baseUrl}/auth/forgot-password-code`, { email })
+  .pipe(catchError(error => this.handleError(error)));
+}
+
+
+  resetPassword(email: string,  newPassword: string): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/auth/reset-password`, {
+      email,
+      newPassword
+    })
+    .pipe(catchError(error => this.handleError(error)));
+
+  }
+
+
 }

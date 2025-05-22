@@ -86,4 +86,11 @@ export class InstructorLoginPageComponent {
   signUp(): void {
     this.router.navigate(['instructor/registration-page']);
   }
+
+
+  goToForgotPassword(){
+    this.router.navigate(['forgot-password']); // Corrected navigation
+
+  }
+
 }
