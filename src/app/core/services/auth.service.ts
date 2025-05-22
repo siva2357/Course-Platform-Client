@@ -185,8 +185,14 @@ verifyOtp(providedCode: string, email: string): Observable<any> {
   getUserName(): string | null {
     const user = this.getUserData();
     return user?.userName || null;
+  }
+
+    getFullName(): string | null {
+    const user = this.getUserData();
+    return user?.fullName || null;
 
   }
+
   getRole(): string | null {
     const user = this.getUserData();
     return user?.role || null;

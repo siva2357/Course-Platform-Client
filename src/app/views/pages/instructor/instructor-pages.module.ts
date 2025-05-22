@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxEditorModule } from 'ngx-editor';
+import { NgChartsModule } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { InstructorCoursePageComponent } from './instructor-course-page/instructor-course-page.component';
@@ -39,7 +41,9 @@ import { InstructorProfileformPageComponent } from './instructor-profileform-pag
     FormsModule,
     ReactiveFormsModule,
     InstrutorPagesRoutingModule,
-    LayoutModule
+    LayoutModule,
+    NgxEditorModule,
+    NgChartsModule
 
 ],
   providers: [DatePipe],

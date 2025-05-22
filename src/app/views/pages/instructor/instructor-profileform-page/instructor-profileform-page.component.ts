@@ -10,13 +10,13 @@ import { UserService } from 'src/app/core/services/user.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Folder } from 'src/app/core/enums/folder.enum';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
+import { DEFAULT_TOOLBAR, Editor, Toolbar } from 'ngx-editor';
 @Component({
   selector: 'app-instructor-profileform-page',
   templateUrl: './instructor-profileform-page.component.html',
   styleUrls: ['./instructor-profileform-page.component.css']
 })
-export class InstructorProfileformPageComponent implements OnInit{
+export class InstructorProfileformPageComponent implements  OnInit, OnDestroy{
   profileDetailsForm!: FormGroup;
   isSubmitting: boolean = false;
   errorMessage: string = '';
@@ -24,7 +24,7 @@ export class InstructorProfileformPageComponent implements OnInit{
   successMessage: string = '';
   instructorId!: string;
   public instructorDetails! :Instructor;
-  public userName!:string;
+  public fullName!:string;
 
   ifPreview = false;
   uploadedFileData: { fileName: string; url: string; filePath: string } | null = null;
@@ -35,6 +35,8 @@ export class InstructorProfileformPageComponent implements OnInit{
   fileUploadProgress: Observable<number | undefined> | undefined;
 
 
+  public editor!: Editor;
+  toolbar: Toolbar = DEFAULT_TOOLBAR;
 
   platforms = Object.values(SocialPlatform);
 
@@ -54,7 +56,7 @@ export class InstructorProfileformPageComponent implements OnInit{
         // Get the userId and role from localStorage or AuthService
         this.instructorId = localStorage.getItem('userId') || this.authService.getUserId() || '';
         const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
-        this.userName = this.authService.getUserName() ||''  // e.g. "Jane Doe"
+        this.fullName = this.authService.getFullName() ||''  // e.g. "Jane Doe"
 
 
         console.log("User ID:", this.instructorId);
@@ -66,16 +68,20 @@ export class InstructorProfileformPageComponent implements OnInit{
             this.errorMessage = 'User ID or Role is not available.';
           }
           this.initializeForm();
-
+          this.editor = new Editor();
 
         }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
 
   initializeForm() {
     this.profileDetailsForm = this.fb.group({
       _id: [null],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      fullName: [{ value: '', disabled: true }],
+      userName: [{ value: '', disabled: true }],
       email: [{ value: '', disabled: true }],
       gender: ['', Validators.required],
       bioDescription: ['', [Validators.required]],
@@ -104,11 +110,7 @@ export class InstructorProfileformPageComponent implements OnInit{
 onFileChange(event: any): void {
   const file = event.target.files && event.target.files[0];
   if (file) {
-    // Use username instead of uid
-    const userName = this.userName;
-
-const filePath = `${Folder.Main_Folder}/${Folder.Instructor_Folder}/${this.userName}/${Folder.Instructor_Sub_Folder_1}/${file.name}`;
-
+    const filePath = `${Folder.Main_Folder}/${Folder.Instructor_Folder}/${this.fullName}/${Folder.Instructor_Sub_Folder_1}/${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -168,6 +170,9 @@ const filePath = `${Folder.Main_Folder}/${Folder.Instructor_Folder}/${this.userN
           this.instructorDetails = data;
           this.profileDetailsForm.patchValue({
             email: data.registrationDetails?.email || '',
+            fullName: data.registrationDetails?.fullName || '',
+            userName: data.registrationDetails?.userName || '',
+
           });
         } else {
           this.errorMessage = 'No profile data found';
@@ -191,11 +196,13 @@ submitProfile() {
 
   const formValue = this.profileDetailsForm.value;
   const email = this.profileDetailsForm.get('email')?.value;
+  const fullName = this.profileDetailsForm.get('fullName')?.value;
+  const userName = this.profileDetailsForm.get('userName')?.value;
 
   const profileData: InstructorProfile = {
     profileDetails: {
-      firstName: formValue.firstName,
-      lastName: formValue.lastName,
+      fullName: fullName,
+      userName: userName,
       email: email,
       gender: formValue.gender,
       socialMedia: formValue.socialLinks,

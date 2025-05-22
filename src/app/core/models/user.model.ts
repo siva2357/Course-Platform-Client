@@ -4,8 +4,10 @@ import { SafeHtml } from "@angular/platform-browser";
 export interface Instructor {
   _id?: string;
   registrationDetails: {
+      fullName: string;
+      userName: string;
       email: string;
-      password?: string; // Optional since it's usually not returned from backend
+      password?: string;
       verified?: boolean;
       verificationCode?: string;
       verificationCodeValidation?: number;
@@ -24,6 +26,9 @@ export interface Instructor {
 export interface Student {
   _id?: string;
   registrationDetails: {
+    firstName: string;
+      lastName: string;
+      userName: string;
       email: string;
       password?: string; // Optional since it's usually not returned from backend
       verified?: boolean;
@@ -45,8 +50,8 @@ export interface InstructorProfile {
   _id?: string;
   profileDetails: {
     profilePicture: { fileName: string; url: string; };
-    firstName: string;
-    lastName: string;
+    fullName: string;
+    userName: string;
     email?: string;
     gender: string;
     socialMedia: [{ platform: string; url: string }];

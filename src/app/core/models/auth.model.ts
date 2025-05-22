@@ -10,7 +10,7 @@ export interface LoginResponse {
   token?: string;     // Optional field if the backend returns a token (e.g., JWT)
   verified:boolean;
   success:boolean;
-  userEmail:string;
+  fullName:string;
   profileComplete:boolean;
 }
 

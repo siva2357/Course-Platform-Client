@@ -27,27 +27,24 @@ import { AuthService } from 'src/app/core/services/auth.service';
    initializeForm(): void {
      this.registrationForm = this.formBuilder.group({
        _id: [null],
+       fullName: ['', [Validators.required]],
+       userName: ['', [Validators.required]],
        email: ['', [Validators.required]],
        password: ['', [Validators.required, Validators.minLength(6)]],
-       confirmPassword: ['', [Validators.required]],
        role: ['instructor'],
-     }, { validators: this.passwordMatchValidator });
+     },);
    }
 
    get controls() {
      return this.registrationForm.controls;
    }
 
-  passwordMatchValidator(formGroup: FormGroup): { [key: string]: boolean } | null {
-    const password = formGroup.get('password')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
-    return password && confirmPassword && password !== confirmPassword ? { mismatch: true } : null;
-  }
-
   submit(): void {
     if (this.registrationForm.valid) {
       const instructorData: Instructor = {
         registrationDetails: {
+          fullName: this.registrationForm.value.fullName,
+          userName: this.registrationForm.value.userName,
           email: this.registrationForm.value.email,
           password: this.registrationForm.value.password, // Will be optional on the backend
         },

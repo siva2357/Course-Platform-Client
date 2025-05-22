@@ -61,7 +61,7 @@ getStudentDetails() {
       (data: any) => {
         this.userDetails = data;
         this.loading = false;
-        this.userName = this.userDetails?.profileDetails?.firstName ?? '';
+        this.userName = this.userDetails?.profileDetails?.userName ?? '';
         this.profile = this.userDetails.profileDetails.profilePicture.url
 
       },
@@ -75,7 +75,7 @@ getInstructorDetails() {
   this.profileService.getInstructorIdProfileById(this.userId).subscribe(
       (data: any) => {
         this.userDetails = data;
-        this.userName = this.userDetails?.profileDetails?.firstName?? '';
+        this.userName = this.userDetails?.profileDetails?.userName?? '';
         this.profile = this.userDetails.profileDetails.profilePicture.url
         this.loading = false;
       },

@@ -48,16 +48,16 @@
       <div class="row mt-3">
 
         <div class="col">
-          <label for="firstName" class="form-label ">Fullname : </label>
-          <input [ngClass]="{'is-invalid': profileDetailsForm.get('firstName')?.invalid && profileDetailsForm.get('firstName')?.touched}" type="text" id="firstName" formControlName="firstName" class="form-control form-control-sm" placeholder="First name" required>
-          <small *ngIf="profileDetailsForm.get('firstName')?.hasError('required') && profileDetailsForm.get('firstName')?.touched"class="text-danger"  style="font-size: 12px;">Firstname is required.</small>
+          <label for="fullName" class="form-label ">Fullname : </label>
+          <input [ngClass]="{'is-invalid': profileDetailsForm.get('fullName')?.invalid && profileDetailsForm.get('fullName')?.touched}" type="text" id="fullName" formControlName="fullName" class="form-control form-control-sm" placeholder="Full name" required>
+          <small *ngIf="profileDetailsForm.get('fullName')?.hasError('required') && profileDetailsForm.get('fullName')?.touched"class="text-danger"  style="font-size: 12px;">Fullname is required.</small>
         </div>
 
 
         <div class="col">
-          <label for="lastName" class="form-label ">Lastname : </label>
-          <input [ngClass]="{'is-invalid': profileDetailsForm.get('lastName')?.invalid && profileDetailsForm.get('lastName')?.touched}" type="text" id="lastName" formControlName="lastName" class="form-control form-control-sm" placeholder="Last name" required>
-          <small *ngIf="profileDetailsForm.get('lastName')?.hasError('required') && profileDetailsForm.get('lastName')?.touched" class="text-danger"  style="font-size: 12px;">Lastname is required.</small>
+          <label for="userName" class="form-label ">Username : </label>
+          <input [ngClass]="{'is-invalid': profileDetailsForm.get('userName')?.invalid && profileDetailsForm.get('userName')?.touched}" type="text" id="userName" formControlName="userName" class="form-control form-control-sm" placeholder="User name" required>
+          <small *ngIf="profileDetailsForm.get('userName')?.hasError('required') && profileDetailsForm.get('userName')?.touched" class="text-danger"  style="font-size: 12px;">Username is required.</small>
         </div>
 
 
@@ -128,10 +128,10 @@
       <div class="row  mt-3">
 
         <div class="col">
-          <!-- <div class="NgxEditor__Wrapper">
+          <div class="NgxEditor__Wrapper">
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
             <ngx-editor [ngClass]="{'is-invalid': profileDetailsForm.get('bioDescription')?.invalid && profileDetailsForm.get('bioDescription')?.touched}" [editor]="editor" class="form-control form-control-sm" formControlName="bioDescription"  [placeholder]="'Enter bio description'" required></ngx-editor>
-          </div> -->
+          </div>
           <small *ngIf="profileDetailsForm.get('bioDescription')?.hasError('required') && profileDetailsForm.get('bioDescription')?.touched" class="text-danger" style="font-size: 12px;">Bio details is required.</small>
         </div>
 
