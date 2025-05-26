@@ -92,6 +92,12 @@ export interface StudentProfile {
 
 
 
+export interface InstructorProfileHeader {
+  _id?: string;
+  fullName: string;
+  profilePictureUrl:string;
+}
+
 
 
 

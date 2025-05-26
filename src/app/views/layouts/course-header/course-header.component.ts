@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { InstructorProfile, StudentProfile } from 'src/app/core/models/user.model';
+import { InstructorProfile, InstructorProfileHeader, StudentProfile } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
 
@@ -12,7 +12,9 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 export class CourseHeaderComponent implements OnInit {
 
   public userDetails! :InstructorProfile | StudentProfile;
-  public userName! :string;
+  public userProfile! :InstructorProfileHeader;
+
+  public fullName! :string;
   public profile! :string;
   userId!: string;
   public errorMessage: string | null = null;
@@ -61,7 +63,7 @@ getStudentDetails() {
       (data: any) => {
         this.userDetails = data;
         this.loading = false;
-        this.userName = this.userDetails?.profileDetails?.userName ?? '';
+        this.fullName = this.userDetails?.profileDetails?.userName ?? '';
         this.profile = this.userDetails.profileDetails.profilePicture.url
 
       },
@@ -72,18 +74,19 @@ getStudentDetails() {
 }
 
 getInstructorDetails() {
-  this.profileService.getInstructorIdProfileById(this.userId).subscribe(
-      (data: any) => {
-        this.userDetails = data;
-        this.userName = this.userDetails?.profileDetails?.userName?? '';
-        this.profile = this.userDetails.profileDetails.profilePicture.url
-        this.loading = false;
-      },
-      (error) => {
-        this.handleError(error);
-      }
-    );
+  this.profileService.getInstructorProfileById(this.userId).subscribe(
+    (data:any) => {
+      this.userProfile = data;
+      this.fullName = this.userProfile.fullName;
+      this.profile = this.userProfile. profilePictureUrl
+      this.loading = false;
+    },
+    (error) => {
+      this.handleError(error);
+    }
+  );
 }
+
 
 handleError(error: any) {
     console.error('Error fetching user details:', error);
@@ -95,6 +98,17 @@ handleError(error: any) {
     this.loading = false;
 }
 
+
+goToProfilePage(){
+      const userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+    const userRole = localStorage.getItem('userRole') || this.authService.getRole() || '';
+    if (!userId || !userRole) {
+      console.error('User ID or role is missing');
+      return;
+    }
+    const rolePath = userRole.toLowerCase(); // Ensure lowercase for consistency
+    this.router.navigate([`instructor/profile-page/${userId}`]); // Redirect to change-password page
+}
 
   // Navigate to the change password page
   goToChangePasswordPage(): void {

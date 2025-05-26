@@ -3,7 +3,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
-import { InstructorProfile, StudentProfile} from '../models/user.model';
+import { InstructorProfile, InstructorProfileHeader, StudentProfile} from '../models/user.model';
 import { environment } from 'src/environments/environment';
 
 
@@ -28,7 +28,7 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
-  getInstructorIdProfileById(instructorId: string): Observable<InstructorProfile> {
+  getInstructorProfile(instructorId: string): Observable<InstructorProfile> {
     if (this.role === 'instructor' && this.userData._id === instructorId) {
       return of(this.userData);
     } else {
@@ -36,6 +36,19 @@ export class ProfileService {
         .pipe(catchError(error => this.handleError(error)));
     }
   }
+
+
+
+
+  getInstructorProfileById(instructorId: string): Observable<InstructorProfileHeader> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<InstructorProfileHeader>(`${this.baseUrl}/instructor/${instructorId}/profile`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
+
 
 
   postInstructorProfile(profileData: InstructorProfile): Observable<InstructorProfile> {

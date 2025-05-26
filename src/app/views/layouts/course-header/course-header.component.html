@@ -38,13 +38,14 @@
 
 
 
-        <div class="poppins-medium" style="margin-right: 20px; font-size: 14px;">{{userName}}</div>
+        <div class="poppins-medium" style="margin-right: 20px; font-size: 14px;">{{fullName}}</div>
 
         <div class="dropdown">
           <button class="nav-link d-flex justify-content-center align-items-center rounded-circle text-decoration-none bg-white" data-bs-toggle="dropdown" aria-expanded="false">
             <img [src]="profile" alt="Profile Image" style="width: 35px; height: 35px; border-radius: 50%;">
           </button>
           <ul class="dropdown-menu dropdown-menu-end shadow mt-3 rounded-0" style="width: 15rem;">
+            <li><a class="dropdown-item" (click)="goToProfilePage()">View Profile</a></li>
             <li><a class="dropdown-item" (click)="goToAccountSettingsPage()">Settings</a></li>
             <li><a class="dropdown-item" (click)="goToChangePasswordPage()">Change password</a></li>
             <hr class="mb-0 mt-0">

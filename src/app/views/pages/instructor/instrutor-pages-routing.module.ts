@@ -18,7 +18,7 @@ import { InstructorProfileformPageComponent } from './instructor-profileform-pag
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'profile-page', component:InstructorProfilePageComponent, title:"Instructor profile page"},
+  { path: 'profile-page/:id', component:InstructorProfilePageComponent, title:"Instructor profile page"},
   { path: 'profile-form-page', component:InstructorProfileformPageComponent, title:"Instructor profile page"},
   { path: 'account-settings/:id', component: InstructorAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
   { path: 'edit-profile/:id', component: InstructorEditProfilePageComponent, title: 'Recruiter Edit Profile Page' },
