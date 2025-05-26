@@ -77,8 +77,8 @@ getInstructorDetails() {
   this.profileService.getInstructorProfileById(this.userId).subscribe(
     (data:any) => {
       this.userProfile = data;
-      this.fullName = this.userProfile.fullName;
-      this.profile = this.userProfile. profilePictureUrl
+      this.fullName = this.userProfile.profile.fullName;
+      this.profile = this.userProfile.profile. profilePictureUrl
       this.loading = false;
     },
     (error) => {
