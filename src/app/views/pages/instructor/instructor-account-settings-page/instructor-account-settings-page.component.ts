@@ -80,9 +80,4 @@ export class InstructorAccountSettingsPageComponent {
   }
 
 
-  goToDashboardPage(){
-      this.router.navigate(['/instructor']);
-
-}
-
 }
