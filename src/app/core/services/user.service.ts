@@ -61,7 +61,7 @@ if (token) {
       if (this.role === 'instructor' && this.userData._id === id) {
       return of(this.userData);
     } else {
-      return this.http.get<Instructor>(`${this.baseUrl}/instructor/${id}`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+      return this.http.get<Instructor>(`${this.baseUrl}/instructor/${id}/profile-settings`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
     }
   }
 

@@ -10,7 +10,6 @@ import { InstructorCourseLearnersComponent } from './instructor-course-learners/
 import { InstructorTransactionPageComponent } from './instructor-transaction-page/instructor-transaction-page.component';
 import { InstructorProfilePageComponent } from './instructor-profile-page/instructor-profile-page.component';
 import { InstructorAccountSettingsPageComponent } from './instructor-account-settings-page/instructor-account-settings-page.component';
-import { InstructorEditProfilePageComponent } from './instructor-edit-profile-page/instructor-edit-profile-page.component';
 import { InstructorProfileformPageComponent } from './instructor-profileform-page/instructor-profileform-page.component';
 
 
@@ -20,8 +19,7 @@ const routes: Routes = [
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'profile-page/:id', component:InstructorProfilePageComponent, title:"Instructor profile page"},
   { path: 'profile-form-page', component:InstructorProfileformPageComponent, title:"Instructor profile page"},
-  { path: 'account-settings/:id', component: InstructorAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
-  { path: 'edit-profile/:id', component: InstructorEditProfilePageComponent, title: 'Recruiter Edit Profile Page' },
+  { path: 'account-settings/:id/profile-settings', component: InstructorAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
 	{ path: '', component: InstructorComponent,
 	  children: [
     { path: 'dashboard', component: InstructorDashboardPageComponent, title: 'Post Jobpost Page'  },

@@ -94,7 +94,6 @@ export interface StudentProfile {
 
 export interface InstructorProfileHeader {
   profile :{
-  _id?: string;
   fullName: string;
   profilePictureUrl:string;
   }

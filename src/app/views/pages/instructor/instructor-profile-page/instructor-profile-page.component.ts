@@ -68,8 +68,9 @@ handleError(error: any) {
 
 
 goToDashboardPage(){
-      this.router.navigate(['/instructor']);
-
+  this.router.navigate(['/instructor']);
 }
+
+
 
 }

@@ -1,61 +1,92 @@
 
 
-<div class="container-fluid mt-5">
-  <div class="row">
-
-<!-- Sidebar Navigation (Tabs) inside a Card -->
-<div class="col-md-3">
-  <div class="card p-3">
-    <ul class="nav flex-column" id="settingsTab" role="tablist">
-      <li class="nav-item mb-2" role="presentation">
-        <button class="btn w-100 custom-tab active" id="main-settings-tab" data-bs-toggle="tab" data-bs-target="#main-settings" type="button" role="tab">
-          Profile Settings
-        </button>
-      </li>
-      <li class="nav-item mb-2" role="presentation">
-        <button class="btn w-100 custom-tab" id="social-network-tab" data-bs-toggle="tab" data-bs-target="#social-network" type="button" role="tab">
-          Social Network
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="btn w-100 custom-tab" id="manage-account-tab" data-bs-toggle="tab" data-bs-target="#manage-account" type="button" role="tab">
-          Manage Account
-        </button>
-      </li>
-    </ul>
-  </div>
+<div class="col mt-5 px-5">
+  <button class="btn btn-sm btn-outline-secondary px-3 rounded-0" (click)="goToDashboardPage()">back</button>
 </div>
 
+
+
+<div class="container-fluid  px-5 mt-3">
+
+
+<!-- Sidebar Navigation (Tabs) inside a Card -->
+
+    <ul class="nav nav-underline " id="settingsTab" role="tablist">
+         <li class="nav-item mb-2" role="presentation">
+        <a class="nav-link active" id="basic-details-tab" data-bs-toggle="tab" data-bs-target="#basic-details" type="button" role="tab">
+         Basic Details
+        </a>
+      </li>
+         <li class="nav-item mb-2" role="presentation">
+        <a class="nav-link" id="profile-update-tab" data-bs-toggle="tab" data-bs-target="#profile-update" type="button" role="tab">
+          Profile Upload
+        </a>
+      </li>
+      <li class="nav-item mb-2" role="presentation">
+        <a class="nav-link" id="change-password-tab" data-bs-toggle="tab" data-bs-target="#change-password" type="button" role="tab">
+          Change password
+        </a>
+      </li>
+      <li class="nav-item mb-2" role="presentation">
+        <a class="nav-link" id="social-network-tab" data-bs-toggle="tab" data-bs-target="#social-network" type="button" role="tab">
+          Social Network
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="manage-account-tab" data-bs-toggle="tab" data-bs-target="#manage-account" type="button" role="tab">
+          Manage Account
+        </a>
+      </li>
+    </ul>
+
+
 <!-- Tab Content -->
-<div class="col-md-9">
+
   <div class="tab-content " id="settingsTabContent">
-    <div class="tab-pane fade show active" id="main-settings" role="tabpanel">
-      <div class="card p-4 ">
-        <h5>Profile Settings</h5>
-        <app-instructor-edit-profile-page></app-instructor-edit-profile-page>
+
+    <div class="tab-pane fade show active" id="basic-details" role="tabpanel">
+      <div class="col mt-3">
+        <h5>Basic details</h5>
       </div>
+
+    </div>
+
+
+    <div class="tab-pane fade " id="profile-update" role="tabpanel">
+      <div class="col mt-3">
+        <h5>Profile Update</h5>
+      </div>
+
+    </div>
+
+
+    <div class="tab-pane fade " id="change-password" role="tabpanel">
+      <div class="col mt-3">
+        <h5>Change Password</h5>
+      </div>
+
     </div>
 
     <div class="tab-pane fade" id="social-network" role="tabpanel">
-      <div class="card p-4">
+      <div class="col mt-3">
         <h3>Social Network</h3>
         <p>Connect your social accounts.</p>
       </div>
     </div>
 
     <div class="tab-pane fade" id="manage-account" role="tabpanel">
-      <div class="card p-4">
+      <div class="col mt-3">
         <h3>Manage Account</h3>
         <p>Delete or deactivate your account.</p>
-
-        <button (click)="deleteAccount()" class="btn btn-danger w-25">Delete Account</button>
       </div>
+
+
+      <button (click)="deleteAccount()" class="btn btn-danger w-25">Delete Account</button>
     </div>
   </div>
-</div>
 
 
-  </div>
+
 </div>
 
 

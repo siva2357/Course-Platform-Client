@@ -78,4 +78,11 @@ export class InstructorAccountSettingsPageComponent {
     }
     this.loading = false;
   }
+
+
+  goToDashboardPage(){
+      this.router.navigate(['/instructor']);
+
+}
+
 }
