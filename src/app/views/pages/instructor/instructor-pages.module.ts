@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxEditorModule } from 'ngx-editor';
+import { NgChartsModule } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { InstructorCoursePageComponent } from './instructor-course-page/instructor-course-page.component';
@@ -14,6 +16,14 @@ import { EditYourCourseComponent } from './edit-your-course/edit-your-course.com
 import { ManageYourCourseComponent } from './manage-your-course/manage-your-course.component';
 import { InstructorCourseLearnersComponent } from './instructor-course-learners/instructor-course-learners.component';
 import { InstructorTransactionPageComponent } from './instructor-transaction-page/instructor-transaction-page.component';
+import { InstructorProfilePageComponent } from './instructor-profile-page/instructor-profile-page.component';
+import { InstructorAccountSettingsPageComponent } from './instructor-account-settings-page/instructor-account-settings-page.component';
+import { InstructorProfileformPageComponent } from './instructor-profileform-page/instructor-profileform-page.component';
+import { InstructorBasicDetailsComponent } from './instructor-basic-details/instructor-basic-details.component';
+import { InstructorProfileUpdateComponent } from './instructor-profile-update/instructor-profile-update.component';
+import { InstructorSocialMediaComponent } from './instructor-social-media/instructor-social-media.component';
+import { ChangePasswordPageComponent } from '../change-password-page/change-password-page.component';
+import { InstructorDeleteAccountComponent } from './instructor-delete-account/instructor-delete-account.component';
 @NgModule({
   declarations: [
     InstructorComponent,
@@ -23,7 +33,15 @@ import { InstructorTransactionPageComponent } from './instructor-transaction-pag
     EditYourCourseComponent,
     ManageYourCourseComponent,
     InstructorCourseLearnersComponent,
-    InstructorTransactionPageComponent
+    InstructorTransactionPageComponent,
+    InstructorProfilePageComponent,
+    InstructorAccountSettingsPageComponent,
+    InstructorProfileformPageComponent,
+    InstructorBasicDetailsComponent,
+    InstructorProfileUpdateComponent,
+    InstructorSocialMediaComponent,
+    ChangePasswordPageComponent,
+    InstructorDeleteAccountComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +49,9 @@ import { InstructorTransactionPageComponent } from './instructor-transaction-pag
     FormsModule,
     ReactiveFormsModule,
     InstrutorPagesRoutingModule,
-    LayoutModule
+    LayoutModule,
+    NgxEditorModule,
+    NgChartsModule
 
 ],
   providers: [DatePipe],

@@ -16,7 +16,15 @@ import { InstructorSingupPageComponent } from './views/pages/instructor-singup-p
 import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
 import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
 import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
+import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
+import { ForgotPasswordPageComponent } from './views/pages/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordPageComponent } from './views/pages/reset-password-page/reset-password-page.component';
+import { ResetPasswordOtpPageComponent } from './views/pages/reset-password-otp-page/reset-password-otp-page.component';
+import { OtpVerificationComponent } from './views/pages/otp-verification/otp-verification.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,7 +38,11 @@ import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
     InstructorSingupPageComponent,
     InstructorLoginPageComponent,
     CartPageComponent,
-
+    AccountConfirmationPageComponent,
+    ForgotPasswordPageComponent,
+    ResetPasswordPageComponent,
+    ResetPasswordOtpPageComponent,
+    OtpVerificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +51,9 @@ import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
     FormsModule,
     ReactiveFormsModule,
     InstrutorPageModule,
-    LearnerPageModule
+    LearnerPageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Use legacy compatibility mode
+    AngularFireStorageModule, // Use storage services
   ],
   providers: [],
   bootstrap: [AppComponent]

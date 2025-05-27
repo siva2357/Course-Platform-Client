@@ -1,8 +1,8 @@
  import { Component } from '@angular/core';
  import { FormBuilder, FormGroup, Validators } from '@angular/forms';
  import { Router } from '@angular/router';
-
-
+import { Instructor } from 'src/app/core/models/user.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
  @Component({
    selector: 'app-instructor-singup-page',
@@ -18,39 +18,60 @@
    showConfirmPassword: boolean = false;
    errorMessage = '';
    registrationSuccess: boolean = false;
-   constructor(private formBuilder: FormBuilder, private router: Router) {}
+   constructor(private formBuilder: FormBuilder, private router: Router,  private authService : AuthService,) {}
 
    ngOnInit(): void {
-     this.initializeForm();
+       this.initializeForm();
    }
 
    initializeForm(): void {
      this.registrationForm = this.formBuilder.group({
-       _id: [null], // ✅ For fetching and updating user details
+       _id: [null],
+       fullName: ['', [Validators.required]],
+       userName: ['', [Validators.required]],
        email: ['', [Validators.required]],
        password: ['', [Validators.required, Validators.minLength(6)]],
-       confirmPassword: ['', [Validators.required]],
-       role: ['recruiter'],
-     }, { validators: this.passwordMatchValidator });
+       role: ['instructor'],
+     },);
    }
 
    get controls() {
      return this.registrationForm.controls;
    }
 
-   passwordMatchValidator(formGroup: FormGroup): { [key: string]: boolean } | null {
-     const password = formGroup.get('password')?.value;
-     const confirmPassword = formGroup.get('confirmPassword')?.value;
-     return password && confirmPassword && password !== confirmPassword ? { mismatch: true } : null;
-   }
+  submit(): void {
+    if (this.registrationForm.valid) {
+      const instructorData: Instructor = {
+        registrationDetails: {
+          fullName: this.registrationForm.value.fullName,
+          userName: this.registrationForm.value.userName,
+          email: this.registrationForm.value.email,
+          password: this.registrationForm.value.password, // Will be optional on the backend
+        },
+        role: 'instructor',
+      };
 
-   submit(): void {
-   }
+      this.isLoading = true;
+
+      this.authService. registerInstructor(instructorData).subscribe(
+        (response: any) => {
+          console.log('Registration successful', response);
+          this.registrationSuccess = true;
+          this.isLoading = false;
+            this.router.navigate(['otp-verification'], {
+              queryParams: { email: instructorData.registrationDetails.email }
+            });
+        },
+        (error: any) => {
+          this.isLoading = false;
+          console.error('Registration failed', error);
+        }
+      );
+    }
+  }
 
 
-   goBack(): void {
-     this.router.navigate(['teaching']);
-   }
+
 
    login(): void {
      this.router.navigate(['instructor/login-page']);

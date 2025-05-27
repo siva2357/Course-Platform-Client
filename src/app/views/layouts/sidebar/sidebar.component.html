@@ -1,53 +1,17 @@
-<!-- <div class="sidebar bg-body-secondary " [ngClass]="{'open': sidebarOpen}" style="font-family: 'Poppins', sans-serif;">
-  <i [ngClass]="!sidebarOpen ? 'bi bi-justify' : 'bi bi-justify'" id="btn" style="font-size: 1.5rem;" (click)="toggle()" ></i>
-  <ul class="nav-list" style="margin-top: 60px;">
-    <li *ngFor="let menu of menuItems" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
-      <a [routerLink]="menu.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <i [class]="menu.icon" style="font-size: 1.2rem;"></i>
-        <span class="links_name poppins-medium" style="margin-left: 10px; font-size: 14px;">{{ menu.label }}</span>
-      </a>
-      <span class="tooltip  poppins-regular" style="font-size: 14px;">{{ menu.label }}</span>
-    </li>
-  </ul>
-</div>
-
-
-<div class="sidebar bg-body-secondary" [ngClass]="{'open': sidebarOpen}">
-  <i class="bi bi-justify toggle-btn"
-     id="btn"
-     (click)="toggle()"
-     style="font-size: 1.5rem;"></i>
-
-  <ul class="nav-list">
-    <li *ngFor="let menu of menuItems">
-      <a [routerLink]="menu.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <i [class]="menu.icon"></i>
-        <span class="links_name" *ngIf="sidebarOpen">{{ menu.label }}</span>
-      </a>
-      <span class="tooltip" *ngIf="!sidebarOpen">{{ menu.label }}</span>
-    </li>
-  </ul>
-</div> -->
-
-
-
 <div class="sidebar shadow-lg" [ngClass]="{'open': sidebarOpen}">
 
-
-<div [class.centered]="!sidebarOpen" [class.left-aligned]="sidebarOpen" style="height: 60px;">
-  <i class="bi bi-justify" id="btn" (click)="toggle()" style="font-size: 1.5rem; cursor: pointer;"></i>
-  <p *ngIf="sidebarOpen" class="label-text" style="color: white;">Course-Hub</p>
-</div>
-
-
-  <ul class="nav-list" style="margin-top:  10px;">
+  <ul class="nav-list" style="margin-top: 80px;">
     <li *ngFor="let menu of menuItems" style="margin: 15px 10px;">
       <a [routerLink]="menu.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <i [class]="menu.icon" ></i>
-        <span *ngIf="sidebarOpen"  class="links_name poppins-medium" style="margin-left: 5px; margin-right: 10px; font-size: 14px;">{{ menu.label }}</span>
+        <span  class="links_name poppins-medium" style="margin-left: 5px; margin-right: 10px; font-size: 14px;">{{ menu.label }}</span>
       </a>
       <span class="tooltip  poppins-regular" style="font-size: 14px;">{{ menu.label }}</span>
 
     </li>
   </ul>
 </div>
+
+
+
+
