@@ -63,7 +63,34 @@ export interface InstructorProfile {
   __v?: number;
 }
 
+export interface BasicProfile {
+  _id?: string;
+    fullName: string;
+    userName: string;
+    email?: string;
+    gender: string;
+    bioDescription: string;
+    sanitizedBioDescription?: SafeHtml;
+    createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+}
 
+export interface ProfileUpload {
+  _id?: string;
+   profilePicture: { fileName: string; url: string };
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+}
+
+export interface SocialMedia {
+  _id?: string;
+    socialMedia: [{ platform: string; url: string }];
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+}
 
 
 export interface StudentProfile {
@@ -95,8 +122,7 @@ export interface StudentProfile {
 export interface InstructorProfileHeader {
   profile :{
   fullName: string;
-  profilePictureUrl:string;
-  }
+profilePicture: { fileName: string;url: string;};  }
 
 }
 

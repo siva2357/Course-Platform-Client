@@ -14,7 +14,6 @@ import { CheckoutPageComponent } from './views/pages/checkout-page/checkout-page
 import { ForgotPasswordPageComponent } from './views/pages/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordOtpPageComponent } from './views/pages/reset-password-otp-page/reset-password-otp-page.component';
 import { ResetPasswordPageComponent } from './views/pages/reset-password-page/reset-password-page.component';
-import { ChangePasswordPageComponent } from './views/pages/change-password-page/change-password-page.component';
 import { OtpVerificationComponent } from './views/pages/otp-verification/otp-verification.component';
 import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
 const routes: Routes = [
@@ -28,7 +27,6 @@ const routes: Routes = [
   { path: 'forgot-password', component:  ForgotPasswordPageComponent }, // Profile page route
   { path: 'forgotPassword-otp-verification', component:  ResetPasswordOtpPageComponent}, // Profile page route
   { path: 'reset-password', component:  ResetPasswordPageComponent}, // Profile page route
-  { path: 'change-password/:id', component:  ChangePasswordPageComponent}, // Profile page route
   { path: 'otp-verification', component:  OtpVerificationComponent }, // Profile page route
   { path: 'confirmation-page', component: AccountConfirmationPageComponent }, // Profile page route
 

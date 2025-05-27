@@ -78,7 +78,7 @@ getInstructorDetails() {
     (data:any) => {
       this.userProfile = data;
       this.fullName = this.userProfile.profile.fullName;
-      this.profile = this.userProfile.profile. profilePictureUrl
+      this.profile = this.userProfile.profile.profilePicture.url
       this.loading = false;
     },
     (error) => {

@@ -18,6 +18,7 @@ const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'profile-form-page', component:InstructorProfileformPageComponent, title:"Instructor profile page"},
+  { path: 'account-settings/:id/profile-settings', component: InstructorAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
 	{ path: '', component: InstructorComponent,
 	  children: [
     { path: 'dashboard', component: InstructorDashboardPageComponent, title: 'Post Jobpost Page'  },
@@ -26,8 +27,6 @@ const routes: Routes = [
     { path: 'course-learners', component:InstructorCourseLearnersComponent, title:"Recruiter profile page"},
     { path: 'payments', component:InstructorTransactionPageComponent, title:"Recruiter profile page"},
     { path: 'profile-page/:id', component:InstructorProfilePageComponent, title:"Instructor profile page"},
-    { path: 'account-settings/:id/profile-settings', component: InstructorAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
-
 	  ]
 	},
   { path: 'course/create', component:InstructorCreateCoursePageComponent, title:"Recruiter profile page"},

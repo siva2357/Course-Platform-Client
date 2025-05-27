@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
-import { InstructorProfile, InstructorProfileHeader, StudentProfile} from '../models/user.model';
+import { BasicProfile, InstructorProfile, InstructorProfileHeader, ProfileUpload, SocialMedia, StudentProfile} from '../models/user.model';
 import { environment } from 'src/environments/environment';
 
 
@@ -28,6 +28,15 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
+
+  private profileImageSubject = new BehaviorSubject<string | null>(null);
+profileImage$ = this.profileImageSubject.asObservable();
+
+setUpdatedProfileImage(url: string) {
+  this.profileImageSubject.next(url);
+}
+
+
   getInstructorProfile(instructorId: string): Observable<InstructorProfile> {
     if (this.role === 'instructor' && this.userData._id === instructorId) {
       return of(this.userData);
@@ -36,6 +45,66 @@ export class ProfileService {
         .pipe(catchError(error => this.handleError(error)));
     }
   }
+
+
+
+  getInstructorBasicDetails(instructorId: string): Observable<BasicProfile> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<BasicProfile>(`${this.baseUrl}/instructor/${instructorId}/profile/basic-details`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
+
+
+updateInstructorBasicDetails(instructorId: string, payload: BasicProfile): Observable<InstructorProfile> {
+  if (this.role === 'instructor' && this.userData._id === instructorId) {
+    return of(this.userData);
+  } else {
+    return this.http.put<InstructorProfile>
+    (`${this.baseUrl}/instructor/${instructorId}/profile/basic-details`, payload, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+  }
+}
+
+
+  getInstructorProfilePicture(instructorId: string): Observable<ProfileUpload> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<ProfileUpload>(`${this.baseUrl}/instructor/${instructorId}/profile/picture`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
+
+updateProfilePicture(instructorId: string, payload: ProfileUpload): Observable<InstructorProfile> {
+  if (this.role === 'instructor' && this.userData._id === instructorId) {
+    return of(this.userData);
+  } else {
+    return this.http.put<InstructorProfile>
+    (`${this.baseUrl}/instructor/${instructorId}/profile/picture`, payload, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+  }
+}
+
+
+
+  getInstructorSocialMedia(instructorId: string): Observable<SocialMedia> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<SocialMedia>(`${this.baseUrl}/instructor/${instructorId}/profile/social-media`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
+
+updateInstructorSocialMedia(instructorId: string, payload: SocialMedia): Observable<InstructorProfile> {
+  if (this.role === 'instructor' && this.userData._id === instructorId) {
+    return of(this.userData);
+  } else {
+    return this.http.put<InstructorProfile>
+    (`${this.baseUrl}/instructor/${instructorId}/profile/social-media`, payload, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+  }
+}
 
 
 
@@ -49,8 +118,6 @@ export class ProfileService {
     }
   }
 
-
-
   postInstructorProfile(profileData: InstructorProfile): Observable<InstructorProfile> {
     return this.http.post<InstructorProfile>(`${this.baseUrl}/instructor/profile-details`, profileData, { headers: this.getHeaders() })
       .pipe(catchError(error => this.handleError(error)));
@@ -60,6 +127,38 @@ export class ProfileService {
     return this.http.put<InstructorProfile>(`${this.baseUrl}/instructor/${instructorId}/profile-details`, updatedData, { headers: this.getHeaders() })
       .pipe(catchError(error => this.handleError(error)));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

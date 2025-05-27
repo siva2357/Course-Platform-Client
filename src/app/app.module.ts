@@ -17,7 +17,6 @@ import { InstructorLoginPageComponent } from './views/pages/instructor-login-pag
 import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
 import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
 import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
-import { ChangePasswordPageComponent } from './views/pages/change-password-page/change-password-page.component';
 import { ForgotPasswordPageComponent } from './views/pages/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './views/pages/reset-password-page/reset-password-page.component';
 import { ResetPasswordOtpPageComponent } from './views/pages/reset-password-otp-page/reset-password-otp-page.component';
@@ -40,7 +39,6 @@ import { environment } from 'src/environments/environment';
     InstructorLoginPageComponent,
     CartPageComponent,
     AccountConfirmationPageComponent,
-    ChangePasswordPageComponent,
     ForgotPasswordPageComponent,
     ResetPasswordPageComponent,
     ResetPasswordOtpPageComponent,
