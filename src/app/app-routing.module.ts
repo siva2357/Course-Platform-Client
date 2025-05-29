@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
   { path: 'admin', component:AdminComponent, title:"Recruiter profile page"},
 
-  { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstrutorPageModule)},
+  { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstructorPageModule)},
   { path: 'learner',loadChildren: () => import('./views/pages/learner/learner-pages.module').then((m) => m.LearnerPageModule)},
 
 

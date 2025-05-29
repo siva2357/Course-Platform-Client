@@ -8,17 +8,19 @@ import { Router } from '@angular/router';
 })
 export class InstructorCreateCoursePageComponent {
 
-  activeTab: string = 'Course landing page';
-
   constructor( public router:Router){}
-
-  setActiveTab(tab: string): void {
-		this.activeTab = tab;
-	}
 
   goToCoursePage(){
     this.router.navigate(['instructor/course'])
   }
 
+     menuItems: any[] = [
+      // { label: 'Dashboard', link: 'dashboard', icon: 'bi bi-grid' },
+      { label: 'Course landing page', link: 'course-landing-page'},
+      { label: 'Plan your course', link: 'plan-your-course'},
+      { label: 'Create your content', link: 'create-your-content'},
+      { label: 'Publish your course', link: 'publish-your-page'},
+
+    ];
 
 }

@@ -29,6 +29,8 @@ const routes: Routes = [
     { path: 'profile-page/:id', component:InstructorProfilePageComponent, title:"Instructor profile page"},
 	  ]
 	},
+  { path: 'course/create',loadChildren: () => import('./instructor-create-course-page/instructor-create-course-pages.module').then((m) => m.InstructorCoursePageModule)},
+
   { path: 'course/create', component:InstructorCreateCoursePageComponent, title:"Recruiter profile page"},
   { path: 'edit-course/:id', component:EditYourCourseComponent, title:"Recruiter profile page"},
   ];
@@ -39,4 +41,4 @@ const routes: Routes = [
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule],
 })
-export class InstrutorPagesRoutingModule { }
+export class InstructorPagesRoutingModule { }
