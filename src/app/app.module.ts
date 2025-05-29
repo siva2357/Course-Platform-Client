@@ -25,6 +25,7 @@ import { OtpVerificationComponent } from './views/pages/otp-verification/otp-ver
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
+import { AdminComponent } from './views/pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { environment } from 'src/environments/environment';
     ResetPasswordPageComponent,
     ResetPasswordOtpPageComponent,
     OtpVerificationComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

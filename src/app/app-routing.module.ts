@@ -16,6 +16,7 @@ import { ResetPasswordOtpPageComponent } from './views/pages/reset-password-otp-
 import { ResetPasswordPageComponent } from './views/pages/reset-password-page/reset-password-page.component';
 import { OtpVerificationComponent } from './views/pages/otp-verification/otp-verification.component';
 import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
+import { AdminComponent } from './views/pages/admin/admin.component';
 const routes: Routes = [
   // Public routes
   { path: 'main', component:  LandingPageComponent, title: 'Main page' },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'instructor/login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
   { path: 'cart', component:CartPageComponent, title:"Recruiter profile page"},
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
+  { path: 'admin', component:AdminComponent, title:"Recruiter profile page"},
 
   { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstrutorPageModule)},
   { path: 'learner',loadChildren: () => import('./views/pages/learner/learner-pages.module').then((m) => m.LearnerPageModule)},
