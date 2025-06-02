@@ -19,6 +19,7 @@ export class InstructorCreateCoursePageComponent {
       { label: 'Course landing page', link: 'course-landing-page'},
       { label: 'Plan your course', link: 'plan-your-course'},
       { label: 'Create your content', link: 'create-your-content'},
+      { label: 'Setup price ', link: 'course-pricing-page'},
       { label: 'Publish your course', link: 'publish-your-page'},
 
     ];

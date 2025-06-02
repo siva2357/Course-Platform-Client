@@ -11,13 +11,15 @@ import { CoursePublishPageComponent } from './course-publish-page/course-publish
 import { CoursePlanningPageComponent } from './course-planning-page/course-planning-page.component';
 import { InstructorCoursePagesRoutingModule } from './instructor-create-course-pages-routing.module';
 import { InstructorCreateCoursePageComponent } from './instructor-create-course-page.component';
+import { CoursePricePageComponent } from './course-price-page/course-price-page.component';
 @NgModule({
   declarations: [
     InstructorCreateCoursePageComponent,
 CoursePlanningPageComponent,
 CoursePublishPageComponent,
 CourseLandingPageComponent,
-CourseContentCreateComponent
+CourseContentCreateComponent,
+CoursePricePageComponent
   ],
   imports: [
     CommonModule,
