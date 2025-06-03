@@ -17,6 +17,8 @@ import { ResetPasswordPageComponent } from './views/pages/reset-password-page/re
 import { OtpVerificationComponent } from './views/pages/otp-verification/otp-verification.component';
 import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
 import { AdminComponent } from './views/pages/admin/admin.component';
+import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
+import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
 const routes: Routes = [
   // Public routes
   { path: 'main', component:  LandingPageComponent, title: 'Main page' },
@@ -37,8 +39,11 @@ const routes: Routes = [
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
   { path: 'admin', component:AdminComponent, title:"Recruiter profile page"},
 
+  { path: 'student/registration-page', component:  StudentSignupPageComponent, title: 'Course page' },
+  { path: 'student/login-page', component: StudentLoginPageComponent, title: 'Course page' },
+
   { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstructorPageModule)},
-  { path: 'learner',loadChildren: () => import('./views/pages/learner/learner-pages.module').then((m) => m.LearnerPageModule)},
+  { path: 'student',loadChildren: () => import('./views/pages/student/student-pages.module').then((m) => m.StudentPageModule)},
 
 
   { path: '**', redirectTo: 'main' }, // Fallback rou

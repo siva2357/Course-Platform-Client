@@ -11,10 +11,10 @@ import { TeachingPageComponent } from './views/pages/teaching-page/teaching-page
 import { LearningPageComponent } from './views/pages/learning-page/learning-page.component';
 import { CourseCategoryComponent } from './views/pages/course-category/course-category.component';
 
+import { StudentPageModule } from './views/pages/student/student-pages.module';
 import { InstructorPageModule } from './views/pages/instructor/instructor-pages.module';
 import { InstructorSingupPageComponent } from './views/pages/instructor-singup-page/instructor-singup-page.component';
 import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
-import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
 import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
 import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
 import { ForgotPasswordPageComponent } from './views/pages/forgot-password-page/forgot-password-page.component';
@@ -53,7 +53,7 @@ import { AdminComponent } from './views/pages/admin/admin.component';
     FormsModule,
     ReactiveFormsModule,
     InstructorPageModule,
-    LearnerPageModule,
+    StudentPageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Use legacy compatibility mode
     AngularFireStorageModule, // Use storage services
   ],
