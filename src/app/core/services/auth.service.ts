@@ -41,7 +41,7 @@ registerInstructor(instructorData: Instructor): Observable<any> {
 
 
     // Register recruiter and send OTP code
-registerSeeker(studentData: Student): Observable<any> {
+registerStudent(studentData: Student): Observable<any> {
   return this.http.post(`${this.baseUrl}/auth/student/signup`, studentData)
     .pipe(
       switchMap((response: any) => {

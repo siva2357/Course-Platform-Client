@@ -26,6 +26,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
 import { AdminComponent } from './views/pages/admin/admin.component';
+import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
+import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,9 @@ import { AdminComponent } from './views/pages/admin/admin.component';
     ResetPasswordOtpPageComponent,
     OtpVerificationComponent,
     AdminComponent,
+    StudentLoginPageComponent,
+     StudentSignupPageComponent
+
   ],
   imports: [
     BrowserModule,

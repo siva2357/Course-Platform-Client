@@ -26,11 +26,10 @@ export interface Instructor {
 export interface Student {
   _id?: string;
   registrationDetails: {
-    firstName: string;
-      lastName: string;
+      fullName: string;
       userName: string;
       email: string;
-      password?: string; // Optional since it's usually not returned from backend
+      password?: string;
       verified?: boolean;
       verificationCode?: string;
       verificationCodeValidation?: number;
@@ -40,7 +39,7 @@ export interface Student {
   role: string;
   lastLoginAt?: Date | null;
   lastLogoutAt?: Date | null;
-  status?: "active" | "inactive"; // Match backend enum
+  status?: string; // Match backend enum
   createdAt?: Date; // Mongoose timestamps field
   updatedAt?: Date; // Mongoose timestamps field
 }
