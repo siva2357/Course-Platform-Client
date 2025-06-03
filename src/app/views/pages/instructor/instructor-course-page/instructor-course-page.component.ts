@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Course } from 'src/app/core/models/course.model';
+import { CourseService } from 'src/app/core/services/course.service';
 
 @Component({
   selector: 'app-instructor-course-page',
@@ -8,13 +10,25 @@ import { Router } from '@angular/router';
 })
 export class InstructorCoursePageComponent {
 
-  constructor( public router:Router){
+  public course!:Course
+
+  constructor( public router:Router, public courseService:CourseService){
 
   }
 
-  goToCreateCourse()
-  {
-    this.router.navigate(['instructor/course/create'])
+  // createNewCourse()
+  // {
+  //   this.router.navigate(['instructor/course/create'])
+  // }
+
+    createNewCourse() {
+    this.courseService.createCourse(this.course).subscribe({
+      next: (course: Course) => {
+        const courseId = course._id;
+        this.router.navigate([`instructor/course/${courseId}/create`]);
+      },
+      error: err => console.error('Course creation failed', err)
+    });
   }
 
 }

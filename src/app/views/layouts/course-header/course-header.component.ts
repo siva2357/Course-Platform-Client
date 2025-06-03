@@ -110,17 +110,6 @@ goToProfilePage(){
     this.router.navigate([`instructor/profile-page/${userId}`]); // Redirect to change-password page
 }
 
-  // Navigate to the change password page
-  goToChangePasswordPage(): void {
-    const userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
-    const userRole = localStorage.getItem('userRole') || this.authService.getRole() || '';
-    if (!userId || !userRole) {
-      console.error('User ID or role is missing');
-      return;
-    }
-    const rolePath = userRole.toLowerCase(); // Ensure lowercase for consistency
-    this.router.navigate([`change-password/${userId}`]); // Redirect to change-password page
-  }
 
   goToAccountSettingsPage(): void {
     const userId = localStorage.getItem('userId') || this.authService.getUserId() || '';

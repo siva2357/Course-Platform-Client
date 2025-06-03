@@ -8,10 +8,10 @@ import { DatePipe } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { InstructorCoursePageComponent } from './instructor-course-page/instructor-course-page.component';
 import { InstructorDashboardPageComponent } from './instructor-dashboard-page/instructor-dashboard-page.component';
-import { InstructorCreateCoursePageComponent } from './instructor-create-course-page/instructor-create-course-page.component';
 import { InstructorComponent } from './instructor.component';
-import { InstrutorPagesRoutingModule } from './instrutor-pages-routing.module';
+import { InstructorPagesRoutingModule } from './instructor-pages-routing.module';
 import { LayoutModule } from '../../layouts/layout.module';
+import { InstructorCoursePageModule} from '../instructor/instructor-create-course-page/instructor-create-course-pages.module';
 import { EditYourCourseComponent } from './edit-your-course/edit-your-course.component';
 import { ManageYourCourseComponent } from './manage-your-course/manage-your-course.component';
 import { InstructorCourseLearnersComponent } from './instructor-course-learners/instructor-course-learners.component';
@@ -29,7 +29,6 @@ import { InstructorDeleteAccountComponent } from './instructor-delete-account/in
     InstructorComponent,
     InstructorCoursePageComponent,
     InstructorDashboardPageComponent,
-    InstructorCreateCoursePageComponent,
     EditYourCourseComponent,
     ManageYourCourseComponent,
     InstructorCourseLearnersComponent,
@@ -48,12 +47,14 @@ import { InstructorDeleteAccountComponent } from './instructor-delete-account/in
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    InstrutorPagesRoutingModule,
+    InstructorPagesRoutingModule,
     LayoutModule,
     NgxEditorModule,
-    NgChartsModule
+    NgChartsModule,
+    InstructorCoursePageModule
+
 
 ],
   providers: [DatePipe],
 })
-export class InstrutorPageModule { }
+export class InstructorPageModule { }

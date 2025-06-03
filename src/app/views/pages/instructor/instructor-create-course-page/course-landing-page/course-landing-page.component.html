@@ -1,0 +1,148 @@
+
+  <form [formGroup]="landingPageDetails" (ngSubmit)="postLandingPage()">
+
+    <div class="card shadow-lg rounded-0">
+      <div class="card-body p-5">
+        <h4>Course landing page</h4>
+        <hr>
+        <p style="font-size: 14px; text-align: justify;">
+          Your course landing page is crucial to your success on Udemy. If it’s done right, it can also help you gain
+          visibility
+          in search engines like Google. As you complete this section, think about creating a compelling Course Landing
+          Page that demonstrates why someone would want to enroll in your course. Learn more about creating your course
+          landing
+          page and course title standards.
+        </p>
+
+        <div class="mb-3 mt-5">
+          <label class="form-label fw-bold">Course title</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" formControlName="courseTitle"
+            placeholder="Course Title" style="font-size: 14px;">
+          <small
+            *ngIf="landingPageDetails.get('courseTitle')?.hasError('required') && landingPageDetails.get('courseTitle')?.touched"
+            class="text-danger" style="font-size: 12px;">Course Title is required.</small>
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-bold">Course category</label>
+          <div class="input-group mb-3">
+            <select class="form-select" formControlName="courseCategory" id="inputGroupSelect02" style="font-size: 14px;">
+              <option selected value="" disabled>Choose...</option>
+              <option value="One">One</option>
+              <option value="Two">Two</option>
+              <option value="Three">Three</option>
+            </select>
+          </div>
+          <small
+            *ngIf="landingPageDetails.get('courseCategory')?.hasError('required') && landingPageDetails.get('courseCategory')?.touched"
+            class="text-danger" style="font-size: 12px;">Course Category is required.</small>
+
+        </div>
+
+
+
+
+        <div class="col mt-3">
+          <div class="NgxEditor__Wrapper">
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+            <ngx-editor
+              [ngClass]="{'is-invalid': landingPageDetails.get('courseDescription')?.invalid && landingPageDetails.get('bioDescription')?.touched}"
+              [editor]="editor" class="form-control form-control-sm" formControlName="courseDescription"
+              [placeholder]="'Enter course description'" required></ngx-editor>
+          </div>
+          <small
+            *ngIf="landingPageDetails.get('courseDescription')?.hasError('required') && landingPageDetails.get('courseDescription')?.touched"
+            class="text-danger" style="font-size: 12px;">Course description is required.</small>
+        </div>
+
+
+
+
+        <div class="container ">
+          <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+              <img
+                src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.05_-_A_visually_stunning_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_smooth_flowing_waves_in_a_gradient_blend_of_deep_ur89bo.webp"
+                class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="500" height="300" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+              <p style="font-size: 14px;">Upload your course image here. It must meet our course image quality standards
+                to be accepted. Important guidelines: 750x422 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.
+              </p>
+
+              <div class=" justify-content-md-start">
+                <div class="input-group mt-5">
+                  <input type="file" class="form-control form-control-sm" formControlName="courseThumbnail"
+                    id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                </div>
+                <small
+                  *ngIf="landingPageDetails.get('courseThumbnail')?.hasError('required') && landingPageDetails.get('courseThumbnail')?.touched"
+                  class="text-danger" style="font-size: 12px;">Course Thumbnail is required.</small>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="container">
+          <div class="row flex-lg-row align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+              <img
+                src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.19_-_A_vibrant_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_a_mix_of_visually_striking_colors_including_shades_of_blue_aytnxj.webp"
+                class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="500" height="300" loading="lazy">
+            </div>
+
+            <div class="col-lg-6">
+
+              <p style="font-size: 14px;">
+                Your promo video is a quick and compelling way for students to preview what they’ll learn in
+                your course. Students considering your course are more likely to enroll if your promo video is well-made.
+                Learn how to make your promo video awesome!
+              </p>
+
+              <div class="justify-content-md-start">
+                <div class="input-group mt-5">
+                  <input type="file" class="form-control form-control-sm" id="inputGroupFile04"
+                    formControlName="coursePreview" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                </div>
+                <small
+                  *ngIf="landingPageDetails.get('coursePreview')?.hasError('required') && landingPageDetails.get('coursePreview')?.touched"
+                  class="text-danger" style="font-size: 12px;">Course Preview is required.</small>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="container mb-5">
+          <div class="d-flex justify-content-between mt-5">
+            <!-- <button type="button"   class="btn btn-sm btn-outline-danger px-4  poppins-medium"  (click)="discard()">Discard</button> -->
+            <button type="submit" class="btn btn-sm btn-outline-primary px-4  poppins-medium">Save</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+  </form>
+
+
+<div class="container-fluid" *ngIf="isLoading">
+  <div class="text-center">
+      <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="mt-3">
+          <p>Saving landing page details</p>
+      </div>
+  </div>
+</div>

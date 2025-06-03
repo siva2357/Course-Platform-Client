@@ -11,7 +11,7 @@ import { TeachingPageComponent } from './views/pages/teaching-page/teaching-page
 import { LearningPageComponent } from './views/pages/learning-page/learning-page.component';
 import { CourseCategoryComponent } from './views/pages/course-category/course-category.component';
 
-import { InstrutorPageModule } from './views/pages/instructor/instructor-pages.module';
+import { InstructorPageModule } from './views/pages/instructor/instructor-pages.module';
 import { InstructorSingupPageComponent } from './views/pages/instructor-singup-page/instructor-singup-page.component';
 import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
 import { LearnerPageModule } from './views/pages/learner/learner-pages.module';
@@ -25,6 +25,7 @@ import { OtpVerificationComponent } from './views/pages/otp-verification/otp-ver
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
+import { AdminComponent } from './views/pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { environment } from 'src/environments/environment';
     ResetPasswordPageComponent,
     ResetPasswordOtpPageComponent,
     OtpVerificationComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,7 @@ import { environment } from 'src/environments/environment';
     LayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    InstrutorPageModule,
+    InstructorPageModule,
     LearnerPageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Use legacy compatibility mode
     AngularFireStorageModule, // Use storage services
