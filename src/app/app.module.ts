@@ -48,7 +48,7 @@ import { StudentSignupPageComponent } from './views/pages/student-signup-page/st
     OtpVerificationComponent,
     AdminComponent,
     StudentLoginPageComponent,
-     StudentSignupPageComponent
+    StudentSignupPageComponent,
 
   ],
   imports: [

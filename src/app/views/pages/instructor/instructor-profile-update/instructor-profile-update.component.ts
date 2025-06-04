@@ -250,7 +250,7 @@ updateProfileImage()  {
       };
 
       this.isUpdating = true;
-      this.profileService.updateProfilePicture(this.instructorId, updatedProfileData).subscribe({
+      this.profileService.updateInstructorProfilePicture(this.instructorId, updatedProfileData).subscribe({
   next: (response: any) => {  // <-- Add response param here
           this.resetState();
           console.log('Profile updated successfully!');

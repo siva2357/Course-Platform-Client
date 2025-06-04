@@ -59,7 +59,7 @@ public userRole: string | null = null;
 
 
 getStudentDetails() {
-    this.profileService.getStudentIdProfileById(this.userId).subscribe(
+    this.profileService.getStudentProfileById(this.userId).subscribe(
       (data: any) => {
         this.userDetails = data;
         this.loading = false;

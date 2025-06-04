@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-
 import { BasicProfile, InstructorProfile, InstructorProfileHeader, ProfileUpload, SocialMedia, StudentProfile} from '../models/user.model';
 import { environment } from 'src/environments/environment';
 
@@ -46,8 +45,6 @@ setUpdatedProfileImage(url: string) {
     }
   }
 
-
-
   getInstructorBasicDetails(instructorId: string): Observable<BasicProfile> {
     if (this.role === 'instructor' && this.userData._id === instructorId) {
       return of(this.userData);
@@ -77,7 +74,7 @@ updateInstructorBasicDetails(instructorId: string, payload: BasicProfile): Obser
     }
   }
 
-updateProfilePicture(instructorId: string, payload: ProfileUpload): Observable<InstructorProfile> {
+updateInstructorProfilePicture(instructorId: string, payload: ProfileUpload): Observable<InstructorProfile> {
   if (this.role === 'instructor' && this.userData._id === instructorId) {
     return of(this.userData);
   } else {
@@ -85,7 +82,6 @@ updateProfilePicture(instructorId: string, payload: ProfileUpload): Observable<I
     (`${this.baseUrl}/instructor/${instructorId}/profile/picture`, payload, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
   }
 }
-
 
 
   getInstructorSocialMedia(instructorId: string): Observable<SocialMedia> {
@@ -105,8 +101,6 @@ updateInstructorSocialMedia(instructorId: string, payload: SocialMedia): Observa
     (`${this.baseUrl}/instructor/${instructorId}/profile/social-media`, payload, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
   }
 }
-
-
 
 
   getInstructorProfileById(instructorId: string): Observable<InstructorProfileHeader> {
@@ -133,54 +127,93 @@ updateInstructorSocialMedia(instructorId: string, payload: SocialMedia): Observa
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  getStudentIdProfileById(studentId: string): Observable<StudentProfile> {
-    if (this.role === 'student' && this.userData._id === studentId) {
+  getStudentProfile(instructorId: string): Observable<InstructorProfile> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
       return of(this.userData);
     } else {
-      return this.http.get<StudentProfile>(`${this.baseUrl}/student/${studentId}/profile-details`, { headers: this.getHeaders() })
+      return this.http.get<InstructorProfile>(`${this.baseUrl}/instructor/${instructorId}/profile-details`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
+
+  getStudentBasicDetails(instructorId: string): Observable<BasicProfile> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<BasicProfile>(`${this.baseUrl}/instructor/${instructorId}/profile/basic-details`, { headers: this.getHeaders() })
         .pipe(catchError(error => this.handleError(error)));
     }
   }
 
 
-  postStudentProfile(profileData: StudentProfile, studentId: string): Observable<StudentProfile> {
-    return this.http.post<StudentProfile>(`${this.baseUrl}/student/${studentId}/profile-details`, profileData, { headers: this.getHeaders() })
+updateStudentBasicDetails(instructorId: string, payload: BasicProfile): Observable<InstructorProfile> {
+  if (this.role === 'instructor' && this.userData._id === instructorId) {
+    return of(this.userData);
+  } else {
+    return this.http.put<InstructorProfile>
+    (`${this.baseUrl}/instructor/${instructorId}/profile/basic-details`, payload, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+  }
+}
+
+
+  getStudentProfilePicture(instructorId: string): Observable<ProfileUpload> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<ProfileUpload>(`${this.baseUrl}/instructor/${instructorId}/profile/picture`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
+
+updateStudentProfilePicture(instructorId: string, payload: ProfileUpload): Observable<InstructorProfile> {
+  if (this.role === 'instructor' && this.userData._id === instructorId) {
+    return of(this.userData);
+  } else {
+    return this.http.put<InstructorProfile>
+    (`${this.baseUrl}/instructor/${instructorId}/profile/picture`, payload, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+  }
+}
+
+
+  getStudentSocialMedia(instructorId: string): Observable<SocialMedia> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<SocialMedia>(`${this.baseUrl}/instructor/${instructorId}/profile/social-media`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
+
+updateStudentSocialMedia(instructorId: string, payload: SocialMedia): Observable<InstructorProfile> {
+  if (this.role === 'instructor' && this.userData._id === instructorId) {
+    return of(this.userData);
+  } else {
+    return this.http.put<InstructorProfile>
+    (`${this.baseUrl}/instructor/${instructorId}/profile/social-media`, payload, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+  }
+}
+
+
+  getStudentProfileById(instructorId: string): Observable<InstructorProfileHeader> {
+    if (this.role === 'instructor' && this.userData._id === instructorId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<InstructorProfileHeader>(`${this.baseUrl}/instructor/${instructorId}/profile`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
+
+  postStudentProfile(profileData: InstructorProfile): Observable<InstructorProfile> {
+    return this.http.post<InstructorProfile>(`${this.baseUrl}/instructor/profile-details`, profileData, { headers: this.getHeaders() })
       .pipe(catchError(error => this.handleError(error)));
   }
 
-  updateStudentProfile(studentId: string,updatedData: StudentProfile): Observable<StudentProfile> {
-    return this.http.put<StudentProfile>(`${this.baseUrl}/student/${studentId}/profile-details`, updatedData, { headers: this.getHeaders() })
+  updateStudentProfile(instructorId: string,updatedData: InstructorProfile): Observable<InstructorProfile> {
+    return this.http.put<InstructorProfile>(`${this.baseUrl}/instructor/${instructorId}/profile-details`, updatedData, { headers: this.getHeaders() })
       .pipe(catchError(error => this.handleError(error)));
 }
+
+
 
 
   private handleError(error: HttpErrorResponse): Observable<never> {
