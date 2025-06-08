@@ -10,18 +10,18 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
 
 @Component({
-  selector: 'app-instructor-profile-update',
-  templateUrl: './instructor-profile-update.component.html',
-  styleUrls: ['./instructor-profile-update.component.css']
+  selector: 'app-student-profile-update',
+  templateUrl: './student-profile-update.component.html',
+  styleUrls: ['./student-profile-update.component.css']
 })
-export class InstructorProfileUpdateComponent implements OnInit{
+export class StudentProfileUpdateComponent implements OnInit{
   @ViewChild('fileInput') fileInput!: ElementRef;
   profileUploadForm!: FormGroup;
   isSubmitting: boolean = false;
   errorMessage: string = '';
   isLoading: boolean = false;
   successMessage: string = '';
-  instructorId!: string;
+ studentId!: string;
   fullName!: string;
 
   public profile!: ProfileUpload;
@@ -53,12 +53,12 @@ export class InstructorProfileUpdateComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.instructorId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+    this. studentId = localStorage.getItem('userId') || this.authService.getUserId() || '';
     const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
         this.fullName = this.authService.getFullName() ||''  // e.g. "Jane Doe"
 
-    if (this.instructorId && role === 'instructor') {
-      this.loadInstructorProfile();
+    if (this. studentId && role === 'student') {
+      this.loadStudentProfile();
     } else {
       this.errorMessage = 'User ID or Role is not available.';
     }
@@ -100,7 +100,7 @@ onFileChange(event: any, filePath: string): void {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
 
-  const newFilePath = `${Folder.Main_Folder}/${Folder.Instructor_Folder}/${this.fullName}/${Folder.Instructor_Sub_Folder_1}/${file.name}`;
+  const newFilePath = `${Folder.Main_Folder}/${Folder.Student_Folder}/${this.fullName}/${Folder.Student_Sub_Folder_1}/${file.name}`;
   const newFileRef = this.storage.ref(newFilePath);
 
   if (filePath) {
@@ -184,17 +184,17 @@ onFileChange(event: any, filePath: string): void {
           return throwError(() => new Error("No file path provided for deletion."));
         }
 
-        const correctedFilePath = `${Folder.Main_Folder}/${Folder.Instructor_Folder}/${this.fullName}/${Folder.Instructor_Sub_Folder_1}/${filePath}`;
+        const correctedFilePath = `${Folder.Main_Folder}/${Folder.Student_Folder}/${this.fullName}/${Folder.Student_Sub_Folder_1}/${filePath}`;
 
         return this.storage.ref(correctedFilePath).delete();
       }
 
 
 
-loadInstructorProfile(): void {
+loadStudentProfile(): void {
   this.isLoading = true;
 
-  this.profileService.getInstructorProfilePicture(this.instructorId).subscribe({
+  this.profileService.getStudentProfilePicture(this.studentId).subscribe({
     next: (data) => {
       this.isLoading = false;
       this.profile = data;
@@ -250,7 +250,7 @@ updateProfileImage()  {
       };
 
       this.isUpdating = true;
-      this.profileService.updateInstructorProfilePicture(this.instructorId, updatedProfileData).subscribe({
+      this.profileService.updateStudentProfilePicture(this.studentId, updatedProfileData).subscribe({
   next: (response: any) => {  // <-- Add response param here
           this.resetState();
           console.log('Profile updated successfully!');
@@ -260,10 +260,10 @@ updateProfileImage()  {
           this.ifPreview = false;
           this.uploadComplete = false;
           this.fileUploadProgress = undefined;
-          this.loadInstructorProfile();
+          this.loadStudentProfile();
           this.profileUploadForm.reset();
          setTimeout(() => {
-          this.loadInstructorProfile();
+          this.loadStudentProfile();
          }, 500);
         },
         error: (err) => {

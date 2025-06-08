@@ -10,7 +10,7 @@ export class LearningPageComponent {
 
   constructor(private router:Router) { }
   goToRegistrationPage(){
-    this.router.navigate(['learner/registration-page']);
+    this.router.navigate(['student/registration-page']);
   }
 
 }
