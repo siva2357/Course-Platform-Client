@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { InstructorProfile, InstructorProfileHeader, StudentProfile } from 'src/app/core/models/user.model';
+import { InstructorProfile, InstructorProfileHeader, StudentProfile, StudentProfileHeader } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
 
@@ -12,7 +12,7 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 export class CourseHeaderComponent implements OnInit {
 
   public userDetails! :InstructorProfile | StudentProfile;
-  public userProfile! :InstructorProfileHeader;
+  public userProfile! :InstructorProfileHeader|StudentProfileHeader;
 
   public fullName! :string;
   public profile! :string;
@@ -61,10 +61,10 @@ public userRole: string | null = null;
 getStudentDetails() {
     this.profileService.getStudentProfileById(this.userId).subscribe(
       (data: any) => {
-        this.userDetails = data;
+        this.userProfile = data;
+        this.fullName = this.userProfile.profile.fullName;
+        this.profile =  this.userProfile.profile.profilePicture.url
         this.loading = false;
-        this.fullName = this.userDetails?.profileDetails?.userName ?? '';
-        this.profile = this.userDetails.profileDetails.profilePicture.url
 
       },
       (error) => {
@@ -99,15 +99,17 @@ handleError(error: any) {
 }
 
 
-goToProfilePage(){
-      const userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
-    const userRole = localStorage.getItem('userRole') || this.authService.getRole() || '';
-    if (!userId || !userRole) {
-      console.error('User ID or role is missing');
-      return;
-    }
-    const rolePath = userRole.toLowerCase(); // Ensure lowercase for consistency
-    this.router.navigate([`instructor/profile-page/${userId}`]); // Redirect to change-password page
+goToProfilePage(): void {
+  const userId = this.authService.getUserId() || localStorage.getItem('userId') || '';
+  const userRole = this.authService.getRole() || localStorage.getItem('userRole') || '';
+
+  if (!userId || !userRole) {
+    console.error('User ID or role is missing');
+    return;
+  }
+
+  const rolePath = userRole.toLowerCase();  // Ensures route path is consistent
+  this.router.navigate([`/${rolePath}/profile-page/${userId}`]);
 }
 
 

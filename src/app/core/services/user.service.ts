@@ -4,7 +4,6 @@ import { catchError } from 'rxjs/operators';
 import { Instructor, Student } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode' ;
-import { InstructorProfile } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -69,7 +68,7 @@ if (token) {
     if (this.role === 'student' && this.userData._id === id) {
       return of(this.userData);
     } else {
-      return this.http.get<Student>(`${this.baseUrl}/student/${id}`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+      return this.http.get<Student>(`${this.baseUrl}/student/${id}/profile-settings`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
     }
   }
 
@@ -99,6 +98,10 @@ if (token) {
     return this.http.delete(`${this.baseUrl}/auth/student/${id}/delete`, { headers: this.getHeaders() })
       .pipe(catchError(error => this.handleError(error)));
   }
+
+
+
+
 
 
 }

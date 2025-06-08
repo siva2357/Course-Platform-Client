@@ -22,8 +22,9 @@ import { InstructorProfileformPageComponent } from './instructor-profileform-pag
 import { InstructorBasicDetailsComponent } from './instructor-basic-details/instructor-basic-details.component';
 import { InstructorProfileUpdateComponent } from './instructor-profile-update/instructor-profile-update.component';
 import { InstructorSocialMediaComponent } from './instructor-social-media/instructor-social-media.component';
-import { ChangePasswordPageComponent } from '../change-password-page/change-password-page.component';
 import { InstructorDeleteAccountComponent } from './instructor-delete-account/instructor-delete-account.component';
+import { InstructorPasswordPageComponent } from './instructor-password-page/instructor-password-page.component';
+
 @NgModule({
   declarations: [
     InstructorComponent,
@@ -39,8 +40,8 @@ import { InstructorDeleteAccountComponent } from './instructor-delete-account/in
     InstructorBasicDetailsComponent,
     InstructorProfileUpdateComponent,
     InstructorSocialMediaComponent,
-    ChangePasswordPageComponent,
-    InstructorDeleteAccountComponent
+    InstructorDeleteAccountComponent,
+    InstructorPasswordPageComponent
   ],
   imports: [
     CommonModule,

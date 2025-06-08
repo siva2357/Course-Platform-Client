@@ -2,25 +2,42 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxEditorModule } from 'ngx-editor';
+import { NgChartsModule } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '../../layouts/layout.module';
 import { StudentComponent } from './student.component';
-import { StudentHomePageComponent } from './student-home-page/student-home-page.component';
 import { StudentWishlistComponent } from './student-wishlist/student-wishlist.component';
 import { StudentCertificationsComponent } from './student-certifications/student-certifications.component';
 import { StudentPurchasesComponent } from './student-purchases/student-purchases.component';
 import { StudentMyCoursesComponent } from './student-my-courses/student-my-courses.component';
 import { StudentPagesRoutingModule } from './student-pages-routing.module';
-
+import { StudentAccountSettingsPageComponent } from './student-account-settings-page/student-account-settings-page.component';
+import { StudentProfilePageComponent } from './student-profile-page/student-profile-page.component';
+import { StudentProfileformPageComponent } from './student-profileform-page/student-profileform-page.component';
+import { StudentSocialMediaComponent } from './student-social-media/student-social-media.component';
+import { StudentProfileUpdateComponent } from './student-profile-update/student-profile-update.component';
+import { StudentBasicDetailsComponent } from './student-basic-details/student-basic-details.component';
+import { StudentDeleteAccountComponent } from './student-delete-account/student-delete-account.component';
+import { StudentPasswordPageComponent } from './student-password-page/student-password-page.component';
+import { StudentHomePageComponent } from './student-home-page/student-home-page.component';
 @NgModule({
   declarations: [
     StudentComponent,
-    StudentHomePageComponent,
     StudentCertificationsComponent,
     StudentMyCoursesComponent,
     StudentWishlistComponent,
-     StudentPurchasesComponent,
+    StudentPurchasesComponent,
+    StudentProfileUpdateComponent,
+    StudentSocialMediaComponent,
+    StudentProfileformPageComponent,
+    StudentProfilePageComponent,
+    StudentAccountSettingsPageComponent ,
+    StudentBasicDetailsComponent,
+    StudentDeleteAccountComponent,
+    StudentPasswordPageComponent,
+    StudentHomePageComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +45,10 @@ import { StudentPagesRoutingModule } from './student-pages-routing.module';
     FormsModule,
     ReactiveFormsModule,
     StudentPagesRoutingModule,
-    LayoutModule
+    LayoutModule,
+        LayoutModule,
+    NgxEditorModule,
+    NgChartsModule,
 
 
 
