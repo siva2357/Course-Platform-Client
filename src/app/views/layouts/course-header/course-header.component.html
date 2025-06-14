@@ -19,11 +19,11 @@
 
 
         <div class="dropdown d-inline-block d-flex "*ngIf="userRole === 'student'">
-          <button type="button" class="btn btn-light rounded-circle me-3" data-bs-toggle="dropdown" aria-expanded="false" (click)="goToCartPage()">
+          <button type="button" class="btn btn-light rounded-circle me-3" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-cart2" style="color: black;"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end mt-3 p-0 rounded-0 shadow text-center" style="width: 18rem;">
-            <li><p class="m-2">Sample notification msg</p></li>
+            <li><p class="m-2" (click)="goToCartPage()" style="cursor: pointer;">Sample notification msg</p></li>
           </ul>
 
         </div>

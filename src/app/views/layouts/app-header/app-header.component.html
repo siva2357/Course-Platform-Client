@@ -60,13 +60,19 @@
     </li>
 
     <!-- Cart Button Dropdown -->
-    <li class="nav-item mx-3 dropdown">
-      <button type="button" class="btn btn-light rounded-circle" data-bs-toggle="dropdown" aria-expanded="false" (click)="goToCartPage()">
-        <i class="bi bi-cart2" style="color: black;"></i>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end mt-3 p-0 rounded-0 shadow text-center" style="width: 18rem;">
-        <li><p class="m-2">Sample notification msg</p></li>
-      </ul>
+    <li>
+
+      <div class="dropdown d-inline-block d-flex ">
+          <button type="button" class="btn btn-light rounded-circle me-3" data-bs-toggle="dropdown" aria-expanded="false" >
+            <i class="bi bi-cart2" style="color: black;"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end mt-3 p-0 rounded-0 shadow text-center" style="width: 18rem;">
+            <li><p class="m-2" (click)="goToCartPage()" style="cursor: pointer;">Sample notification msg</p></li>
+          </ul>
+
+        </div>
+
+
     </li>
 
     <!-- Auth Buttons -->
