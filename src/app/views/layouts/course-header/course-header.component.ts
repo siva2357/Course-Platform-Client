@@ -135,4 +135,9 @@ onLogout(): void {
   }
 }
 
+goToCartPage(){
+  this.router.navigate(['/cart']);
+
+}
+
 }
