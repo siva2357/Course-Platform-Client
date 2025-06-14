@@ -31,92 +31,59 @@
 
 
 
-
     <div class="collapse navbar-collapse d-none d-lg-flex justify-content-between align-items-center" id="navbarSupportedContent">
-      <form role="search" class="position-relative ">
-        <input
-          type="search"
-          class="form-control ps-5 rounded-4"
-          placeholder="Search for anyting"
-          aria-label="Search"
-          style="width: 500px; font-size: 14px;"
-        >
-        <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-      </form>
 
+  <!-- Search Bar -->
+  <form role="search" class="position-relative">
+    <input type="search" class="form-control ps-5 rounded-4"
+           placeholder="Search for anything" aria-label="Search"
+           style="width: 400px; font-size: 14px;">
+    <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+  </form>
 
+  <!-- Navigation Links -->
+  <ul class="navbar-nav mb-2 mb-lg-0 align-items-center" style="font-size: 14px;">
 
-      <ul class="navbar-nav  mb-2 mb-lg-0" style="font-size: 14px;">
-        <li class="nav-item mx-3">
-          <a routerLink="/teaching" [ngClass]="{'active': isActive('/teaching')}" class="nav-link text-dark">Teach with us</a>
-        </li>
+    <li class="nav-item mx-3">
+      <a routerLink="/plans-pricing-page" [ngClass]="{'active': isActive('/plans-pricing-page')}"
+         class="nav-link text-dark">Plans and Pricing</a>
+    </li>
 
-        <li class="nav-item mx-3">
-          <a routerLink="/learning" [ngClass]="{'active': isActive('/learning')}" class="nav-link  text-dark">Learn with us</a>
-        </li>
+    <li class="nav-item mx-3">
+      <a routerLink="/teaching" [ngClass]="{'active': isActive('/teaching')}"
+         class="nav-link text-dark">Teach with Us</a>
+    </li>
 
-        <button class="nav-item mx-3  px-3 btn btn-outline-primary btn-sm" >Log in</button>
-        <button class="nav-item mx-3  px-3 btn btn-primary btn-sm" >Sign up</button>
+    <li class="nav-item mx-3">
+      <a routerLink="/learning" [ngClass]="{'active': isActive('/learning')}"
+         class="nav-link text-dark">Learn with Us</a>
+    </li>
+
+    <!-- Cart Button Dropdown -->
+    <li class="nav-item mx-3 dropdown">
+      <button type="button" class="btn btn-light rounded-circle" data-bs-toggle="dropdown" aria-expanded="false" (click)="goToCartPage()">
+        <i class="bi bi-cart2" style="color: black;"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end mt-3 p-0 rounded-0 shadow text-center" style="width: 18rem;">
+        <li><p class="m-2">Sample notification msg</p></li>
       </ul>
+    </li>
+
+    <!-- Auth Buttons -->
+    <li class="nav-item mx-2">
+      <button class="btn btn-outline-primary btn-sm px-3">Log in</button>
+    </li>
+
+    <li class="nav-item mx-2">
+      <button class="btn btn-primary btn-sm px-3">Sign up</button>
+    </li>
+
+  </ul>
+
+</div>
 
 
-    </div>
 
-
-
-
-    <!-- Mobile toggler -->
-    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-    <!-- Offcanvas Mobile Menu -->
-    <div class="offcanvas offcanvas-end text-bg-dark d-lg-none w-75" tabindex="-1" id="mobileMenu"
-         aria-labelledby="mobileMenuLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-white">Menu</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav"  style="font-size: 14px;">
-          <!-- Mega dropdown mobile -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="mobileDropdown1" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu bg-body-secondary">
-              <li class="px-3 py-2">
-                <h5 class="mb-2">Featured Section</h5>
-                <p>Some placeholder content for the dropdown panel.</p>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Admissions dropdown mobile -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="mobileDropdown2" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Admissions
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Apply Now</a></li>
-              <li><a class="dropdown-item" href="#">Courses</a></li>
-              <li><a class="dropdown-item" href="#">Fee Structure</a></li>
-              <li><a class="dropdown-item" href="#">FAQs</a></li>
-              <li><a class="dropdown-item" href="#">Scholarships</a></li>
-            </ul>
-          </li>
-        </ul>
-
-        <!-- Buttons -->
-        <div class="mt-4">
-          <button class="btn btn-outline-primary w-100 mb-2 text-white">Login</button>
-          <button class="btn btn-outline-primary w-100 text-white">Signup</button>
-        </div>
-      </div>
-    </div>
 
   </div>
 </nav>

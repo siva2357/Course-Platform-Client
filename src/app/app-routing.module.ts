@@ -17,6 +17,7 @@ import { AccountConfirmationPageComponent } from './views/pages/account-confirma
 import { AdminComponent } from './views/pages/admin/admin.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
 import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
+import { PlansPricingPageComponent } from './views/pages/plans-pricing-page/plans-pricing-page.component';
 const routes: Routes = [
   // Public routes
   { path: 'main', component:  LandingPageComponent, title: 'Main page' },
@@ -32,6 +33,8 @@ const routes: Routes = [
   { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
   { path: 'instructor/login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
   { path: 'cart', component:CartPageComponent, title:"Recruiter profile page"},
+  { path: 'plans-pricing-page', component:PlansPricingPageComponent, title:"Recruiter profile page"},
+
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
   { path: 'admin', component:AdminComponent, title:"Recruiter profile page"},
 

@@ -65,6 +65,9 @@ onMenuLeave() {
 
 
 
+goToCartPage(){
+  this.router.navigate(['/cart']);
 
+}
 
 }

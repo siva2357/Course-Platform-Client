@@ -27,6 +27,7 @@ import { environment } from 'src/environments/environment';
 import { AdminComponent } from './views/pages/admin/admin.component';
 import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
+import { PlansPricingPageComponent } from './views/pages/plans-pricing-page/plans-pricing-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { StudentSignupPageComponent } from './views/pages/student-signup-page/st
     AdminComponent,
     StudentLoginPageComponent,
     StudentSignupPageComponent,
+    PlansPricingPageComponent,
   ],
   imports: [
     BrowserModule,
