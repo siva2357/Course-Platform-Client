@@ -38,8 +38,8 @@ const routes: Routes = [
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
   { path: 'admin', component:AdminComponent, title:"Recruiter profile page"},
 
-  { path: 'student/registration-page', component:  StudentSignupPageComponent, title: 'Course page' },
-  { path: 'student/login-page', component: StudentLoginPageComponent, title: 'Course page' },
+  { path: 'registration-page', component:  StudentSignupPageComponent, title: 'Course page' },
+  { path: 'login-page', component: StudentLoginPageComponent, title: 'Course page' },
 
   { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstructorPageModule)},
   { path: 'student',loadChildren: () => import('./views/pages/student/student-pages.module').then((m) => m.StudentPageModule)},
