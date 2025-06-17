@@ -25,7 +25,7 @@ const routes: Routes = [
     children: [
     { path: 'home', component: StudentHomePageComponent, title: 'Post Jobpost Page'},
     { path: 'my-courses', component: StudentMyCoursesComponent, title: 'Post Jobpost Page'},
-      { path: 'course/courseName', component: CoursePageDetailsComponent, title: 'Course page' },
+      { path: 'course/:id/:courseName', component: CoursePageDetailsComponent, title: 'Course page' },
 
     { path: 'my-wishlist', component: StudentWishlistComponent, title: 'Post Jobpost Page'},
     { path: 'my-certifications', component: StudentCertificationsComponent , title: 'Post Jobpost Page'},

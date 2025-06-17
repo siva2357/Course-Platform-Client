@@ -14,15 +14,39 @@
       <div class="d-flex align-items-center" style="margin-right: 30px; ">
 
 
-        <div class="dropdown d-inline-block d-flex "*ngIf="userRole === 'student'">
-          <button type="button" class="btn btn-light rounded-circle me-3" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-cart2" style="color: black;"></i>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end mt-3 p-0 rounded-0 shadow text-center" style="width: 18rem;">
-            <li><p class="m-2" (click)="goToCartPage()" style="cursor: pointer;">Sample notification msg</p></li>
-          </ul>
+        <div class="dropdown d-inline-block d-flex position-relative">
+  <button type="button" class="btn btn-light rounded-circle me-3 position-relative" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-cart2" style="color: black;"></i>
 
+    <!-- Badge Count -->
+    <span *ngIf="cartCount > 0"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      {{ cartCount }}
+    </span>
+  </button>
+
+  <!-- Dropdown List -->
+  <ul class="dropdown-menu dropdown-menu-end mt-3 p-0 rounded-0 shadow text-center" style="width: 18rem;">
+    <ng-container *ngIf="cartItems.length > 0; else noItems">
+      <li *ngFor="let item of cartItems" class="p-2 border-bottom text-start">
+        <div class="d-flex align-items-center">
+          <img [src]="item.courseThumbnail" alt="Thumbnail" width="50" height="50" class="me-2 rounded" />
+          <div>
+            <div class="fw-bold" style="font-size: 14px;">{{ item.courseTitle }}</div>
+            <div class="text-muted" style="font-size: 12px;">₹{{ item.amount }}</div>
+          </div>
         </div>
+      </li>
+      <li class="p-2">
+        <button class="btn btn-primary btn-sm w-100" (click)="goToCartPage()">Go to Cart</button>
+      </li>
+    </ng-container>
+    <ng-template #noItems>
+      <li class="p-3 text-muted">No items in cart</li>
+    </ng-template>
+  </ul>
+</div>
+
 
 
         <div class="dropdown d-inline-block d-flex ">

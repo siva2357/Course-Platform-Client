@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartItem } from 'src/app/core/models/cart.model';
 import { InstructorProfile, InstructorProfileHeader, StudentProfile, StudentProfileHeader } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { CourseService } from 'src/app/core/services/course.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
-
+import { filter } from 'rxjs/operators';
+import { NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-course-header',
   templateUrl: './course-header.component.html',
@@ -21,7 +24,8 @@ export class CourseHeaderComponent implements OnInit {
   loading: boolean = true;  // For managing loading state
 
 public userRole: string | null = null;
-
+cartCount: number = 0;
+cartItems: CartItem[] = [];
   @Input() sidebarOpen: boolean = true; // Receives sidebar state
   @Output() toggleSidebar = new EventEmitter<void>(); // Emits toggle event
 
@@ -34,27 +38,43 @@ public userRole: string | null = null;
   constructor(
     private router: Router,
     private authService: AuthService,
-     private profileService:ProfileService
+     private profileService:ProfileService,
+     private courseService:CourseService
   ) {}
 
-  ngOnInit(): void {
-    // Get the userId and role from localStorage or AuthService
-    this.userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
-    const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
-  this.userRole = localStorage.getItem('userRole');
-    if (this.userId && role) {
-      if (role === 'student') {
-        this.getStudentDetails();
-      } else if (role === 'instructor') {
-        this.getInstructorDetails();
+ngOnInit(): void {
+  this.userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+  const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
+  this.userRole = role;
 
-      }else {
-        this.errorMessage = 'Invalid role.';
-      }
+  if (this.userId && role) {
+    if (role === 'student') {
+      this.getStudentDetails();
+    } else if (role === 'instructor') {
+      this.getInstructorDetails();
     } else {
-      this.errorMessage = 'User ID or Role is not available.';
+      this.errorMessage = 'Invalid role.';
     }
+  } else {
+    this.errorMessage = 'User ID or Role is not available.';
   }
+
+  // 🔁 Update cart on route change (fixes stale count on navigation)
+  this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => {
+      this.loadCartItems();
+    });
+
+  // 🔔 Update cart manually when triggerCartUpdate() is called
+  this.courseService.cartUpdated$.subscribe(() => {
+    this.loadCartItems();
+  });
+
+  // 🔄 Initial cart load
+  this.loadCartItems();
+}
+
 
 
 
@@ -139,5 +159,14 @@ goToCartPage(){
   this.router.navigate(['/cart']);
 
 }
+
+
+loadCartItems(): void {
+  this.courseService.getFromCart().subscribe(cart => {
+    this.cartItems = cart.items;
+    this.cartCount = cart.items.length;
+  });
+}
+
 
 }

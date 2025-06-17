@@ -11,13 +11,30 @@
 <div class="container-fluid mb-5 bg-body-secondary">
   <h3 class="mb-5">Learn from popular categories in India</h3>
 
+<div *ngFor="let course of courses">
+<h5 (click)="goToCourseDetails(course)" style="cursor: pointer;">
+  {{ course.landingPage.courseTitle }}
+</h5>
+
+
+
+  <h5>{{ course.landingPage.courseThumbnail }}</h5>
+  <h5 [innerHTML]="course.landingPage.courseDescription"></h5>
+
+  <button class="btn btn-info btn-sm" (click)="handleAddToCart(course._id!)">
+    Add to cart
+  </button>
+</div>
+
+
+
   <div class="row g-3">
 
   <div class="col">
     <div class="card h-100 rounded-0">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
       <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails()" style="cursor: pointer;">Card title</h5>
+        <h5 class="card-title" style="cursor: pointer;">Card title</h5>
         <p class="card-text"> This content is a little bit longer.</p>
           <button class="btn btn-info btn-sm">Add to cart</button>
 
@@ -30,7 +47,7 @@
     <div class="card h-100 rounded-0">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
       <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails()" style="cursor: pointer;">Card title</h5>
+        <h5 class="card-title"  style="cursor: pointer;">Card title</h5>
         <p class="card-text"> This content is a little bit longer.</p>
           <button class="btn btn-info btn-sm">Add to cart</button>
 
@@ -43,7 +60,7 @@
     <div class="card h-100 rounded-0">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
       <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails()" style="cursor: pointer;">Card title</h5>
+        <h5 class="card-title" style="cursor: pointer;">Card title</h5>
         <p class="card-text"> This content is a little bit longer.</p>
           <button class="btn btn-info btn-sm">Add to cart</button>
 
@@ -56,7 +73,7 @@
     <div class="card h-100 rounded-0">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
       <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails()" style="cursor: pointer;">Card title</h5>
+        <h5 class="card-title"  style="cursor: pointer;">Card title</h5>
         <p class="card-text"> This content is a little bit longer.</p>
           <button class="btn btn-info btn-sm">Add to cart</button>
 
@@ -79,7 +96,7 @@
     <div class="card h-100 rounded-0">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
       <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails()" style="cursor: pointer;">Card title</h5>
+        <h5 class="card-title" style="cursor: pointer;">Card title</h5>
         <p class="card-text"> This content is a little bit longer.</p>
           <button class="btn btn-info btn-sm">Add to cart</button>
 
@@ -91,7 +108,7 @@
     <div class="card h-100 rounded-0">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
       <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails()" style="cursor: pointer;">Card title</h5>
+        <h5 class="card-title"  style="cursor: pointer;">Card title</h5>
         <p class="card-text"> This content is a little bit longer.</p>
           <button class="btn btn-info btn-sm">Add to cart</button>
 
@@ -104,7 +121,7 @@
     <div class="card h-100 rounded-0">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
       <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails()" style="cursor: pointer;">Card title</h5>
+        <h5 class="card-title"  style="cursor: pointer;">Card title</h5>
         <p class="card-text"> This content is a little bit longer.</p>
           <button class="btn btn-info btn-sm">Add to cart</button>
 
@@ -116,7 +133,7 @@
     <div class="card h-100 rounded-0">
       <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
       <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails()" style="cursor: pointer;">Card title</h5>
+        <h5 class="card-title" style="cursor: pointer;">Card title</h5>
         <p class="card-text"> This content is a little bit longer.</p>
           <button class="btn btn-info btn-sm">Add to cart</button>
 
