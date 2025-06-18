@@ -1,1 +1,12 @@
 <p class="mt-5">student-my-courses works!</p>
+    <div class="col-md-4">
+      <h5>🎓 Purchases for Course</h5>
+      <div *ngFor="let purchase of coursePurchases" class="border p-2 mb-2">
+        Title: {{ purchase.courseTitle }}<br>
+        Amount: ₹{{ purchase.amount }}<br>
+        Order ID: {{ purchase.orderId }}<br>
+        Payment ID: {{ purchase.paymentId }}<br>
+        Status: {{ purchase.status }}<br>
+        Date: {{ purchase.purchasedAt | date:'medium' }}
+      </div>
+    </div>

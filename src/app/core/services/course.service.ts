@@ -165,6 +165,22 @@ removeFromWishlist(courseId: string): Observable<WishList> {
 }
 
 
+generateCertificate(studentName: string, courseTitle: string, issueDate: string): Observable<Blob> {
+  const payload = { studentName, courseTitle, issueDate };
+
+  return this.http.post(`${this.baseUrl}/certificate/generate-certificate`, payload, {
+    headers: this.getHeaders(),       // your existing headers, e.g. Content-Type
+    responseType: 'blob'              // important: tells Angular to expect binary Blob
+  }).pipe(
+    catchError(this.handleError)      // your existing error handling
+  );
+}
+
+
+
+
+
+
 
 
   private handleError(error: HttpErrorResponse): Observable<never> {

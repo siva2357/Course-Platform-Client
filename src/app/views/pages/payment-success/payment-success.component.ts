@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { PaymentService } from 'src/app/core/services/payment.service';
 import { Purchase } from 'src/app/core/models/purchase.model';
 
-
 @Component({
-  selector: 'app-student-my-courses',
-  templateUrl: './student-my-courses.component.html',
-  styleUrls: ['./student-my-courses.component.css']
+  selector: 'app-payment-success',
+  templateUrl: './payment-success.component.html',
+  styleUrls: ['./payment-success.component.css']
 })
-export class StudentMyCoursesComponent implements OnInit {
+export class PaymentSuccessComponent implements OnInit {
 
   summaryData: any[] = [];
   coursePurchases: Purchase[] = [];

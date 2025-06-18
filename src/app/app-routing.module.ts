@@ -18,6 +18,8 @@ import { AdminComponent } from './views/pages/admin/admin.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
 import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
 import { PlansPricingPageComponent } from './views/pages/plans-pricing-page/plans-pricing-page.component';
+import { PaymentFailureComponent } from './views/pages/payment-failure/payment-failure.component';
+import { PaymentSuccessComponent } from './views/pages/payment-success/payment-success.component';
 const routes: Routes = [
   // Public routes
   { path: 'main', component:  LandingPageComponent, title: 'Main page' },
@@ -36,6 +38,8 @@ const routes: Routes = [
   { path: 'plans-pricing-page', component:PlansPricingPageComponent, title:"Recruiter profile page"},
 
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
+    { path: 'paymentfailed', component:  PaymentFailureComponent },
+  { path: 'paymentsuccess', component: PaymentSuccessComponent },
   { path: 'admin', component:AdminComponent, title:"Recruiter profile page"},
 
   { path: 'registration-page', component:  StudentSignupPageComponent, title: 'Course page' },
