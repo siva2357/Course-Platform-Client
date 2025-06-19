@@ -1,9 +1,9 @@
 
-
-
-
-<div class="container-fluid mt-5">
-<button class="btn btn-primary mt-3" (click)="viewCertificate()">
-  View Certificate
-</button>
+<!-- ✅ Only visible when course is completed -->
+<div class="container-fluid mt-5" *ngIf="isCourseCompleted">
+  <button class="btn btn-primary mt-3" (click)="downloadCertificate()">
+    Download Certificate
+  </button>
 </div>
+
+

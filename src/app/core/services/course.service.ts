@@ -179,17 +179,6 @@ generateCertificate(studentName: string, courseTitle: string, issueDate: string)
 }
 
 
-
-
-getCertificateById(certId: string): Observable<Certificate> {
-  return this.http.get<Certificate>(`${this.baseUrl}/certificate/${certId}`);
-}
-
-saveCertificate(data: Partial<Certificate>): Observable<{ certificate: Certificate }> {
-  return this.http.post<{ certificate: Certificate }>(`${this.baseUrl}/certificate/create`, data);
-}
-
-
 getCourseProgress(courseId: string): Observable<CourseTracking> {
   return this.http.get<CourseTracking>(`${this.baseUrl}/course/track/progress/${courseId}`);
 }
