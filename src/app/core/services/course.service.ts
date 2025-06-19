@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { Course, CoursePlan, CoursesResponse, Curriculum, LandingPage, Price } from '../models/course.model';
+import { CartItem, WishList } from '../models/cart.model';
+import { Certificate } from '../models/certificate.model';
+import { CourseTracking } from '../models/courseTracking.model';
 
 @Injectable({
   providedIn: 'root'
@@ -84,11 +87,6 @@ export class CourseService {
 
 
 
-
-
-
-
-
 getAllCourses(): Observable<CoursesResponse> {
   return this.http.get<CoursesResponse>(`${this.baseUrl}/courses`, { headers: this.getHeaders() })
     .pipe(catchError(this.handleError));
@@ -109,6 +107,83 @@ getAllCourses(): Observable<CoursesResponse> {
     return this.http.delete<{ message: string }>(`${this.baseUrl}/course/${id}/delete`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
+
+
+
+
+
+
+// Add a course to cart
+addToCart(courseId: string): Observable<CartItem> {
+  return this.http.post<CartItem>(`${this.baseUrl}/cart/add`, { courseId }, {
+    headers: this.getHeaders()
+  }).pipe(catchError(this.handleError));
+}
+
+
+private cartUpdated = new Subject<void>();
+cartUpdated$ = this.cartUpdated.asObservable();
+
+triggerCartUpdate() {
+  this.cartUpdated.next();
+}
+
+
+// Get all courses in cart
+getFromCart(): Observable<{ totalItems: number, items: CartItem[] }> {
+  return this.http.get<{ totalItems: number, items: CartItem[] }>(
+    `${this.baseUrl}/cart`, { headers: this.getHeaders() }
+  ).pipe(catchError(this.handleError));
+}
+
+// Remove a specific course from cart by courseId
+removeFromCart(courseId: string): Observable<CartItem> {
+  return this.http.delete<CartItem>(`${this.baseUrl}/cart/delete/${courseId}`, {
+    headers: this.getHeaders()
+  }).pipe(catchError(this.handleError));
+}
+
+
+// Add a course to cart
+// Add to wishlist
+addToWishlist(courseId: string): Observable<WishList> {
+  return this.http.post<WishList>(`${this.baseUrl}/wishlist/add`, { courseId }, {
+    headers: this.getHeaders()
+  }).pipe(catchError(this.handleError));
+}
+
+// Get wishlist
+getFromWishlist(): Observable<{ totalItems: number, items: WishList[] }> {
+  return this.http.get<{ totalItems: number, items: WishList[] }>(
+    `${this.baseUrl}/wishlist`, { headers: this.getHeaders() }
+  ).pipe(catchError(this.handleError));
+}
+
+// Remove from wishlist
+removeFromWishlist(courseId: string): Observable<WishList> {
+  return this.http.delete<WishList>(`${this.baseUrl}/wishlist/delete/${courseId}`, {
+    headers: this.getHeaders()
+  }).pipe(catchError(this.handleError));
+}
+
+
+generateCertificate(studentName: string, courseTitle: string, issueDate: string): Observable<Blob> {
+  const payload = { studentName, courseTitle, issueDate };
+
+  return this.http.post(`${this.baseUrl}/certificate/generate-certificate`, payload, {
+    headers: this.getHeaders(),       // your existing headers, e.g. Content-Type
+    responseType: 'blob'              // important: tells Angular to expect binary Blob
+  }).pipe(
+    catchError(this.handleError)      // your existing error handling
+  );
+}
+
+
+getCourseProgress(courseId: string): Observable<CourseTracking> {
+  return this.http.get<CourseTracking>(`${this.baseUrl}/course/track/progress/${courseId}`);
+}
+
+
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';

@@ -65,6 +65,18 @@ onMenuLeave() {
 
 
 
+goToCartPage(){
+  this.router.navigate(['/cart']);
+}
+
+
+goToSignupPage(){
+    this.router.navigate(['registration-page']);
+}
+
+goToLoginPage(){
+     this.router.navigate(['login-page']);
+}
 
 
 }

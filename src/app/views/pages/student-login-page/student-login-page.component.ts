@@ -84,7 +84,7 @@ export class StudentLoginPageComponent {
   }
 
   signUp(): void {
-    this.router.navigate(['student/registration-page']);
+    this.router.navigate(['registration-page']);
   }
 
 

@@ -1,1 +1,42 @@
-<p class="mt-5">student-purchases works!</p>
+<app-course-header></app-course-header>
+
+<div class="container-fluid mt-5 p-5">
+  <h2 class="fw-bold">My Purchases</h2>
+
+  <div *ngIf="isLoading">Loading...</div>
+  <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading && coursePurchases.length === 0" class="text-muted">
+    No purchases yet.
+  </div>
+
+  <div *ngIf="coursePurchases.length > 0">
+    <p style="font-size: 14px;">Total Courses Purchased: {{ totalItems }}</p>
+
+    <div *ngFor="let item of coursePurchases" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.courseTitle }}</h5>
+        <p>Amount: ₹{{ item.amount }}</p>
+        <p>Status: <strong>{{ item.status }}</strong></p>
+        <small class="text-muted">Purchased at: {{ item.purchasedAt | date:'short' }}</small>
+
+        <!-- ✅ Action -->
+        <div class="mt-2">
+          <button *ngIf="canRefund(item)"
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="onRefund(item._id!)">
+            Refund
+          </button>
+
+          <span *ngIf="item.status === 'refunded'" class="text-success fw-medium">
+            Refunded successfully
+          </span>
+
+          <span *ngIf="!canRefund(item) && item.status === 'purchased'" class="text-danger fw-medium">
+            Non-refundable
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

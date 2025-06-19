@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './views/pages/landing-page/landing-page.component';
 import { LayoutModule } from './views/layouts/layout.module';
 import { CoursePageComponent } from './views/pages/course-page/course-page.component';
-import { CoursePageDetailsComponent } from './views/pages/course-page-details/course-page-details.component';
 import { TeachingPageComponent } from './views/pages/teaching-page/teaching-page.component';
 import { LearningPageComponent } from './views/pages/learning-page/learning-page.component';
 import { CourseCategoryComponent } from './views/pages/course-category/course-category.component';
@@ -28,12 +27,14 @@ import { environment } from 'src/environments/environment';
 import { AdminComponent } from './views/pages/admin/admin.component';
 import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
+import { PlansPricingPageComponent } from './views/pages/plans-pricing-page/plans-pricing-page.component';
+import { PaymentSuccessComponent } from './views/pages/payment-success/payment-success.component';
+import { PaymentFailureComponent } from './views/pages/payment-failure/payment-failure.component';
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     CoursePageComponent,
-    CoursePageDetailsComponent,
     TeachingPageComponent,
     LearningPageComponent,
     CourseCategoryComponent,
@@ -48,6 +49,9 @@ import { StudentSignupPageComponent } from './views/pages/student-signup-page/st
     AdminComponent,
     StudentLoginPageComponent,
     StudentSignupPageComponent,
+    PlansPricingPageComponent,
+    PaymentSuccessComponent,
+    PaymentFailureComponent,
   ],
   imports: [
     BrowserModule,

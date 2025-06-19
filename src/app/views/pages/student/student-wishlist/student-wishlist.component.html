@@ -1,1 +1,13 @@
 <p class="mt-5">student-wishlist works!</p>
+<div *ngFor="let item of wishListItems" class="card">
+  <div class="card-body">
+        <p class="card-title">{{ item.courseTitle}}</p>
+        <p class="card-title" [innerHTML]="item.courseDescription"></p>
+        <p class="card-title">{{ item.courseThumbnail}}</p>
+        <h5 class="card-title">{{ item.amount}}</h5>
+
+    <p class="card-text text-primary mb-2"
+       style="cursor: pointer; font-size: 14px;"
+       (click)="removeFromWishlist(item._id!)">Remove</p>
+  </div>
+</div>

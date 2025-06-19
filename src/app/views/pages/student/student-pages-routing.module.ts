@@ -12,6 +12,8 @@ import { StudentMyCoursesComponent } from './student-my-courses/student-my-cours
 import { StudentAccountSettingsPageComponent } from './student-account-settings-page/student-account-settings-page.component';
 import { StudentProfilePageComponent } from './student-profile-page/student-profile-page.component';
 import { StudentProfileformPageComponent } from './student-profileform-page/student-profileform-page.component';
+import { CoursePageDetailsComponent } from './course-page-details/course-page-details.component';
+import { StudentAccomplishmentsComponent } from './student-accomplishments/student-accomplishments.component';
 
 
 const routes: Routes = [
@@ -19,11 +21,14 @@ const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'profile-form-page', component: StudentProfileformPageComponent , title: 'Post Jobpost Page'},
   { path: 'account-settings/:id/profile-settings', component: StudentAccountSettingsPageComponent, title: 'Post Jobpost Page'},
+  { path: 'accomplishments/certificate/:certId', component: StudentAccomplishmentsComponent, title: 'Post Jobpost Page'},
 
   { path: '', component: StudentComponent,
     children: [
     { path: 'home', component: StudentHomePageComponent, title: 'Post Jobpost Page'},
     { path: 'my-courses', component: StudentMyCoursesComponent, title: 'Post Jobpost Page'},
+      { path: 'course/:id/:courseName', component: CoursePageDetailsComponent, title: 'Course page' },
+
     { path: 'my-wishlist', component: StudentWishlistComponent, title: 'Post Jobpost Page'},
     { path: 'my-certifications', component: StudentCertificationsComponent , title: 'Post Jobpost Page'},
     { path: 'my-purchases', component: StudentPurchasesComponent, title: 'Post Jobpost Page'  },

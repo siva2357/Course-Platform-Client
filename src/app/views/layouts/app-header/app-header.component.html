@@ -1,124 +1,69 @@
+
+
 <nav class="navbar navbar-expand-lg bg-white fixed-top shadow" style="height: 60px;">
-  <div class="container-fluid">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- LEFT SIDE: Brand + Explore -->
+    <div class="d-flex align-items-center gap-3 ms-3">
 
       <!-- Brand -->
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <span>Course Hub</span>
-      </a>
-
-      <div class="mega-menu-wrapper"  (mouseenter)="onMenuEnter()" (mouseleave)="onMenuLeave()">
-
-   <button class="btn btn-outline-primary text-dark" style="margin-right: 30px; font-size: 14px;">Explore</button>
-
-   <div class="mega-menu-dropdown mt-3" *ngIf="showMenu">
-     <!-- Main Categories -->
-     <div class="category-column">
-       <div *ngFor="let category of mainCategories"  class="category-item" [ngClass]="{'active': activeCategory === category}" (mouseenter)="activeCategory = category" style="font-size: 14px;">
-         {{ category.name }}
-       </div>
-     </div>
-
-<!-- Subcategories -->
-<div class="subcategory-column" *ngIf="activeCategory?.subcategories?.length > 0">
-  <div *ngFor="let sub of activeCategory.subcategories">
-    <a href="courses/category" class="subcategory-link" style="font-size: 14px;">{{ sub }}</a>
-  </div>
-</div>
-
-   </div>
- </div>
+<!-- Brand -->
+<a href="#" class="navbar-brand d-flex align-items-center">
+  <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1736057959/Logo_usvb7a.svg"
+       alt="Course Hub Logo"
+       style="height: 32px; margin-right: 8px;">
+  <span>Course Hub</span>
+</a>
 
 
 
+        <div class="mega-menu-wrapper" (mouseenter)="onMenuEnter()" (mouseleave)="onMenuLeave()">
 
+        <button class="btn btn-outline-primary text-dark" style="margin-right: 30px; font-size: 14px;">Explore</button>
 
-    <div class="collapse navbar-collapse d-none d-lg-flex justify-content-between align-items-center" id="navbarSupportedContent">
-      <form role="search" class="position-relative ">
-        <input
-          type="search"
-          class="form-control ps-5 rounded-4"
-          placeholder="Search for anyting"
-          aria-label="Search"
-          style="width: 500px; font-size: 14px;"
-        >
-        <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-      </form>
+        <div class="mega-menu-dropdown mt-3" *ngIf="showMenu">
+          <!-- Main Categories -->
+          <div class="category-column">
+            <div *ngFor="let category of mainCategories" class="category-item"
+              [ngClass]="{'active': activeCategory === category}" (mouseenter)="activeCategory = category"
+              style="font-size: 14px;">
+              {{ category.name }}
+            </div>
+          </div>
 
+          <!-- Subcategories -->
+          <div class="subcategory-column" *ngIf="activeCategory?.subcategories?.length > 0">
+            <div *ngFor="let sub of activeCategory.subcategories">
+              <a href="courses/category" class="subcategory-link" style="font-size: 14px;">{{ sub }}</a>
+            </div>
+          </div>
 
-
-      <ul class="navbar-nav  mb-2 mb-lg-0" style="font-size: 14px;">
-        <li class="nav-item mx-3">
-          <a routerLink="/teaching" [ngClass]="{'active': isActive('/teaching')}" class="nav-link text-dark">Teach with us</a>
-        </li>
-
-        <li class="nav-item mx-3">
-          <a routerLink="/learning" [ngClass]="{'active': isActive('/learning')}" class="nav-link  text-dark">Learn with us</a>
-        </li>
-
-        <button class="nav-item mx-3  px-3 btn btn-outline-primary btn-sm" >Log in</button>
-        <button class="nav-item mx-3  px-3 btn btn-primary btn-sm" >Sign up</button>
-      </ul>
+        </div>
+      </div>
 
 
     </div>
 
+    <!-- RIGHT SIDE: Navigation -->
+    <div class="d-none d-lg-flex align-items-center gap-4 ">
+      <ul class="navbar-nav mb-0 d-flex align-items-center" style="font-size: 14px;">
+        <li class="nav-item">
+          <a routerLink="/plans-pricing-page" [ngClass]="{'active': isActive('/plans-pricing-page')}"
+             class="nav-link text-dark px-3">Plans and Pricing</a>
+        </li>
+        <li class="nav-item me-4">
+          <a routerLink="/teaching" [ngClass]="{'active': isActive('/teaching')}" class="nav-link text-dark px-3">
+            Teach with Us</a>
+        </li>
 
-
-
-    <!-- Mobile toggler -->
-    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-    <!-- Offcanvas Mobile Menu -->
-    <div class="offcanvas offcanvas-end text-bg-dark d-lg-none w-75" tabindex="-1" id="mobileMenu"
-         aria-labelledby="mobileMenuLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-white">Menu</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav"  style="font-size: 14px;">
-          <!-- Mega dropdown mobile -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="mobileDropdown1" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu bg-body-secondary">
-              <li class="px-3 py-2">
-                <h5 class="mb-2">Featured Section</h5>
-                <p>Some placeholder content for the dropdown panel.</p>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Admissions dropdown mobile -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="mobileDropdown2" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Admissions
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Apply Now</a></li>
-              <li><a class="dropdown-item" href="#">Courses</a></li>
-              <li><a class="dropdown-item" href="#">Fee Structure</a></li>
-              <li><a class="dropdown-item" href="#">FAQs</a></li>
-              <li><a class="dropdown-item" href="#">Scholarships</a></li>
-            </ul>
-          </li>
-        </ul>
-
-        <!-- Buttons -->
-        <div class="mt-4">
-          <button class="btn btn-outline-primary w-100 mb-2 text-white">Login</button>
-          <button class="btn btn-outline-primary w-100 text-white">Signup</button>
-        </div>
-      </div>
+        <li class="nav-item me-4">
+          <button class="btn btn-outline-primary btn-sm px-3 mx-1" (click)="goToLoginPage()">Log in</button>
+        </li>
+        <li class="nav-item me-4">
+          <button class="btn btn-primary btn-sm px-3 mx-1" (click)="goToSignupPage()">Sign up</button>
+        </li>
+      </ul>
     </div>
 
   </div>
 </nav>
-
-

@@ -1,1 +1,9 @@
-<p class="mt-5">student-certifications works!</p>
+
+<!-- ✅ Only visible when course is completed -->
+<div class="container-fluid mt-5" *ngIf="isCourseCompleted">
+  <button class="btn btn-primary mt-3" (click)="downloadCertificate()">
+    Download Certificate
+  </button>
+</div>
+
+

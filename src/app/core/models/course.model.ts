@@ -14,11 +14,14 @@ export interface Curriculum {
 }
 
 export interface Section {
+    _id?: string;
   sectionTitle: string;
   lectures: Lecture[];
 }
 
 export interface Lecture {
+    _id?: string;
+
   lectureTitle: string;
   lectureDescription: string;
   lectureContent: string;
