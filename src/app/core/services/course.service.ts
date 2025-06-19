@@ -6,6 +6,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { environment } from 'src/environments/environment';
 import { Course, CoursePlan, CoursesResponse, Curriculum, LandingPage, Price } from '../models/course.model';
 import { CartItem, WishList } from '../models/cart.model';
+import { Certificate } from '../models/certificate.model';
+import { CourseTracking } from '../models/courseTracking.model';
 
 @Injectable({
   providedIn: 'root'
@@ -179,7 +181,18 @@ generateCertificate(studentName: string, courseTitle: string, issueDate: string)
 
 
 
+getCertificateById(certId: string): Observable<Certificate> {
+  return this.http.get<Certificate>(`${this.baseUrl}/certificate/${certId}`);
+}
 
+saveCertificate(data: Partial<Certificate>): Observable<{ certificate: Certificate }> {
+  return this.http.post<{ certificate: Certificate }>(`${this.baseUrl}/certificate/create`, data);
+}
+
+
+getCourseProgress(courseId: string): Observable<CourseTracking> {
+  return this.http.get<CourseTracking>(`${this.baseUrl}/course/track/progress/${courseId}`);
+}
 
 
 

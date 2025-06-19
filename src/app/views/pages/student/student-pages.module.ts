@@ -23,6 +23,7 @@ import { StudentDeleteAccountComponent } from './student-delete-account/student-
 import { StudentPasswordPageComponent } from './student-password-page/student-password-page.component';
 import { StudentHomePageComponent } from './student-home-page/student-home-page.component';
 import { CoursePageDetailsComponent } from './course-page-details/course-page-details.component';
+import { StudentAccomplishmentsComponent } from './student-accomplishments/student-accomplishments.component';
 @NgModule({
   declarations: [
     StudentComponent,
@@ -39,7 +40,8 @@ import { CoursePageDetailsComponent } from './course-page-details/course-page-de
     StudentDeleteAccountComponent,
     StudentPasswordPageComponent,
     StudentHomePageComponent,
-    CoursePageDetailsComponent
+    CoursePageDetailsComponent,
+    StudentAccomplishmentsComponent
   ],
   imports: [
     CommonModule,
