@@ -1,0 +1,139 @@
+<div class="container-fluid d-flex p-0">
+
+
+
+  <!-- Sidebar -->
+  <div class="sidebar shadow-lg">
+    <ul class="nav-list mt-5">
+
+  <!-- Progress Bar -->
+<div class="mb-4">
+  <label class="fw-semibold">Course Progress</label>
+  <div class="progress" style="height: 20px;">
+    <div class="progress-bar bg-success" role="progressbar"
+         [style.width.%]="progressPercentage"
+         [attr.aria-valuenow]="progressPercentage"
+         aria-valuemin="0" aria-valuemax="100">
+      {{ progressPercentage }}%
+    </div>
+  </div>
+</div>
+      <!-- Course Title -->
+      <li class="px-3">
+        <h5 class="poppins-semibold">Course Title</h5>
+      </li>
+
+      <!-- Course Material Accordion -->
+      <li class="nav-item px-2">
+        <div class="accordion" id="sectionAccordion">
+          <div class="accordion-item border-0">
+            <h2 class="accordion-header" id="headingSections">
+              <button class="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseSections" aria-expanded="false" aria-controls="collapseSections">
+                Course Material
+              </button>
+            </h2>
+            <div id="collapseSections" class="accordion-collapse show" aria-labelledby="headingSections"
+              data-bs-parent="#sectionAccordion">
+              <div class="accordion-body p-0">
+                <ul class="list-unstyled m-0 p-2">
+<li *ngFor="let section of sections; let i = index;" class="mb-2">
+                    <button (click)="selectSection(i)"
+                      [ngClass]="{'active-section': i === selectedSectionIndex}"
+                      class="btn btn-light w-100 text-start px-2 py-1 rounded d-flex align-items-center">
+                      <i class="bi bi-journal-bookmark-fill me-2"></i>
+                      {{ section.sectionTitle || 'Module ' + (i + 1) }}
+
+
+  <span class="ms-auto">
+    <i
+      [ngClass]="{
+        'bi bi-check-circle-fill text-success': section.status === 'Completed',
+        'bi bi-circle': section.status !== 'Completed'
+      }"
+      class="fs-6"
+    ></i>
+  </span>
+
+
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+ <div class="main-content flex-grow-1 p-4 ms-sidebar">
+
+  <div *ngIf="isCourseCompleted && certificateIssued" class="mt-4 text-end">
+  <button class="btn btn-primary" (click)="goToCertificate()">
+    🎓 View Certificate
+  </button>
+</div>
+
+
+<div *ngIf="selectedSection">
+  <h4 class="mb-4">{{ selectedSection.sectionTitle }}</h4>
+
+  <div class="accordion" id="lectureAccordion">
+    <div class="accordion-item" *ngFor="let lecture of selectedSection.lectures; let j = index">
+      <h2 class="accordion-header" [id]="'heading' + j">
+        <button
+          class="accordion-button"
+          [ngClass]="{ 'collapsed': openedLectureIndex !== j }"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapse' + j"
+          [attr.aria-expanded]="openedLectureIndex === j ? 'true' : 'false'"
+          [attr.aria-controls]="'collapse' + j"
+          (click)="onLectureClick(j)"
+
+        >
+          {{ lecture.lectureTitle }}
+<span class="ms-auto">
+  <i
+    [ngClass]="{
+      'bi bi-check-circle-fill text-success': lecture.status === 'Completed',
+      'bi bi-circle': lecture.status !== 'Completed'
+    }"
+    class="fs-6"
+  ></i>
+</span>
+
+        </button>
+      </h2>
+
+      <div
+        [id]="'collapse' + j"
+        class="accordion-collapse collapse"
+        [class.show]="openedLectureIndex === j"
+        [attr.aria-labelledby]="'heading' + j"
+        data-bs-parent="#lectureAccordion"
+      >
+        <div class="accordion-body">
+          <p><strong>Description:</strong> {{ lecture.lectureDescription }}</p>
+          <p><strong>Content:</strong> {{ lecture.lectureContent }}</p>
+          <p><strong>Resources:</strong> {{ lecture.lectureResources }}</p>
+
+          <button
+            class="btn btn-sm"
+            [disabled]="lecture.status === 'Completed'"
+            (click)="markAsCompleted(lecture._id)"
+          >
+            {{ lecture.status === 'Completed' ? 'Completed ✅' : 'Mark as Completed' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
