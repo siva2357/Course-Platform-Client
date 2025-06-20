@@ -9,17 +9,9 @@ import { CourseService } from 'src/app/core/services/course.service';
   styleUrls: ['./instructor-course-page.component.css']
 })
 export class InstructorCoursePageComponent {
-
   public course!:Course
 
-  constructor( public router:Router, public courseService:CourseService){
-
-  }
-
-  // createNewCourse()
-  // {
-  //   this.router.navigate(['instructor/course/create'])
-  // }
+  constructor( public router:Router, public courseService:CourseService){}
 
     createNewCourse() {
     this.courseService.createCourse(this.course).subscribe({
@@ -30,5 +22,6 @@ export class InstructorCoursePageComponent {
       error: err => console.error('Course creation failed', err)
     });
   }
+
 
 }

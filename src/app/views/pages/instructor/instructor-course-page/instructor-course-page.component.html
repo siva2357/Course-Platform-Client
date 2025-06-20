@@ -1,58 +1,133 @@
 
-<div class="container-fluid  mt-5 mb-5 bg-body-secondary">
-<h3 class="mb-5">Courses</h3>
 
-<div class="col text-end" style="margin-right: 40px;">
-  <button class="btn btn-sm btn-outline-primary rounded-0 px-3" (click)=" createNewCourse()">New course</button>
+
+
+
+
+
+
+<div class="container-fluid mt-5 mb-5 ">
+
+  <!-- Top Heading + Create Button -->
+  <div class="d-flex justify-content-between align-items-center px-4 mb-4">
+    <button class="btn btn-sm btn-outline-primary rounded-0 px-3" (click)="createNewCourse()">New Course</button>
+  </div>
+
+  <!-- Info Cards Section -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 px-4">
+
+    <!-- Card 1: Course Planning -->
+    <div class="col">
+      <div class="card h-100 border-0 rounded-4 " style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);">
+
+        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg"
+             class="card-img-top rounded-top-4" alt="Course Planning">
+        <div class="card-body">
+          <h5 class="text-primary fw-semibold">Create an Engaging Course</h5>
+          <p class="text-muted small">Whether you're a new instructor or experienced, learn to outline and plan impactful content that keeps students engaged.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Recording Help -->
+    <div class="col">
+      <div class="card h-100 border-0 rounded-4 " style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);">
+        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg"
+             class="card-img-top rounded-top-4" alt="Video Recording">
+        <div class="card-body">
+          <h5 class="text-primary fw-semibold">Get Started with Video</h5>
+          <p class="text-muted small">Videos make your course shine. We’ll guide you on tools and tips to record high-quality lectures from home.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Grow Audience -->
+    <div class="col">
+      <div class="card h-100 border-0 rounded-4 " style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);">
+        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg"
+             class="card-img-top rounded-top-4" alt="Build Audience">
+        <div class="card-body">
+          <h5 class="text-primary fw-semibold">Build Your Audience</h5>
+          <p class="text-muted small">Get tips on growing your audience and reaching the right learners before your course even goes live.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 </div>
 
-    <div class="container col-xxl-8 px-4 py-5">
-      <div class="row flex-lg-row align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6" >
-          <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg"
-            class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-        </div>
-        <div class="col-lg-6">
-          <h5>Create an Engaging Course</h5>
-          <p class="fs-6">Whether you've been teaching for years or are teaching for the first time, you can make an engaging course. We've compiled resources and best practices to help you get to the next level, no matter where you're starting.</p>
-
-        </div>
-      </div>
-    </div>
 
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
 
-      <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row align-items-center g-5 py-5">
-          <div class="col-10 col-sm-8 col-lg-6" >
-            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg"
-              class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-          </div>
-          <div class="col-lg-6">
-            <h5> Get Started with Video</h5>
-            <p class="fs-6">Quality video lectures can set your course apart. Use our resources to learn the basics.</p>
 
-          </div>
+
+<div class="container-fluid py-5 bg-light">
+
+  <!-- 🎯 Header -->
+  <div class="text-center mb-5">
+    <h2 class="fw-bold text-primary">Start Your Course Creation Journey</h2>
+    <p class="text-secondary fs-6">We’ll guide you through every step to publish a high-quality learning experience.</p>
+  </div>
+
+  <!-- 🧭 Timeline -->
+  <div class="row justify-content-center">
+    <div class="col-lg-9 position-relative ps-4">
+
+      <!-- Vertical Line -->
+      <div class="position-absolute top-0 start-0 bottom-0 border-start border-3 border-primary" style="left: 16px;"></div>
+
+      <!-- Timeline Item 1 -->
+      <div class="mb-5 position-relative">
+        <div class="position-absolute top-0 start-0 translate-middle bg-primary rounded-circle" style="width: 16px; height: 16px;"></div>
+        <div class="p-4 ms-4 rounded-4 shadow-sm" style="background-color: #e7f1ff; border-left: 5px solid #0d6efd;">
+          <h5 class="text-primary fw-semibold mb-2">Step 1: Add Course Details</h5>
+          <p class="text-muted mb-0">Set the title, category, thumbnail, and preview video of your course.</p>
         </div>
       </div>
 
-    <div class="container col-xxl-8 px-4 py-5">
-      <div class="row flex-lg-row align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6" >
-          <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg"
-            class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-        </div>
-        <div class="col-lg-6">
-          <h5> Build Your Audience</h5>
-          <p class="fs-6">Set your course up for success by building your audience.</p>
-
+      <!-- Timeline Item 2 -->
+      <div class="mb-5 position-relative">
+        <div class="position-absolute top-0 start-0 translate-middle bg-info rounded-circle" style="width: 16px; height: 16px;"></div>
+        <div class="p-4 ms-4 rounded-4 shadow-sm" style="background-color: #e0f7fc; border-left: 5px solid #0dcaf0;">
+          <h5 class="text-info fw-semibold mb-2">Step 2: Define Learning Objectives</h5>
+          <p class="text-muted mb-0">Define what students will learn, prerequisites, and the course level.</p>
         </div>
       </div>
-    </div>
+
+      <!-- Timeline Item 3 -->
+      <div class="mb-5 position-relative">
+        <div class="position-absolute top-0 start-0 translate-middle bg-success rounded-circle" style="width: 16px; height: 16px;"></div>
+        <div class="p-4 ms-4 rounded-4 shadow-sm" style="background-color: #e6f4ea; border-left: 5px solid #198754;">
+          <h5 class="text-success fw-semibold mb-2">Step 3: Add Curriculum</h5>
+          <p class="text-muted mb-1">Organize your course with sections and lectures. Include titles, videos, and resources.</p>
+          <p class="text-info small mb-0"><i class="bi bi-lightbulb"></i> Tip: Keep each video under 10 minutes.</p>
+        </div>
+      </div>
+
+      <!-- Timeline Item 4 -->
+      <div class="mb-5 position-relative">
+        <div class="position-absolute top-0 start-0 translate-middle bg-warning rounded-circle" style="width: 16px; height: 16px;"></div>
+        <div class="p-4 ms-4 rounded-4 shadow-sm" style="background-color: #fff8e1; border-left: 5px solid #ffc107;">
+          <h5 class="text-warning fw-semibold mb-2">Step 4: Pricing</h5>
+          <p class="text-muted mb-0">Select your pricing tier, currency, and define how students will pay.</p>
+        </div>
+      </div>
+
+      <!-- Timeline Item 5 -->
+      <div class="mb-5 position-relative">
+        <div class="position-absolute top-0 start-0 translate-middle bg-danger rounded-circle" style="width: 16px; height: 16px;"></div>
+        <div class="p-4 ms-4 rounded-4 shadow-sm" style="background-color: #fdecea; border-left: 5px solid #dc3545;">
+          <h5 class="text-danger fw-semibold mb-2">Step 5: Review & Publish</h5>
+          <p class="text-muted mb-0">Check all details and publish your course to go live.</p>
+        </div>
+      </div>
 
     </div>
-
-
+  </div>
 </div>
+
+
+
+
+
