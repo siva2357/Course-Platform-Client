@@ -34,3 +34,11 @@ th {
 
 
 
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+canvas {
+  width: 100% !important;
+}
