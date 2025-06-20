@@ -36,11 +36,16 @@
       <h3 class="pb-4 mb-4 fst-italic border-bottom"> From the Firehose</h3>
 
       <!-- course-access.component.html -->
+
+
 <div *ngIf="hasAccess; else noAccess">
-  <button class="btn btn-success" [routerLink]="['/course', courseId]">
+  <button class="btn btn-success" (click)="goToCourse()">
     Go to Course
   </button>
 </div>
+
+
+
 
 <ng-template #noAccess>
   <button class="btn btn-primary" (click)="buyNow(course)">
@@ -196,17 +201,20 @@
     <button class="btn btn-primary flex-fill" (click)="handleAddToCart(course._id!)" *ngIf="!isInCart">Add to Cart</button>
     <button class="btn btn-outline-primary flex-fill" [routerLink]="['/cart']" *ngIf="isInCart"> Go to Cart</button>
 <!-- Add to wishlist -->
+<!-- ❤️ Add to Wishlist -->
 <button class="btn btn-outline-secondary"
         (click)="handleWishlist(course._id!)"
         *ngIf="!isInWishlist">
   <i class="bi bi-heart"></i>
 </button>
 
-<!-- Remove from wishlist -->
-<!-- Remove from wishlist -->
-<button class="btn btn-outline-danger" (click)="removeFromWishlist(wishlistItemId)" *ngIf="isInWishlist">
+<!-- 💔 Remove from Wishlist -->
+<button class="btn btn-outline-danger"
+        (click)="removeFromWishlist(wishlistItemId)"
+        *ngIf="isInWishlist">
   <i class="bi bi-heart-fill text-danger"></i>
 </button>
+
 
 
 

@@ -15,8 +15,10 @@ export class CoursePageDetailsComponent implements OnInit, AfterViewInit {
   @ViewChild('courseVideo') courseVideo!: ElementRef<HTMLVideoElement>;
   showOverlay: boolean = true;
 courseId!: string;
+ courseTitle: string = ''; // must be assigned when data is loaded
 course!: Course;
 isInCart: boolean = false;
+currentUrl: string = '';
 isInWishlist:boolean=false;
   successMessage!: string;
   errorMessage!: string;
@@ -28,11 +30,19 @@ isInWishlist:boolean=false;
   constructor(private router: Router, private courseService:CourseService, private route: ActivatedRoute, private paymentService:PaymentService) {}
 
 ngOnInit() {
+
+  this.router.events.subscribe(() => {
+    this.currentUrl = this.router.url;
+  });
+
+
+
   const courseId = this.route.snapshot.paramMap.get('id');
   if (!courseId) {
     console.error('Course ID not found');
     return;
   }
+this.courseId = courseId; // ✅ Fix: store it
 
   // Fetch course first
   this.courseService.getCourseById(courseId).subscribe(course => {
@@ -46,19 +56,18 @@ ngOnInit() {
     });
 
     // Check if in wishlist
-    this.courseService.getFromWishlist().subscribe(wishList => {
-      const item = wishList.items.find(
-        item => item.courseTitle === this.course.landingPage.courseTitle
-      );
+this.courseService.getFromWishlist().subscribe(wishlist => {
+  const item = wishlist.items.find(item => item.courseId?.toString() === courseId);
+  if (item) {
+    this.isInWishlist = true;
+    this.wishlistItemId = item._id;
+  } else {
+    this.isInWishlist = false;
+    this.wishlistItemId = '';
+  }
+});
 
-      if (item) {
-        this.isInWishlist = true;
-        this.wishlistItemId = item._id;
-      } else {
-        this.isInWishlist = false;
-        this.wishlistItemId = '';
-      }
-    });
+
 
     // ✅ Now check course access
     this.paymentService.checkCourseAccess(courseId).subscribe(res => {
@@ -120,33 +129,29 @@ handleAddToCart(courseId: string): void {
 }
 
 
-handleWishlist(courseId: string) {
+handleWishlist(courseId: string): void {
   this.courseService.addToWishlist(courseId).subscribe({
     next: (res) => {
-      console.log('Cart add response:', res);
-      this.isInWishlist= true; // ✅ Immediately switch to "Go to Cart"
-
+      this.isInWishlist = true;
+      this.wishlistItemId = res._id; // 👈 Make sure backend returns the new wishlist item's ID
     },
     error: (err) => {
-      console.error('Add to cart error:', err);
+      console.error('❌ Failed to add to wishlist:', err);
     }
   });
 }
 
-   removeFromWishlist(wishlistItemId: string) {
-      this.isLoading = true;
-
-      this.courseService.removeFromWishlist(wishlistItemId).subscribe({
-        next: () => {
-          this.successMessage = 'Item removed successfully';
-          this.isInWishlist=false;
-        },
-        error: () => {
-          this.errorMessage = 'Failed to remove item';
-          this.isLoading = false;
-        }
-      });
+removeFromWishlist(wishlistItemId: string): void {
+  this.courseService.removeFromWishlist(wishlistItemId).subscribe({
+    next: () => {
+      this.isInWishlist = false;
+      this.wishlistItemId = '';
+    },
+    error: () => {
+      console.error('❌ Failed to remove from wishlist');
     }
+  });
+}
 
 // buyNow(id: string) {
 //   this.router.navigate(['checkout', id]);
@@ -172,6 +177,25 @@ buyNow(course: Course) {
   });
 }
 
+
+  slugify(title: string): string {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '');
+  }
+
+goToCourse(): void {
+  if (!this.course?.landingPage?.courseTitle || !this.courseId) {
+    console.error('Course title or ID missing');
+    return;
+  }
+
+  const slug = this.slugify(this.course.landingPage.courseTitle);
+  this.router.navigate(['/student/course/learning', slug, 'home'], {
+    queryParams: { courseId: this.courseId }
+  });
+}
 
 
 }

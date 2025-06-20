@@ -1,0 +1,39 @@
+/* Sidebar styling */
+.sidebar {
+  width: 300px;
+  background-color: #ffffff;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow-y: auto;
+  padding-top: 70px;
+}
+
+/* Offset main content due to sidebar */
+.ms-sidebar {
+  margin-left: 300px;
+}
+
+/* Nav list styling */
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list li {
+  margin-bottom: 10px;
+}
+
+/* Active section button */
+.active-section {
+  background-color: #007bff !important;
+  color: white !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
