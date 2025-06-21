@@ -66,8 +66,8 @@ handleAddToCart(courseId: string): void {
   splitCoursesIntoChunks() {
     for (const category of this.categories) {
       category.courseChunks = [];
-      for (let i = 0; i < category.courses.length; i += 6) {
-        category.courseChunks.push(category.courses.slice(i, i + 6));
+      for (let i = 0; i < category.courses.length; i += 4) {
+        category.courseChunks.push(category.courses.slice(i, i + 4));
       }
     }
   }
