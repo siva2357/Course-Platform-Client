@@ -153,11 +153,16 @@ postContentPage(): void {
 loadCurriculum() {
   this.courseService.getCourseContent(this.courseId).subscribe({
     next: (curriculum) => {
-      this.sections.clear(); // clear existing form arrays
+      this.sections.clear();
 
-      curriculum.sections.forEach(section => {
-        this.sections.push(this.createSectionGroup(section));
-      });
+      if (curriculum.sections && curriculum.sections.length > 0) {
+        curriculum.sections.forEach(section => {
+          this.sections.push(this.createSectionGroup(section));
+        });
+      } else {
+        // 👇 Add 1 empty section + 1 lecture if none exist
+        this.addSections();
+      }
     },
     error: (err) => {
       console.error('Failed to load curriculum', err);
@@ -165,6 +170,7 @@ loadCurriculum() {
     }
   });
 }
+
 
 createSectionGroup(section: Section): FormGroup {
   return this.fb.group({
