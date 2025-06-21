@@ -31,6 +31,7 @@ loadCart() {
   this.courseService.getFromCart().subscribe({
     next: (res: any) => {
       this.cartItems = res.items;
+      this.totalItems = this.cartItems.length; // ✅ Recalculate here
       this.isLoading = false;
     },
     error: () => {
@@ -57,5 +58,22 @@ removeFromCart(cartItemId: string) {
     }
   });
 }
+
+
+
+couponCode = '';
+getCartTotal(): number {
+  return this.cartItems.reduce((sum, item) => sum + item.amount, 0);
+}
+
+applyCoupon() {
+  alert(`Coupon "${this.couponCode}" applied!`);
+}
+
+proceedToCheckout() {
+  // Navigate to checkout
+  this.router.navigate(['/checkout']);
+}
+
 
 }

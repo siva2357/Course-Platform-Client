@@ -1,143 +1,60 @@
 <app-course-header></app-course-header>
 
-
-<div class="container-fluid mt-5 p-5">
-
-  <h2 class="fw-bold">Shopping Cart</h2>
-
-  <div class="row mt-3">
-    <div class="col-9">
+<div class="container mt-5 py-5">
+  <h2 class="fw-bold mb-3">🛒 Shopping Cart</h2>
+<p class="text-muted" style="font-size: 14px;">
+  {{ totalItems }} {{ totalItems === 1 ? 'Course' : 'Courses' }} in Cart
+</p>
 
 
-      <p style="font-size: 14px;">2 Courses in Cart</p>
-<h5>Total Items in Cart: {{ totalItems }}</h5>
+  <div class="row g-4">
+    <!-- 🧾 Cart Items Section -->
+    <div class="col-lg-9">
+      <div *ngFor="let item of cartItems" class="card mb-3 shadow-sm border-0">
+        <div class="row g-0 align-items-center">
+          <div class="col-md-3 text-center">
+            <img [src]="item.courseThumbnail" alt="Thumbnail" class="img-fluid rounded-start" style="max-height: 120px;" />
+          </div>
 
-
-<div *ngFor="let item of cartItems" class="card">
-  <div class="card-body">
-        <p class="card-title">{{ item.courseTitle}}</p>
-        <p class="card-title" [innerHTML]="item.courseDescription"></p>
-        <p class="card-title">{{ item.courseThumbnail}}</p>
-        <h5 class="card-title">{{ item.amount}}</h5>
-
-    <p class="card-text text-primary mb-2"
-       style="cursor: pointer; font-size: 14px;"
-       (click)="removeFromCart(item._id!)">Remove</p>
-  </div>
-</div>
-
-
-      <ul class="list-group list-group-flush">
-
-        <li class="list-group-item ">
-          <div class="card  mb-3 mt-3 rounded-0">
-            <div class="card-body text-dark">
-              <div class="row ">
-                <div class="col-md-2 text-center">
-                  <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1746956327/cert-course_vbs1sm.avif"
-                    alt="Online Education">
-                </div>
-
-                <div class="col-md-5">
-                  <h6 class="card-title mb-0">Angular - The Complete Guide (2025 Edition)</h6>
-                  <p class="card-text  mb-1" style="font-size: 12px;">By Instructor Name</p>
-                  <p class="card-text mb-1" style="font-size: 14px;">Web Development</p>
-                  <p class="card-text mb-1" style="font-size: 14px;">56 hrs Total. 10 lectures. beginner levels </p>
-                </div>
-
-                <div class="col-md-3 text-end">
-                  <p class="card-text text-primary mb-2" style="cursor: pointer; font-size: 14px;" >Remove</p>
-                  <p class="card-text text-primary mb-2" style="cursor: pointer; font-size: 14px;">Save for later</p>
-                  <p class="card-text text-primary " style="cursor: pointer; font-size: 14px;">Move to wishlist</p>
-
-                </div>
-
-
-                <div class="col-md-2 text-end">
-                  <h6 class="card-title mb-0 mt-0">3000</h6>
-                </div>
-
-
+          <div class="col-md-6">
+            <div class="card-body">
+              <h6 class="card-title fw-semibold mb-1">{{ item.courseTitle }}</h6>
+              <p class="card-text mb-1" [innerHTML]="item.courseDescription" style="font-size: 14px;"></p>
+              <p class="text-muted mb-1" style="font-size: 13px;">Web Development • Beginner</p>
+              <div class="d-flex gap-2 mt-2">
+                <span class="text-primary" style="cursor: pointer; font-size: 13px;" (click)="removeFromCart(item._id!)">Remove</span>
+                <span class="text-primary" style="cursor: pointer; font-size: 13px;">Save for later</span>
+                <span class="text-primary" style="cursor: pointer; font-size: 13px;">Move to wishlist</span>
               </div>
             </div>
           </div>
-        </li>
 
-
-
-
-
-        <li class="list-group-item">
-          <div class="card  mb-3  mt-3  rounded-0">
-            <div class="card-body text-dark">
-              <div class="row ">
-                <div class="col-md-2 text-center">
-                  <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1746956327/cert-course_vbs1sm.avif"
-                    alt="Online Education">
-                </div>
-
-                <div class="col-md-5">
-                  <h6 class="card-title mb-0">Angular - The Complete Guide (2025 Edition)</h6>
-                  <p class="card-text  mb-1" style="font-size: 12px;">By Instructor Name</p>
-                  <p class="card-text mb-1" style="font-size: 14px;">Web Development</p>
-                  <p class="card-text mb-1" style="font-size: 14px;">56 hrs Total. 10 lectures. beginner levels </p>
-                </div>
-
-                <div class="col-md-3 text-end">
-                  <p class="card-text text-primary mb-2" style="cursor: pointer; font-size: 14px;">Remove</p>
-                  <p class="card-text text-primary mb-2" style="cursor: pointer; font-size: 14px;">Save for later</p>
-                  <p class="card-text text-primary " style="cursor: pointer; font-size: 14px;">Move to wishlist</p>
-
-                </div>
-
-
-                <div class="col-md-2 text-end">
-                  <h6 class="card-title mb-0 mt-0">3000</h6>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-        </li>
-
-      </ul>
-
-    </div>
-
-    <div class="col-3 ">
-
-      <div class="row flex-column align-items-center">
-        <div class="col">
-          <h6 class="card-title mb-2">Total : </h6>
-          <h3 class="card-text mb-1">4,000</h3>
-          <button class="btn btn-primary btn-lg rounded-2 mt-2 w-100">Proceed to Checkout</button>
-          <p class="card-text mt-2" style=" cursor: pointer; font-size: 12px;">You won't be charged yet</p>
-          <hr>
-        </div>
-
-
-        <div class="col">
-          <h6 class="card-title mb-3">Promotions</h6>
-          <div class="row g-2 mb-5 align-items-center">
-            <div class="col-9">
-              <input type="text" class="form-control form-control-sm" placeholder="Apply coupon" aria-label="Promotion code">
-            </div>
-            <div class="col-3">
-              <button class="btn btn-primary btn-sm w-100 rounded-2">Apply</button>
-            </div>
+          <div class="col-md-3 text-end pe-4">
+            <h5 class="text-success">₹{{ item.amount }}</h5>
           </div>
         </div>
-
-
-
       </div>
-
     </div>
 
+    <!-- 💰 Price Summary Section -->
+    <div class="col-lg-3">
+      <div class="card shadow-sm p-4 border-0">
+        <h6 class="fw-semibold mb-2">Total:</h6>
+        <h3 class="text-success fw-bold mb-3">₹{{ getCartTotal() }}</h3>
 
+        <button class="btn btn-primary w-100 mb-2" (click)="proceedToCheckout()">
+          Proceed to Checkout
+        </button>
+        <p class="text-muted text-center" style="font-size: 12px;">You won't be charged yet</p>
+
+        <hr />
+
+        <h6 class="fw-semibold mb-3">🎁 Promotions</h6>
+        <div class="input-group input-group-sm mb-2">
+          <input type="text" class="form-control" placeholder="Apply coupon" [(ngModel)]="couponCode" />
+          <button class="btn btn-outline-primary" (click)="applyCoupon()">Apply</button>
+        </div>
+      </div>
+    </div>
   </div>
-
-
-
 </div>
