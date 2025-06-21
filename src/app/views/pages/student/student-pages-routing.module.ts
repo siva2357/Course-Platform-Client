@@ -22,7 +22,6 @@ const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'profile-form-page', component: StudentProfileformPageComponent , title: 'Post Jobpost Page'},
   { path: 'account-settings/:id/profile-settings', component: StudentAccountSettingsPageComponent, title: 'Post Jobpost Page'},
-  { path: 'accomplishments/certificate/:certId', component: StudentAccomplishmentsComponent, title: 'Post Jobpost Page'},
     { path: 'course/learning/:slug/home',component: StudentCourseLearningComponent, title: 'Post Jobpost Page'},
 
 
@@ -33,6 +32,8 @@ const routes: Routes = [
       { path: 'course/:id/:courseName', component: CoursePageDetailsComponent, title: 'Course page' },
     { path: 'my-wishlist', component: StudentWishlistComponent, title: 'Post Jobpost Page'},
     { path: 'my-certifications', component: StudentCertificationsComponent , title: 'Post Jobpost Page'},
+      { path: 'accomplishments/certificate/:certId', component: StudentAccomplishmentsComponent, title: 'Post Jobpost Page'},
+
     { path: 'my-purchases', component: StudentPurchasesComponent, title: 'Post Jobpost Page'  },
     { path: 'profile-page/:id', component: StudentProfilePageComponent, title: 'Post Jobpost Page'},
     ]

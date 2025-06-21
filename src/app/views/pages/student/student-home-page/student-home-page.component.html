@@ -9,142 +9,103 @@
   </div>
 
 <div class="container-fluid mb-5 bg-body-secondary">
+
+
+
+
+
   <h3 class="mb-5">Learn from popular categories in India</h3>
 
-<div *ngFor="let course of courses">
-<h5 (click)="goToCourseDetails(course)" style="cursor: pointer;">
-  {{ course.landingPage.courseTitle }}
-</h5>
-
-
-
-  <h5>{{ course.landingPage.courseThumbnail }}</h5>
-  <h5 [innerHTML]="course.landingPage.courseDescription"></h5>
-
-  <button class="btn btn-info btn-sm" (click)="handleAddToCart(course._id!)">
-    Add to cart
-  </button>
+<div class="row g-3">
+  <div class="col-12 col-sm-6 col-md-4 col-lg-2" *ngFor="let course of courses">
+    <div class="card h-100 rounded-0">
+      <img [src]="course.landingPage.courseThumbnail" class="card-img-top rounded-0" alt="...">
+      <div class="card-body">
+        <h5 class="card-title" (click)="goToCourseDetails(course)" style="cursor: pointer;">
+          {{ course.landingPage.courseTitle }}
+        </h5>
+        <p [innerHTML]="course.landingPage.courseDescription"></p>
+        <button class="btn btn-info btn-sm" (click)="handleAddToCart(course._id!)">
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
-
-
-  <div class="row g-3">
-
-  <div class="col">
-    <div class="card h-100 rounded-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title" style="cursor: pointer;">Card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p>
-          <button class="btn btn-info btn-sm">Add to cart</button>
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col">
-    <div class="card h-100 rounded-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"  style="cursor: pointer;">Card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p>
-          <button class="btn btn-info btn-sm">Add to cart</button>
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col">
-    <div class="card h-100 rounded-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title" style="cursor: pointer;">Card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p>
-          <button class="btn btn-info btn-sm">Add to cart</button>
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col">
-    <div class="card h-100 rounded-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"  style="cursor: pointer;">Card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p>
-          <button class="btn btn-info btn-sm">Add to cart</button>
-
-      </div>
-    </div>
-  </div>
-
-
-
-</div>
-</div>
-
-
-<div class="container-fluid bg-body-secondary mt-5 mb-5">
-  <h3 class="mb-5">What to learn next</h3>
-
-  <div class="row g-3">
-
-  <div class="col">
-    <div class="card h-100 rounded-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title" style="cursor: pointer;">Card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p>
-          <button class="btn btn-info btn-sm">Add to cart</button>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="card h-100 rounded-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"  style="cursor: pointer;">Card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p>
-          <button class="btn btn-info btn-sm">Add to cart</button>
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col">
-    <div class="card h-100 rounded-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"  style="cursor: pointer;">Card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p>
-          <button class="btn btn-info btn-sm">Add to cart</button>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="card h-100 rounded-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title" style="cursor: pointer;">Card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p>
-          <button class="btn btn-info btn-sm">Add to cart</button>
-
-      </div>
-    </div>
-  </div>
-
-
-
-</div>
 </div>
 
 
 </div>
+
+
+
+
+<div class="container-fluid mt-5">
+  <!-- 🔍 Search Bar -->
+  <div class="mb-4">
+    <form class="position-relative">
+      <input type="search" class="form-control ps-5 rounded-4 w-100 w-md-75"
+             placeholder="Search for anything" style="font-size: 14px;" />
+      <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+    </form>
+  </div>
+
+
+  <!-- ✅ CATEGORY LOOP -->
+<div *ngFor="let category of categories" class="mb-5">
+  <h4 class="mb-3">{{ category.name }}</h4>
+
+  <!-- ✅ Category carousel -->
+  <div class="carousel slide" [attr.id]="getCarouselId(category.name)" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <!-- ✅ Loop for courseChunks (each chunk = 1 carousel item) -->
+      <div *ngFor="let chunk of category.courseChunks; let i = index"
+           class="carousel-item" [class.active]="i === 0">
+        <div class="row gx-3">
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let course of chunk">
+            <div class="card h-100 shadow-sm rounded-3">
+              <img [src]="course.image" class="card-img-top" alt="course-img" />
+              <div class="card-body p-2">
+                <h6 class="card-title">{{ course.title }}</h6>
+                <p class="card-text small">{{ course.description }}</p>
+                <button class="btn btn-info btn-sm w-100"
+                        (click)="handleAddToCart(course._id!)">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ✅ Controls -->
+<!-- Carousel Controls -->
+<!-- Prev -->
+<button class="carousel-control-prev custom-control"
+        [attr.data-bs-target]="'#' + getCarouselId(category.name)"
+        data-bs-slide="prev">
+  <span class="carousel-control-prev-icon"></span>
+</button>
+
+<!-- Next -->
+<button class="carousel-control-next custom-control"
+        [attr.data-bs-target]="'#' + getCarouselId(category.name)"
+        data-bs-slide="next">
+  <span class="carousel-control-next-icon"></span>
+</button>
+
+
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+

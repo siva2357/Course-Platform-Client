@@ -179,27 +179,6 @@ generateCertificate(studentName: string, courseTitle: string, issueDate: string)
 }
 
 
-
-// course.service.ts
-
-// markLectureCompleted(courseId: string, lectureId: string): Observable<CourseTracking> {
-//   const body = { courseId, lectureId };
-
-//   return this.http.post<CourseTracking>(
-//     `${this.baseUrl}/course/track/complete`,
-//     body,
-//     { headers: this.getHeaders() }   // ✅ include headers here
-//   ).pipe(catchError(this.handleError));
-// }
-
-// // Get wishlist
-// getCourseProgress(courseId: string): Observable<CourseTracking> {
-//   return this.http.get<CourseTracking>(
-//     `${this.baseUrl}/course/track/progress/${courseId}`,
-//     { headers: this.getHeaders() }   // ✅ fix misplaced comma
-//   ).pipe(catchError(this.handleError));
-// }
-
 markLectureCompleted(courseId: string, lectureId: string): Observable<any> {
   return this.http.post(`${this.baseUrl}/course/track/complete`, { courseId, lectureId });
 }

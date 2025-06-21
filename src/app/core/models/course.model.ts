@@ -53,3 +53,19 @@ export interface CoursesResponse {
   total: number;
   courses: Course[];
 }
+
+
+
+export interface  CoursePreview {
+    _id?: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface  Category {
+  name: string;
+  courses: CoursePreview[];
+  courseChunks: CoursePreview[][];
+}
+
