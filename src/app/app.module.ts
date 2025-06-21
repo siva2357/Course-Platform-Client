@@ -63,6 +63,7 @@ import { PaymentFailureComponent } from './views/pages/payment-failure/payment-f
     StudentPageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Use legacy compatibility mode
     AngularFireStorageModule, // Use storage services
+
   ],
   providers: [],
   bootstrap: [AppComponent]

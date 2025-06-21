@@ -25,6 +25,8 @@ import { StudentHomePageComponent } from './student-home-page/student-home-page.
 import { CoursePageDetailsComponent } from './course-page-details/course-page-details.component';
 import { StudentAccomplishmentsComponent } from './student-accomplishments/student-accomplishments.component';
 import { StudentCourseLearningComponent } from './student-course-learning/student-course-learning.component';
+import { ReplacePipe } from 'src/app/core/pipes/replace.pipe';
+
 @NgModule({
   declarations: [
     StudentComponent,
@@ -43,7 +45,8 @@ import { StudentCourseLearningComponent } from './student-course-learning/studen
     StudentHomePageComponent,
     CoursePageDetailsComponent,
     StudentAccomplishmentsComponent,
-    StudentCourseLearningComponent
+    StudentCourseLearningComponent,
+         ReplacePipe
   ],
   imports: [
     CommonModule,

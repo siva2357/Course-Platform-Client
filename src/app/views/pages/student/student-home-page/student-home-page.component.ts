@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Course } from 'src/app/core/models/course.model';
+import { Category, Course } from 'src/app/core/models/course.model';
 import { CourseService } from 'src/app/core/services/course.service';
-
+import { Pipe, PipeTransform } from '@angular/core';
 @Component({
   selector: 'app-student-home-page',
   templateUrl: './student-home-page.component.html',
@@ -10,15 +10,14 @@ import { CourseService } from 'src/app/core/services/course.service';
 })
 export class StudentHomePageComponent {
 
-  constructor(public router:Router, public courseService:CourseService){
-
-  }
+  constructor(public router:Router, public courseService:CourseService){}
 
 courses: Course[] = []; // Make sure this is defined
 
 
 ngOnInit() {
   this.loadCourses();
+    this.splitCoursesIntoChunks();
 }
 
 loadCourses() {
@@ -35,8 +34,6 @@ goToCourseDetails(course: Course) {
 }
 
 
-
-
 handleAddToCart(courseId: string): void {
   this.courseService.addToCart(courseId).subscribe({
     next: (res) => {
@@ -49,6 +46,35 @@ handleAddToCart(courseId: string): void {
     }
   });
 }
+
+  categories: Category[] = [
+    'Angular', 'React', 'Vue', 'Node.js', 'Python', 'Java', 'Django', 'MongoDB', 'DevOps', 'Full Stack'
+  ].map(name => ({
+    name,
+    courses: Array.from({ length: 20 }).map((_, i) => ({
+      title: `${name} Course ${i + 1}`,
+      description: `Description for ${name} Course ${i + 1}`,
+      image: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp'
+    })),
+    courseChunks: [] // will be filled below
+  }));
+
+
+
+    // ✅ Utility: Split into chunks of 6
+
+  splitCoursesIntoChunks() {
+    for (const category of this.categories) {
+      category.courseChunks = [];
+      for (let i = 0; i < category.courses.length; i += 6) {
+        category.courseChunks.push(category.courses.slice(i, i + 6));
+      }
+    }
+  }
+
+  getCarouselId(name: string): string {
+    return name.toLowerCase().replace(/\s+/g, '-') + '-carousel';
+  }
 
 
 }
