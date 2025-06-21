@@ -3,9 +3,11 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DEFAULT_TOOLBAR, Editor, Toolbar, Validators } from 'ngx-editor';
+import { DEFAULT_TOOLBAR, Editor, Toolbar} from 'ngx-editor';
 import { Course, LandingPage } from 'src/app/core/models/course.model';
 import { CourseService } from 'src/app/core/services/course.service';
+import { Validators } from '@angular/forms'; // ✅ Correct Angular Validators
+
 
 @Component({
   selector: 'app-course-landing-page',
@@ -72,14 +74,17 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
     }
   });
 }
-
+submitted = false;
 
   postLandingPage() {
-    if (this.landingPageDetails.invalid) {
-      this.landingPageDetails.markAllAsTouched();
-      this.errorMessage = 'Please fill in all required fields correctly.';
-      return;
-    }
+  this.submitted = true;
+
+  if (this.landingPageDetails.invalid) {
+    this.landingPageDetails.markAllAsTouched();
+    this.errorMessage = 'Please fill in all required fields correctly.';
+    return;
+  }
+
 
     const formValue = this.landingPageDetails.getRawValue();
 

@@ -297,4 +297,5 @@ public coursePerformanceChartOptions: ChartOptions<'bar'> = {
 };
 
 
+
 }

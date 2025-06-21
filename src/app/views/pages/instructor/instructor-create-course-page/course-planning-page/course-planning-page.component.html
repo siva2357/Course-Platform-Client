@@ -114,3 +114,85 @@
 </form>
 
 
+<form [formGroup]="coursePlanDetails" (ngSubmit)="postPlanPage()">
+  <div class="card shadow-lg  border-0">
+    <div class="card-body p-5">
+      <h4 class="text-primary fw-semibold mb-3">🎯 Intended Learners</h4>
+      <hr class="mb-4">
+
+      <p class="text-muted" style="font-size: 14px;">
+        The following descriptions will appear on your course landing page and directly impact your course’s visibility and performance.
+      </p>
+
+      <!-- ✅ Section: Learning Objectives -->
+      <div class="mb-5">
+        <h6 class="fw-bold mb-2">📝 What will students learn in your course?</h6>
+        <p class="text-muted" style="font-size: 14px;">
+          Add at least 4 learning outcomes that students can expect to achieve after completing your course.
+        </p>
+
+        <div formArrayName="learningObjectives">
+          <div *ngFor="let objective of learningObjectives.controls; let i = index" class="row mb-2 align-items-center">
+            <div class="col-md-8">
+              <input class="form-control form-control-sm" [formControlName]="i" placeholder="Learning objective" />
+              <small *ngIf="objective.invalid && objective.touched" class="text-danger" style="font-size: 12px;">This field is required.</small>
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-sm btn-outline-danger rounded-0" (click)="removeObjectives(i)" *ngIf="learningObjectives.length > 1">Remove</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-primary mt-2 rounded-0" (click)="addObjectives()">+ Add Objective</button>
+        </div>
+      </div>
+
+      <!-- ✅ Section: Requirements -->
+      <div class="mb-5">
+        <h6 class="fw-bold mb-2">📌 Requirements or Prerequisites</h6>
+        <p class="text-muted" style="font-size: 14px;">
+          List any required skills, tools, or background knowledge. If none, use this section to welcome beginners.
+        </p>
+
+        <div formArrayName="courseRequirements">
+          <div *ngFor="let requirement of courseRequirements.controls; let i = index" class="row mb-2 align-items-center">
+            <div class="col-md-8">
+              <input class="form-control form-control-sm" [formControlName]="i" placeholder="e.g., Basic HTML knowledge" />
+              <small *ngIf="requirement.invalid && requirement.touched" class="text-danger" style="font-size: 12px;">This field is required.</small>
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-sm btn-outline-danger rounded-0" (click)="removeRequirements(i)" *ngIf="courseRequirements.length > 1">Remove</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-primary mt-2 rounded-0" (click)="addRequirements()">+ Add Requirement</button>
+        </div>
+      </div>
+
+      <!-- ✅ Section: Target Audience -->
+      <div class="mb-5">
+        <h6 class="fw-bold mb-2">👥 Who is this course for?</h6>
+        <p class="text-muted" style="font-size: 14px;">
+          Describe your ideal learners. This helps attract the right audience.
+        </p>
+
+        <div formArrayName="courseLevel">
+          <div *ngFor="let level of courseLevel.controls; let i = index" class="row mb-2 align-items-center">
+            <div class="col-md-8">
+              <input class="form-control form-control-sm" [formControlName]="i" placeholder="e.g., Beginners in Web Development" />
+              <small *ngIf="level.invalid && level.touched" class="text-danger" style="font-size: 12px;">This field is required.</small>
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-sm btn-outline-danger rounded-0" (click)="removeCourseLevel(i)" *ngIf="courseLevel.length > 1">Remove</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-primary mt-2 rounded-0" (click)="addCourseLevel()">+ Add Audience</button>
+        </div>
+      </div>
+
+      <!-- ✅ Action Buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-4 rounded-0" (click)="previous()">Back</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary px-4 rounded-0">Save</button>
+      </div>
+
+    </div>
+  </div>
+</form>

@@ -21,6 +21,9 @@ export class ManageYourCourseComponent implements OnInit {
   pageNumbers: number[] = [];
   totalEntries = 0;
 
+selectedCategory: string = '';
+availableCategories: string[] = ['Development', 'Design', 'Marketing', 'Business'];
+
   constructor(private courseService: CourseService, private router: Router) {}
 
   ngOnInit(): void {
@@ -59,6 +62,17 @@ filteredCourses(): Course[] {
     course._id?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
     course.landingPage?.courseTitle?.toLowerCase().includes(this.searchTerm.toLowerCase())
   );
+}
+
+
+
+filterByCategory() {
+  this.currentPage = 1;
+  this.filteredData = this.courses.filter(course =>
+    (this.selectedCategory === '' || course.landingPage.courseCategory === this.selectedCategory) &&
+    (this.searchTerm === '' || course.landingPage.courseTitle.toLowerCase().includes(this.searchTerm.toLowerCase()))
+  );
+  this.updatePagination();
 }
 
 

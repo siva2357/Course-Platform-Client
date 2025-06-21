@@ -88,3 +88,85 @@
 
 
   </div>
+
+
+
+
+
+  <div class="container-fluid mt-5 mb-5 bg-body-secondary p-4 rounded">
+  <h3 class="mb-4 fw-bold text-primary">Payments</h3>
+
+  <!-- Search -->
+  <div class="row g-3 align-items-end mb-4">
+    <div class="col-md-4">
+      <label class="form-label poppins-medium mb-1" style="font-size: 14px;">Search Course</label>
+      <input type="text" class="form-control form-select-sm shadow-sm"
+             placeholder="Search by Course ID, Course Name" [(ngModel)]="searchTerm" />
+    </div>
+    <div class="col-md-2 d-flex align-items-end">
+      <button class="btn btn-outline-secondary btn-sm px-4 w-100" (click)="resetSearch()">Reset</button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive mb-4">
+    <table class="table table-hover align-middle text-center shadow-sm" style="font-size: 14px;">
+      <thead class="table-light">
+        <tr>
+          <th style="width: 5%;">S.No</th>
+          <th style="width: 25%;">Course Name</th>
+          <th style="width: 20%;">Collections</th>
+          <th style="width: 20%;">Refunds</th>
+          <th style="width: 10%;">Orders</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="paginatedData.length > 0">
+        <tr *ngFor="let payment of paginatedData; let i = index">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ payment.courseName }}</td>
+          <td>{{ payment.collections }} Rupees</td>
+          <td>{{ payment.refunds }} Rupees</td>
+          <td>{{ payment.orders }}</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="paginatedData?.length === 0">
+        <tr>
+          <td colspan="5" class="text-center text-muted py-4 poppins-medium">No data to display.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="row align-items-center mb-3 p-3 border rounded shadow-sm bg-light">
+    <!-- Items per page selector -->
+    <div class="col-md-4 d-flex align-items-center mb-2 mb-md-0">
+      <label for="itemsPerPage" class="fw-bold me-2">Items per page:</label>
+      <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updatePagination()" class="form-select form-select-sm w-auto">
+        <option *ngFor="let size of [5, 10, 15, 20, 50, 100]" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+
+    <!-- Pagination -->
+    <div class="col-md-4 d-flex justify-content-center mb-2 mb-md-0">
+      <nav>
+        <ul class="pagination pagination-sm mb-0 flex-wrap">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="onPageChange(currentPage - 1)">&laquo;</a>
+          </li>
+          <li *ngFor="let page of pageNumbers" class="page-item" [class.active]="page === currentPage">
+            <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="onPageChange(currentPage + 1)">&raquo;</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Entry summary -->
+    <div class="col-md-4 text-center text-md-end text-muted small">
+      <strong>Showing:</strong> {{ (currentPage - 1) * itemsPerPage + 1 }} - {{ getEndIndex() }} of {{ totalEntries }} entries
+    </div>
+  </div>
+</div>

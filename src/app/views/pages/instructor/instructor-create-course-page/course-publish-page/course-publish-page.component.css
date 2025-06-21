@@ -1,0 +1,25 @@
+.form-label {
+  font-size: 14px;
+}
+
+input, select, textarea {
+  font-size: 14px !important;
+}
+
+.poppins-medium {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.btn {
+  border-radius: 2px;
+}
+
+.alert {
+  border-radius: 4px;
+}
