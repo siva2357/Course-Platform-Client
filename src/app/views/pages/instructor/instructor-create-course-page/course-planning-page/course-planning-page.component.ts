@@ -45,17 +45,18 @@ export class CoursePlanningPageComponent implements OnInit {
   }
 
   // Getters for form arrays
-  get learningObjectives(): FormArray {
-    return this.coursePlanDetails.get('learningObjectives') as FormArray;
-  }
+get learningObjectives(): FormArray {
+  return this.coursePlanDetails?.get('learningObjectives') as FormArray;
+}
 
-  get courseRequirements(): FormArray {
-    return this.coursePlanDetails.get('courseRequirements') as FormArray;
-  }
+get courseRequirements(): FormArray {
+  return this.coursePlanDetails?.get('courseRequirements') as FormArray;
+}
 
-  get courseLevel(): FormArray {
-    return this.coursePlanDetails.get('courseLevel') as FormArray;
-  }
+get courseLevel(): FormArray {
+  return this.coursePlanDetails?.get('courseLevel') as FormArray;
+}
+
 
   // Add controls
   addObjectives(): void {
@@ -89,22 +90,6 @@ export class CoursePlanningPageComponent implements OnInit {
     }
   }
 
-// loadCoursePlan() {
-//   this.courseService.getCoursePlan(this.courseId).subscribe({
-//     next: (coursePlan) => {
-//       this.coursePlanDetails.patchValue({
-//         learningObjectives: coursePlan.learningObjectives,
-//         courseRequirements: coursePlan.courseRequirements,
-//         courseLevel: coursePlan.courseLevel
-//       });
-//     },
-//     error: (err) => {
-//       console.error('Failed to load course plan', err);
-//       this.errorMessage = 'Failed to load course plan data.';
-//     }
-//   });
-// }
-
 
 loadCoursePlan() {
   this.courseService.getCoursePlan(this.courseId).subscribe({
@@ -124,22 +109,25 @@ loadCoursePlan() {
 // Utility to reset and populate a FormArray
 private setFormArray(formArray: FormArray, values: string[]): void {
   formArray.clear();  // remove existing controls
-  values.forEach(value => formArray.push(this.fb.control(value, Validators.required)));
+
+  if (values && values.length > 0) {
+    values.forEach(value => formArray.push(this.fb.control(value, Validators.required)));
+  } else {
+    // 👇 Ensure at least one control exists
+    formArray.push(this.fb.control('', Validators.required));
+  }
 }
-
-
-
-
 
 
   // Submit logic
   postPlanPage(): void {
-    if (this.coursePlanDetails.invalid) {
-      this.coursePlanDetails.markAllAsTouched();
-      this.errorMessage = 'Please fill in all required fields correctly.';
-      return;
-    }
+  this.submitted = true; // ⬅️ mark that user tried to submit
 
+  if (this.coursePlanDetails.invalid) {
+    this.coursePlanDetails.markAllAsTouched();
+    this.errorMessage = 'Please fill in all required fields correctly.';
+    return;
+  }
     const formValue = this.coursePlanDetails.getRawValue();
     const courseData: CoursePlan = {
       learningObjectives: formValue.learningObjectives,
@@ -173,4 +161,12 @@ private setFormArray(formArray: FormArray, values: string[]): void {
   previous() {
     this.router.navigate([`instructor/course/${this.courseId}/create/course-landing-page`]);
   }
+
+
+
+  submitted = false;
+
+
+
+
 }

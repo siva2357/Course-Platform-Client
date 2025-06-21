@@ -1,0 +1,87 @@
+/* Card Container */
+.card {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+}
+
+/* Headings */
+.card h4 {
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+/* Paragraphs */
+p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Form Inputs */
+input.form-control,
+textarea.form-control,
+select.form-select {
+  font-size: 14px;
+  border-radius: 0.25rem;
+}
+
+/* Buttons */
+button.btn {
+  font-size: 13px;
+}
+
+.btn-outline-primary,
+.btn-outline-danger,
+.btn-outline-secondary,
+.btn-outline-success {
+  border-radius: 0;
+  font-weight: 500;
+}
+
+/* Form Sections */
+.container .border {
+  border-color: #dee2e6 !important;
+}
+
+/* Table Styling */
+.table {
+  font-size: 14px;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+/* Video and PDF Preview */
+video,
+iframe {
+  border-radius: 0.25rem;
+  object-fit: cover;
+}
+
+/* Icons */
+.bi {
+  cursor: pointer;
+}
+
+/* Custom Shadow Section Cards */
+.section-card {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+/* Lecture Card */
+.lecture-card {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.04);
+  margin-bottom: 1rem;
+}

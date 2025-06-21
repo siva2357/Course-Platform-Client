@@ -1,182 +1,176 @@
+
 <form [formGroup]="courseContentDetails" (ngSubmit)="postContentPage()">
+  <div class="card shadow-lg rounded-0">
+    <div class="card-body p-5">
+      <h4 class="text-primary fw-bold mb-3">Curriculum</h4>
+      <hr />
+      <p class="mb-2" style="font-size: 14px;">
+        Start putting together your course by creating sections, lectures and practice activities (quizzes, coding exercises, assignments).
+        Use your course outline to structure your content and label your sections and lectures clearly.
+      </p>
+      <p class="mb-4" style="font-size: 14px;">
+        <strong>Note:</strong> If you’re offering a free course, the total video content must be under 2 hours.
+      </p>
 
- <div class="card shadow-lg rounded-0">
-              <div class="card-body p-5">
-                <h4>Curriculum</h4>
-                <hr>
-                <p style="font-size: 14px; text-align: justify;">
-                  Start putting together your course by creating sections, lectures and practice (quizzes, coding exercises and assignments).
-                </p>
+      <!-- Sections & Lectures -->
+      <div formArrayName="sections" class="container">
+        <div *ngFor="let section of sections.controls; let sectionIndex = index" [formGroupName]="sectionIndex"
+             class="mb-4 border rounded p-4 shadow-sm bg-light">
 
-                <p style="font-size: 14px; text-align: justify;">
-                  Start putting together your course by creating sections, lectures and practice activities (quizzes, coding  exercises and assignments).
-                  Use your course outline to structure your content and label your sections and lectures clearly.
-                  If you’re intending to offer your course for free, the total length of video content must be less than 2 hours.
-                </p>
-
-
-
-<!-- <div formArrayName="sections">
-  <div *ngFor="let section of sections.controls; let sectionIndex = index" [formGroupName]="sectionIndex">
-    <input formControlName="sectionTitle" placeholder="Section Title" class="form-control mb-3" />
-
-    <div formArrayName="lectures">
-      <div *ngFor="let lecture of lectures(sectionIndex).controls; let lectureIndex = index" [formGroupName]="lectureIndex">
-        <input formControlName="lectureTitle" class="form-control" placeholder="Lecture Title" />
-        <textarea formControlName="lectureDescription" class="form-control" placeholder="Lecture Description"></textarea>
-        <input formControlName="lectureContent" class="form-control" placeholder="Lecture Content" />
-        <input formControlName="lectureResources" class="form-control" placeholder="Lecture Resources" />
-        <button (click)="removeLectures(sectionIndex, lectureIndex)" *ngIf="lectures(sectionIndex).length > 1">Remove Lecture</button>
-      </div>
-      <button (click)="addLectures(sectionIndex)">+ Add Lecture</button>
-    </div>
-
-    <button (click)="removeSections(sectionIndex)" *ngIf="sections.length > 1">Remove Section</button>
-  </div>
-  <button (click)="addSections()">+ Add Section</button>
-</div> -->
-
-
-<div formArrayName="sections" class="container">
-  <div *ngFor="let section of sections.controls; let sectionIndex = index" [formGroupName]="sectionIndex" class="mb-4 border rounded p-3 shadow-sm bg-light">
-
-    <input formControlName="sectionTitle" placeholder="Section Title" class="form-control mb-3 fw-semibold fs-5" />
-
-    <div formArrayName="lectures" class="ps-3">
-      <div *ngFor="let lecture of lectures(sectionIndex).controls; let lectureIndex = index" [formGroupName]="lectureIndex" class="mb-3 border rounded p-3 bg-white shadow-sm">
-
-        <input formControlName="lectureTitle" class="form-control mb-2" placeholder="Lecture Title" />
-
-        <textarea formControlName="lectureDescription" class="form-control mb-2" placeholder="Lecture Description" rows="3"></textarea>
-
-        <input formControlName="lectureContent" class="form-control mb-2" placeholder="Lecture Content" />
-
-        <input formControlName="lectureResources" class="form-control mb-3" placeholder="Lecture Resources" />
-
-        <button type="button" class="btn btn-danger btn-sm" (click)="removeLectures(sectionIndex, lectureIndex)" *ngIf="lectures(sectionIndex).length > 1">
-          Remove Lecture
-        </button>
-      </div>
-
-      <button type="button" class="btn btn-outline-primary btn-sm mb-3" (click)="addLectures(sectionIndex)">
-        + Add Lecture
-      </button>
-    </div>
-
-    <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeSections(sectionIndex)" *ngIf="sections.length > 1">
-      Remove Section
-    </button>
-  </div>
-
-  <button type="button" class="btn btn-outline-success btn-sm mt-3" (click)="addSections()">
-    + Add Section
-  </button>
+<div class="mb-3">
+  <label class="form-label fw-semibold">Section Title</label>
+  <input
+    formControlName="sectionTitle"
+    class="form-control"
+    [ngClass]="{ 'is-invalid': section.get('sectionTitle')?.invalid && section.get('sectionTitle')?.touched }"
+    placeholder="e.g., Introduction"
+  />
+  <small class="text-danger" *ngIf="section.get('sectionTitle')?.invalid && section.get('sectionTitle')?.touched">
+    Section title is required.
+  </small>
 </div>
 
 
-                <div class="card  rounded-0">
-                  <div class="card-body bg-body-secondary">
-                    <p style="font-size: 14px;">Section 1: Introduction</p>
+          <!-- Lectures -->
+          <div formArrayName="lectures">
+            <div *ngFor="let lecture of lectures(sectionIndex).controls; let lectureIndex = index"
+                 [formGroupName]="lectureIndex"
+                 class="lecture-card">
 
-                    <div class="p-3" style="margin-top: -10px;">
-                      <div class="card rounded-0">
-
-
-
-
-
-                        <div class="card-body">
-                          <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                              <p class="mb-0" style="font-size: 14px;">Lecture 1: Introduction</p>
-                            </div>
-                            <div class="d-flex justify-content-between gap-3">
-                              <button class="btn btn-outline-primary btn-sm rounded-0"> <span style="font-size: 18px;">+ </span> Content</button>
-                              <button class="btn btn-outline-primary btn-sm rounded-0"> <span style="font-size: 18px;">+ </span> Resources</button>
-                            </div>
-                          </div>
-
-                          <!-- Content -->
-                          <div class="table-responsive mb-5 mt-3">
-                            <table class="table  table-hover  shadow-sm" style="font-size: 14px;">
-                              <thead class="table-light ">
-                                <tr>
-                                  <th scope="col" style="width: 15%;">File</th>
-                                  <th scope="col" style="width: 15%;">File Name</th>
-                                  <th scope="col" style="width: 10%;">Type</th>
-                                  <th scope="col" style="width: 15%;">Status</th>
-                                  <th scope="col" style="width: 10%;">Date</th>
-                                  <th scope="col" style="width: 10%;">Actions</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    <video src="https://res.cloudinary.com/dpp8aspqs/video/upload/v1743489729/cg-spectrum-institute-hompage-header-02_e9fwxo.mp4" style="height: 80px; width: 150px;"  autoplay muted loop playsinline>
-                                      Your browser does not support the video tag.
-                                    </video>
-                                  </td>
-                                  <td>cg-spectrum-institute-hompage-header-02_e9fwxo </td>
-                                  <td>Game development</td>
-                                  <td>Success</td>
-                                  <td>06-05-2025</td>
-                                  <td>
-                                    <div class="d-flex justify-content-center gap-3">
-                                      <i class="bi bi-pencil-square text-info" style="font-size: 1.2rem;"></i>
-                                      <i class="bi bi-trash text-danger"  style="font-size: 1.2rem;"></i>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <iframe  src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1747126209/4f1bdcb1-1b40-4d62-acb8-ccaf33010e2f_d2c6f751-4703-4a51-a27c-d9d5955caaa3_fl9360.pdf" class="card-img-top" style="width: 200px; height: 200px;" frameborder="0"></iframe>
-                                  </td>
-                                  <td>4f1bdcb1-1b40-4d62-acb8-ccaf33010e2f_40ac2e65-a8f9-4400-b18b-ebe8e7ac07bf.pdf </td>
-                                  <td>Game development</td>
-                                  <td>Success</td>
-                                  <td>06-05-2025</td>
-                                  <td>
-                                    <div class="d-flex justify-content-center gap-3">
-                                      <i class="bi bi-pencil-square text-info" style="font-size: 1.2rem;"></i>
-                                      <i class="bi bi-trash text-danger"  style="font-size: 1.2rem;"></i>
-                                    </div>
-                                  </td>
-                                </tr>
-
-
-                              </tbody>
-                            </table>
-
-                          </div>
-
-
-                        </div>
-
-
-
-
-
-
-                      </div>
-                    </div>
-
-                  </div>
-
-
-
-                </div>
+              <div class="mb-2">
+                <label class="form-label">Lecture Title</label>
+<input formControlName="lectureTitle" class="form-control"
+       [ngClass]="{ 'is-invalid': lecture.get('lectureTitle')?.invalid && lecture.get('lectureTitle')?.touched }"
+       placeholder="e.g., What is Full Stack?" />
+<small class="text-danger" *ngIf="lecture.get('lectureTitle')?.invalid && lecture.get('lectureTitle')?.touched">
+  Lecture title is required.
+</small>
 
               </div>
 
+              <div class="mb-2">
+                <label class="form-label">Lecture Description</label>
+<textarea formControlName="lectureDescription" class="form-control" rows="3"
+          [ngClass]="{ 'is-invalid': lecture.get('lectureDescription')?.invalid && lecture.get('lectureDescription')?.touched }"
+          placeholder="Brief summary of lecture..."></textarea>
+<small class="text-danger" *ngIf="lecture.get('lectureDescription')?.invalid && lecture.get('lectureDescription')?.touched">
+  Lecture description is required.
+</small>
 
-                    <div class="container mb-5">
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-sm btn-outline-secondary px-4  poppins-medium" (click)="previous()">Back</button>
-          <button type="submit" class="btn btn-sm btn-outline-primary px-4  poppins-medium">Save</button>
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">Lecture Content Link</label>
+<input formControlName="lectureContent" class="form-control"
+       [ngClass]="{ 'is-invalid': lecture.get('lectureContent')?.invalid && lecture.get('lectureContent')?.touched }"
+       placeholder="Link or short content" />
+<small class="text-danger" *ngIf="lecture.get('lectureContent')?.invalid && lecture.get('lectureContent')?.touched">
+  Lecture content is required.
+</small>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Lecture Resources</label>
+                <input formControlName="lectureResources" class="form-control"
+       [ngClass]="{ 'is-invalid': lecture.get('lectureResources')?.invalid && lecture.get('lectureResources')?.touched }"
+       placeholder="e.g., PDF or notes link" />
+<small class="text-danger" *ngIf="lecture.get('lectureResources')?.invalid && lecture.get('lectureResources')?.touched">
+  Lecture resources are required.
+</small>
+
+              </div>
+
+              <button type="button" class="btn btn-sm btn-outline-danger rounded-0 px-3"
+                      (click)="removeLectures(sectionIndex, lectureIndex)" *ngIf="lectures(sectionIndex).length > 1">
+                Remove Lecture
+              </button>
+            </div>
+
+            <button type="button" class="btn btn-sm btn-outline-primary mt-3 px-3"
+                    (click)="addLectures(sectionIndex)">
+              + Add Lecture
+            </button>
+          </div>
+
+          <!-- Remove Section -->
+          <button type="button" class="btn btn-sm btn-outline-danger mt-3 px-3"
+                  (click)="removeSections(sectionIndex)" *ngIf="sections.length > 1">
+            Remove Section
+          </button>
+        </div>
+
+        <!-- Add Section -->
+        <div class="text-end">
+          <button type="button" class="btn btn-sm btn-outline-success px-4 mt-2" (click)="addSections()">
+            + Add Section
+          </button>
         </div>
       </div>
 
 
-            </div>
+      <!-- Save Button -->
+      <div class="d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-4 poppins-medium" (click)="previous()">Back</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary px-4 poppins-medium">Save</button>
+      </div>
+    </div>
+  </div>
 </form>
+
+
+
+
+
+
+      <!-- Video & PDF Table Preview (optional / demo section) -->
+      <div class="card border-0 rounded-0 mt-5">
+        <div class="card-body bg-body-secondary">
+          <p class="fw-semibold mb-3">Section Preview</p>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+              <thead class="table-light">
+                <tr style="font-size: 14px;">
+                  <th>Preview</th>
+                  <th>File Name</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody style="font-size: 14px;">
+                <tr>
+                  <td>
+                    <video width="150" height="80" autoplay muted loop playsinline>
+                      <source src="https://res.cloudinary.com/dpp8aspqs/video/upload/v1743489729/cg-spectrum-institute-hompage-header-02_e9fwxo.mp4" />
+                    </video>
+                  </td>
+                  <td>Intro Video</td>
+                  <td>Video</td>
+                  <td><span class="text-success">Uploaded</span></td>
+                  <td>06-05-2025</td>
+                  <td>
+                    <i class="bi bi-pencil-square text-info me-2" style="font-size: 1.2rem;"></i>
+                    <i class="bi bi-trash text-danger" style="font-size: 1.2rem;"></i>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <iframe src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1747126209/sample.pdf"
+                            width="150" height="80" frameborder="0"></iframe>
+                  </td>
+                  <td>Sample PDF</td>
+                  <td>Document</td>
+                  <td><span class="text-success">Uploaded</span></td>
+                  <td>06-05-2025</td>
+                  <td>
+                    <i class="bi bi-pencil-square text-info me-2" style="font-size: 1.2rem;"></i>
+                    <i class="bi bi-trash text-danger" style="font-size: 1.2rem;"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>

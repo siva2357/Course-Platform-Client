@@ -36,47 +36,49 @@ export class CoursePricePageComponent implements OnInit{
     this.coursePriceDetails = this.fb.group({
       currency: ['', Validators.required],
       pricingTier: ['', Validators.required],
-      amount: ['', Validators.required],
+  amount: ['', [Validators.required, Validators.min(1)]] // ✅ this is essential
     });
   }
 
-  postCoursePrice() {
-    if (this.coursePriceDetails.invalid) {
-      this.coursePriceDetails.markAllAsTouched();
-      this.errorMessage = 'Please fill in all required fields correctly.';
-      return;
-    }
-
-    const formValue = this.coursePriceDetails.getRawValue();
-
-    const courseData: Price = {
-      currency: formValue.currency,
-      pricingTier: formValue.pricingTier,
-      amount: formValue.amount, // fixed typo
-    };
-
-    this.isUpdating = true;
-    this.errorMessage = '';
-    this.successMessage = '';
-
-    this.courseService.postCoursePrice(this.courseId, courseData).subscribe({
-      next: () => {
-        this.successMessage = 'Profile updated successfully.';
-        setTimeout(() => {
-          this.coursePriceDetails.markAsPristine();
-          this.coursePriceDetails.markAsUntouched();
-        });
-
-        this.isUpdating = false;
-        this.router.navigate([`instructor/course/${this.courseId}/create/publish-your-page`,]);
-      },
-      error: (err) => {
-        console.error('Update failed:', err);
-        this.errorMessage = 'Failed to update profile. Please try again later.';
-        this.isUpdating = false;
-      },
-    });
+postCoursePrice() {
+  if (this.coursePriceDetails.invalid) {
+    this.coursePriceDetails.markAllAsTouched();
+    this.errorMessage = 'Please fill in all required fields correctly.';
+    return;
   }
+
+  const formValue = this.coursePriceDetails.getRawValue();
+
+  const courseData: Price = {
+    currency: formValue.currency,
+    pricingTier: formValue.pricingTier,
+    amount: formValue.amount,
+  };
+
+  this.isUpdating = true;
+  this.isLoading = true; // 👈 add this
+  this.errorMessage = '';
+  this.successMessage = '';
+
+  this.courseService.postCoursePrice(this.courseId, courseData).subscribe({
+    next: () => {
+      this.successMessage = 'Profile updated successfully.';
+      setTimeout(() => {
+        this.coursePriceDetails.markAsPristine();
+        this.coursePriceDetails.markAsUntouched();
+      });
+      this.isUpdating = false;
+      this.isLoading = false; // 👈 stop spinner
+      this.router.navigate([`instructor/course/${this.courseId}/create/publish-your-page`]);
+    },
+    error: (err) => {
+      console.error('Update failed:', err);
+      this.errorMessage = 'Failed to update profile. Please try again later.';
+      this.isUpdating = false;
+      this.isLoading = false; // 👈 stop spinner
+    },
+  });
+}
 
   loadCoursePrice() {
   this.courseService.getCoursePrice(this.courseId).subscribe({
