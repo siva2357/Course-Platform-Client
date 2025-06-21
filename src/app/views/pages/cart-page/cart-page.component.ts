@@ -75,5 +75,8 @@ proceedToCheckout() {
   this.router.navigate(['/checkout']);
 }
 
+    goToHome(){
+      this.router.navigate([`/student`]);
+    }
 
 }
