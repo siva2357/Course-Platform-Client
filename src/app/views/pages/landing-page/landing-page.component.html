@@ -1,142 +1,34 @@
 <app-app-header></app-app-header>
 
-
-<div class="container-fluid col-xxl-8 p-5">
-  <div class="row flex-lg-row-reverse align-items-center g-5 p-5  mb-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169962/12145601_Wavy_Edu-04_Single-05_f7arfo.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-    </div>
+<!-- HERO SECTION -->
+<div class="container-fluid bg-white p-5 mt-5">
+  <div class="row align-items-center g-5">
     <div class="col-lg-6">
-      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
-      <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-<!-- Hero section -->
-<div class="container-fluid bg-dark text-secondary  p-5 text-center">
-  <div class="py-5 mt-5 mb-5">
-    <h1 class="display-5 fw-regular text-white">Start your creative <br>journey with confidence</h1>
-    <div class="col-lg-12 ">
-      <p class="fs-5 mb-4 mt-3" style="text-align: center;">
-        Certified. Authorized. Accredited. Creative hub's courses are vetted and validated by industry professionals, top studios, and academic accrediting bodies to ensure they meet the latest industry standards. With direct input from experts actively working in the creative industries, our courses stay relevant, practical, and aligned with real-world job requirements.
+      <h1 class="display-4 fw-bold text-dark mb-4">Accelerate Your Career with Industry-Aligned Courses</h1>
+      <p class="lead text-secondary">
+        Learn from certified mentors, master in-demand skills, and earn credentials that matter.
       </p>
+      <div class="mt-4">
+        <button class="btn btn-primary btn-lg px-4 me-3">Get Started</button>
+        <button class="btn btn-outline-secondary btn-lg px-4">Browse Courses</button>
+      </div>
     </div>
-
+    <div class="col-lg-6 text-center">
+      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169962/12145601_Wavy_Edu-04_Single-05_f7arfo.jpg" class="img-fluid rounded" alt="Learning Hero Image" width="700" />
+    </div>
   </div>
 </div>
 
 
 
-<div class="container-fluid p-5 bg-body-secondary">
-
-  <!-- DEGREES & DIPLOMA-->
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-12 col-md-8 mx-auto">
-        <h3 class="fw-semibold">All the skills you need in one place</h3>
-        <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the
-          creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-
-      </div>
-    </div>
-  </section>
-
-
-
-
-
-  <div class="mb-4 d-block d-md-none">
-    <select class="form-select" style="font-size: 14px;" [(ngModel)]="selectedCategory"
-      (change)="onCategoryChange(selectedCategory)">
-
-      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.label }}</option>
-    </select>
-  </div>
-
-
-
-  <!-- Tabs for desktop -->
-  <ul class="nav nav-tabs  d-none d-md-flex">
-    <li class="nav-item" *ngFor="let cat of categories">
-      <a class="nav-link" [class.active]="selectedCategory === cat.id" (click)="onCategoryChange(cat.id)"
-        style="cursor: pointer;">
-        {{ cat.label }}
-      </a>
-    </li>
-  </ul>
-
-  <div class="tab-content mt-3">
-    <div class="tab-pane fade show active" *ngFor="let cat of categories" [hidden]="selectedCategory !== cat.id">
-      <div class="album mt-5 ">
-        <!-- Carousel -->
-        <div class="position-relative">
-          <div [id]="'carousel-' + cat.id" class="carousel slide mb-6 " data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item" *ngFor="let slide of getCarouselSlides(cat.id); let i = index"
-                [class.active]="i === 0">
-                <div class="row">
-                  <div class="col-md-3" *ngFor="let course of slide">
-                    <div class="card shadow-sm " style="width: 300px;">
-                      <img [src]="course.imageUrl" class="card-img-top" [alt]="course.title"
-                        style="object-fit: cover;">
-                      <div class="card-body">
-                        <h5>{{ course.title }}</h5>
-                        <p class="card-text">{{ course.description }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="goToCoursePage()">View more</button>
-                          <small class="text-body-secondary">{{ course.time }}</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel-' + cat.id"
-              data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel-' + cat.id"
-              data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-
-
-          </div>
-        </div>
-
-
-
-      </div>
-
-    </div>
-  </div>
-
-
-
-  <div class="col mt-5 d-flex justify-content-center">
-    <a href="courses">
-    <button class="btn btn-outline-primary px-4 py-3 text-center">
-      BROWSE ALL COURSES
-    </button>
-  </a>
-  </div>
-
+<!-- MISSION STATEMENT -->
+<div class="container-fluid bg-dark text-white text-center p-5">
+  <h2 class="fw-bold mb-3 mt-5">Start Your Creative Journey With Confidence</h2>
+  <p class="lead mb-5">
+        Certified. Authorized. Accredited. Creative hub's courses are vetted and validated by industry professionals, top studios, and academic accrediting bodies to ensure they meet the latest industry standards. With direct input from experts actively working in the creative industries, our courses stay relevant, practical, and aligned with real-world job requirements.
+  </p>
 </div>
+
 
 
 <section id="feature-section">
@@ -210,24 +102,93 @@
 
 
 
-<div class="container-fluid col-xxl-8 p-5">
-  <div class="row flex-lg-row-reverse align-items-center g-5 p-5 mt-5 mb-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744170029/26196026_top_management_15_qdqj4g.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-    </div>
-    <div class="col-lg-6">
-      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
-      <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+<!-- CATEGORIES & COURSES -->
+<div class="container-fluid p-5 bg-body-tertiary">
+  <section class="text-center mb-5">
+    <h3 class="fw-bold">All the Skills You Need In One Place</h3>
+    <p class="text-secondary">Explore by category and find the right course for your goals.</p>
+  </section>
+
+  <!-- Tabs (Desktop) -->
+  <ul class="nav nav-tabs justify-content-center d-none d-md-flex">
+    <li class="nav-item" *ngFor="let cat of categories">
+      <a class="nav-link" [class.active]="selectedCategory === cat.id" (click)="onCategoryChange(cat.id)" style="cursor: pointer;">
+        {{ cat.label }}
+      </a>
+    </li>
+  </ul>
+
+  <!-- Dropdown (Mobile) -->
+  <div class="mb-4 d-md-none">
+    <select class="form-select" [(ngModel)]="selectedCategory" (change)="onCategoryChange(selectedCategory)">
+      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.label }}</option>
+    </select>
+  </div>
+
+  <!-- Category-wise Carousel -->
+  <div *ngFor="let cat of categories" [hidden]="selectedCategory !== cat.id">
+    <div class="container mt-4 position-relative">
+      <div [id]="'carousel-' + cat.id" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+          <!-- Each slide (group of 4 cards) -->
+          <div *ngFor="let slide of getCarouselSlides(cat.id); let i = index" class="carousel-item" [class.active]="i === 0">
+            <div class="row justify-content-center">
+              <div class="col-md-3 mb-4" *ngFor="let course of slide">
+                <div class="card h-100 shadow border-0">
+                  <img [src]="course.imageUrl" class="card-img-top" alt="Course Image" style="object-fit: cover; height: 180px;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">{{ course.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <button class="btn btn-sm btn-outline-primary" (click)="goToCoursePage()">View More</button>
+                      <span class="small text-muted">{{ course.time }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel-' + cat.id" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel-' + cat.id" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
+  </div>
+
+  <!-- Browse All CTA -->
+  <div class="text-center mt-5 d-flex flex-column flex-md-row justify-content-center gap-3">
+    <a href="courses">
+      <button class="btn btn-outline-primary btn-lg px-4 py-3">Browse All Courses</button>
+    </a>
+    <a href="signup">
+      <button class="btn btn-primary btn-lg px-4 py-3">Sign Up</button>
+    </a>
   </div>
 </div>
 
 
-
-
+<!-- CLOSING SECTION -->
+<div class="container-fluid bg-light p-5">
+  <div class="row align-items-center g-5">
+    <div class="col-lg-6">
+      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744170029/26196026_top_management_15_qdqj4g.jpg" class="img-fluid rounded" alt="Mentorship Image">
+    </div>
+    <div class="col-lg-6">
+      <h2 class="fw-bold">Guided by Experts. Built for You.</h2>
+      <p class="lead">We empower learners to achieve success with real-world training, expert mentoring, and personalized feedback.</p>
+      <button class="btn btn-primary btn-lg mt-3">Explore Programs</button>
+    </div>
+  </div>
+</div>
 
 <app-app-footer></app-app-footer>

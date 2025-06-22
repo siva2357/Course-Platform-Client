@@ -232,19 +232,21 @@ export class LandingPageComponent {
     this.router.navigateByUrl(`courses/courseName`);
 
   }
-  getCarouselSlides(categoryId: string): any[][] {
-    let filteredCourses = this.courses;
+// ✅ Fix this function — make sure it refers to `this.courses`
+getCarouselSlides(categoryId: string): any[][] {
+  const filtered = categoryId === 'all'
+    ? this.courses
+    : this.courses.filter(course => course.category === categoryId);
 
-    if (categoryId !== 'all') {
-      filteredCourses = this.courses.filter(course => course.category === categoryId);
-    }
+  const grouped: any[][] = [];
 
-    const slides: any[][] = [];
-    for (let i = 0; i < filteredCourses.length; i += 4) {
-      slides.push(filteredCourses.slice(i, i + 4));
-    }
-    return slides;
+  for (let i = 0; i < filtered.length; i += 4) {
+    grouped.push(filtered.slice(i, i + 4));
   }
+
+  return grouped;
+}
+
 
 
 }
