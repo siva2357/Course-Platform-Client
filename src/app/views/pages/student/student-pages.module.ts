@@ -26,6 +26,7 @@ import { CoursePageDetailsComponent } from './course-page-details/course-page-de
 import { StudentAccomplishmentsComponent } from './student-accomplishments/student-accomplishments.component';
 import { StudentCourseLearningComponent } from './student-course-learning/student-course-learning.component';
 import { ReplacePipe } from 'src/app/core/pipes/replace.pipe';
+import { SafeUrlPipe } from 'src/app/core/pipes/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ReplacePipe } from 'src/app/core/pipes/replace.pipe';
     CoursePageDetailsComponent,
     StudentAccomplishmentsComponent,
     StudentCourseLearningComponent,
-         ReplacePipe
+         ReplacePipe,
+          SafeUrlPipe
   ],
   imports: [
     CommonModule,

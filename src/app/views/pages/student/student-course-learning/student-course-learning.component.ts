@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/core/services/course.service';
 import { Course } from 'src/app/core/models/course.model';
-
 @Component({
   selector: 'app-student-course-learning',
   templateUrl: './student-course-learning.component.html',
@@ -39,6 +38,10 @@ openedLectureIndices: { [sectionIndex: number]: number | null } = {};
       this.loadCourseProgress();
     });
   }
+
+
+
+
 
 loadCourseProgress(callback?: () => void): void {
     this.courseService.getCourseProgress(this.courseId).subscribe(progress => {
