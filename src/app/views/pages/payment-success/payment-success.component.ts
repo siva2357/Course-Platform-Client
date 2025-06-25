@@ -15,37 +15,35 @@ export class PaymentSuccessComponent implements OnInit {
 
   constructor(private paymentService: PaymentService) {}
 
+
   ngOnInit() {
-    // Load selected purchase from service
-    const purchase = this.paymentService.getSelectedProductForCheckout();
+  const purchase = this.paymentService.getSelectedProductForCheckout();
 
-    if (purchase) {
-      const courseId = purchase.courseId;
-      const orderId = purchase.orderId;
+  if (purchase?.courseId) {
+    console.log('Loaded from localStorage:', purchase);
 
-      console.log('Loaded from localStorage:', purchase);
-
-      if (courseId) {
-        this.paymentService.getAllPurchasesByCourse(courseId).subscribe({
-          next: data => {
-            this.coursePurchases = data;
-            console.log('Course purchases:', data);
-          },
-          error: err => console.error('Failed to load course purchases:', err)
-        });
-      }
-    }
-
-    // ✅ Corrected: Extract only `data` array from summary API
-    this.paymentService.getPurchaseSummary().subscribe({
-      next: res => {
-        this.summaryData = res.data || []; // avoid runtime error
-        console.log('Purchase Summary:', this.summaryData);
+    this.paymentService.getAllCoursesPurchased().subscribe({
+      next: data => {
+        this.coursePurchases = data.items || [];
+        console.log('✅ Course purchases loaded:', this.coursePurchases);
       },
       error: err => {
-        console.error('Failed to load summary:', err);
-        this.summaryData = [];
+        console.error('❌ Failed to load course purchases:', err);
+        this.coursePurchases = [];
       }
     });
   }
+
+  this.paymentService.getPurchaseSummary().subscribe({
+    next: res => {
+      this.summaryData = res.data || [];
+      console.log('✅ Purchase Summary:', this.summaryData);
+    },
+    error: err => {
+      console.error('❌ Failed to load summary:', err);
+      this.summaryData = [];
+    }
+  });
+}
+
 }

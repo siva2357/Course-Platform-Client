@@ -21,7 +21,7 @@ ngOnInit() {
 }
 
 loadCourses() {
-  this.courseService.getAllCourses().subscribe((res) => {
+  this.courseService.getPublishedCourses().subscribe((res) => {
     this.courses = res.courses; // or res.items depending on your API
   });
 }

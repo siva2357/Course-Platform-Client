@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Purchase } from 'src/app/core/models/purchase.model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { PaymentService } from 'src/app/core/services/payment.service';
 
 @Component({
   selector: 'app-instructor-transaction-page',
@@ -15,6 +19,61 @@ pageNumbers: number[] = [];
 allPayments: any[] = []; // Replace with your actual data type
 
 paginatedData: any[] = []; // Replace with your actual data type
+    public  userId!: string;
+public userRole: string | null = null;
+
+   public errorMessage: string | null = null;
+
+
+  constructor( public router:Router, public paymentService:PaymentService, private authService: AuthService,){
+
+  }
+
+
+        ngOnInit(): void {
+        // Get the userId and role from localStorage or AuthService
+        this.userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+        const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
+         this.userRole = localStorage.getItem('userRole');
+        if (this.userId && role) {
+           if (role === 'instructor') {
+               this.fetchCoursePayments();
+
+
+          }else {
+            this.errorMessage = 'Invalid role.';
+          }
+        } else {
+          this.errorMessage = 'User ID or Role is not available.';
+        }
+      }
+
+
+
+
+
+fetchCoursePayments(): void {
+  this.paymentService.getInstructorCoursesRevenue().subscribe({
+    next: (response: { total: number; data: any[] }) => {
+      this.allPayments = response.data.map((item: any) => ({
+        courseName: item.courseTitle,
+        collections: item.totalPayments,
+        refunds: item.totalRefunds,
+        revenue: item.netRevenue,
+        orders: item.totalOrders
+      }));
+      this.updatePagination(); // If you're using pagination logic
+    },
+    error: (error) => {
+      console.error('Error fetching instructor revenue:', error);
+      this.errorMessage = error.message || 'Failed to load revenue data.';
+    }
+  });
+}
+
+
+
+
 
 updatePagination() {
   // slice logic to calculate paginatedData based on itemsPerPage and currentPage

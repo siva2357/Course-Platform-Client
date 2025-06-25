@@ -1,6 +1,9 @@
 import { Component} from '@angular/core';
 import { PaymentService } from 'src/app/core/services/payment.service';
 import { Purchase } from 'src/app/core/models/purchase.model';
+import { Router } from '@angular/router';
+import { CourseService } from 'src/app/core/services/course.service';
+import { Course } from 'src/app/core/models/course.model';
 
 
 @Component({
@@ -9,8 +12,22 @@ import { Purchase } from 'src/app/core/models/purchase.model';
   styleUrls: ['./student-my-courses.component.css']
 })
 export class StudentMyCoursesComponent  {
+  constructor(public router:Router, public courseService:CourseService){}
 
-  constructor() {}
+courses: Course[] = []; // Make sure this is defined
+
+  ngOnInit() {
+  this.loadCourses();
+}
+
+loadCourses() {
+  this.courseService.getPurchasedCourses().subscribe((res) => {
+    this.courses = res.courses; // or res.items depending on your API
+  });
+}
+
+
+
 
 public myCourses: any[] = [
   {

@@ -50,6 +50,7 @@ ngOnInit(): void {
   if (this.userId && role) {
     if (role === 'student') {
       this.getStudentDetails();
+      this.loadCartItems(); // 🔁 Only students need this
     } else if (role === 'instructor') {
       this.getInstructorDetails();
     } else {
@@ -59,21 +60,23 @@ ngOnInit(): void {
     this.errorMessage = 'User ID or Role is not available.';
   }
 
-  // 🔁 Update cart on route change (fixes stale count on navigation)
+  // 🔁 Listen for route changes
   this.router.events
     .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe(() => {
-      this.loadCartItems();
+      if (this.userRole === 'student') {
+        this.loadCartItems();
+      }
     });
 
-  // 🔔 Update cart manually when triggerCartUpdate() is called
+  // 🔔 Manual cart refresh trigger
   this.courseService.cartUpdated$.subscribe(() => {
-    this.loadCartItems();
+    if (this.userRole === 'student') {
+      this.loadCartItems();
+    }
   });
-
-  // 🔄 Initial cart load
-  this.loadCartItems();
 }
+
 
 
 

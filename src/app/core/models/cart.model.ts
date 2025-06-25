@@ -11,10 +11,11 @@ export interface CartItem {
 
 export interface WishList {
   _id: string;
-  courseId: string; // 👈 add this
+  courseId: string;
   courseTitle: string;
   courseCategory: string;
   courseThumbnail: string;
   courseDescription: string;
   amount: number;
 }
+

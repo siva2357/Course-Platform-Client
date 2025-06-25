@@ -35,13 +35,13 @@ export class StudentAccomplishmentsComponent  implements OnInit {
   ngOnInit(): void {
     this.studentId = localStorage.getItem('userId') || this.authService.getUserId() || '';
     this.fullName = this.authService.getFullName() || '';
-    this.courseId = '68539fa6bc72b327d59fcb08'; // ✅ Replace with dynamic route param later
+    this.courseId = '685a76c5167f7b376541ee07'; // ✅ Replace with dynamic route param later
 
-    this.fetchCourseProgress();
+    this.completedCourseDetails();
   }
 
-  fetchCourseProgress(): void {
-    this.courseService.getCourseProgress(this.courseId).subscribe({
+  completedCourseDetails(): void {
+    this.courseService.getCertifiedCourseDetails(this.courseId).subscribe({
       next: (res) => {
         this.courseTracking = res;
         this.isCourseCompleted = this.courseTracking.isCourseCompleted;
@@ -52,6 +52,10 @@ export class StudentAccomplishmentsComponent  implements OnInit {
       }
     });
   }
+
+
+
+
 
   downloadCertificate(): void {
     const studentName = 'this.fullName';
