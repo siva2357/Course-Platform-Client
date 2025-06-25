@@ -14,58 +14,47 @@
     <button class="btn btn-outline-secondary px-4" style="font-size: 14px;" >Reset</button>
   </div>
 
-  <!-- 📋 Table -->
+
   <div class="table-responsive mb-4">
-    <table class="table table-hover text-center align-middle shadow-sm" style="font-size: 14px;">
-      <thead class="table-light">
-        <tr>
-          <th style="width: 5%;">S.No</th>
-          <th style="width: 20%;">Learner Name</th>
-          <th style="width: 20%;">Email</th>
-          <th style="width: 20%;">Status</th>
-          <th style="width: 15%;">Started On</th>
-          <th style="width: 15%;">Completed On</th>
-        </tr>
-      </thead>
+  <table class="table table-hover text-center align-middle shadow-sm" style="font-size: 14px;">
+    <thead class="table-light">
+      <tr>
+        <th style="width: 5%;">S.No</th>
+        <th style="width: 20%;">Learner Name</th>
+        <th style="width: 20%;">Email</th>
+        <th style="width: 20%;">Status</th>
+        <th style="width: 15%;">Started On</th>
+        <th style="width: 15%;">Completed On</th>
+      </tr>
+    </thead>
 
-      <tbody *ngIf="paginatedData.length > 0">
-        <tr *ngFor="let student of paginatedData; let i = index">
-          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-          <td>{{ student.name }}</td>
-          <td>{{ student.email }}</td>
-          <td>
-            <span [ngClass]="{
-              'badge bg-warning': student.status === 'In Progress',
-              'badge bg-success': student.status === 'Completed',
-              'badge bg-info': student.status === 'Certified'
-            }">
-              {{ student.status }}
-            </span>
-          </td>
-          <td>{{ student.startedOn | date: 'dd-MM-yyyy' }}</td>
-          <td>{{ student.completedOn | date: 'dd-MM-yyyy' }}</td>
-        </tr>
-      </tbody>
+    <tbody *ngIf="paginatedData.length > 0">
+      <tr *ngFor="let student of paginatedData; let i = index">
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+        <td>{{ student.studentName }}</td>
+        <td>{{ student.studentEmail }}</td>
+        <td>
+          <span [ngClass]="{
+            'badge bg-info': student.status === 'Certified',
+            'badge bg-success': student.status === 'Completed',
+            'badge bg-warning text-dark': student.status === 'In Progress'
+          }">
+            {{ student.status }}
+          </span>
+        </td>
+        <td>{{ student.startedOn | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ student.completedOn | date: 'dd-MM-yyyy' }}</td>
+      </tr>
+    </tbody>
 
+    <tbody *ngIf="paginatedData?.length === 0">
+      <tr>
+        <td colspan="6" class="text-center text-muted py-4">No learners enrolled yet.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-        <tbody>
-            <tr>
-              <td>1</td>
-              <td>Game development</td>
-              <td>Game123gmail.com</td>
-              <td>In progress/ Certified / completed</td>
-              <td>06-05-2025</td>
-              <td>10-05-2025 </td>
-            </tr>
-          </tbody>
-
-      <tbody *ngIf="paginatedData?.length === 0">
-        <tr>
-          <td colspan="6" class="text-center text-muted poppins-medium py-4">No data to display.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
   <!-- 📊 Pagination Controls -->
   <div class="row align-items-center mb-3 p-3 border rounded shadow-sm bg-light">

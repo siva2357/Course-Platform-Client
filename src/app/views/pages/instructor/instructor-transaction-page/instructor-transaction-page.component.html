@@ -11,44 +11,40 @@
   </div>
 
   <!-- Table -->
-  <div class="table-responsive mb-4">
-    <table class="table table-hover align-middle text-center shadow-sm" style="font-size: 14px;">
-      <thead class="table-light">
-        <tr>
-          <th style="width: 5%;">S.No</th>
-          <th style="width: 25%;">Course Name</th>
-          <th style="width: 20%;">Collections</th>
-          <th style="width: 20%;">Refunds</th>
-          <th style="width: 10%;">Orders</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="paginatedData.length > 0">
-        <tr *ngFor="let payment of paginatedData; let i = index">
-          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-          <td>{{ payment.courseName }}</td>
-          <td>{{ payment.collections }} Rupees</td>
-          <td>{{ payment.refunds }} Rupees</td>
-          <td>{{ payment.orders }}</td>
-        </tr>
+<div class="table-responsive mb-4">
+  <table class="table table-hover align-middle text-center shadow-sm" style="font-size: 14px;">
+    <thead class="table-light">
+      <tr>
+        <th style="width: 5%;">S.No</th>
+        <th style="width: 25%;">Course Name</th>
+        <th style="width: 20%;">Collections</th>
+        <th style="width: 20%;">Refunds</th>
+        <th style="width: 10%;">Orders</th>
+        <th style="width: 20%;">Revenue</th>
+      </tr>
+    </thead>
 
-      </tbody>
+    <tbody *ngIf="paginatedData.length > 0">
+      <tr *ngFor="let payment of paginatedData; let i = index">
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+        <td>{{ payment.courseName }}</td>
+        <td>₹{{ payment.collections }}</td>
+        <td>₹{{ payment.refunds }}</td>
+        <td>{{ payment.orders }}</td>
+        <td>₹{{ payment.revenue }}</td>
+      </tr>
+    </tbody>
 
-                <tbody>
-            <tr>
-              <td>1</td>
-              <td>Game development - unreal engine</td>
-              <td>20000 Rupees</td>
-              <td>3000 Rupees</td>
-              <td>20 </td>
-            </tr>
-          </tbody>
-      <tbody *ngIf="paginatedData?.length === 0">
-        <tr>
-          <td colspan="5" class="text-center text-muted py-4 poppins-medium">No data to display.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <tbody *ngIf="paginatedData?.length === 0">
+      <tr>
+        <td colspan="6" class="text-center text-muted py-4 poppins-medium">
+          No data to display.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 
   <!-- Pagination Controls -->

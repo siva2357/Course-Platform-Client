@@ -12,49 +12,52 @@
 
 
 <!-- 🔍 Search & Filter Section -->
-<div class="row g-2 align-items-end mb-4">
+<!-- 🔍 Search & Filter Section -->
+<div class="row g-3 align-items-end mb-4">
 
-    <!-- Search Field -->
+  <!-- 🔎 Search Field -->
   <div class="col-md-4">
     <label class="form-label fw-medium mb-1" style="font-size: 14px;">Search Course</label>
     <input
       type="text"
-      class="form-control form-select-sm shadow-sm"
+      class="form-control form-control-sm shadow-sm"
       [(ngModel)]="searchTerm"
       placeholder="Search by title, category..."
     />
   </div>
 
-  <!-- Search Button -->
+  <!-- 🔍 Search Button -->
   <div class="col-md-2">
-    <label class="form-label fw-medium mb-1" style="font-size: 14px; margin-left: 20px;">&nbsp;</label>
+    <label class="form-label fw-medium mb-1" style="font-size: 14px;">&nbsp;</label>
     <button
-      class="btn btn-outline-primary btn-sm w-50 shadow-sm"
+      class="btn btn-sm btn-outline-primary w-100 shadow-sm"
       (click)="performSearch()"
     >
       Search
     </button>
   </div>
 
-
-  <!-- Reset Button -->
+  <!-- 🔄 Reset Button -->
   <div class="col-md-2">
-    <label class="form-label fw-medium mb-1" style="font-size: 14px; margin-left: -100px;">&nbsp;</label>
+    <label class="form-label fw-medium mb-1" style="font-size: 14px;">&nbsp;</label>
     <button
-      class="btn btn-outline-secondary btn-sm w-50 shadow-sm"
+      class="btn btn-sm btn-outline-secondary w-100 shadow-sm"
       (click)="resetSearch()"
     >
       Reset
     </button>
   </div>
 
-  <!-- New Course Button -->
+  <!-- ➕ New Course Button -->
   <div class="col-md-4 text-md-end">
-    <label class="form-label fw-medium mb-1" style="font-size: 14px;">&nbsp;</label>
-    <button class="btn btn-sm btn-outline-primary  px-3" (click)="createNewCourse()">New Course</button>
-
+    <label class="form-label fw-medium mb-1 d-block" style="font-size: 14px;">&nbsp;</label>
+    <button
+      class="btn btn-sm btn-outline-primary px-4 shadow-sm"
+      (click)="createNewCourse()"
+    >
+      New Course
+    </button>
   </div>
-
 </div>
 
 

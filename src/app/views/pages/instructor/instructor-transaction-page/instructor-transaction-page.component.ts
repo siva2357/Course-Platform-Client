@@ -55,10 +55,14 @@ public userRole: string | null = null;
 fetchCoursePayments(): void {
   this.paymentService.getInstructorCoursesRevenue().subscribe({
     next: (response: { total: number; data: any[] }) => {
-      this.allPayments = response.data.map((purchase: any) => ({
-        ...purchase,
-        id: purchase._id || purchase.id
+      this.allPayments = response.data.map((item: any) => ({
+        courseName: item.courseTitle,
+        collections: item.totalPayments,
+        refunds: item.totalRefunds,
+        revenue: item.netRevenue,
+        orders: item.totalOrders
       }));
+      this.updatePagination(); // If you're using pagination logic
     },
     error: (error) => {
       console.error('Error fetching instructor revenue:', error);
