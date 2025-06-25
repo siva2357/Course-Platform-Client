@@ -76,11 +76,11 @@ export class CourseService {
     .pipe(catchError(this.handleError));
 }
 
-
-    SubmitCourseReview(courseId:string,) {
-    return this.http.patch(`${this.baseUrl}/course/${courseId}/submit`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError));
-  }
+SubmitCourseReview(courseId: string) {
+  return this.http.patch(`${this.baseUrl}/course/${courseId}/submit`, {}, {
+    headers: this.getHeaders()
+  }).pipe(catchError(this.handleError));
+}
 
 
 
@@ -88,7 +88,31 @@ export class CourseService {
 
 
 getAllCourses(): Observable<CoursesResponse> {
-  return this.http.get<CoursesResponse>(`${this.baseUrl}/courses`, { headers: this.getHeaders() })
+  return this.http.get<CoursesResponse>(`${this.baseUrl}/instructor/my-courses`, { headers: this.getHeaders() })
+    .pipe(catchError(this.handleError));
+}
+
+
+getInstructorLearnerReport(): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/instructor/learners/report`, { headers: this.getHeaders() })
+    .pipe(catchError(this.handleError));
+}
+
+
+getInstructorSummaryAnalytics(): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/analytics/summary`, { headers: this.getHeaders() })
+    .pipe(catchError(this.handleError));
+}
+
+
+getInstructorChartAnalytics(): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/analytics/charts`, { headers: this.getHeaders() })
+    .pipe(catchError(this.handleError));
+}
+
+
+getInstructorPurchaseSummary(): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/analytics/recent-purchases`, { headers: this.getHeaders() })
     .pipe(catchError(this.handleError));
 }
 
@@ -110,7 +134,16 @@ getAllCourses(): Observable<CoursesResponse> {
 
 
 
+getPublishedCourses(): Observable<CoursesResponse> {
+  return this.http.get<CoursesResponse>(`${this.baseUrl}/student/courses`, { headers: this.getHeaders() })
+    .pipe(catchError(this.handleError));
+}
 
+
+getPurchasedCourses(): Observable<CoursesResponse> {
+  return this.http.get<CoursesResponse>(`${this.baseUrl}/student/my-courses`, { headers: this.getHeaders() })
+    .pipe(catchError(this.handleError));
+}
 
 
 // Add a course to cart
@@ -179,6 +212,22 @@ generateCertificate(studentName: string, courseTitle: string, issueDate: string)
 }
 
 
+getAllCertifiedCourses(): Observable<any> {
+  return this.http.get<{ total: number, data: any[] }>(
+    `${this.baseUrl}/course/certificate/all`,
+    { headers: this.getHeaders() }
+  );
+}
+
+getCertifiedCourseDetails(courseId: string): Observable<any> {
+  return this.http.get<any>(
+    `${this.baseUrl}/course/certificate/details/${courseId}`,
+    { headers: this.getHeaders() }
+  );
+}
+
+
+
 markLectureCompleted(courseId: string, lectureId: string): Observable<any> {
   return this.http.post(`${this.baseUrl}/course/track/complete`, { courseId, lectureId });
 }
@@ -186,6 +235,9 @@ markLectureCompleted(courseId: string, lectureId: string): Observable<any> {
 getCourseProgress(courseId: string): Observable<any> {
   return this.http.get(`${this.baseUrl}/course/track/progress/${courseId}`);
 }
+
+
+
 
 
 

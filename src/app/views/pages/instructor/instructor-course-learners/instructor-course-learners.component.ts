@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { CourseService } from 'src/app/core/services/course.service';
 
 @Component({
   selector: 'app-instructor-course-learners',
@@ -16,6 +19,59 @@ pageNumbers: number[] = [];
 allPayments: any[] = []; // Replace with your actual data type
 
 paginatedData: any[] = []; // Replace with your actual data type
+
+
+
+    public  userId!: string;
+public userRole: string | null = null;
+
+   public errorMessage: string | null = null;
+
+
+  constructor( public router:Router, public courseService:CourseService, private authService: AuthService,){
+
+  }
+
+
+        ngOnInit(): void {
+        // Get the userId and role from localStorage or AuthService
+        this.userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+        const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
+         this.userRole = localStorage.getItem('userRole');
+        if (this.userId && role) {
+           if (role === 'instructor') {
+               this.fetchInstructorLearnerReport();
+
+
+          }else {
+            this.errorMessage = 'Invalid role.';
+          }
+        } else {
+          this.errorMessage = 'User ID or Role is not available.';
+        }
+      }
+
+
+
+
+
+fetchInstructorLearnerReport(): void {
+  this.courseService.getInstructorLearnerReport().subscribe({
+    next: (response: { total: number; data: any[] }) => {
+      this.allPayments = response.data.map((purchase: any) => ({
+        ...purchase,
+        id: purchase._id || purchase.id
+      }));
+    },
+    error: (error) => {
+      console.error('Error fetching instructor revenue:', error);
+      this.errorMessage = error.message || 'Failed to load revenue data.';
+    }
+  });
+}
+
+
+
 
 updatePagination() {
   // slice logic to calculate paginatedData based on itemsPerPage and currentPage

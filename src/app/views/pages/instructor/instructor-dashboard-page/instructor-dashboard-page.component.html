@@ -2,145 +2,44 @@
   <h5 class="mb-4 mt-5">Overview Analytics</h5>
 
 <div class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-4 g-4">
+  <div class="col" *ngFor="let card of cards">
+    <div
+      class="card border-0 rounded-4 py-3 w-100 h-100"
+      style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);"
+    >
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+          <p class="text-primary mb-0" style="font-size: 12px;">{{ card.title }}</p>
 
-<div class="col">
-<div class="card  border-0 rounded-4 py-3 w-100  h-100" style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);">
-
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-  <p class="text-primary mb-0" style="font-size: 12px;">TOTAL REVENUE</p>
-
-  <div class="dropdown ms-auto">
-    <button class="btn btn-sm btn-outline-primary dropdown-toggle px-3 py-1"
-            type="button" data-bs-toggle="dropdown" aria-expanded="false"
-            style="font-size: 12px;">
-      <span>{{ selectedRevenueRange }}</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end">
-      <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateRevenueRange('Weekly')">Weekly</a></li>
-      <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateRevenueRange('Monthly')">Monthly</a></li>
-      <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateRevenueRange('Yearly')">Yearly</a></li>
-    </ul>
-  </div>
-</div>
-
-
-      <h5 class="text-dark fw-semibold mb-1" style="font-size: 20px;">
-        {{ revenueAmount }}
-      </h5>
-      <p class="text-muted mb-0" style="font-size: 13px;">
-        Earning this {{ selectedRevenueRange.toLowerCase() }}
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="col">
-<div class="card  border-0 rounded-4 py-3 w-100  h-100" style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);">
-
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-        <p class="text-primary mb-0" style="font-size: 12px;">TOTAL REFUNDS</p>
-
-        <div class="dropdown ms-auto">
-          <button class="btn btn-sm btn-outline-primary dropdown-toggle px-3 py-1"
-                  type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                  style="font-size: 12px;">
-            <span>{{ selectedRefundRange }}</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateRefundRange('Weekly')">Weekly</a></li>
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateRefundRange('Monthly')">Monthly</a></li>
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateRefundRange('Yearly')">Yearly</a></li>
-          </ul>
+          <div class="dropdown ms-auto">
+            <button
+              class="btn btn-sm btn-outline-primary dropdown-toggle px-3 py-1"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="font-size: 12px;"
+            >
+             <span>{{ card.getRange() }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Weekly')">Weekly</a></li>
+              <li><a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Monthly')">Monthly</a></li>
+              <li><a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Yearly')">Yearly</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <h5 class="text-dark fw-semibold mb-1" style="font-size: 20px;">
-        {{ refundAmount }}
-      </h5>
-      <p class="text-muted mb-0" style="font-size: 13px;">
-        Earning this {{selectedRefundRange.toLowerCase() }}
-      </p>
+        <h5 class="text-dark fw-semibold mb-1" style="font-size: 20px;">
+          {{ card.getValue() }}
+        </h5>
+       <p class="text-muted mb-0" style="font-size: 13px;">
+  {{ getCardLabel(card.title, card.getRange()) }}
+</p>
+
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
-<div class="col">
-<div class="card  border-0 rounded-4 py-3 w-100  h-100" style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);">
-
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-
-        <p class="text-primary mb-0" style="font-size: 12px;">ACTIVE STUDENTS</p>
-
-        <div class="dropdown ms-auto">
-          <button class="btn btn-sm btn-outline-primary dropdown-toggle px-3 py-1"
-                  type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                  style="font-size: 12px;">
-            <span>{{ selectedStudentRange }}</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateStudentRange('Weekly')">Weekly</a></li>
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateStudentRange('Monthly')">Monthly</a></li>
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateStudentRange('Yearly')">Yearly</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <h5 class="text-dark fw-semibold mb-1" style="font-size: 20px;">
-        {{ studentCount }}
-      </h5>
-      <p class="text-muted mb-0" style="font-size: 13px;">
-        Earning this {{ selectedStudentRange.toLowerCase() }}
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-
-<div class="col">
-<div class="card  border-0 rounded-4 py-3 w-100  h-100" style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);">
-
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-        <p class="text-primary mb-0" style="font-size: 12px;">ALL TIME ORDERS</p>
-
-        <div class="dropdown ms-auto">
-          <button class="btn btn-sm btn-outline-primary dropdown-toggle px-3 py-1"
-                  type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                  style="font-size: 12px;">
-            <span>{{ selectedOrderRange }}</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateOrderRange('Weekly')">Weekly</a></li>
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateOrderRange('Monthly')">Monthly</a></li>
-            <li><a class="dropdown-item" style="font-size: 12px;" (click)="updateOrderRange('Yearly')">Yearly</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <h5 class="text-dark fw-semibold mb-1" style="font-size: 20px;">
-        {{orderCount}}
-      </h5>
-      <p class="text-muted mb-0" style="font-size: 13px;">
-        Earning this {{ selectedOrderRange.toLowerCase() }}
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-    </div>
-
 
 
       <h5 class=" mt-5">Data Analytics</h5>
@@ -191,51 +90,51 @@
 
     <div class="card-body text-primary">
       <div class="table-responsive">
+
         <table class="table table-hover text-center align-middle" style="font-size: 14px;">
-          <thead class="table-light">
-            <tr>
-              <th style="width: 5%;">S.No</th>
-              <th style="width: 10%;">Course ID</th>
-              <th style="width: 10%;">Date</th>
-              <th style="width: 10%;">Status</th>
-              <th style="width: 15%;">Customer</th>
-              <th style="width: 25%;">Course Name</th>
-              <th style="width: 10%;">Cost</th>
-            </tr>
-          </thead>
+  <thead class="table-light">
+    <tr>
+      <th style="width: 5%;">S.No</th>
+      <th style="width: 15%;">Student Name</th>
+      <th style="width: 20%;">Student Email</th>
+      <th style="width: 20%;">Course Title</th>
+      <th style="width: 10%;">Amount</th>
+      <th style="width: 10%;">Status</th>
+      <th style="width: 10%;">Date</th>
+    </tr>
+  </thead>
 
-          <tbody *ngIf="students && students.length > 0; else noRecords">
-            <tr *ngFor="let student of students; index as i">
-              <td>{{ i + 1 }}</td>
-              <td>{{ student.courseId }}</td>
-              <td>{{ student.purchaseDate }}</td>
-
-              <td>
-                <span class="badge" [ngClass]="{
-                'text-bg-success': student.status === 'Paid',
-                'text-bg-danger': student.status === 'Refunded'
+  <tbody *ngIf="recentPurchases.length > 0; else noRecords">
+    <tr *ngFor="let item of recentPurchases; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.studentName }}</td>
+      <td>{{ item.studentEmail }}</td>
+      <td>{{ item.courseTitle }}</td>
+      <td>₹{{ item.amount }}</td>
+      <td>
+        <span class="badge"
+              [ngClass]="{
+                'text-bg-success': item.status === 'Paid',
+                'text-bg-danger': item.status === 'Refunded'
               }">
-                  {{ student.status }}
-                </span>
-              </td>
+          {{ item.status }}
+        </span>
+      </td>
+      <td>{{ item.purchasedAt | date: 'dd-MM-yyyy' }}</td>
+    </tr>
+  </tbody>
 
-              <td>{{ student.customerName }}</td>
-              <td>{{ student.courseName }}</td>
-              <td>₹{{ student.amount }}</td>
-            </tr>
-          </tbody>
+  <ng-template #noRecords>
+    <tbody>
+      <tr>
+        <td colspan="7" class="text-center text-muted py-3">
+          No records available to display.
+        </td>
+      </tr>
+    </tbody>
+  </ng-template>
+</table>
 
-          <!-- No Records Fallback -->
-          <ng-template #noRecords>
-            <tbody>
-              <tr>
-                <td colspan="7" class="text-center text-muted py-3">
-                  No records available to display.
-                </td>
-              </tr>
-            </tbody>
-          </ng-template>
-        </table>
       </div>
     </div>
   </div>

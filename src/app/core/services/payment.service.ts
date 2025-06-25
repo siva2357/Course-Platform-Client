@@ -1,7 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Purchase } from '../models/purchase.model';
-import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, catchError, of, retry } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, Subject, catchError, of, retry, throwError } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
@@ -17,6 +17,18 @@ selectedProductForCheckout: Purchase | null = null;
     private httpClient: HttpClient,
     @Inject(PLATFORM_ID) private platformId: object
   ) {}
+
+
+
+    private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('JWT_Token');
+      if (!token) {
+        console.error("🚨 No token found in localStorage!");
+        return new HttpHeaders();
+      }
+      return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
+
 
 getSelectedProductForCheckout(): Purchase | null {
   if (this.selectedProductForCheckout) {
@@ -81,7 +93,6 @@ storePurchase(purchase: Purchase) {
   return this.httpClient.post(`${this.baseUrl}/purchase/store`, purchase);
 }
 
-
 // ✅ Get purchase by Razorpay Order ID
 getPurchaseByOrderId(orderId: string): Observable<Purchase> {
   return this.httpClient.get<Purchase>(`${this.baseUrl}/purchase/order/${orderId}`);
@@ -92,11 +103,11 @@ getAllPurchasesByCourse(courseId: string): Observable<Purchase[]> {
   return this.httpClient.get<Purchase[]>(`${this.baseUrl}/admin/purchases/course/${courseId}`);
 }
 
-// ✅ Get all purchases made by the logged-in student
+
+
 getAllCoursesPurchased(): Observable<{ total: number, items: Purchase[] }> {
-  return this.httpClient.get<{ total: number, items: Purchase[] }>(
-    `${this.baseUrl}/purchases/courses`
-  );
+  return this.httpClient.get<{ total: number, items: Purchase[] }>(`${this.baseUrl}/student/purchase-history`, { headers: this.getHeaders() })
+    .pipe(catchError(this.handleError));
 }
 
 
@@ -115,6 +126,19 @@ getAllCoursesPurchased(): Observable<{ total: number, items: Purchase[] }> {
   }
 
 
+
+
+getInstructorCoursesRevenue(): Observable<{ total: number, data: any[] }> {
+  return this.httpClient.get<{ total: number, data: any[] }>(
+    `${this.baseUrl}/instructor/revenue`,
+    { headers: this.getHeaders() }
+  ).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
+
   refundPurchase(purchaseId: string): Observable<any> {
   return this.httpClient.patch(`${this.baseUrl}/purchase/${purchaseId}/refund`, {});
 }
@@ -127,6 +151,15 @@ checkCourseAccess(courseId: string): Observable<{ access: boolean }> {
 
 
 
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(() => new Error(errorMessage));
+  }
 
 }
 function _window(): any {
