@@ -13,20 +13,20 @@ import { PaymentService } from 'src/app/core/services/payment.service';
 })
 export class CoursePageDetailsComponent implements OnInit, AfterViewInit {
   @ViewChild('courseVideo') courseVideo!: ElementRef<HTMLVideoElement>;
-  showOverlay: boolean = true;
-courseId!: string;
- courseTitle: string = ''; // must be assigned when data is loaded
-course!: Course;
-isInCart: boolean = false;
-currentUrl: string = '';
-isInWishlist:boolean=false;
-  successMessage!: string;
-  errorMessage!: string;
-  wishlistCourseIds: string[] = [];
-  wishlistItemId: string = '';
-    hasAccess = false;
+public  showOverlay: boolean = true;
+public  courseId!: string;
+public  courseTitle: string = ''; // must be assigned when data is loaded
+public  course!: Course;
+public isInCart: boolean = false;
+public currentUrl: string = '';
+public isInWishlist:boolean=false;
+public   successMessage!: string;
+public   errorMessage!: string;
+public   wishlistCourseIds: string[] = [];
+public   wishlistItemId: string = '';
+public   hasAccess :boolean= false;
 
-   isLoading = false;
+public   isLoading = false;
   constructor(private router: Router, private courseService:CourseService, private route: ActivatedRoute, private paymentService:PaymentService) {}
 
 ngOnInit() {
@@ -45,35 +45,33 @@ ngOnInit() {
 this.courseId = courseId; // ✅ Fix: store it
 
   // Fetch course first
-  this.courseService.getCourseById(courseId).subscribe(course => {
-    this.course = course;
+this.courseService.getCourseById(courseId).subscribe(course => {
+  this.course = course;
 
-    // Check if in cart
-    this.courseService.getFromCart().subscribe(cart => {
-      this.isInCart = cart.items.some(
-        item => item.courseTitle === this.course.landingPage.courseTitle
-      );
-    });
-
-    // Check if in wishlist
-this.courseService.getFromWishlist().subscribe(wishlist => {
-  const item = wishlist.items.find(item => item.courseId?.toString() === courseId);
-  if (item) {
-    this.isInWishlist = true;
-    this.wishlistItemId = item._id;
-  } else {
-    this.isInWishlist = false;
-    this.wishlistItemId = '';
+  const courseTitle = this.course?.landingPage?.courseTitle;
+  if (!courseTitle) {
+    console.warn('landingPage.courseTitle missing');
+    return;
   }
+
+  // ✅ Safe to check cart
+  this.courseService.getFromCart().subscribe(cart => {
+    this.isInCart = cart.items.some(item => item.courseTitle === courseTitle);
+  });
+
+  // ✅ Safe to check wishlist
+  this.courseService.getFromWishlist().subscribe(wishlist => {
+    const item = wishlist.items.find(item => item.courseId?.toString() === courseId);
+    this.isInWishlist = !!item;
+    this.wishlistItemId = item?._id || '';
+  });
+
+  // ✅ Check access
+  this.paymentService.checkCourseAccess(courseId).subscribe(res => {
+    this.hasAccess = res.access;
+  });
 });
 
-
-
-    // ✅ Now check course access
-    this.paymentService.checkCourseAccess(courseId).subscribe(res => {
-      this.hasAccess = res.access;
-    });
-  });
 }
 
 
@@ -196,102 +194,6 @@ goToCourse(): void {
     queryParams: { courseId: this.courseId }
   });
 }
-
-
-
-
-
-courseData = {
-    "landingPage": {
-        "courseTitle": "fwffwfwfwf",
-        "courseCategory": "One",
-        "courseDescription": "<p>fwfwfwfwfwfwfw</p>",
-        "courseThumbnail": "https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp",
-        "coursePreview": "C:\\fakepath\\41830500.jpg"
-    },
-    "coursePlan": {
-        "learningObjectives": [
-            "cadfadadadadad",
-            "daddadada"
-        ],
-        "courseRequirements": [
-            "adadadad",
-            "dadadada"
-        ],
-        "courseLevel": [
-            "adadada",
-            "adadadad"
-        ]
-    },
-    "curriculum": {
-        "sections": [
-            {
-                "sectionTitle": "dadada",
-                "lectures": [
-                    {
-                        "lectureTitle": "dadad",
-                        "lectureDescription": "adadadada",
-                        "lectureContent": "adadadad",
-                        "lectureResources": "adadadad",
-                        "_id": "68539fe7bc72b327d59fcb13"
-                    },
-                    {
-                        "lectureTitle": "dadad",
-                        "lectureDescription": "adadada",
-                        "lectureContent": "adada",
-                        "lectureResources": "dadadada",
-                        "_id": "68539fe7bc72b327d59fcb14"
-                    }
-                ],
-                "_id": "68539fe7bc72b327d59fcb12"
-            },
-            {
-                "sectionTitle": "adada",
-                "lectures": [
-                    {
-                        "lectureTitle": "dadad",
-                        "lectureDescription": "adadada",
-                        "lectureContent": "dadada",
-                        "lectureResources": "dadadadada",
-                        "_id": "68539fe7bc72b327d59fcb16"
-                    },
-                    {
-                        "lectureTitle": "daadad",
-                        "lectureDescription": "adadadad",
-                        "lectureContent": "adad",
-                        "lectureResources": "adadad",
-                        "_id": "68539fe7bc72b327d59fcb17"
-                    }
-                ],
-                "_id": "68539fe7bc72b327d59fcb15"
-            },
-            {
-                "sectionTitle": "adadad",
-                "lectures": [
-                    {
-                        "lectureTitle": "adad",
-                        "lectureDescription": "adadadad",
-                        "lectureContent": "adadad",
-                        "lectureResources": "adadadada",
-                        "_id": "68539fe7bc72b327d59fcb19"
-                    }
-                ],
-                "_id": "68539fe7bc72b327d59fcb18"
-            }
-        ]
-    },
-    "price": {
-        "currency": "1",
-        "pricingTier": "2",
-        "amount": 55555
-    },
-    "_id": "68539fa6bc72b327d59fcb08",
-    "status": "Pending",
-    "createdAt": "2025-06-19T05:27:02.686Z",
-    "updatedAt": "2025-06-19T05:28:19.273Z",
-    "__v": 0
-}
-
 
 
 }

@@ -13,23 +13,27 @@ export class StudentCertificationsComponent {
 
     constructor(public router:Router, public courseService:CourseService){}
 
-  courses: Course[] = []; // Make sure this is defined
+  courses: any[] = []; // Make sure this is defined
 
     ngOnInit() {
     this.loadCertifications();
   }
 
-  loadCertifications() {
-    this.courseService.getAllCertifiedCourses().subscribe((res) => {
-      this.courses = res.courses; // or res.items depending on your API
-    });
-  }
+loadCertifications() {
+  this.courseService.getAllCertifiedCourses().subscribe((res) => {
+    this.courses = res.data; // ✅ Corrected
+  });
+}
 
 
 
-  viewCertificate(){
-  this.router.navigateByUrl('/student/accomplishments/certificate/:certid');
 
-  }
+viewCertificate(courseId: string): void {
+  this.router.navigate(['/student/accomplishments/certificate', courseId]);
+}
+
 
 }
+
+
+

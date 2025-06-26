@@ -30,10 +30,10 @@
     <ng-container *ngIf="cartItems.length > 0; else noItems">
       <li *ngFor="let item of cartItems" class="p-2 border-bottom text-start">
         <div class="d-flex align-items-center">
-          <img [src]="item.courseThumbnail" alt="Thumbnail" width="50" height="50" class="me-2 rounded" />
+          <img [src]="item?.courseThumbnail" alt="Thumbnail" width="50" height="50" class="me-2 rounded" />
           <div>
-            <div class="fw-bold" style="font-size: 14px;">{{ item.courseTitle }}</div>
-            <div class="text-muted" style="font-size: 12px;">₹{{ item.amount }}</div>
+            <div class="fw-bold" style="font-size: 14px;">{{ item?.courseTitle }}</div>
+            <div class="text-muted" style="font-size: 12px;">₹{{ item?.amount }}</div>
           </div>
         </div>
       </li>

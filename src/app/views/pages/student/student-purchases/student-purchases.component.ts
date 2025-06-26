@@ -8,7 +8,7 @@ import { Purchase } from 'src/app/core/models/purchase.model';
   styleUrls: ['./student-purchases.component.css']
 })
 export class StudentPurchasesComponent implements OnInit {
-  coursePurchases: Purchase[] = [];
+  coursePurchases: any[] = [];
   totalItems = 0;
   isLoading = false;
   errorMessage = '';
@@ -20,20 +20,21 @@ export class StudentPurchasesComponent implements OnInit {
     this.loadStudentPurchases();
   }
 
-  loadStudentPurchases(): void {
-    this.isLoading = true;
-    this.paymentService.getAllCoursesPurchased().subscribe({
-      next: (res) => {
-        this.coursePurchases = res.items || [];
-        this.totalItems = res.total || 0;
-        this.isLoading = false;
-      },
-      error: () => {
-        this.errorMessage = 'Failed to load purchased courses';
-        this.isLoading = false;
-      }
-    });
-  }
+loadStudentPurchases(): void {
+  this.isLoading = true;
+  this.paymentService.getAllCoursesPurchased().subscribe({
+    next: (res) => {
+      this.coursePurchases = res.data || []; // 🔁 update to use `res.data`
+      this.totalItems = res.total || 0;
+      this.isLoading = false;
+    },
+    error: () => {
+      this.errorMessage = 'Failed to load purchased courses';
+      this.isLoading = false;
+    }
+  });
+}
+
 
   onRefund(purchaseId: string): void {
     if (!purchaseId) {

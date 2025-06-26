@@ -4,6 +4,10 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, Subject, catchError, of, retry, throwError } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from 'src/environments/environment';
+function _window(): any {
+  // return the global native browser window object
+  return window;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -58,8 +62,20 @@ createOrder(product: Purchase) {
     }
   };
 
-  return this.httpClient.post(`${this.baseUrl}/createPaymentOrder`, { payload });
+  const headers = this.getHeaders(); // ✅ Include headers
+
+  return this.httpClient.post(
+    `${this.baseUrl}/createPaymentOrder`,
+    { payload },
+    { headers } // ✅ Pass JWT token here
+  ).pipe(
+    catchError(err => {
+      console.error('❌ Error from /createPaymentOrder:', err);
+      return throwError(() => err);
+    })
+  );
 }
+
 
 
 verifyPaymentSignature(checkoutResponse: any, original_order_id: string) {
@@ -72,11 +88,17 @@ verifyPaymentSignature(checkoutResponse: any, original_order_id: string) {
     courseId: selectedProduct?.courseId,
     courseTitle: selectedProduct?.courseTitle,
     amount: selectedProduct?.amount,
-    // optionally userId if available
   };
 
-  return this.httpClient.post(`${this.baseUrl}/validatePayment`, { payload });
+  const headers = this.getHeaders(); // ✅ Include Authorization header
+
+  return this.httpClient.post(
+    `${this.baseUrl}/validatePayment`,
+    { payload },
+    { headers } // ✅ Add headers here
+  );
 }
+
 
 
   get nativeWindow(): any {
@@ -85,28 +107,41 @@ verifyPaymentSignature(checkoutResponse: any, original_order_id: string) {
     }
   }
 
+
+
  getRazorPayKey(): string {
   return this.razorPayKey; // return string directly
 }
 
+
 storePurchase(purchase: Purchase) {
-  return this.httpClient.post(`${this.baseUrl}/purchase/store`, purchase);
+  const headers = this.getHeaders(); // 👈 add Authorization header
+  return this.httpClient.post(`${this.baseUrl}/purchase/store`, purchase, { headers });
 }
+
+refundPurchase(purchaseId: string): Observable<any> {
+  const headers = this.getHeaders(); // 👈 add Authorization header
+  return this.httpClient.patch(`${this.baseUrl}/purchase/${purchaseId}/refund`, {}, { headers });
+}
+
+
+
 
 // ✅ Get purchase by Razorpay Order ID
 getPurchaseByOrderId(orderId: string): Observable<Purchase> {
-  return this.httpClient.get<Purchase>(`${this.baseUrl}/purchase/order/${orderId}`);
+  const headers = this.getHeaders(); // ✅ Attach token
+
+  return this.httpClient.get<Purchase>(
+    `${this.baseUrl}/purchase/order/${orderId}`,
+    { headers }
+  );
 }
 
-// ✅ Get all purchases for a course
-getAllPurchasesByCourse(courseId: string): Observable<Purchase[]> {
-  return this.httpClient.get<Purchase[]>(`${this.baseUrl}/admin/purchases/course/${courseId}`);
-}
 
 
 
-getAllCoursesPurchased(): Observable<{ total: number, items: Purchase[] }> {
-  return this.httpClient.get<{ total: number, items: Purchase[] }>(`${this.baseUrl}/student/purchase-history`, { headers: this.getHeaders() })
+getAllCoursesPurchased(): Observable<{ total: number, data: any[] }> {
+  return this.httpClient.get<{ total: number, data: any[] }>(`${this.baseUrl}/student/purchase-history`, { headers: this.getHeaders() })
     .pipe(catchError(this.handleError));
 }
 
@@ -138,16 +173,17 @@ getInstructorCoursesRevenue(): Observable<{ total: number, data: any[] }> {
 }
 
 
-
-  refundPurchase(purchaseId: string): Observable<any> {
-  return this.httpClient.patch(`${this.baseUrl}/purchase/${purchaseId}/refund`, {});
-}
-
-
 checkCourseAccess(courseId: string): Observable<{ access: boolean }> {
-  return this.httpClient.post<{ access: boolean }>( `${this.baseUrl}/check-access`,{ courseId } // courseId in body
-  );
+  const headers = this.getHeaders();
+  const body = { courseId };
+
+  return this.httpClient
+    .post<{ access: boolean }>(`${this.baseUrl}/check-access`, body, { headers })
+    .pipe(
+      catchError(this.handleError)
+    );
 }
+
 
 
 
@@ -161,10 +197,6 @@ checkCourseAccess(courseId: string): Observable<{ access: boolean }> {
     return throwError(() => new Error(errorMessage));
   }
 
-}
-function _window(): any {
-  // return the global native browser window object
-  return window;
 }
 
 

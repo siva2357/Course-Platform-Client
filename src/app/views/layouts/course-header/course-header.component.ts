@@ -166,10 +166,12 @@ goToCartPage(){
 
 loadCartItems(): void {
   this.courseService.getFromCart().subscribe(cart => {
-    this.cartItems = cart.items;
-    this.cartCount = cart.items.length;
+    console.log('🧾 Cart response:', cart);
+    this.cartItems = cart.items || []; // fallback to avoid crash
+    this.cartCount = this.cartItems.length;
   });
 }
+
 
 
 }
