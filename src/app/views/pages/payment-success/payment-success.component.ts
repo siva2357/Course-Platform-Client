@@ -24,7 +24,7 @@ export class PaymentSuccessComponent implements OnInit {
 
     this.paymentService.getAllCoursesPurchased().subscribe({
       next: data => {
-        this.coursePurchases = data.items || [];
+        this.coursePurchases =  data.data|| [];
         console.log('✅ Course purchases loaded:', this.coursePurchases);
       },
       error: err => {

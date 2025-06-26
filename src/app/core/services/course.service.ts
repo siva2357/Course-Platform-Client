@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { Course, CoursePlan, CoursesResponse, Curriculum, LandingPage, Price } from '../models/course.model';
+import { Category, Course, CoursePlan, CoursesResponse, Curriculum, LandingPage, Price } from '../models/course.model';
 import { CartItem, WishList } from '../models/cart.model';
 import { Certificate } from '../models/certificate.model';
 import { CourseTracking } from '../models/courseTracking.model';
@@ -87,8 +87,8 @@ SubmitCourseReview(courseId: string) {
 
 
 
-getAllCourses(): Observable<CoursesResponse> {
-  return this.http.get<CoursesResponse>(`${this.baseUrl}/instructor/my-courses`, { headers: this.getHeaders() })
+getAllCourses(): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/instructor/my-courses`, { headers: this.getHeaders() })
     .pipe(catchError(this.handleError));
 }
 
@@ -117,10 +117,13 @@ getInstructorPurchaseSummary(): Observable<any> {
 }
 
 
-  getCourseById(id: string): Observable<Course> {
-    return this.http.get<Course>(`${this.baseUrl}/course/${id}`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError));
-  }
+getCourseById(id: string): Observable<Course> {
+  return this.http.get<{ success: boolean; course: Course }>(`${this.baseUrl}/course/${id}`, { headers: this.getHeaders() })
+    .pipe(
+      map(response => response.course),  // extract course from response
+      catchError(this.handleError)
+    );
+}
 
   updateCourse(id: string, course: Course): Observable<Course> {
     return this.http.put<Course>(`${this.baseUrl}/course/${id}`, course, { headers: this.getHeaders() })
@@ -134,8 +137,8 @@ getInstructorPurchaseSummary(): Observable<any> {
 
 
 
-getPublishedCourses(): Observable<CoursesResponse> {
-  return this.http.get<CoursesResponse>(`${this.baseUrl}/student/courses`, { headers: this.getHeaders() })
+getPublishedCourses(): Observable<Category> {
+  return this.http.get<Category>(`${this.baseUrl}/student/courses`, { headers: this.getHeaders() })
     .pipe(catchError(this.handleError));
 }
 
@@ -212,12 +215,13 @@ generateCertificate(studentName: string, courseTitle: string, issueDate: string)
 }
 
 
-getAllCertifiedCourses(): Observable<any> {
+getAllCertifiedCourses(): Observable<{ total: number, data: any[] }> {
   return this.http.get<{ total: number, data: any[] }>(
     `${this.baseUrl}/course/certificate/all`,
     { headers: this.getHeaders() }
   );
 }
+
 
 getCertifiedCourseDetails(courseId: string): Observable<any> {
   return this.http.get<any>(
@@ -227,13 +231,20 @@ getCertifiedCourseDetails(courseId: string): Observable<any> {
 }
 
 
+markContentCompleted(courseId: string, lectureId: string, contentId: string): Observable<any> {
+  return this.http.post(
+    `${this.baseUrl}/course/track/content`,
+    { courseId, lectureId, contentId },
+    { headers: this.getHeaders() }
+  );
+}
 
 markLectureCompleted(courseId: string, lectureId: string): Observable<any> {
-  return this.http.post(`${this.baseUrl}/course/track/complete`, { courseId, lectureId });
+  return this.http.post(`${this.baseUrl}/course/track/complete`, { courseId, lectureId },   { headers: this.getHeaders() });
 }
 
 getCourseProgress(courseId: string): Observable<any> {
-  return this.http.get(`${this.baseUrl}/course/track/progress/${courseId}`);
+  return this.http.get(`${this.baseUrl}/course/track/progress/${courseId}`,   { headers: this.getHeaders() });
 }
 
 

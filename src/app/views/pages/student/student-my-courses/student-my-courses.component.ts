@@ -3,7 +3,7 @@ import { PaymentService } from 'src/app/core/services/payment.service';
 import { Purchase } from 'src/app/core/models/purchase.model';
 import { Router } from '@angular/router';
 import { CourseService } from 'src/app/core/services/course.service';
-import { Course } from 'src/app/core/models/course.model';
+import { Course, CourseIntro, CoursePreview, CoursesResponse } from 'src/app/core/models/course.model';
 
 
 @Component({
@@ -11,58 +11,44 @@ import { Course } from 'src/app/core/models/course.model';
   templateUrl: './student-my-courses.component.html',
   styleUrls: ['./student-my-courses.component.css']
 })
-export class StudentMyCoursesComponent  {
-  constructor(public router:Router, public courseService:CourseService){}
 
-courses: Course[] = []; // Make sure this is defined
+export class StudentMyCoursesComponent  {
+  courses:  CourseIntro[] = [];
+
+  constructor(
+    public router: Router,
+    public courseService: CourseService
+  ) {}
 
   ngOnInit() {
-  this.loadCourses();
-}
+    this.loadCourses();
+  }
 
-loadCourses() {
-  this.courseService.getPurchasedCourses().subscribe((res) => {
-    this.courses = res.courses; // or res.items depending on your API
+  loadCourses() {
+    this.courseService.getPurchasedCourses().subscribe((res) => {
+      console.log('📦 API response:', res);
+      this.courses = res.myCourses; // ✅ fixed here
+    });
+  }
+
+goToCourse(course: CourseIntro): void {
+  if (!course?.title || !course?._id) {
+    console.error('Course title or ID missing');
+    return;
+  }
+
+  const slug = this.slugify(course.title);
+  this.router.navigate(['/student/course/learning', slug, 'home'], {
+    queryParams: { courseId: course._id }
   });
 }
 
-
-
-
-public myCourses: any[] = [
-  {
-    courseTitle: 'Angular Crash Course',
-    description: 'Master the basics of Angular step-by-step.',
-    thumbnail: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1750510782/756150_c033_4_qcmqc0.webp',
-    progress: 30
-  },
-  {
-    courseTitle: 'React Fundamentals',
-    description: 'Learn modern React with hooks and components.',
-    thumbnail: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1750510836/5939718_4725_4_k2a8qq.webp',
-    progress: 50
-  },
-  {
-    courseTitle: 'Node.js API Development',
-    description: 'Build real RESTful APIs using Node and Express.',
-    thumbnail: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1750510923/6624533_08bc_3_zwmn8z.webp',
-    progress: 20
-  },
-  {
-    courseTitle: 'Full Stack with Django',
-    description: 'Build full-stack apps using Django & React.',
-    thumbnail: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1750510944/2243250_f8ef_10_m8spyc.webp',
-    progress: 40
-  }
-];
-
-
-  goToCourse(courseTitle: string) {
-    alert('Go to course: ' + courseTitle);
-    // Replace with routing logic if needed
-  }
-
-
-
+// Optional slugify function (basic)
+slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // replace non-alphanumeric with hyphens
+    .replace(/(^-|-$)+/g, '');   // remove leading/trailing hyphens
+}
 
 }

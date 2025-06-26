@@ -5,31 +5,41 @@
     <div class="col-lg-6">
       <div class="certificate-container h-100">
         <div class="d-flex align-items-center mb-4">
-          <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1737957960/WhatsApp_Image_2024-07-15_at_10.07.27_21c10573_varrvt.jpg" alt="User Avatar" class="user-avatar me-3"/>
+          <img [src]="profilePicture" alt="User Avatar" class="user-avatar me-3" />
           <div>
-            <h5 class="mb-1 fw-semibold text-dark">John Doe</h5>
-            <span class="text-muted small">Completed on: <strong>June 20, 2025</strong></span>
+            <h5 class="mb-1 fw-semibold text-dark">{{ fullName }}</h5>
+            <span class="text-muted small">
+              Completed on: <strong>{{ issuedDate | date: 'longDate' }}</strong>
+            </span>
           </div>
         </div>
 
-        <p class="mb-2"><strong>Course Duration:</strong> 12 hours</p>
+        <p class="mb-2"><strong>Course Duration:</strong> {{ courseDuration }}</p>
         <p class="mb-3"><strong>Grade Achieved:</strong> A+</p>
 
         <hr />
 
-        <div>
+        <!-- Learning Objectives -->
+        <div *ngIf="learningObjectives?.length">
           <div class="section-heading">Learning Objectives</div>
           <ul class="mb-3 ps-3">
-            <li>Understand Angular fundamentals</li>
-            <li>Build dynamic SPA applications</li>
-            <li>Use RxJS and Observables effectively</li>
+            <li *ngFor="let item of learningObjectives">{{ item }}</li>
           </ul>
+        </div>
 
-          <div class="section-heading">Course Outcomes</div>
-          <ul class="ps-3">
-            <li>Developed a full Angular project</li>
-            <li>Created dynamic forms and route guards</li>
-            <li>Integrated with RESTful APIs</li>
+        <!-- Course Requirements -->
+        <div *ngIf="courseRequirements?.length">
+          <div class="section-heading">Course Requirements</div>
+          <ul class="mb-3 ps-3">
+            <li *ngFor="let req of courseRequirements">{{ req }}</li>
+          </ul>
+        </div>
+
+        <!-- Course Level -->
+        <div *ngIf="courseLevel?.length">
+          <div class="section-heading">Course Level</div>
+          <ul class="mb-3 ps-3">
+            <li *ngFor="let lvl of courseLevel">{{ lvl }}</li>
           </ul>
         </div>
       </div>
@@ -38,10 +48,15 @@
     <!-- Right: Certificate Preview -->
     <div class="col-lg-6">
       <div class="certificate-container text-center">
-        <div class="certificate-preview mb-4">
-          <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1750512993/CERTIFICATE_LANDING_PAGE_66Q5Q6PCTQ6H_qdc4pm.jpg"
-               alt="Certificate Preview" class="img-fluid"/>
-        </div>
+<div class="certificate-preview mb-4">
+  <div *ngIf="isGeneratingImage" class="text-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Generating certificate preview...</p>
+  </div>
+
+  <img *ngIf="certificateImageUrl && !isGeneratingImage" [src]="certificateImageUrl" alt="Certificate" class="img-fluid" />
+</div>
+
 
         <div class="d-flex justify-content-center gap-3 action-buttons" *ngIf="isCourseCompleted">
           <button class="btn btn-outline-primary" (click)="downloadCertificate()">

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category, Course } from 'src/app/core/models/course.model';
+import { Category, Course, CoursePreview } from 'src/app/core/models/course.model';
 import { CourseService } from 'src/app/core/services/course.service';
 import { Pipe, PipeTransform } from '@angular/core';
 @Component({
@@ -12,25 +12,72 @@ export class StudentHomePageComponent {
 
   constructor(public router:Router, public courseService:CourseService){}
 
-courses: Course[] = []; // Make sure this is defined
+categories: Category[] = [];
 
 
 ngOnInit() {
   this.loadCourses();
-    this.splitCoursesIntoChunks();
 }
 
 loadCourses() {
-  this.courseService.getPublishedCourses().subscribe((res) => {
-    this.courses = res.courses; // or res.items depending on your API
+  this.courseService.getPublishedCourses().subscribe((res: any) => {
+    const categorized = res.categorizedCourses;
+
+    this.categories = Object.keys(categorized).map((categoryName) => {
+      const courses: CoursePreview[] = categorized[categoryName].map((course: any) => ({
+        _id: course._id,
+        title: course.title,
+        description: course.description,
+        thumbnail: course.thumbnail,
+        preview: course.preview,
+        createdByName: course.createdByName,
+        createdAt: course.createdAt
+      }));
+
+      return {
+        name: categoryName,
+        courses,
+        courseChunks: this.chunkCourses(courses, 4)
+      };
+    });
   });
 }
 
-goToCourseDetails(course: Course) {
-  const encodedName = encodeURIComponent(course.landingPage.courseTitle);
-  const urlTree = this.router.createUrlTree(['/student/course', course._id, encodedName]);
+
+
+chunkCourses(courses: CoursePreview[], size: number): CoursePreview[][] {
+  const chunks: CoursePreview[][] = [];
+  for (let i = 0; i < courses.length; i += size) {
+    chunks.push(courses.slice(i, i + size));
+  }
+  return chunks;
+}
+
+
+
+
+
+
+  getCarouselId(name: string): string {
+    return name.toLowerCase().replace(/\s+/g, '-') + '-carousel';
+  }
+
+
+
+goToCourseDetails(course: CoursePreview) {
+  const slug = this.slugify(course.title);
+
+  const urlTree = this.router.createUrlTree(['/student/course', course._id, slug]);
   const fullUrl = this.router.serializeUrl(urlTree);
-  window.open(fullUrl, '_blank'); // ✅ Open in new tab
+
+  window.open(fullUrl, '_blank');
+}
+
+slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')  // replace spaces and special chars with hyphen
+    .replace(/(^-|-$)+/g, '');    // trim leading/trailing hyphens
 }
 
 
@@ -47,34 +94,11 @@ handleAddToCart(courseId: string): void {
   });
 }
 
-  categories: Category[] = [
-    'Angular', 'React', 'Vue', 'Node.js', 'Python', 'Java', 'Django', 'MongoDB', 'DevOps', 'Full Stack'
-  ].map(name => ({
-    name,
-    courses: Array.from({ length: 20 }).map((_, i) => ({
-      title: `${name} Course ${i + 1}`,
-      description: `Description for ${name} Course ${i + 1}`,
-      image: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744000400/all-courses-header-01_1_vcgijc.webp'
-    })),
-    courseChunks: [] // will be filled below
-  }));
-
 
 
     // ✅ Utility: Split into chunks of 6
 
-  splitCoursesIntoChunks() {
-    for (const category of this.categories) {
-      category.courseChunks = [];
-      for (let i = 0; i < category.courses.length; i += 4) {
-        category.courseChunks.push(category.courses.slice(i, i + 4));
-      }
-    }
-  }
 
-  getCarouselId(name: string): string {
-    return name.toLowerCase().replace(/\s+/g, '-') + '-carousel';
-  }
 
 
 }

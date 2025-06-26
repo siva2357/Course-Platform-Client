@@ -1,46 +1,3 @@
-<div class="container-fluid mt-5 ">
-
-
-  <div class="col mb-5">
-      <form role="search" class="position-relative">
-        <input type="search" class="form-control ps-5 rounded-4 w-75" placeholder="Search for anyting" aria-label="Search" style=" font-size: 14px;">
-        <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-      </form>
-  </div>
-
-<div class="container-fluid mb-5 bg-body-secondary">
-
-
-
-
-
-  <h3 class="mb-5">Learn from popular categories in India</h3>
-
-<div class="row g-3">
-  <div class="col-12 col-sm-6 col-md-4 col-lg-2" *ngFor="let course of courses">
-    <div class="card h-100 rounded-0">
-      <img [src]="course.landingPage.courseThumbnail" class="card-img-top rounded-0" alt="...">
-      <div class="card-body">
-        <h5 class="card-title" (click)="goToCourseDetails(course)" style="cursor: pointer;">
-          {{ course.landingPage.courseTitle }}
-        </h5>
-        <p [innerHTML]="course.landingPage.courseDescription"></p>
-        <button class="btn btn-info btn-sm" (click)="handleAddToCart(course._id!)">
-          Add to cart
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-
-</div>
-
-
-
-
 <div class="container-fluid mt-5">
   <!-- 🔍 Search Bar -->
   <div class="mb-4">
@@ -60,25 +17,25 @@
   <div class="carousel slide" [attr.id]="getCarouselId(category.name)" data-bs-ride="carousel">
     <div class="carousel-inner">
 
-      <!-- ✅ Loop for courseChunks (each chunk = 1 carousel item) -->
       <div *ngFor="let chunk of category.courseChunks; let i = index"
-           class="carousel-item" [class.active]="i === 0">
-        <div class="row gx-3">
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let course of chunk">
-            <div class="card h-100 shadow-sm rounded-3">
-              <img [src]="course.image" class="card-img-top" alt="course-img" />
-              <div class="card-body p-2">
-                <h6 class="card-title">{{ course.title }}</h6>
-                <p class="card-text small">{{ course.description }}</p>
-                <button class="btn btn-info btn-sm w-100"
-                        (click)="handleAddToCart(course._id!)">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
+     class="carousel-item" [class.active]="i === 0">
+  <div class="row gx-3">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let course of chunk">
+      <div class="card h-100 shadow-sm rounded-3">
+        <img [src]="course.thumbnail" class="card-img-top" alt="course-img" />
+        <div class="card-body p-2">
+          <h6 class="card-title" (click)="goToCourseDetails(course)" style="cursor: pointer;">{{ course.title }}</h6>
+          <p class="card-text small" [innerHTML]="course.description"></p>
+          <button class="btn btn-info btn-sm w-100"
+                  (click)="handleAddToCart(course._id)">
+            Add to Cart
+          </button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
 
     </div>
 

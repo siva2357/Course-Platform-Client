@@ -1,72 +1,46 @@
-<div class="container py-5">
-  <h2 class="fw-bold mb-4">My Accomplishments</h2>
 
-  <p class="text-muted small">Total Courses Completed: 3</p>
+<div class="container mt-4 p-3 mt-5">
+  <h2 class="fw-bold mb-4">🏅 My Certifications</h2>
 
-  <!-- 🔹 Accomplishment Card 1 -->
-  <div class="card shadow-sm border-0 rounded-4 mb-4">
-    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-      <div>
-        <h5 class="fw-semibold mb-1">Angular for Beginners</h5>
-        <p class="mb-1 text-muted small">Master the basics of Angular in this crash course.</p>
-
-        <!-- Progress -->
-        <div class="progress mb-2" style="height: 6px; width: 250px;">
-          <div class="progress-bar bg-success" style="width: 100%;"></div>
-        </div>
-        <small class="text-muted">Progress: 100% | 12/12 Lectures Completed</small><br />
-
-        <!-- Certificate -->
-        <span class="badge bg-success-subtle text-success fw-medium mt-2">Certificate Issued</span>
-        <div class="text-muted small">Issued on: Jun 1, 2025</div>
-      </div>
-      <div>
-        <button class="btn btn-outline-primary btn-sm mt-3 mt-md-0" (click)="viewCertificate()">View Certificate</button>
-      </div>
-    </div>
+  <div *ngIf="courses.length === 0" class="text-muted">
+    No certifications available yet.
   </div>
 
-  <!-- 🔹 Accomplishment Card 2 -->
-  <div class="card shadow-sm border-0 rounded-4 mb-4">
+  <div *ngFor="let course of courses" class="card shadow-sm border-0 rounded-4 mb-4">
     <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-      <div>
-        <h5 class="fw-semibold mb-1">React Masterclass</h5>
-        <p class="mb-1 text-muted small">Deep dive into advanced React concepts with hooks and state management.</p>
 
-        <!-- Progress -->
-        <div class="progress mb-2" style="height: 6px; width: 250px;">
-          <div class="progress-bar bg-warning" style="width: 75%;"></div>
+      <!-- Course Info -->
+      <div class="d-flex gap-3 align-items-start">
+        <img [src]="course.thumbnail || 'assets/default-course.jpg'" alt="Course Thumbnail"
+             class="rounded" style="width: 100px; height: 70px; object-fit: cover;" />
+
+        <div>
+          <h5 class="fw-semibold mb-1">{{ course.title }}</h5>
+          <p class="mb-1 text-muted small">Instructor: {{ course.instructor }}</p>
+
+          <!-- Progress -->
+          <div class="progress mb-2" style="height: 6px; width: 250px;">
+            <div class="progress-bar bg-success" [style.width.%]="course.progress"></div>
+          </div>
+          <small class="text-muted">
+            Progress: {{ course.progress }}% |
+            {{ course.progress}}
+          </small><br />
+
+          <!-- Certificate Info -->
+          <ng-container *ngIf="course.certificateIssued && course.isCompleted">
+            <span class="badge bg-success-subtle text-success fw-medium mt-2">Certificate Issued</span>
+            <div class="text-muted small">Issued on: {{ course.createdAt | date: 'mediumDate' }}</div>
+          </ng-container>
         </div>
-        <small class="text-muted">Progress: 75% | 9/12 Lectures Completed</small><br />
-
-        <!-- Status -->
-        <span class="badge bg-warning-subtle text-warning fw-medium mt-2">In Progress</span>
       </div>
-      <div>
-        <button class="btn btn-outline-secondary btn-sm mt-3 mt-md-0" disabled>Certificate Locked</button>
-      </div>
-    </div>
-  </div>
 
-  <!-- 🔹 Accomplishment Card 3 -->
-  <div class="card shadow-sm border-0 rounded-4 mb-4">
-    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
-      <div>
-        <h5 class="fw-semibold mb-1">Node.js Crash Course</h5>
-        <p class="mb-1 text-muted small">Build REST APIs and learn Node.js fundamentals from scratch.</p>
-
-        <!-- Progress -->
-        <div class="progress mb-2" style="height: 6px; width: 250px;">
-          <div class="progress-bar bg-success" style="width: 100%;"></div>
-        </div>
-        <small class="text-muted">Progress: 100% | 10/10 Lectures Completed</small><br />
-
-        <!-- Certificate -->
-        <span class="badge bg-secondary-subtle text-secondary fw-medium mt-2">Certificate Issued</span>
-        <div class="text-muted small">Issued on: May 28, 2025</div>
-      </div>
-      <div>
-        <button class="btn btn-outline-primary btn-sm mt-3 mt-md-0">View Certificate</button>
+      <!-- Button -->
+      <div class="ms-auto mt-3 mt-md-0">
+        <button class="btn btn-outline-primary btn-sm"
+                (click)="viewCertificate(course.courseId)">
+          View Certificate
+        </button>
       </div>
     </div>
   </div>

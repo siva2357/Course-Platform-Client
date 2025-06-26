@@ -32,7 +32,7 @@ const routes: Routes = [
       { path: 'course/:id/:courseName', component: CoursePageDetailsComponent, title: 'Course page' },
     { path: 'my-wishlist', component: StudentWishlistComponent, title: 'Post Jobpost Page'},
     { path: 'my-certifications', component: StudentCertificationsComponent , title: 'Post Jobpost Page'},
-      { path: 'accomplishments/certificate/:certId', component: StudentAccomplishmentsComponent, title: 'Post Jobpost Page'},
+      { path: 'accomplishments/certificate/:courseId', component: StudentAccomplishmentsComponent, title: 'Post Jobpost Page'},
 
     { path: 'my-purchases', component: StudentPurchasesComponent, title: 'Post Jobpost Page'  },
     { path: 'profile-page/:id', component: StudentProfilePageComponent, title: 'Post Jobpost Page'},

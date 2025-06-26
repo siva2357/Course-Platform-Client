@@ -20,6 +20,7 @@ selectedProduct: Purchase | null = null;
     this.getRazorPayKey();
     this.listenSelectedProduct();
     this.getOrderId();
+
   }
 getRazorPayKey() {
   this.razorPayKey = this.paymentService.getRazorPayKey();
