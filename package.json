@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "chart.js": "^3.9.1",
-    "firebase": "^11.2.0",
+    "firebase": "^11.10.0",
     "jwt-decode": "^4.0.0",
     "ng2-charts": "^4.1.1",
     "ngx-editor": "^16.0.1",
