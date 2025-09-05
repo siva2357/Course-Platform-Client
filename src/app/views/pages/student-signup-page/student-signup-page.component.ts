@@ -31,7 +31,7 @@ export class StudentSignupPageComponent  {
        userName: ['', [Validators.required]],
        email: ['', [Validators.required]],
        password: ['', [Validators.required, Validators.minLength(6)]],
-       role: ['instructor'],
+       role: ['student'],
      },);
    }
 

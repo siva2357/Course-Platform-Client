@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// Public and Shared Components
 import { LandingPageComponent } from './views/pages/landing-page/landing-page.component';
 import { TeachingPageComponent } from './views/pages/teaching-page/teaching-page.component';
 import { CourseCategoryComponent } from './views/pages/course-category/course-category.component';
@@ -26,29 +25,23 @@ const routes: Routes = [
   { path: 'courses/category', component: CourseCategoryComponent, title: 'Course page' },
   { path: 'learning', component:  LearningPageComponent, title: 'Course page' },
   { path: 'teaching', component:  TeachingPageComponent, title: 'Course page' },
-  { path: 'forgot-password', component:  ForgotPasswordPageComponent }, // Profile page route
-  { path: 'forgotPassword-otp-verification', component:  ResetPasswordOtpPageComponent}, // Profile page route
-  { path: 'reset-password', component:  ResetPasswordPageComponent}, // Profile page route
-  { path: 'otp-verification', component:  OtpVerificationComponent }, // Profile page route
-  { path: 'confirmation-page', component: AccountConfirmationPageComponent }, // Profile page route
-
+  { path: 'forgot-password', component:  ForgotPasswordPageComponent },
+  { path: 'forgotPassword-otp-verification', component:  ResetPasswordOtpPageComponent},
+  { path: 'reset-password', component:  ResetPasswordPageComponent},
+  { path: 'otp-verification', component:  OtpVerificationComponent },
+  { path: 'confirmation-page', component: AccountConfirmationPageComponent },
   { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
   { path: 'instructor/login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
   { path: 'cart', component:CartPageComponent, title:"Recruiter profile page"},
   { path: 'plans-pricing-page', component:PlansPricingPageComponent, title:"Recruiter profile page"},
-
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
-    { path: 'paymentfailed', component:  PaymentFailureComponent },
+  { path: 'paymentfailed', component:  PaymentFailureComponent },
   { path: 'paymentsuccess', component: PaymentSuccessComponent },
   { path: 'admin', component:AdminComponent, title:"Recruiter profile page"},
-
   { path: 'registration-page', component:  StudentSignupPageComponent, title: 'Course page' },
   { path: 'login-page', component: StudentLoginPageComponent, title: 'Course page' },
-
   { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstructorPageModule)},
   { path: 'student',loadChildren: () => import('./views/pages/student/student-pages.module').then((m) => m.StudentPageModule)},
-
-
   { path: '**', redirectTo: 'main' }, // Fallback rou
 
 ];
