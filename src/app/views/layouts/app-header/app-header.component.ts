@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +8,30 @@ import { Router } from '@angular/router';
 })
 export class AppHeaderComponent {
 
+    isMobile: boolean = false;
+
   constructor(public router: Router) {}
 
   isActive(route: string): boolean {
     return this.router.url === route;
   }
+
+    ngOnInit(): void {
+    this.updateView();
+  }
+
+
+  @HostListener('window:resize')
+  onResize() {
+    this.updateView();
+  }
+
+
+  private updateView() {
+    this.isMobile = window.innerWidth < 992;
+  }
+
+
 
   showMenu = false;
 activeCategory: any = null;

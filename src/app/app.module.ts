@@ -27,9 +27,10 @@ import { environment } from 'src/environments/environment';
 import { AdminComponent } from './views/pages/admin/admin.component';
 import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
-import { PlansPricingPageComponent } from './views/pages/plans-pricing-page/plans-pricing-page.component';
 import { PaymentSuccessComponent } from './views/pages/payment-success/payment-success.component';
 import { PaymentFailureComponent } from './views/pages/payment-failure/payment-failure.component';
+import { FindCoursesComponent } from './views/pages/find-courses/find-courses.component';
+import { AboutPageComponent } from './views/pages/about-page/about-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,9 +50,10 @@ import { PaymentFailureComponent } from './views/pages/payment-failure/payment-f
     AdminComponent,
     StudentLoginPageComponent,
     StudentSignupPageComponent,
-    PlansPricingPageComponent,
     PaymentSuccessComponent,
     PaymentFailureComponent,
+    FindCoursesComponent,
+    AboutPageComponent,
   ],
   imports: [
     BrowserModule,

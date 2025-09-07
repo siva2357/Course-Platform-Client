@@ -16,15 +16,18 @@ import { AccountConfirmationPageComponent } from './views/pages/account-confirma
 import { AdminComponent } from './views/pages/admin/admin.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
 import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
-import { PlansPricingPageComponent } from './views/pages/plans-pricing-page/plans-pricing-page.component';
 import { PaymentFailureComponent } from './views/pages/payment-failure/payment-failure.component';
 import { PaymentSuccessComponent } from './views/pages/payment-success/payment-success.component';
+import { FindCoursesComponent } from './views/pages/find-courses/find-courses.component';
+import { AboutPageComponent } from './views/pages/about-page/about-page.component';
 const routes: Routes = [
   // Public routes
   { path: 'main', component:  LandingPageComponent, title: 'Main page' },
+  { path: 'courses', component: FindCoursesComponent, title: 'Course page' },
   { path: 'courses/category', component: CourseCategoryComponent, title: 'Course page' },
   { path: 'learning', component:  LearningPageComponent, title: 'Course page' },
   { path: 'teaching', component:  TeachingPageComponent, title: 'Course page' },
+  { path: 'about', component:  AboutPageComponent, title: 'Course page' },
   { path: 'forgot-password', component:  ForgotPasswordPageComponent },
   { path: 'forgotPassword-otp-verification', component:  ResetPasswordOtpPageComponent},
   { path: 'reset-password', component:  ResetPasswordPageComponent},
@@ -33,7 +36,6 @@ const routes: Routes = [
   { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
   { path: 'instructor/login-page', component:  InstructorLoginPageComponent, title: 'Course page' },
   { path: 'cart', component:CartPageComponent, title:"Recruiter profile page"},
-  { path: 'plans-pricing-page', component:PlansPricingPageComponent, title:"Recruiter profile page"},
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
   { path: 'paymentfailed', component:  PaymentFailureComponent },
   { path: 'paymentsuccess', component: PaymentSuccessComponent },
