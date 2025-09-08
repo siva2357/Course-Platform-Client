@@ -10,6 +10,7 @@ import { TeachingPageComponent } from './views/pages/teaching-page/teaching-page
 import { LearningPageComponent } from './views/pages/learning-page/learning-page.component';
 import { CourseCategoryComponent } from './views/pages/course-category/course-category.component';
 
+import { AdminPageModule } from './views/pages/admin/admin-pages.module';
 import { StudentPageModule } from './views/pages/student/student-pages.module';
 import { InstructorPageModule } from './views/pages/instructor/instructor-pages.module';
 import { InstructorSingupPageComponent } from './views/pages/instructor-singup-page/instructor-singup-page.component';
@@ -24,13 +25,13 @@ import { OtpVerificationComponent } from './views/pages/otp-verification/otp-ver
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
-import { AdminComponent } from './views/pages/admin/admin.component';
 import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
 import { PaymentSuccessComponent } from './views/pages/payment-success/payment-success.component';
 import { PaymentFailureComponent } from './views/pages/payment-failure/payment-failure.component';
 import { FindCoursesComponent } from './views/pages/find-courses/find-courses.component';
 import { AboutPageComponent } from './views/pages/about-page/about-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,6 @@ import { AboutPageComponent } from './views/pages/about-page/about-page.componen
     ResetPasswordPageComponent,
     ResetPasswordOtpPageComponent,
     OtpVerificationComponent,
-    AdminComponent,
     StudentLoginPageComponent,
     StudentSignupPageComponent,
     PaymentSuccessComponent,
@@ -63,6 +63,7 @@ import { AboutPageComponent } from './views/pages/about-page/about-page.componen
     ReactiveFormsModule,
     InstructorPageModule,
     StudentPageModule,
+    AdminPageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Use legacy compatibility mode
     AngularFireStorageModule, // Use storage services
 

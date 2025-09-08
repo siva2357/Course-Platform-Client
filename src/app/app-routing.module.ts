@@ -13,13 +13,14 @@ import { ResetPasswordOtpPageComponent } from './views/pages/reset-password-otp-
 import { ResetPasswordPageComponent } from './views/pages/reset-password-page/reset-password-page.component';
 import { OtpVerificationComponent } from './views/pages/otp-verification/otp-verification.component';
 import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
-import { AdminComponent } from './views/pages/admin/admin.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
 import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
 import { PaymentFailureComponent } from './views/pages/payment-failure/payment-failure.component';
 import { PaymentSuccessComponent } from './views/pages/payment-success/payment-success.component';
 import { FindCoursesComponent } from './views/pages/find-courses/find-courses.component';
 import { AboutPageComponent } from './views/pages/about-page/about-page.component';
+import { RoleGuard } from './core/guards/role.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   // Public routes
   { path: 'main', component:  LandingPageComponent, title: 'Main page' },
@@ -39,11 +40,11 @@ const routes: Routes = [
   { path: 'checkout/:paymentOrderId', component:CheckoutPageComponent, title:"Recruiter profile page"},
   { path: 'paymentfailed', component:  PaymentFailureComponent },
   { path: 'paymentsuccess', component: PaymentSuccessComponent },
-  { path: 'admin', component:AdminComponent, title:"Recruiter profile page"},
   { path: 'registration-page', component:  StudentSignupPageComponent, title: 'Course page' },
   { path: 'login-page', component: StudentLoginPageComponent, title: 'Course page' },
-  { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstructorPageModule)},
-  { path: 'student',loadChildren: () => import('./views/pages/student/student-pages.module').then((m) => m.StudentPageModule)},
+  { path: 'admin',loadChildren: () => import('./views/pages/admin/admin-pages.module').then((m) => m.AdminPageModule),canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'admin' }},
+  { path: 'instructor',loadChildren: () => import('./views/pages/instructor/instructor-pages.module').then((m) => m.InstructorPageModule),canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'instructor' }},
+  { path: 'student',loadChildren: () => import('./views/pages/student/student-pages.module').then((m) => m.StudentPageModule),canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'student' }},
   { path: '**', redirectTo: 'main' }, // Fallback rou
 
 ];
