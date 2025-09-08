@@ -70,7 +70,7 @@
   </div>
 
 
-<div class="table-responsive mb-4">
+<div class="table-responsive mb-4 mt-4">
   <table class="table table-hover table-striped align-middle shadow-sm small">
     <thead class="table-light d-none d-md-table-header-group">
       <tr class="text-center">
@@ -85,46 +85,48 @@
     </thead>
 
     <tbody *ngIf="filteredData.length > 0">
-      <tr *ngFor="let course of paginatedData; let i = index" class="d-block d-md-table-row mb-3 mb-md-0 border rounded p-2 p-md-0">
+      <tr *ngFor="let course of paginatedData; let i = index"
+          class="d-block d-md-table-row mb-3 mb-md-0 border rounded shadow-sm p-3 p-md-0">
+
         <!-- S.No -->
-        <td class="d-flex d-md-table-cell justify-content-between">
+        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
           <span class="fw-bold d-md-none">#</span>
           {{ (currentPage - 1) * itemsPerPage + i + 1 }}
         </td>
 
         <!-- Title -->
-        <td class="d-flex d-md-table-cell justify-content-between text-truncate" style="max-width: 220px;">
+        <td class="d-flex d-md-table-cell justify-content-between align-items-center text-truncate" style="max-width: 220px;">
           <span class="fw-bold d-md-none">Title:</span>
-          {{ course.landingPage.courseTitle }}
+          <span class="text-dark fw-semibold">{{ course.landingPage.courseTitle }}</span>
         </td>
 
         <!-- Category -->
-        <td class="d-flex d-md-table-cell justify-content-between">
+        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
           <span class="fw-bold d-md-none">Category:</span>
           {{ course.landingPage.courseCategory }}
         </td>
 
         <!-- Posted -->
-        <td class="d-flex d-md-table-cell justify-content-between">
+        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
           <span class="fw-bold d-md-none">Posted On:</span>
           {{ course.createdAt | date: 'dd-MM-yyyy' }}
         </td>
 
         <!-- Updated -->
-        <td class="d-flex d-md-table-cell justify-content-between">
+        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
           <span class="fw-bold d-md-none">Updated On:</span>
           {{ course.updatedAt | date: 'dd-MM-yyyy' }}
         </td>
 
         <!-- Status -->
-        <td class="d-flex d-md-table-cell justify-content-between">
+        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
           <span class="fw-bold d-md-none">Status:</span>
           <span class="badge bg-success" *ngIf="course.status === 'Published'">{{ course.status }}</span>
           <span class="badge bg-warning text-dark" *ngIf="course.status !== 'Published'">{{ course.status }}</span>
         </td>
 
         <!-- Actions -->
-        <td class="d-flex d-md-table-cell justify-content-between">
+        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
           <span class="fw-bold d-md-none">Actions:</span>
           <div class="d-flex gap-2 flex-wrap justify-content-end">
             <button class="btn btn-outline-info btn-sm shadow-sm px-3"
@@ -139,7 +141,9 @@
     <!-- No Data -->
     <tbody *ngIf="filteredData.length === 0">
       <tr>
-        <td  class="text-muted text-center py-4">No courses available to display.</td>
+        <td colspan="7" class="text-muted text-center py-4">
+          No courses available to display.
+        </td>
       </tr>
     </tbody>
   </table>

@@ -53,44 +53,53 @@
       </div>
 
       <!-- 🖼️ Thumbnail Upload -->
-      <div class="card mb-4 shadow-sm border-0 rounded-4">
-        <div class="card-body p-3 p-md-4 row align-items-center">
-          <div class="col-md-6 mb-3 mb-md-0">
-            <h5 class="fw-semibold text-primary mb-2">
-              3. Upload Course Thumbnail
-            </h5>
-            <p class="text-muted small">
-              Ideal size: 750x422px | .jpg, .jpeg, .png only
-            </p>
-            <input type="file" class="form-control form-control-sm" formControlName="courseThumbnail"/>
-            <div *ngIf="submitted && landingPageDetails.get('courseThumbnail')?.hasError('required')" class="text-danger small mt-1">
-              Course image is required.
-            </div>
-          </div>
-          <div class="col-md-6 text-center">
-            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.05_-_A_visually_stunning_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_smooth_flowing_waves_in_a_gradient_blend_of_deep_ur89bo.webp" class="img-fluid rounded-3 mt-3" width="280" alt="Thumbnail Preview"/>
-          </div>
-        </div>
+<!-- 🖼️ Thumbnail Upload -->
+<div class="card mb-4 shadow-sm border-0 rounded-4">
+  <div class="card-body p-3 p-md-4 row align-items-center">
+    <div class="col-md-6 mb-3 mb-md-0">
+      <h5 class="fw-semibold text-primary mb-2">3. Upload Course Thumbnail</h5>
+      <p class="text-muted small">Ideal size: 750x422px | .jpg, .jpeg, .png only</p>
+      <input type="file" class="form-control form-control-sm" (change)="uploadThumbnail($event)" />
+      <div *ngIf="submitted && landingPageDetails.get('courseThumbnail')?.hasError('required')" class="text-danger small mt-1">
+        Course image is required.
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <ng-container *ngIf="thumbnailFileData?.url; else defaultThumb">
+        <img [src]="thumbnailFileData?.url" class="img-fluid rounded-3 mt-3" width="280" alt="Thumbnail Preview" />
+        <button class="btn btn-sm btn-outline-danger mt-2" (click)="deleteThumbnail()">Delete Thumbnail</button>
+      </ng-container>
+      <ng-template #defaultThumb>
+        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.05_-_A_visually_stunning_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_smooth_flowing_waves_in_a_gradient_blend_of_deep_ur89bo.webp" class="img-fluid rounded-3 mt-3" width="280" alt="Default Thumbnail" />
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<!-- 🎥 Promo Video Upload -->
+<div class="card mb-4 shadow-sm border-0 rounded-4">
+  <div class="card-body p-3 p-md-4 row align-items-center">
+    <div class="col-md-6 mb-3 mb-md-0">
+      <h5 class="fw-semibold text-primary mb-2">4. Upload Promo Video</h5>
+      <p class="text-muted small">Short preview to attract students (MP4, max 100MB)</p>
+      <input type="file" class="form-control form-control-sm" (change)="uploadPreview($event)" />
+      <div *ngIf="submitted && landingPageDetails.get('coursePreview')?.hasError('required')" class="text-danger small mt-1">
+        Promo video is required.
       </div>
 
-      <!-- 🎥 Promo Video Upload -->
-      <div class="card mb-4 shadow-sm border-0 rounded-4">
-        <div class="card-body p-3 p-md-4 row align-items-center">
-          <div class="col-md-6 mb-3 mb-md-0">
-            <h5 class="fw-semibold text-primary mb-2">4. Upload Promo Video</h5>
-            <p class="text-muted small">
-              Short preview to attract students (MP4, max 100MB)
-            </p>
-            <input type="file" class="form-control form-control-sm" formControlName="coursePreview"/>
-            <div *ngIf="submitted && landingPageDetails.get('coursePreview')?.hasError('required')" class="text-danger small mt-1">
-              Promo video is required.
-            </div>
-          </div>
-          <div class="col-md-6 text-center">
-            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.19_-_A_vibrant_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_a_mix_of_visually_striking_colors_including_shades_of_blue_aytnxj.webp" class="img-fluid rounded-3 mt-3" width="280" alt="Video Preview"/>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <ng-container *ngIf="previewFileData?.url; else defaultPreview">
+        <video [src]="previewFileData?.url" class="rounded-3 mt-3" width="280" controls></video>
+        <button class="btn btn-sm btn-outline-danger mt-2" (click)="deletePreview()">Delete Video</button>
+      </ng-container>
+      <ng-template #defaultPreview>
+        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.19_-_A_vibrant_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_a_mix_of_visually_striking_colors_including_shades_of_blue_aytnxj.webp" class="img-fluid rounded-3 mt-3" width="280" alt="Default Video Placeholder" />
+      </ng-template>
+    </div>
+  </div>
+</div>
+
 
       <!-- ✅ Save Button -->
       <div class="d-flex justify-content-end">

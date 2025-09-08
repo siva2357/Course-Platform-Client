@@ -49,15 +49,12 @@ export interface Lecture {
   lectureTitle: string;
   lectureDescription: string;
   lectureDuration?: string;  // optional, default "0m"
-  lectureContent: ContentItem[];
-  lectureResources: Resource[];
+  lectureContent: string[];
 }
 
 export interface ContentItem {
-  type: string;        // e.g. "video", "text"
   title: string;
   url?: string;        // required unless type==='text' (can be optional here)
-  value?: string;      // for text type content
 }
 
 export interface Resource {
