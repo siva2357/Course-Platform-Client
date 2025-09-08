@@ -1,24 +1,24 @@
+<div class="col mt-3 px-5">
+  <button class="btn btn-sm btn-outline-secondary px-3 rounded-0" (click)="goToCoursePage()">Back</button>
+</div>
 
-
-<div class=" col mt-3 px-5">
-  <button class="btn btn-sm btn-outline-secondary px-3 rounded-0" (click)="goToCoursePage()">back</button>
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <!-- 📌 Sidebar on desktop, Top nav on mobile -->
+<div class="col-12 col-md-3 col-lg-2 mb-3 mb-md-0">
+  <div class="nav nav-tabs flex-row flex-md-column flex-nowrap overflow-auto" role="tablist" aria-orientation="vertical">
+    <button *ngFor="let menu of menuItems" class="nav-link btn-outline-primary text-start mb-2 mb-md-2 me-2 me-md-0" [routerLink]="menu.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="links_name poppins-medium" style="font-size: 14px; white-space: nowrap;">
+        {{ menu.label }}
+      </span>
+    </button>
+  </div>
 </div>
 
 
-<div class="container-fluid p-5 ">
-
-  <div class="row d-flex">
-  <div class="col-2" >
-    <div class="nav flex-column nav-tabs" role="tablist" aria-orientation="vertical" *ngFor="let menu of menuItems" >
-      <button class="nav-link mb-2 btn-outline-primary" [routerLink]="menu.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <span  class="links_name poppins-medium" style="margin-left: 5px; margin-right: 10px; font-size: 14px;">{{ menu.label }}</span>
-      </button>
+    <!-- 📌 Content -->
+    <div class="col-12 col-md-9 col-lg-10">
+      <router-outlet></router-outlet>
     </div>
   </div>
-
-     <div class="col-10">
-      <router-outlet ></router-outlet>
-      </div>
-    </div>
-
 </div>

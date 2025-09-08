@@ -23,12 +23,13 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   successMessage: string = '';
   courseId!: string;
+  submitted = false;
 
   constructor(
     private fb: FormBuilder,
     private courseService: CourseService,
     private router: Router,
-    private storage: AngularFireStorage, // CRUD Service
+    private storage: AngularFireStorage,
     private domSanitizer: DomSanitizer,
     private route: ActivatedRoute
   ) {}
@@ -74,7 +75,7 @@ export class CourseLandingPageComponent implements OnInit, OnDestroy {
     }
   });
 }
-submitted = false;
+
 
   postLandingPage() {
   this.submitted = true;
@@ -85,21 +86,17 @@ submitted = false;
     return;
   }
 
-
     const formValue = this.landingPageDetails.getRawValue();
-
     const courseData: LandingPage = {
       courseTitle: formValue.courseTitle,
       courseCategory: formValue.courseCategory,
-      courseDescription: formValue.courseDescription, // fixed typo
+      courseDescription: formValue.courseDescription,
       courseThumbnail: formValue.courseThumbnail,
       coursePreview: formValue.coursePreview,
     };
-
     this.isUpdating = true;
     this.errorMessage = '';
     this.successMessage = '';
-
     this.courseService.postCourseLanding(this.courseId, courseData).subscribe({
       next: () => {
         this.successMessage = 'Profile updated successfully.';
@@ -107,7 +104,6 @@ submitted = false;
           this.landingPageDetails.markAsPristine();
           this.landingPageDetails.markAsUntouched();
         });
-
         this.isUpdating = false;
         this.router.navigate([
           `instructor/course/${this.courseId}/create/plan-your-course`,

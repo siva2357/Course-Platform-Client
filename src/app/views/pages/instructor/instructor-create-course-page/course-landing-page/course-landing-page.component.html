@@ -1,117 +1,104 @@
+<form [formGroup]="landingPageDetails" (ngSubmit)="postLandingPage()">
+  <div class="card shadow-lg rounded-0">
+    <div class="card-body p-4 p-md-5">
+      <!-- 🧠 Intro -->
+      <div class="text-center mb-5">
+        <h3 class="fw-semibold">Design Your Course Landing Page</h3>
+        <p class="text-muted">
+          Attract learners with clear titles, a compelling description, and
+          eye-catching visuals.
+        </p>
+      </div>
 
-<form [formGroup]="landingPageDetails" (ngSubmit)="postLandingPage()" >
-    <div class="card shadow-lg rounded-0">
-      <div class="card-body p-5">
-  <!-- 🧠 Intro -->
-  <div class="text-center mb-5">
-    <h2 class="fw-bold text-primary">Design Your Course Landing Page</h2>
-    <p class="text-muted">Attract learners with clear titles, a compelling description, and eye-catching visuals.</p>
-  </div>
+      <!-- 📘 Course Basics -->
+      <div class="card mb-4 shadow-sm border-0 rounded-4">
+        <div class="card-body p-3 p-md-4">
+          <h5 class="fw-semibold text-primary mb-3">1. Course Basics</h5>
 
-  <!-- 📘 Course Basics -->
-  <div class="card mb-4 shadow-sm border-0 rounded-4">
-    <div class="card-body p-4">
-      <h5 class="fw-semibold text-primary mb-3">1. Course Basics</h5>
-
-      <!-- Title -->
-
-
-
-      <div class="mb-3">
-  <label class="form-label fw-semibold">Course Title</label>
-  <input
-    type="text"
-    class="form-control"
-    formControlName="courseTitle"
-    placeholder="E.g., Complete Angular Masterclass"
-  />
-
-  <div
-    *ngIf="landingPageDetails.get('courseTitle')?.touched && landingPageDetails.get('courseTitle')?.hasError('required')"
-    class="text-danger small mt-1"
-  >
-    Course title is required.
-  </div>
-</div>
+          <!-- Course Title -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Course Title</label>
+            <input type="text" class="form-control form-control-sm" formControlName="courseTitle" placeholder="E.g., Complete Angular Masterclass"/>
+            <div *ngIf="landingPageDetails.get('courseTitle')?.touched && landingPageDetails.get('courseTitle')?.hasError('required')" class="text-danger small mt-1">
+              Course title is required.
+            </div>
+          </div>
 
 
-      <!-- Category -->
-      <div>
-        <label class="form-label fw-semibold">Course Category</label>
-        <select class="form-select" formControlName="courseCategory">
-          <option disabled value="">Select category</option>
-          <option value="Development">Development</option>
-          <option value="Design">Design</option>
-          <option value="Marketing">Marketing</option>
-        </select>
-        <div *ngIf="landingPageDetails.get('courseCategory')?.touched && landingPageDetails.get('courseCategory')?.hasError('required')" class="text-danger small mt-1">
-          Course category is required.
+          <div>
+            <label class="form-label fw-semibold">Course Category</label>
+            <select class="form-select form-select-sm" formControlName="courseCategory">
+              <option disabled value="">Select category</option>
+              <option value="Development">Development</option>
+              <option value="Design">Design</option>
+              <option value="Marketing">Marketing</option>
+            </select>
+            <div *ngIf="landingPageDetails.get('courseCategory')?.touched && landingPageDetails.get('courseCategory')?.hasError('required')" class="text-danger small mt-1">
+              Course category is required.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- 📝 Description -->
-  <div class="card mb-4 shadow-sm border-0 rounded-4">
-    <div class="card-body p-4">
-      <h5 class="fw-semibold text-primary mb-3">2. Course Description</h5>
-      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
-      <ngx-editor [editor]="editor" class="form-control" formControlName="courseDescription" placeholder="Describe what the course is about..."></ngx-editor>
-      <div *ngIf="landingPageDetails.get('courseDescription')?.touched && landingPageDetails.get('courseDescription')?.hasError('required')" class="text-danger small mt-1">
-        Course description is required.
+      <!-- 📝 Description -->
+      <div class="card mb-4 shadow-sm border-0 rounded-4">
+        <div class="card-body p-3 p-md-4">
+          <h5 class="fw-semibold text-primary mb-3">2. Course Description</h5>
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+          <ngx-editor [editor]="editor" class="form-control form-control-sm" formControlName="courseDescription" placeholder="Describe what the course is about..."></ngx-editor>
+          <div *ngIf="landingPageDetails.get('courseDescription')?.touched && landingPageDetails.get('courseDescription')?.hasError('required')" class="text-danger small mt-1">
+            Course description is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- 🖼️ Thumbnail Upload -->
+      <div class="card mb-4 shadow-sm border-0 rounded-4">
+        <div class="card-body p-3 p-md-4 row align-items-center">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <h5 class="fw-semibold text-primary mb-2">
+              3. Upload Course Thumbnail
+            </h5>
+            <p class="text-muted small">
+              Ideal size: 750x422px | .jpg, .jpeg, .png only
+            </p>
+            <input type="file" class="form-control form-control-sm" formControlName="courseThumbnail"/>
+            <div *ngIf="submitted && landingPageDetails.get('courseThumbnail')?.hasError('required')" class="text-danger small mt-1">
+              Course image is required.
+            </div>
+          </div>
+          <div class="col-md-6 text-center">
+            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.05_-_A_visually_stunning_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_smooth_flowing_waves_in_a_gradient_blend_of_deep_ur89bo.webp" class="img-fluid rounded-3 mt-3" width="280" alt="Thumbnail Preview"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🎥 Promo Video Upload -->
+      <div class="card mb-4 shadow-sm border-0 rounded-4">
+        <div class="card-body p-3 p-md-4 row align-items-center">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <h5 class="fw-semibold text-primary mb-2">4. Upload Promo Video</h5>
+            <p class="text-muted small">
+              Short preview to attract students (MP4, max 100MB)
+            </p>
+            <input type="file" class="form-control form-control-sm" formControlName="coursePreview"/>
+            <div *ngIf="submitted && landingPageDetails.get('coursePreview')?.hasError('required')" class="text-danger small mt-1">
+              Promo video is required.
+            </div>
+          </div>
+          <div class="col-md-6 text-center">
+            <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.19_-_A_vibrant_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_a_mix_of_visually_striking_colors_including_shades_of_blue_aytnxj.webp" class="img-fluid rounded-3 mt-3" width="280" alt="Video Preview"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ Save Button -->
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary btn-sm px-4 rounded-2">
+          Save Landing Page
+        </button>
       </div>
     </div>
-  </div>
-
-  <!-- 🖼️ Thumbnail Upload -->
-  <div class="card mb-4 shadow-sm border-0 rounded-4">
-    <div class="card-body p-4 row align-items-center">
-      <div class="col-md-6">
-        <h5 class="fw-semibold text-primary mb-2">3. Upload Course Thumbnail</h5>
-        <p class="text-muted small">Ideal size: 750x422px | .jpg, .jpeg, .png only</p>
-        <input type="file" class="form-control form-control-sm" formControlName="courseThumbnail">
-
-<div
-  *ngIf="submitted && landingPageDetails.get('courseThumbnail')?.hasError('required')"
-  class="text-danger small mt-1"
->
-  Course image is required.
-</div>
-      </div>
-      <div class="col-md-6 text-center">
-        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.05_-_A_visually_stunning_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_smooth_flowing_waves_in_a_gradient_blend_of_deep_ur89bo.webp"
-             class="img-fluid rounded-3 mt-3" width="300">
-      </div>
-    </div>
-  </div>
-
-  <!-- 🎥 Promo Video Upload -->
-  <div class="card mb-4 shadow-sm border-0 rounded-4">
-    <div class="card-body p-4 row align-items-center">
-      <div class="col-md-6">
-        <h5 class="fw-semibold text-primary mb-2">4. Upload Promo Video</h5>
-        <p class="text-muted small">Short preview to attract students (MP4, max 100MB)</p>
-        <input type="file" class="form-control form-control-sm" formControlName="coursePreview">
-<div
-  *ngIf="submitted && landingPageDetails.get('coursePreview')?.hasError('required')"
-  class="text-danger small mt-1"
->
-  Promo video is required.
-</div>
-      </div>
-      <div class="col-md-6 text-center">
-        <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1742468642/DALL_E_2025-03-20_16.31.19_-_A_vibrant_and_fluid_wave_design_for_a_website_landing_page_background._The_design_features_a_mix_of_visually_striking_colors_including_shades_of_blue_aytnxj.webp"
-             class="img-fluid rounded-3 mt-3" width="300">
-      </div>
-    </div>
-  </div>
-
-  <!-- ✅ Save Button -->
-  <div class="d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary px-4 rounded-2">Save Landing Page</button>
-  </div>
-
-  </div>
   </div>
 </form>
 

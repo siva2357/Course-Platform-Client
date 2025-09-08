@@ -13,7 +13,6 @@ export class InstructorCoursePageComponent  implements OnInit {
   courses: Course[] = [];
   errorMessage: string = '';
   searchTerm: string = '';
-
   filteredData: Course[] = [];
   paginatedData: Course[] = [];
   currentPage: number = 1;
@@ -21,19 +20,12 @@ export class InstructorCoursePageComponent  implements OnInit {
   totalPages: number = 1;
   pageNumbers: number[] = [];
   totalEntries = 0;
-
 selectedCategory: string = '';
 availableCategories: string[] = ['Development', 'Design', 'Marketing', 'Business'];
-
   constructor( public router:Router, public courseService:CourseService){}
-
-
-
   ngOnInit(): void {
     this.fetchCourses();
   }
-
-
 
     get hasCourses(): boolean {
     return this.courses.length > 0;

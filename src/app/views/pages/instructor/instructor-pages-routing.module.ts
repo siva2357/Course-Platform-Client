@@ -16,12 +16,12 @@ import { InstructorProfileformPageComponent } from './instructor-profileform-pag
 
 const routes: Routes = [
 	// Default path for recruiter redirects to 'recruiter/dashboard'
-	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+	{ path: '', redirectTo: 'course', pathMatch: 'full' },
   { path: 'profile-form-page', component:InstructorProfileformPageComponent, title:"Instructor profile page"},
   { path: 'account-settings/:id/profile-settings', component: InstructorAccountSettingsPageComponent , title: 'Recruiter account-settings page' },
 	{ path: '', component: InstructorComponent,
 	  children: [
-    { path: 'dashboard', component: InstructorDashboardPageComponent, title: 'Post Jobpost Page'  },
+    { path: 'overview-analytics', component: InstructorDashboardPageComponent, title: 'Post Jobpost Page'  },
 		{ path: 'course', component:InstructorCoursePageComponent, title:"Recruiter profile page"},
     { path: 'manage-courses', component:ManageYourCourseComponent, title:"Recruiter profile page"},
     { path: 'course-learners', component:InstructorCourseLearnersComponent, title:"Recruiter profile page"},
