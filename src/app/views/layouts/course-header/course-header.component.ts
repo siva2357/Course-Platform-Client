@@ -1,177 +1,198 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 import { CartItem } from 'src/app/core/models/cart.model';
 import { InstructorProfile, InstructorProfileHeader, StudentProfile, StudentProfileHeader } from 'src/app/core/models/user.model';
+
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CourseService } from 'src/app/core/services/course.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
-import { filter } from 'rxjs/operators';
-import { NavigationEnd } from '@angular/router';
+
 @Component({
   selector: 'app-course-header',
   templateUrl: './course-header.component.html',
   styleUrls: ['./course-header.component.css']
 })
 export class CourseHeaderComponent implements OnInit {
-
-  public userDetails! :InstructorProfile | StudentProfile;
-  public userProfile! :InstructorProfileHeader|StudentProfileHeader;
-
-  public fullName! :string;
-  public profile! :string;
+  // ✅ User Data
+  userDetails!: InstructorProfile | StudentProfile;
+  userProfile!: InstructorProfileHeader | StudentProfileHeader;
   userId!: string;
-  public errorMessage: string | null = null;
-  loading: boolean = true;  // For managing loading state
+  userRole: string | null = null;
 
-public userRole: string | null = null;
-cartCount: number = 0;
-cartItems: CartItem[] = [];
-  @Input() sidebarOpen: boolean = true; // Receives sidebar state
-  @Output() toggleSidebar = new EventEmitter<void>(); // Emits toggle event
+  // ✅ UI State
+  userName!: string;
+  fullName!: string;
+  profile!: string;
+  errorMessage: string | null = null;
+  loading = true;
 
-  toggle() {
-    this.sidebarOpen = !this.sidebarOpen;
-    this.toggleSidebar.emit(); // Emit event to parent to toggle sidebar
+  // ✅ Sidebar
+  @Input() sidebarOpen = true;
+  @Output() toggleSidebar = new EventEmitter<void>();
 
-  }
+  // ✅ Cart
+  cartItems: CartItem[] = [];
+  cartCount = 0;
+
+  // ✅ Notifications
+  notifications: any[] = [];
+  showAll = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-     private profileService:ProfileService,
-     private courseService:CourseService
+    private profileService: ProfileService,
+    private courseService: CourseService
   ) {}
 
-ngOnInit(): void {
-  this.userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
-  const role = localStorage.getItem('userRole') || this.authService.getRole() || '';
-  this.userRole = role;
+  ngOnInit(): void {
+    this.userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
+    this.userRole = localStorage.getItem('userRole') || this.authService.getRole() || '';
 
-  if (this.userId && role) {
-    if (role === 'student') {
-      this.getStudentDetails();
-      this.loadCartItems(); // 🔁 Only students need this
-    } else if (role === 'instructor') {
-      this.getInstructorDetails();
-    } else {
-      this.errorMessage = 'Invalid role.';
-    }
-  } else {
-    this.errorMessage = 'User ID or Role is not available.';
-  }
+    if (this.userId && this.userRole) {
+      this.loadNotifications();
 
-  // 🔁 Listen for route changes
-  this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe(() => {
-      if (this.userRole === 'student') {
-        this.loadCartItems();
+      switch (this.userRole) {
+        case 'admin':
+          this.getAdminDetails();
+          break;
+        case 'student':
+          this.getStudentDetails();
+          this.loadCartItems();
+          break;
+        case 'instructor': // fixed spelling
+          this.getInstructorDetails();
+          break;
+        default:
+          this.errorMessage = 'Invalid role.';
       }
+    } else {
+      this.errorMessage = 'User ID or Role is not available.';
+    }
+
+    // ✅ Refresh cart on route change (only for students)
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      if (this.userRole === 'student') this.loadCartItems();
     });
 
-  // 🔔 Manual cart refresh trigger
-  this.courseService.cartUpdated$.subscribe(() => {
-    if (this.userRole === 'student') {
-      this.loadCartItems();
-    }
-  });
-}
-
-
-
-
-
-getStudentDetails() {
-    this.profileService.getStudentProfileById(this.userId).subscribe(
-      (data: any) => {
-        this.userProfile = data;
-        this.fullName = this.userProfile.profile.fullName;
-        this.profile =  this.userProfile.profile.profilePicture.url
-        this.loading = false;
-
-      },
-      (error) => {
-        this.handleError(error);
-      }
-    );
-}
-
-getInstructorDetails() {
-  this.profileService.getInstructorProfileById(this.userId).subscribe(
-    (data:any) => {
-      this.userProfile = data;
-      this.fullName = this.userProfile.profile.fullName;
-      this.profile = this.userProfile.profile.profilePicture.url
-      this.loading = false;
-    },
-    (error) => {
-      this.handleError(error);
-    }
-  );
-}
-
-
-handleError(error: any) {
-    console.error('Error fetching user details:', error);
-    if (error.status === 401) {
-      this.errorMessage = 'Unauthorized access. Please log in again.';
-    } else {
-      this.errorMessage = 'An error occurred while fetching user details.';
-    }
-    this.loading = false;
-}
-
-
-goToProfilePage(): void {
-  const userId = this.authService.getUserId() || localStorage.getItem('userId') || '';
-  const userRole = this.authService.getRole() || localStorage.getItem('userRole') || '';
-
-  if (!userId || !userRole) {
-    console.error('User ID or role is missing');
-    return;
+    // ✅ Manual cart refresh trigger
+    this.courseService.cartUpdated$.subscribe(() => {
+      if (this.userRole === 'student') this.loadCartItems();
+    });
   }
 
-  const rolePath = userRole.toLowerCase();  // Ensures route path is consistent
-  this.router.navigate([`/${rolePath}/profile-page/${userId}`]);
-}
+  // 🔹 Sidebar
+  toggle(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+    this.toggleSidebar.emit();
+  }
 
+  // 🔹 Profile fetch
+  private getAdminDetails() {
+    // TODO: Implement admin profile API when ready
+  }
+
+  private getStudentDetails() {
+    this.profileService.getStudentProfileById(this.userId).subscribe({
+      next: (data: StudentProfileHeader) => {
+        this.userProfile = data;
+        this.setUserData();
+      },
+      error: err => this.handleError(err)
+    });
+  }
+
+
+
+  private getInstructorDetails() {
+    this.profileService.getInstructorProfileById(this.userId).subscribe({
+      next: (data: InstructorProfileHeader) => {
+        this.userProfile = data;
+        this.setUserData();
+      },
+      error: err => this.handleError(err)
+    });
+  }
+
+  private setUserData(): void {
+    this.userName = this.userProfile.userName;
+    this.fullName = this.userProfile.fullName;
+    this.profile = this.userProfile.profilePicture.url;
+    this.loading = false;
+  }
+
+  private handleError(error: any): void {
+    console.error('Error fetching user details:', error);
+    this.errorMessage = error.status === 401
+      ? 'Unauthorized access. Please log in again.'
+      : 'An error occurred while fetching user details.';
+    this.loading = false;
+  }
+
+  // 🔹 Navigation
+  goToProfilePage(): void {
+    if (!this.userId || !this.userRole) return;
+    this.router.navigate([`/${this.userRole.toLowerCase()}/profile-page/${this.userId}`]);
+  }
 
   goToAccountSettingsPage(): void {
-    const userId = localStorage.getItem('userId') || this.authService.getUserId() || '';
-    const userRole = localStorage.getItem('userRole') || this.authService.getRole() || '';
-    if (!userId || !userRole) {
-      console.error('User ID or role is missing');
-      return;
+    if (!this.userId || !this.userRole) return;
+    this.router.navigate([`/${this.userRole.toLowerCase()}/account-settings/${this.userId}/profile-settings`]);
+  }
+
+  goToPurchasePage(): void {
+    this.router.navigate(['freelancer/your-offers']);
+  }
+
+  goToCartPage(): void {
+    this.router.navigate(['/cart']);
+  }
+
+  onLogout(): void {
+    const role = this.userRole;
+    this.authService.logout();
+    if (role === 'instructor') {
+      this.router.navigate(['/instructor/login-page']);
+    } else if (role === 'student') {
+      this.router.navigate(['/student/login-page']);
     }
-    const rolePath = userRole.toLowerCase(); // Ensure lowercase for consistency
-    this.router.navigate([`/${rolePath}/account-settings/${userId}/profile-settings`]);
   }
 
-
-onLogout(): void {
-  const role = localStorage.getItem('userRole');
-  this.authService.logout();
-  if (role === 'instructor') {
-    this.router.navigate(['/instructor/login-page']);
-  } else if (role === 'student') {
-    this.router.navigate(['/student/login-page']);
+  // 🔹 Cart
+  private loadCartItems(): void {
+    this.courseService.getFromCart().subscribe({
+      next: cart => {
+        this.cartItems = cart.items || [];
+        this.cartCount = this.cartItems.length;
+      },
+      error: () => {
+        this.cartItems = [];
+        this.cartCount = 0;
+      }
+    });
   }
-}
 
-goToCartPage(){
-  this.router.navigate(['/cart']);
+  // 🔹 Notifications (stubs to implement later)
+  private loadNotifications(): void {}
+  getNotificationCount(): number {
+    return this.notifications.filter(n => !n.read).length;
+  }
+  deleteNotification(id: string): void {}
+  markAllRead(): void {}
+  clearAll(): void {}
+  markAsRead(id: string): void {}
 
-}
+  hasUnread(): boolean {
+    return this.getNotificationCount() > 0;
+  }
 
+  toggleShowAll(): void {
+    this.showAll = !this.showAll;
+  }
 
-loadCartItems(): void {
-  this.courseService.getFromCart().subscribe(cart => {
-    console.log('🧾 Cart response:', cart);
-    this.cartItems = cart.items || []; // fallback to avoid crash
-    this.cartCount = this.cartItems.length;
-  });
-}
-
-
-
+  get visibleNotifications() {
+    return this.showAll ? this.notifications : this.notifications.slice(0, 3);
+  }
 }

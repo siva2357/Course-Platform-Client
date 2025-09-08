@@ -1,0 +1,21 @@
+/* Main Content */
+.main-content {
+  transition: all 0.3s ease;
+  margin-left: 80px; /* default when sidebar is collapsed */
+  width: calc(100% - 80px);
+
+  min-height: 100vh;
+}
+
+.main-content.shifted {
+  margin-left: 230px; /* when sidebar is open */
+  width: calc(100% - 230px);
+}
+
+@media (max-width: 768px) {
+  .main-content,
+  .main-content.shifted {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}

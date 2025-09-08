@@ -40,11 +40,10 @@ export interface InstructorProfile {
 
 
 export interface InstructorProfileHeader {
-  profile :{
+  userName:string;
   fullName: string;
-profilePicture: { fileName: string;url: string;};  }
+profilePicture: { fileName: string;url: string;}; }
 
-}
 
 
 
@@ -89,9 +88,9 @@ export interface StudentProfile {
 
 
 export interface StudentProfileHeader {
-  profile :{
+  userName:string;
   fullName: string;
-profilePicture: { fileName: string;url: string;};  }
+profilePicture: { fileName: string;url: string;};
 
 }
 

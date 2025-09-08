@@ -1,20 +1,60 @@
 <header>
-  <nav class="navbar shadow bg-body-secondary fixed-top" style="height: 60px; font-family: 'Poppins', sans-serif;">
-    <div class="container-fluid">
-      <!-- Brand Section -->
-      <div class="navbar-brand d-flex align-items-center" style="text-decoration: none; color: black; cursor: pointer; margin-top: -5px;">
-        <img class="logo" style=" margin-right: 10px;" src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1737024440/Logo_qboacm.svg" alt="logo" width="40" height="40">
-        <div class="logo_name me-3 poppins-medium" *ngIf="sidebarOpen" style="font-size: 16px;">Creative Hub</div>
-        <i [ngClass]="!sidebarOpen ? 'bi bi-justify' : 'bi bi-justify'"id="btn" style="font-size: 1.5rem;"  (click)="toggle()"></i>
+  <nav class="navbar bg-body-secondary shadow fixed-top" style="height: 60px; font-family: 'Poppins', sans-serif;">
+    <div class="container-fluid d-flex justify-content-between align-items-center px-3" style="height: 100%;">
+
+      <!-- 🔹 Left: Logo + Toggle + Nav Items -->
+      <div class="d-flex align-items-center gap-3" style="height: 100%;">
+        <!-- Logo -->
+        <img src="https://firebasestorage.googleapis.com/v0/b/course-platform-247f5.firebasestorage.app/o/Website%2FLogo%201.jpg?alt=media&token=b7463ab0-2dee-41ae-87ec-d4d7610ae333" alt="Logo" style="width: 45px; height: 45px; border-radius: 50%;" />
+
+        <!-- Toggle Button -->
+        <button class="btn p-0 border-0 bg-transparent " (click)="toggle()" aria-label="Toggle sidebar"  *ngIf="userRole === 'admin'">
+          <i class="bi bi-list fs-3 text-dark"></i>
+        </button>
+
+<!-- Hamburger Icon for Small Devices -->
+<button class="btn p-0 border-0 bg-transparent d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav"  *ngIf="userRole !== 'admin'">
+  <i class="bi bi-list fs-3 text-dark"></i>
+</button>
+
+<div class="talent-navbar d-none d-lg-block" *ngIf="userRole === 'instructor'">
+
+  <ul class="talent-nav">
+    <li><a routerLink="/instructor/course" routerLinkActive="active-link">My Courses</a></li>
+    <li><a routerLink="/instructor/course-learners" routerLinkActive="active-link">Students</a></li>
+    <li><a routerLink="/instructor/payments"routerLinkActive="active-link">Earnings</a></li>
+    <li><a routerLink="/instructor/dashboard" routerLinkActive="active-link">Analytics</a></li>
+  </ul>
+</div>
+
+<div  class="talent-navbar d-none d-lg-block" *ngIf="userRole === 'student'">
+  <ul class="talent-nav">
+    <li><a routerLink="/student/home" routerLinkActive="active-link">Home</a></li>
+    <li><a routerLink="/student/my-courses" routerLinkActive="active-link">My Courses</a></li>
+    <li><a routerLink="/student/my-wishlist" routerLinkActive="active-link">My Wishlist</a></li>
+    <li><a routerLink="/student/my-certifications" routerLinkActive="active-link">My Certifications</a></li>
+    <li><a routerLink="/student/my-purchases" routerLinkActive="active-link">My Purchases</a></li>
+
+  </ul>
+</div>
+
+
+
+
       </div>
 
 
 
-      <!-- Right-Side Content -->
-      <div class="d-flex align-items-center" style="margin-right: 30px; ">
 
 
-        <div class="dropdown d-inline-block d-flex position-relative" *ngIf="userRole =='student'">
+
+      <!-- 🔹 Right: Notifications + Chat + Profile -->
+<div class="d-flex align-items-center gap-3" style="height: 100%;">
+
+
+
+
+              <div class="dropdown d-inline-block d-flex position-relative" *ngIf="userRole =='student'">
   <button type="button" class="btn btn-light rounded-circle me-3 position-relative" data-bs-toggle="dropdown" aria-expanded="false">
     <i class="bi bi-cart2" style="color: black;"></i>
 
@@ -47,40 +87,157 @@
   </ul>
 </div>
 
+  <!-- 🔔 Notifications -->
+  <div class="dropdown">
+<button class="btn btn-light rounded-circle p-2 d-flex align-items-center justify-content-center"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        style="width: 40px; height: 40px; position: relative;">
+  <i class="bi bi-bell text-dark fs-5"></i>
+
+  <!-- Badge with count -->
+  <span *ngIf="getNotificationCount()"
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        style="font-size: 12px; min-width: 20px;">
+    {{ getNotificationCount() }}
+  </span>
+</button>
 
 
-        <div class="dropdown d-inline-block d-flex ">
-          <button type="button" class="btn btn-light rounded-circle me-3" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-bell" style="color: black;"></i>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end mt-3 p-0 rounded-0 shadow text-center" style="width: 18rem;">
-            <li><p class="m-2">Sample notification msg</p></li>
-          </ul>
+    <!-- Notifications dropdown -->
+    <ul class="dropdown-menu dropdown-menu-end shadow px-2 py-2" style="width: 18rem;" (click)="$event.stopPropagation()">
+      <li *ngIf="notifications.length" class="d-flex justify-content-between align-items-center px-2 mb-1">
+        <button class="btn btn-sm text-primary" (click)="markAllRead()">Mark all read</button>
+        <button class="btn btn-sm text-danger" (click)="clearAll()">Clear all</button>
+      </li>
+      <li *ngIf="!notifications.length" class="text-center text-muted px-2 py-3">No notifications</li>
+      <hr class="my-1" *ngIf="notifications.length" />
 
-        </div>
-
-
-
-
-        <div class="poppins-medium" style="margin-right: 20px; font-size: 14px;">{{fullName}}</div>
-
-        <div class="dropdown">
-          <button class="nav-link d-flex justify-content-center align-items-center rounded-circle text-decoration-none bg-white" data-bs-toggle="dropdown" aria-expanded="false">
-            <img [src]="profile" alt="Profile Image" style="width: 35px; height: 35px; border-radius: 50%;">
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end shadow mt-3 rounded-0" style="width: 15rem;">
-            <li><a class="dropdown-item" (click)="goToProfilePage()">View Profile</a></li>
-            <li><a class="dropdown-item" (click)="goToAccountSettingsPage()">Account settings</a></li>
-            <hr class="mb-0 mt-0">
-            <li><a class="dropdown-item" style="cursor: pointer; font-size: 14px;" (click)="onLogout()">Sign Out</a></li>
-          </ul>
-        </div>
-
-
+      <div *ngIf="notifications.length" [style.maxHeight]="showAll ? 'auto' : '180px'" style="overflow-y: auto;" id="notificationList">
+        <li *ngFor="let n of visibleNotifications">
+          <div class="alert mb-2 py-2 px-3 d-flex justify-content-between align-items-start"
+              [ngClass]="n.read ? 'alert-light' : 'alert-primary'" style="font-size: 14px;">
+            <span (click)="markAsRead(n._id)" style="cursor: pointer;">{{ n.message }}</span>
+            <button (click)="deleteNotification(n._id)" class="btn-close btn-sm ms-2" aria-label="Close"></button>
+          </div>
+        </li>
       </div>
+
+      <li *ngIf="notifications.length > 3">
+        <button class="btn btn-sm text-primary w-100 mt-2" (click)="toggleShowAll()">
+          {{ showAll ? 'Show less' : 'Show more' }}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 👤 Username (hidden on small) -->
+  <div class=" d-md-flex justify-content-center align-items-center">
+    <p class="m-0" style="font-size: 14px;">{{ userName }}</p>
+  </div>
+
+  <!-- 👤 Profile Dropdown -->
+  <div class="dropdown position-relative">
+    <button class="nav-link p-0 bg-white border-0 d-flex align-items-center justify-content-center rounded-circle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="width: 45px; height: 45px; position: relative;">
+      <img [src]="profile" alt="Profile" class="rounded-circle"
+           style="width: 100%; height: 100%; object-fit: cover;" />
+      <!-- Online dot -->
+      <span style="position: absolute; bottom: 2px; right: 2px; width: 10px; height: 10px;
+                   background-color: #28a745; border: 2px solid white; border-radius: 50%;">
+      </span>
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-end shadow px-3 py-2 rounded-0" style="width: 14rem;">
+
+      <!-- Profile preview -->
+      <li class="mb-2 mt-1">
+        <div class="d-flex align-items-center gap-2 px-1">
+          <div class="rounded-circle border d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+            <img [src]="profile" alt="Profile" class="rounded-circle"
+                 style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <div class="d-flex flex-column">
+            <span class="fw-semibold" style="font-size: 14px;">{{ fullName }}</span>
+            <span class="text-muted" style="font-size: 13px;">{{ userRole }}</span>
+          </div>
+        </div>
+      </li>
+
+      <hr class="my-1" />
+
+      <!-- Menu Items -->
+      <li class="mt-2">
+        <a class="dropdown-item d-flex align-items-center gap-2" style="font-size: 14px; cursor: pointer;" (click)="goToProfilePage()">
+          <i class="bi bi-person-circle"></i> Your Profile
+        </a>
+      </li>
+
+      <li class="mt-2" *ngIf="userRole === 'freelancer'">
+        <a class="dropdown-item d-flex align-items-center gap-2" style="font-size: 14px; cursor: pointer;" (click)="goToPurchasePage()">
+          <i class="bi bi-briefcase-fill"></i>My Purchases
+        </a>
+      </li>
+
+      <li class="mt-2">
+        <a class="dropdown-item d-flex align-items-center gap-2" style="font-size: 14px; cursor: pointer;" (click)="goToAccountSettingsPage()">
+          <i class="bi bi-gear"></i> Account Settings
+        </a>
+      </li>
+
+      <hr class="my-1" />
+
+      <li class="mt-2">
+        <a class="dropdown-item d-flex align-items-center gap-2 text-danger" style="font-size: 14px; cursor: pointer;" (click)="onLogout()">
+          <i class="bi bi-box-arrow-right"></i> Log out
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
 
 
 
     </div>
   </nav>
+
+
+  <!-- 📱 Mobile Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start  w-100" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title fw-semibold" id="offcanvasNavLabel">Navigation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body px-3">
+    <ul class="list-unstyled mb-0">
+
+<ng-container *ngIf="userRole === 'instructor'">
+  <li class="nav-item"><a class="nav-link-custom d-flex align-items-center gap-2"  data-bs-dismiss="offcanvas"  routerLink="/instructor/course" routerLinkActive="fw-bold">My Courses</a></li>
+  <li class="nav-item"><a class="nav-link-custom d-flex align-items-center gap-2" data-bs-dismiss="offcanvas" routerLink="/instructor/course-learners" routerLinkActive="fw-bold">Students</a></li>
+  <li class="nav-item"><a class="nav-link-custom d-flex align-items-center gap-2" data-bs-dismiss="offcanvas" routerLink="/instructor/payments"  routerLinkActive="fw-bold">Earnings</a></li>
+  <li class="nav-item"><a class="nav-link-custom d-flex align-items-center gap-2" data-bs-dismiss="offcanvas" routerLink="/instructor/dashboard" routerLinkActive="fw-bold">Analytics</a></li>
+</ng-container>
+
+
+      <ng-container *ngIf="userRole === 'student'">
+        <li class="nav-item"><a class="nav-link-custom" data-bs-dismiss="offcanvas" routerLink="/student/home" routerLinkActive="fw-bold">Home</a></li>
+        <li class="nav-item"><a class="nav-link-custom" data-bs-dismiss="offcanvas" routerLink="/student/my-courses" routerLinkActive="fw-bold">My Courses</a></li>
+        <li class="nav-item"><a class="nav-link-custom" data-bs-dismiss="offcanvas" routerLink="/student/my-wishlist" routerLinkActive="fw-bold">My Wishlist</a></li>
+        <li class="nav-item"><a class="nav-link-custom" data-bs-dismiss="offcanvas" routerLink="/student/my-certifications" routerLinkActive="fw-bold">My Certifications</a></li>
+        <li class="nav-item"><a class="nav-link-custom" data-bs-dismiss="offcanvas" routerLink="/student/my-purchases" routerLinkActive="fw-bold">My Purchases</a></li>
+      </ng-container>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
 </header>
