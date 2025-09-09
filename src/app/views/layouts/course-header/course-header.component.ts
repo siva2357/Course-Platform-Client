@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 import { CartItem } from 'src/app/core/models/cart.model';
-import { InstructorProfile, InstructorProfileHeader, StudentProfile, StudentProfileHeader } from 'src/app/core/models/user.model';
+import { AdminProfileHeader, InstructorProfile, InstructorProfileHeader, StudentProfile, StudentProfileHeader } from 'src/app/core/models/user.model';
 
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CourseService } from 'src/app/core/services/course.service';
@@ -91,7 +91,13 @@ export class CourseHeaderComponent implements OnInit {
 
   // 🔹 Profile fetch
   private getAdminDetails() {
-    // TODO: Implement admin profile API when ready
+        this.profileService.getAdminProfileById(this.userId).subscribe({
+      next: (data: AdminProfileHeader) => {
+        this.userProfile = data;
+        this.setUserData();
+      },
+      error: err => this.handleError(err)
+    });
   }
 
   private getStudentDetails() {

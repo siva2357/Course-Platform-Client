@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { BasicProfile, InstructorProfile, InstructorProfileHeader, ProfileUpload, SocialMedia, StudentProfile, StudentProfileHeader} from '../models/user.model';
+import { AdminProfileHeader, BasicProfile, InstructorProfile, InstructorProfileHeader, ProfileUpload, SocialMedia, StudentProfile, StudentProfileHeader} from '../models/user.model';
 import { environment } from 'src/environments/environment';
 
 
@@ -214,6 +214,15 @@ updateStudentSocialMedia(studentId: string, payload: SocialMedia): Observable<St
 }
 
 
+
+  getAdminProfileById(adminId: string): Observable<AdminProfileHeader> {
+    if (this.role === 'admin' && this.userData._id === adminId) {
+      return of(this.userData);
+    } else {
+      return this.http.get<AdminProfileHeader>(`${this.baseUrl}/admin/${adminId}/profile`, { headers: this.getHeaders() })
+        .pipe(catchError(error => this.handleError(error)));
+    }
+  }
 
 
   private handleError(error: HttpErrorResponse): Observable<never> {

@@ -32,6 +32,7 @@ import { PaymentFailureComponent } from './views/pages/payment-failure/payment-f
 import { FindCoursesComponent } from './views/pages/find-courses/find-courses.component';
 import { AboutPageComponent } from './views/pages/about-page/about-page.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -16,7 +16,7 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { CourseDetailsPageComponent } from './course-details-page/course-details-page.component';
 import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -28,6 +28,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
     CourseListComponent,
     CourseDetailsPageComponent,
     TransactionsPageComponent,
+    AdminProfileComponent
   ],
   imports: [
     CommonModule,

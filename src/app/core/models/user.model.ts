@@ -125,3 +125,12 @@ export interface SocialMedia {
   updatedAt?: string;
   __v?: number;
 }
+
+
+
+export interface AdminProfileHeader {
+  userName:string;
+  fullName: string;
+profilePicture: { fileName: string;url: string;};
+
+}

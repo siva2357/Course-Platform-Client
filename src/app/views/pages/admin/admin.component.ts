@@ -10,11 +10,10 @@ export class AdminComponent {
 
     menu: MenuItem[] = [
     { label: 'Dashboard', icon: 'bi bi-grid', link: 'dashboard'},
-    { label: 'Clients', link: 'user-client',icon: 'bi bi-person-fill'},
-    { label: 'Freelancers', link: 'user-freelancer',icon: 'bi bi-person-workspace'},
-    { label: 'Job Posts', link: 'job-list',icon: 'bi bi-briefcase'},
-    { label: 'Applicants', link: 'applicant-list',icon: 'bi bi-people-fill'},
-    { label: 'Meetings', link: 'meetings',icon: 'bi bi-laptop'},
+    { label: 'Instructors', link: 'instructor-list',icon: 'bi bi-person-fill'},
+    { label: 'Students', link: 'student-list',icon: 'bi bi-person-workspace'},
+    { label: 'Courses', link: 'course-list',icon: 'bi bi-briefcase'},
+    { label: 'Transactions', link: 'transactions',icon: 'bi bi-people-fill'},
   ];
 
 

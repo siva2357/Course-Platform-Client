@@ -65,7 +65,16 @@ export class StudentLoginPageComponent {
                 this.router.navigate(response.profileComplete ?
                   ['student'] :
                   ['student/profile-form-page']);
-              } else {
+              }
+              if (response.role === 'instructor') {
+                this.router.navigate(response.profileComplete ?
+                  ['instructor'] :
+                  ['instructor/profile-form-page']);
+              }
+              else if (response.role === 'admin') {
+                this.router.navigate( ['admin']);
+              }
+               else {
                 console.warn('Unknown user role:', response.role);
               }
             }, 2000);

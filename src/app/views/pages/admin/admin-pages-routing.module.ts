@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -13,25 +12,40 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { CourseDetailsPageComponent } from './course-details-page/course-details-page.component';
 import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 
 const routes: Routes = [
-
-  { path: '', component:  AdminComponent,
+  {
+    path: '',
+    component: AdminComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component:  DashboardPageComponent , title: 'Freelancer Dashboard' },
-      { path: 'instructor-list', component: InstructorListComponent, title: 'Freelancer Dashboard' },
-      { path: 'instructor/:id/profile', component: InstructorProfileDetailsComponent, title: 'Freelancer Dashboard' },
-      { path: 'student-list', component: StudentListComponent, title: 'Freelancer Dashboard' },
-      { path: 'student/:id/profile', component: StudentProfileDetailsComponent, title: 'Freelancer Dashboard' },
-      { path: 'course-list', component: CourseListComponent, title: 'Freelancer Dashboard' },
-      { path: 'course-list/:id/course-details', component: CourseDetailsPageComponent, title: 'Freelancer Dashboard' },
-     { path: 'transactions', component: TransactionsPageComponent, title: 'Freelancer Dashboard' },
 
+      // Dashboard
+      { path: 'dashboard', component: DashboardPageComponent, title: 'Admin Dashboard' },
+
+      // Instructors
+      { path: 'instructor-list', component: InstructorListComponent, title: 'Instructors' },
+      { path: 'instructor/:id/profile', component: InstructorProfileDetailsComponent, title: 'Instructor Profile' },
+
+      // Students
+      { path: 'student-list', component: StudentListComponent, title: 'Students' },
+      { path: 'student/:id/profile', component: StudentProfileDetailsComponent, title: 'Student Profile' },
+
+      // Courses
+      { path: 'course-list', component: CourseListComponent, title: 'Courses' },
+      { path: 'course-list/:id/course-details', component: CourseDetailsPageComponent, title: 'Course Details' },
+
+      // Transactions
+      { path: 'transactions', component: TransactionsPageComponent, title: 'Transactions' },
+
+      // Admin profile
+      { path: 'profile-page/:id', component: AdminProfileComponent, title: 'Admin Profile' },
+
+      // Fallback
       { path: '**', redirectTo: 'dashboard' },
     ],
   },
-
 ];
 
 @NgModule({
