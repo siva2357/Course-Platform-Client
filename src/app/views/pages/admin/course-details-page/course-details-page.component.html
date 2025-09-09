@@ -1,1 +1,107 @@
-<p>course-details-page works!</p>
+<div *ngIf="loading" class="text-center py-5">
+  <div class="spinner-border text-primary"></div>
+  <p>Loading course details...</p>
+</div>
+
+<div *ngIf="!loading && courseDetails" class="container my-4">
+
+  <!-- Hero Section -->
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <h1 class="fw-bold">{{ courseDetails.landingPage.courseTitle }}</h1>
+      <p class="text-muted">{{ courseDetails.landingPage.courseCategory }}</p>
+      <div [innerHTML]="courseDetails.landingPage.courseDescription"></div>
+      <p class="mt-2">
+        Created by <strong>{{ courseDetails.createdBy.fullName }}</strong>
+        <span class="text-muted">({{ courseDetails.createdBy.email }})</span>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <video width="100%" height="200" controls [src]="courseDetails.landingPage.coursePreview"></video>
+        <div class="card-body">
+          <h4 class="fw-bold">{{ courseDetails.price.currency }} {{ courseDetails.price.amount }}</h4>
+          <button class="btn btn-primary w-100 mb-2">Enroll Now</button>
+          <button class="btn btn-outline-secondary w-100">Add to Wishlist</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What you'll learn -->
+  <div class="mb-4">
+    <h3>What you'll learn</h3>
+    <ul>
+      <li *ngFor="let obj of courseDetails.coursePlan.learningObjectives">{{ obj }}</li>
+    </ul>
+  </div>
+
+  <!-- Requirements -->
+  <div class="mb-4">
+    <h3>Requirements</h3>
+    <ul>
+      <li *ngFor="let req of courseDetails.coursePlan.courseRequirements">{{ req }}</li>
+    </ul>
+  </div>
+
+  <!-- Course Level -->
+  <div class="mb-4">
+    <h3>Course Level</h3>
+    <span *ngFor="let level of courseDetails.coursePlan.courseLevel" class="badge bg-info me-2">{{ level }}</span>
+  </div>
+
+<!-- Curriculum -->
+<div class="mb-4">
+  <h3>Curriculum</h3>
+
+  <div class="accordion" id="curriculumAccordion">
+    <div *ngFor="let section of courseDetails.curriculum.sections; let i = index" class="accordion-item">
+      <h2 class="accordion-header" id="heading{{i}}">
+        <button class="accordion-button collapsed fw-bold" type="button"
+                data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapse' + i"
+                aria-expanded="false"
+                [attr.aria-controls]="'collapse' + i">
+          {{ section.sectionTitle }}
+          <span class="ms-2 text-muted small">({{ section.sectionDuration }})</span>
+        </button>
+      </h2>
+
+      <div [id]="'collapse' + i" class="accordion-collapse collapse"
+           [attr.aria-labelledby]="'heading' + i"
+           data-bs-parent="#curriculumAccordion">
+        <div class="accordion-body p-0">
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let lecture of section.lectures" class="list-group-item">
+              <div class="d-flex align-items-start">
+                <!-- Small lecture video always visible -->
+                <video *ngIf="lecture.lectureContent?.length"
+                       class="me-3 rounded shadow-sm"
+                       width="180"
+                       height="100"
+                       controls
+                       [src]="lecture.lectureContent[0]">
+                </video>
+
+                <!-- Lecture info -->
+                <div class="flex-grow-1">
+                  <strong>{{ lecture.lectureTitle }}</strong>
+                  <p class="small text-muted mb-1">{{ lecture.lectureDescription }}</p>
+                  <span class="badge bg-secondary">{{ lecture.lectureDuration }}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<div *ngIf="!loading && errorMessage" class="alert alert-danger text-center">
+  {{ errorMessage }}
+</div>

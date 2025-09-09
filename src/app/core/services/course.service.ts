@@ -9,6 +9,7 @@ import { CartItem, WishList } from '../models/cart.model';
 import { Certificate } from '../models/certificate.model';
 import { CourseTracking } from '../models/courseTracking.model';
 import { CourseReport } from '../models/purchase.model';
+import { CourseResponse } from '../models/courseResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -254,6 +255,34 @@ getCourseProgress(courseId: string): Observable<any> {
 
 
 
+getCourses(): Observable<CourseResponse> {
+  return this.http
+    .get<CourseResponse>(`${this.baseUrl}/admin/all-courses`, { headers: this.getHeaders() })
+    .pipe(catchError(this.handleError));
+}
+
+
+  getCourseDetails(courseId:string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/admin/course/${courseId}/course-details`, { headers: this.getHeaders() }).pipe(catchError(this.handleError));
+  }
+
+
+// course.service.ts
+approveCourse(courseId: string, adminId: string): Observable<any> {
+  return this.http.patch<any>(
+    `${this.baseUrl}/admin/courses/${courseId}/approve`,
+    { adminId }, // payload only includes admin info
+    { headers: this.getHeaders() }
+  ).pipe(catchError(this.handleError));
+}
+
+rejectCourse(courseId: string, adminId: string): Observable<any> {
+  return this.http.patch<any>(
+    `${this.baseUrl}/admin/courses/${courseId}/reject`,
+    { adminId },
+    { headers: this.getHeaders() }
+  ).pipe(catchError(this.handleError));
+}
 
 
 

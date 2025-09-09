@@ -34,7 +34,7 @@ const routes: Routes = [
 
       // Courses
       { path: 'course-list', component: CourseListComponent, title: 'Courses' },
-      { path: 'course-list/:id/course-details', component: CourseDetailsPageComponent, title: 'Course Details' },
+      { path: 'course-list/:courseId/course-details', component: CourseDetailsPageComponent, title: 'Course Details' },
 
       // Transactions
       { path: 'transactions', component: TransactionsPageComponent, title: 'Transactions' },

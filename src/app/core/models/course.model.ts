@@ -8,7 +8,7 @@ export interface Course {
   curriculum: Curriculum;
   price: Price;
 
-  status?: "Pending" | "Published" | "Rejected" | "Draft";
+  status: "Pending" | "Published" | "Rejected" | "Draft";
 
   totalDuration?: string;       // "0m" default
 
@@ -133,5 +133,11 @@ export interface Category {
   courses: CoursePreview[];
   courseChunks: CoursePreview[][];
 }
+
+
+
+
+
+
 
 

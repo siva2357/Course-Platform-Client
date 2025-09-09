@@ -151,7 +151,7 @@ getAllCoursesPurchased(): Observable<{ total: number, data: any[] }> {
   // ✅ Get purchase summary grouped by course
   getPurchaseSummary(): Observable<{ totalLength: number, data: any[] }> {
     return this.httpClient.get<{ totalLength: number, data: any[] }>(
-      `${this.baseUrl}/admin/purchases`
+      `${this.baseUrl}/admin/purchases`,{ headers: this.getHeaders() }
     ).pipe(
       catchError(error => {
         console.error('Error fetching summary:', error);
