@@ -26,11 +26,11 @@ const routes: Routes = [
 
       // Instructors
       { path: 'instructor-list', component: InstructorListComponent, title: 'Instructors' },
-      { path: 'instructor/:id/profile', component: InstructorProfileDetailsComponent, title: 'Instructor Profile' },
+      { path: 'instructor/:instructorId/profile', component: InstructorProfileDetailsComponent, title: 'Instructor Profile' },
 
       // Students
       { path: 'student-list', component: StudentListComponent, title: 'Students' },
-      { path: 'student/:id/profile', component: StudentProfileDetailsComponent, title: 'Student Profile' },
+      { path: 'student/:studentId/profile', component: StudentProfileDetailsComponent, title: 'Student Profile' },
 
       // Courses
       { path: 'course-list', component: CourseListComponent, title: 'Courses' },

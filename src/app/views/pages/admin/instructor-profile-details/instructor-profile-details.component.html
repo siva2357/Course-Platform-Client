@@ -1,1 +1,158 @@
-<p>instructor-profile-details works!</p>
+<div class="container mt-5 p-1">
+  <div class="card overflow-hidden shadow-lg rounded-4 mt-5">
+
+    <!-- 🔹 Banner -->
+    <div class="w-100"
+         style="background-image: url('https://firebasestorage.googleapis.com/v0/b/talent-platform-c6b73.firebasestorage.app/o/Websites%2Fpngtree-modern-design-vibrant-violet-fluid-space-screen-with-rainbow-texture-image_13913957.png?alt=media&token=f2f245c5-d65a-4640-8198-3ff16b39b739');
+                background-size: cover; background-position: center; height: 150px;">
+    </div>
+
+    <!-- 🔹 Client Identity -->
+    <div class="text-center" style="margin-top: -75px;">
+      <img [src]="instructorProfile?.profileDetails?.profileDetails?.profilePicture.url"
+           class="rounded-circle shadow border border-4 border-white img-fluid"
+           style="width: 120px; height: 120px; object-fit: cover; object-position: center;"
+           alt="Client Profile">
+
+      <h5 class="fw-bold mt-3 mb-1 text-truncate px-2">
+        {{ instructorProfile.profileDetails.profileDetails.fullName }}
+      </h5>
+
+      <p class="text-muted fs-6 mb-0">
+        Client
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-4 p-1">
+  <div class="row g-4">
+
+    <!-- 🔹 LEFT COLUMN -->
+    <div class="col-md-5">
+
+      <!-- 👤 Client Info -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Client Information</h5>
+
+        <div class="mb-2 d-flex justify-content-between">
+          <span class="fw-semibold">Full Name</span>
+          <span>{{ instructorProfile.profileDetails.profileDetails.fullName }}</span>
+        </div>
+
+        <div class="mb-2 d-flex justify-content-between">
+          <span class="fw-semibold">Email</span>
+          <span>{{ instructorProfile.profileDetails.profileDetails.email }}</span>
+        </div>
+
+        <div class="mb-2 d-flex justify-content-between">
+          <span class="fw-semibold">Phone</span>
+          <span>{{ instructorProfile.profileDetails.profileDetails.phoneNumber }}</span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <span class="fw-semibold">Location</span>
+          <span>{{ instructorProfile.profileDetails.profileDetails.location }}</span>
+        </div>
+      </div>
+
+
+
+      <!-- 🌍 Languages -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4"
+           *ngIf="instructorProfile?.profileDetails?.profileDetails?.languages?.length">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Languages</h5>
+
+        <div *ngFor="let lang of instructorProfile.profileDetails.profileDetails.languages"
+             class="d-flex justify-content-between mb-2">
+          <span>{{ lang.language }}</span>
+          <span class="text-muted">{{ lang.proficiency }}</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- 🔹 RIGHT COLUMN -->
+    <div class="col-md-7">
+
+      <!-- 🧾 About Client -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">About the Client</h5>
+        <p class="mb-0" [innerHTML]="instructorProfile.profileDetails.profileDetails.bioDescription"></p>
+      </div>
+
+      <!-- 🌐 Social Media -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4"
+           *ngIf="instructorProfile.profileDetails.profileDetails.socialMedia.length">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Social Media</h5>
+        <div *ngFor="let link of instructorProfile.profileDetails.profileDetails.socialMedia"
+             class="mb-2 d-flex align-items-center">
+          <i [class]="getSocialIcon(link.platform) + ' me-2'"></i>
+          <a [href]="link.url" target="_blank" class="text-decoration-none text-dark">
+            {{ link.platform }}
+          </a>
+        </div>
+      </div>
+
+      <!-- 📋 Job Postings -->
+<!-- 📋 Courses -->
+<div class="card p-3 shadow-sm rounded-4 mb-5">
+  <h5 class="fw-bold mb-3" style="font-size: 16px;">Courses</h5>
+
+<div class="list-group list-group-flush">
+  <div class="list-group-item d-flex align-items-center px-2 py-2 border rounded-2 border-secondary"
+       *ngFor="let course of instructorProfile.courses">
+
+    <!-- Left: Thumbnail / Video -->
+<!-- Left: Video with Thumbnail Overlay -->
+<div class="position-relative me-3" style="width: 150px; height: 100px; flex-shrink: 0;">
+
+  <!-- Video -->
+  <video #courseVideo class="w-100 h-100 rounded"
+         [attr.controls]="!showOverlay ? true : null"
+         [src]="course.landingPage.coursePreview"></video>
+
+  <!-- Overlay: Thumbnail + Play Button -->
+  <div *ngIf="showOverlay"
+       class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center rounded"
+       style="cursor:pointer; background: rgba(0,0,0,0.2);"
+       (click)="playVideo()">
+
+    <img [src]="course.landingPage.courseThumbnail"
+         alt="Video thumbnail"
+         class="w-100 h-100 object-fit-cover rounded position-absolute top-0 start-0" />
+
+    <i class="bi bi-play-circle-fill text-white position-absolute"
+       style="font-size:2rem;"></i>
+  </div>
+
+</div>
+
+
+    <!-- Middle: Course Info -->
+    <div class="flex-grow-1">
+      <div class="fw-semibold">{{ course.landingPage.courseTitle }}</div>
+      <div class="text-muted">{{ course.landingPage.courseCategory }}</div>
+      <div class="text-muted mt-1">
+        Duration: {{ course.totalDuration }} | Revenue: ₹{{ course.revenue }} | Total Sales: ₹{{ course.totalSales }}
+      </div>
+    </div>
+
+    <!-- Right: Price & Status -->
+    <div class="text-end ms-3" style="min-width: 100px;">
+      <div>₹{{ course.price.amount }} ({{ course.price.pricingTier }})</div>
+      <span class="badge bg-success">{{ course.status }}</span>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
+
+
+    </div>
+  </div>
+</div>

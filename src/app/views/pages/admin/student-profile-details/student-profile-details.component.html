@@ -1,1 +1,159 @@
-<p>student-profile-details works!</p>
+<div class="container mt-5 p-1">
+  <div class="card overflow-hidden shadow-lg rounded-4 mt-5">
+
+    <!-- Banner -->
+    <div class="w-100"
+         style="background-image: url('https://firebasestorage.googleapis.com/v0/b/talent-platform-c6b73.firebasestorage.app/o/Websites%2Fpngtree-modern-design-vibrant-violet-fluid-space-screen-with-rainbow-texture-image_13913957.png?alt=media');
+                background-size: cover; background-position: center; height: 150px;">
+    </div>
+
+    <!-- Student Identity -->
+<div class="text-center" style="margin-top: -75px;">
+  <img [src]="studentProfile?.profileDetails?.profileDetails?.profilePicture?.url"
+       class="rounded-circle shadow border border-4 border-white img-fluid"
+       style="width: 120px; height: 120px; object-fit: cover;"
+       alt="Student Profile">
+
+  <h5 class="fw-bold mt-3 mb-1 text-truncate px-2">
+    {{ studentProfile?.profileDetails?.profileDetails?.fullName }}
+  </h5>
+
+  <p class="text-muted fs-6 mb-0">Student</p>
+</div>
+
+  </div>
+</div>
+
+<div class="container mt-4 p-1">
+  <div class="row g-4">
+
+    <!-- LEFT COLUMN -->
+    <div class="col-md-5">
+
+      <!-- Student Info -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Student Information</h5>
+<div class="mb-2 d-flex justify-content-between">
+  <span class="fw-semibold">Full Name</span>
+  <span>{{ studentProfile?.profileDetails?.profileDetails?.fullName }}</span>
+</div>
+
+<div class="mb-2 d-flex justify-content-between">
+  <span class="fw-semibold">Email</span>
+  <span>{{ studentProfile?.profileDetails?.profileDetails?.email }}</span>
+</div>
+
+<div class="mb-2 d-flex justify-content-between">
+  <span class="fw-semibold">Phone</span>
+  <span>{{ studentProfile?.profileDetails?.profileDetails?.phoneNumber || '-' }}</span>
+</div>
+
+<div class="d-flex justify-content-between">
+  <span class="fw-semibold">Location</span>
+  <span>{{ studentProfile?.profileDetails?.profileDetails?.location || '-' }}</span>
+</div>
+
+      </div>
+
+      <!-- Languages -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4"
+           *ngIf="studentProfile?.profileDetails?.languages?.length">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Languages</h5>
+
+        <div *ngFor="let lang of studentProfile.profileDetails.languages"
+             class="d-flex justify-content-between mb-2">
+          <span>{{ lang.language }}</span>
+          <span class="text-muted">{{ lang.proficiency }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <!-- RIGHT COLUMN -->
+    <div class="col-md-7">
+
+      <!-- About Student -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">About the Student</h5>
+<p class="mb-0" [innerHTML]="studentProfile?.profileDetails?.profileDetails?.bioDescription"></p>
+      </div>
+
+      <!-- Social Media -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Social Media</h5>
+<div *ngFor="let link of studentProfile?.profileDetails?.profileDetails?.socialMedia">
+  <i [class]="getSocialIcon(link.platform) + ' me-2'"></i>
+  <a [href]="link.url" target="_blank" class="text-decoration-none text-dark">
+    {{ link.platform }}
+  </a>
+</div>
+
+      </div>
+
+
+
+      <!-- Purchased Courses -->
+<!-- All Courses -->
+<div class="card p-3 shadow-sm rounded-4 mb-5" *ngIf="studentProfile?.courses?.length">
+  <h5 class="fw-bold mb-3">Courses</h5>
+
+  <div class="list-group list-group-flush">
+<div class="list-group-item d-flex align-items-center px-2 py-2 border rounded-2 border-secondary mb-2"
+     *ngFor="let course of studentProfile?.courses">
+
+  <!-- Video Thumbnail -->
+  <div class="position-relative me-3" style="width: 150px; height: 100px; flex-shrink: 0;">
+    <video #courseVideo class="w-100 h-100 rounded"
+           [attr.controls]="!showOverlay[course.landingPage.courseTitle] ? true : null"
+           [src]="course.landingPage.coursePreview"></video>
+
+    <div *ngIf="showOverlay[course.landingPage.courseTitle] !== false"
+         class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center rounded"
+         style="cursor:pointer; background: rgba(0,0,0,0.2);"
+         (click)="playVideo(course.landingPage.courseTitle, courseVideo)">
+      <img [src]="course.landingPage.courseThumbnail"
+           alt="Video thumbnail"
+           class="w-100 h-100 object-fit-cover rounded position-absolute top-0 start-0" />
+      <i class="bi bi-play-circle-fill text-white position-absolute" style="font-size:2rem;"></i>
+    </div>
+  </div>
+
+  <!-- Course Info -->
+  <div class="flex-grow-1">
+    <div class="fw-semibold">{{ course.landingPage.courseTitle }}</div>
+    <div class="text-muted">{{ course.landingPage.courseCategory }}</div>
+    <div class="text-muted mt-1">Duration: {{ course.totalDuration }}</div>
+
+    <div class="mt-1">
+      <small>Purchased: ₹{{ course.purchaseDetails.amount }} on {{ course.purchaseDetails.purchasedAt | date:'shortDate' }}</small>
+    </div>
+
+    <div class="mt-1">
+      <small>Progress: {{ course.tracking.progressPercentage }}%</small> |
+      <small *ngIf="course.tracking.isCourseCompleted && course.tracking.certificateIssued" class="text-success">
+        Certificate Issued
+      </small>
+      <small *ngIf="course.tracking.isCourseCompleted && !course.tracking.certificateIssued" class="text-warning">
+        Completed
+      </small>
+      <small *ngIf="!course.tracking.isCourseCompleted" class="text-muted">In Progress</small>
+    </div>
+  </div>
+
+  <div class="text-end ms-3" style="min-width: 100px;">
+    <div>₹{{ course.price.amount }} ({{ course.price.pricingTier }})</div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+
+
+
+
+
+    </div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ export enum SocialPlatform {
   Medium = 'Medium'
 }
 
+// URL regex validation
 export const SOCIAL_URL_PATTERNS: Record<SocialPlatform, RegExp> = {
   [SocialPlatform.LinkedIn]: /^https:\/\/(www\.)?linkedin\.com\/.*$/i,
   [SocialPlatform.Instagram]: /^https:\/\/(www\.)?instagram\.com\/.*$/i,
@@ -18,4 +19,16 @@ export const SOCIAL_URL_PATTERNS: Record<SocialPlatform, RegExp> = {
   [SocialPlatform.Behance]: /^https:\/\/(www\.)?behance\.net\/.*$/i,
   [SocialPlatform.Dribbble]: /^https:\/\/(www\.)?dribbble\.com\/.*$/i,
   [SocialPlatform.Medium]: /^https:\/\/(www\.)?medium\.com\/.*$/i
+};
+
+// New mapping for Bootstrap Icons (CSS class names)
+export const SOCIAL_ICONS: Record<SocialPlatform, string> = {
+  [SocialPlatform.LinkedIn]: 'bi bi-linkedin',
+  [SocialPlatform.Instagram]: 'bi bi-instagram',
+  [SocialPlatform.Website]: 'bi bi-globe',
+  [SocialPlatform.Twitter]: 'bi bi-twitter-x',  // Bootstrap now has X instead of bird
+  [SocialPlatform.GitHub]: 'bi bi-github',
+  [SocialPlatform.Behance]: 'bi bi-behance',
+  [SocialPlatform.Dribbble]: 'bi bi-dribbble',
+  [SocialPlatform.Medium]: 'bi bi-medium'
 };

@@ -1,1 +1,95 @@
-<p>instructor-list works!</p>
+<div class="container pt-5 mt-5 mb-5">
+  <!-- Section Heading -->
+  <div class="mb-4">
+    <h5 class="fw-semibold">Clients Management</h5>
+    <p class="text-muted" style="font-size: 14px;">View, filter, and manage registered clients</p>
+  </div>
+
+  <!-- Clients Table -->
+  <div class="table-responsive rounded-4 shadow-sm">
+    <table class="table table-hover align-middle border-0 mb-0" style="font-size: 14px;">
+      <thead class="table-light fw-semibold">
+        <tr>
+          <th>S.No</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Verification</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Last Login</th>
+          <th>Last Logout</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let instructor of paginatedInstructors; let i = index">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ instructor.registrationDetails?.fullName || '—' }}</td>
+          <td>{{ instructor.registrationDetails?.email || '—' }}</td>
+          <td>
+            <span class="badge rounded-pill"
+                  [ngClass]="instructor.registrationDetails?.verified ? 'bg-success' : 'bg-secondary'">
+              {{ instructor.registrationDetails?.verified ? 'Verified' : 'Unverified' }}
+            </span>
+          </td>
+          <td>{{ instructor.role || '—' }}</td>
+          <td>
+            <span class="badge rounded-pill"
+                  [ngClass]="{
+                    'bg-success': instructor.status === 'active',
+                    'bg-danger': instructor.status === 'inactive',
+                    'bg-warning text-dark': instructor.status === 'pending'
+                  }">
+              {{ instructor.status || '—' }}
+            </span>
+          </td>
+          <td>{{ instructor.lastLoginAt ? (instructor.lastLoginAt | date: 'short') : '—' }}</td>
+          <td>{{ instructor.lastLogoutAt ? (instructor.lastLogoutAt | date: 'short') : '—' }}</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-outline-info px-3" (click)="viewInstructorProfile(instructor._id)">
+              <i class="bi bi-eye me-1"></i> View
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="paginatedInstructors.length === 0">
+          <td colspan="9" class="text-center text-muted py-4">
+            <i class="bi bi-people fs-4 d-block mb-2"></i>
+            No clients found
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination + Controls -->
+  <div class="d-flex align-items-center mt-3 border rounded-4 shadow-sm bg-white flex-nowrap flex-wrap">
+    <!-- Left: Items per page -->
+    <div class="d-flex align-items-center flex-shrink-0 me-3" style="min-width: 100px;">
+      <label for="itemsPerPage" class="me-2 mb-0" style="white-space: nowrap;">Show</label>
+      <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updatePagination()"
+              class="form-select form-select-sm" style="min-width: 50px; max-width: 70px;">
+        <option *ngFor="let size of [5,10,20,50]" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+
+    <!-- Center: Pagination -->
+    <div class="flex-grow-1 d-flex justify-content-center overflow-auto">
+      <ul class="pagination pagination-sm m-0 flex-nowrap">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="onPageChange(currentPage - 1)" href="javascript:void(0)">&laquo;</a>
+        </li>
+        <li *ngFor="let page of pageNumbers" class="page-item" [class.active]="page === currentPage">
+          <a class="page-link" (click)="onPageChange(page)" href="javascript:void(0)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="onPageChange(currentPage + 1)" href="javascript:void(0)">&raquo;</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right: Current page info -->
+    <div class="flex-shrink-0 ms-3" style="min-width: 120px; text-align: right;">
+      <small class="text-muted">Page {{ currentPage }} of {{ totalPages }}</small>
+    </div>
+  </div>
+</div>

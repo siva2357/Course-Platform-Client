@@ -17,20 +17,15 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  private getHeaders(): HttpHeaders {
-    // const token = localStorage.getItem('token');
-
-const token = localStorage.getItem('JWT_Token');
-if (token) {
-  const decodedToken: any = jwtDecode(token);
+private getHeaders(): HttpHeaders {
+  const token = localStorage.getItem('JWT_Token');
+  if (!token) {
+    console.error("🚨 No token found in localStorage!");
+    return new HttpHeaders();
+  }
+  return new HttpHeaders({ Authorization: `Bearer ${token}` });
 }
 
-    if (!token) {
-      console.error("🚨 No token found in localStorage!");
-      return new HttpHeaders();
-    }
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
@@ -101,6 +96,23 @@ if (token) {
 
 
 
+
+getAllInstructors(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/instructors`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+}
+
+getInstructorProfileById(id: string): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/instructor/${id}/profile-details`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+}
+
+
+getAllStudents(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/students`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+}
+
+getStudentProfileById(id: string): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/student/${id}/profile-details`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
+}
 
 
 
