@@ -1,14 +1,15 @@
 <div class="container-fluid mt-5 mb-5 ">
   <h5 class="mb-4 mt-5">Overview Analytics</h5>
 
-<div class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-4 g-4">
+<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 mb-4">
   <div class="col" *ngFor="let card of cards">
     <div
       class="card border-0 rounded-4 py-3 w-100 h-100"
-      style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);"
+      style="background-color: #fcfcfc; border: 1px solid #007bff; box-shadow: 0 0 12px rgba(0,123,255,0.2);"
     >
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+      <div class="card-body d-flex flex-column justify-content-between h-100">
+        <!-- Header: Title + Dropdown -->
+        <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
           <p class="text-primary mb-0" style="font-size: 12px;">{{ card.title }}</p>
 
           <div class="dropdown ms-auto">
@@ -19,32 +20,41 @@
               aria-expanded="false"
               style="font-size: 12px;"
             >
-             <span>{{ card.getRange() }}</span>
+              {{ card.getRange() }}
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Weekly')">Weekly</a></li>
-              <li><a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Monthly')">Monthly</a></li>
-              <li><a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Yearly')">Yearly</a></li>
+              <li>
+                <a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Weekly')">Weekly</a>
+              </li>
+              <li>
+                <a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Monthly')">Monthly</a>
+              </li>
+              <li>
+                <a class="dropdown-item" style="font-size: 12px;" (click)="card.updateRange('Yearly')">Yearly</a>
+              </li>
             </ul>
           </div>
         </div>
 
+        <!-- Value -->
         <h5 class="text-dark fw-semibold mb-1" style="font-size: 20px;">
           {{ card.getValue() }}
         </h5>
-       <p class="text-muted mb-0" style="font-size: 13px;">
-  {{ getCardLabel(card.title, card.getRange()) }}
-</p>
 
+        <!-- Subtitle / Description -->
+        <p class="text-muted mb-0" style="font-size: 13px;">
+          {{ getCardLabel(card.title, card.getRange()) }}
+        </p>
       </div>
     </div>
   </div>
 </div>
 
 
-      <h5 class=" mt-5">Data Analytics</h5>
 
-  <div class="row  mb-5 ">
+<h5 class="mt-5">Data Analytics</h5>
+
+<div class="row mb-5">
 
   <!-- Pie Chart: Course Categories -->
   <div class="col-md-5 mb-4 mt-4">
@@ -53,6 +63,7 @@
         <h5 class="card-title text-primary mb-3">Courses by Category</h5>
         <div style="height: 300px;">
           <canvas baseChart
+                  #categoryChart
                   [data]="courseCategoryChartData"
                   [options]="courseCategoryChartOptions"
                   [type]="'pie'">
@@ -69,6 +80,7 @@
         <h5 class="card-title text-primary mb-3">Course Performance (Revenue & Students)</h5>
         <div style="height: 300px;">
           <canvas baseChart
+                  #performanceChart
                   [data]="coursePerformanceChartData"
                   [options]="coursePerformanceChartOptions"
                   [type]="'bar'">

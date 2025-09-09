@@ -1,0 +1,41 @@
+.table-responsive {
+  overflow-x: auto;          /* allow horizontal scroll */
+  overflow-y: hidden;        /* no vertical scroll */
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+}
+
+.table-responsive::-webkit-scrollbar {
+  height: 0; /* hide horizontal scrollbar */
+}
+.table-responsive::-webkit-scrollbar-track {
+  background: transparent;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.table-responsive {
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.table th,
+.table td {
+  white-space: nowrap;
+  padding: 10px 12px;
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: #f8f9fa;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 0.35em 0.65em;
+}

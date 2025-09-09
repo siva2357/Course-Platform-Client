@@ -8,6 +8,7 @@ import { Category, Course, CoursePlan, CoursesResponse, Curriculum, LandingPage,
 import { CartItem, WishList } from '../models/cart.model';
 import { Certificate } from '../models/certificate.model';
 import { CourseTracking } from '../models/courseTracking.model';
+import { CourseReport } from '../models/purchase.model';
 
 @Injectable({
   providedIn: 'root'
@@ -93,9 +94,13 @@ getAllCourses(): Observable<any> {
 }
 
 
-getInstructorLearnerReport(): Observable<any> {
-  return this.http.get<any>(`${this.baseUrl}/instructor/learners/report`, { headers: this.getHeaders() })
-    .pipe(catchError(this.handleError));
+getInstructorLearnerReport(): Observable<{ report: CourseReport[] }> {
+  return this.http.get<{ report: CourseReport[] }>(
+    `${this.baseUrl}/instructor/learners/report`,
+    { headers: this.getHeaders() }
+  ).pipe(
+    catchError(this.handleError)
+  );
 }
 
 

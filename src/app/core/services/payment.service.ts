@@ -1,5 +1,5 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Purchase } from '../models/purchase.model';
+import { InstructorPurchase, Purchase } from '../models/purchase.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, catchError, of, retry, throwError } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
@@ -163,14 +163,15 @@ getAllCoursesPurchased(): Observable<{ total: number, data: any[] }> {
 
 
 
-getInstructorCoursesRevenue(): Observable<{ total: number, data: any[] }> {
-  return this.httpClient.get<{ total: number, data: any[] }>(
+getInstructorCoursesRevenue(): Observable<{ purchases: InstructorPurchase[] }> {
+  return this.httpClient.get<{ purchases: InstructorPurchase[] }>(
     `${this.baseUrl}/instructor/revenue`,
     { headers: this.getHeaders() }
   ).pipe(
     catchError(this.handleError)
   );
 }
+
 
 
 checkCourseAccess(courseId: string): Observable<{ access: boolean }> {

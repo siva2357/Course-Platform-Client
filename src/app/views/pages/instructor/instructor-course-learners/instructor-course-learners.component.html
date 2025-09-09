@@ -33,15 +33,7 @@
         <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
         <td>{{ student.studentName }}</td>
         <td>{{ student.studentEmail }}</td>
-        <td>
-          <span [ngClass]="{
-            'badge bg-info': student.status === 'Certified',
-            'badge bg-success': student.status === 'Completed',
-            'badge bg-warning text-dark': student.status === 'In Progress'
-          }">
-            {{ student.status }}
-          </span>
-        </td>
+        <td>{{ student.status }}</td>
         <td>{{ student.startedOn | date: 'dd-MM-yyyy' }}</td>
         <td>{{ student.completedOn | date: 'dd-MM-yyyy' }}</td>
       </tr>

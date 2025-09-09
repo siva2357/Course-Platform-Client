@@ -16,22 +16,22 @@
     <thead class="table-light">
       <tr>
         <th style="width: 5%;">S.No</th>
-        <th style="width: 25%;">Course Name</th>
-        <th style="width: 20%;">Collections</th>
-        <th style="width: 20%;">Refunds</th>
-        <th style="width: 10%;">Orders</th>
-        <th style="width: 20%;">Revenue</th>
+        <th style="width: 25%;">Course Title</th>
+        <th style="width: 20%;">Student Name</th>
+        <th style="width: 20%;">Student Email</th>
+        <th style="width: 10%;">Amount</th>
+        <th style="width: 20%;">Status</th>
       </tr>
     </thead>
 
     <tbody *ngIf="paginatedData.length > 0">
       <tr *ngFor="let payment of paginatedData; let i = index">
         <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-        <td>{{ payment.courseName }}</td>
-        <td>₹{{ payment.collections }}</td>
-        <td>₹{{ payment.refunds }}</td>
-        <td>{{ payment.orders }}</td>
-        <td>₹{{ payment.revenue }}</td>
+        <td>{{ payment.courseTitle }}</td>
+        <td>{{ payment.studentName }}</td>
+        <td>{{ payment.studentEmail }}</td>
+        <td>₹{{ payment.amount | number:'1.0-0' }}</td>
+        <td>{{ payment.status }}</td>
       </tr>
     </tbody>
 
@@ -44,6 +44,7 @@
     </tbody>
   </table>
 </div>
+
 
 
 

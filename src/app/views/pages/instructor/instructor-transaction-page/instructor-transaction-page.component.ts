@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Purchase } from 'src/app/core/models/purchase.model';
+import { InstructorPurchase, Purchase } from 'src/app/core/models/purchase.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { PaymentService } from 'src/app/core/services/payment.service';
 
@@ -16,9 +16,9 @@ currentPage = 1;
 totalPages = 1;
 totalEntries = 0;
 pageNumbers: number[] = [];
-allPayments: any[] = []; // Replace with your actual data type
+allPayments: InstructorPurchase[] = [];
+paginatedData: InstructorPurchase[] = [];
 
-paginatedData: any[] = []; // Replace with your actual data type
     public  userId!: string;
 public userRole: string | null = null;
 
@@ -54,15 +54,9 @@ public userRole: string | null = null;
 
 fetchCoursePayments(): void {
   this.paymentService.getInstructorCoursesRevenue().subscribe({
-    next: (response: { total: number; data: any[] }) => {
-      this.allPayments = response.data.map((item: any) => ({
-        courseName: item.courseTitle,
-        collections: item.totalPayments,
-        refunds: item.totalRefunds,
-        revenue: item.netRevenue,
-        orders: item.totalOrders
-      }));
-      this.updatePagination(); // If you're using pagination logic
+    next: (response: { purchases: InstructorPurchase[] }) => {
+      this.allPayments = response.purchases || [];
+      this.updatePagination();
     },
     error: (error) => {
       console.error('Error fetching instructor revenue:', error);
@@ -70,6 +64,7 @@ fetchCoursePayments(): void {
     }
   });
 }
+
 
 
 
@@ -103,12 +98,12 @@ resetSearch() {
   this.updatePagination();
 }
 
-filterData() {
-  // Apply filtering logic
+filterData(): InstructorPurchase[] {
   return this.allPayments.filter(payment =>
-    payment.courseName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    payment.courseTitle.toLowerCase().includes(this.searchTerm.toLowerCase())
   );
 }
+
 
 
 }

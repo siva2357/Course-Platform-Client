@@ -70,9 +70,9 @@
   </div>
 
 
-<div class="table-responsive mb-4 mt-4">
-  <table class="table table-hover table-striped align-middle shadow-sm small">
-    <thead class="table-light d-none d-md-table-header-group">
+<div class="table-responsive rounded-4 shadow-sm mb-3 mt-3">
+  <table class="table table-hover align-middle mb-0" style="font-size: 14px;">
+    <thead class="table-light fw-semibold">
       <tr class="text-center">
         <th>S.No</th>
         <th>Course Title</th>
@@ -84,70 +84,62 @@
       </tr>
     </thead>
 
-    <tbody *ngIf="filteredData.length > 0">
-      <tr *ngFor="let course of paginatedData; let i = index"
-          class="d-block d-md-table-row mb-3 mb-md-0 border rounded shadow-sm p-3 p-md-0">
-
-        <!-- S.No -->
-        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
-          <span class="fw-bold d-md-none">#</span>
+    <tbody>
+      <tr *ngFor="let course of paginatedData; let i = index">
+        <!-- Index -->
+        <td class="text-center">
           {{ (currentPage - 1) * itemsPerPage + i + 1 }}
         </td>
 
         <!-- Title -->
-        <td class="d-flex d-md-table-cell justify-content-between align-items-center text-truncate" style="max-width: 220px;">
-          <span class="fw-bold d-md-none">Title:</span>
-          <span class="text-dark fw-semibold">{{ course.landingPage.courseTitle }}</span>
+        <td class="fw-semibold text-truncate" >
+          {{ course.landingPage.courseTitle }}
         </td>
 
         <!-- Category -->
-        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
-          <span class="fw-bold d-md-none">Category:</span>
-          {{ course.landingPage.courseCategory }}
-        </td>
+        <td>{{ course.landingPage.courseCategory }}</td>
 
-        <!-- Posted -->
-        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
-          <span class="fw-bold d-md-none">Posted On:</span>
-          {{ course.createdAt | date: 'dd-MM-yyyy' }}
-        </td>
-
-        <!-- Updated -->
-        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
-          <span class="fw-bold d-md-none">Updated On:</span>
-          {{ course.updatedAt | date: 'dd-MM-yyyy' }}
-        </td>
+        <!-- Dates -->
+        <td>{{ course.createdAt | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ course.updatedAt | date: 'dd-MM-yyyy' }}</td>
 
         <!-- Status -->
-        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
-          <span class="fw-bold d-md-none">Status:</span>
-          <span class="badge bg-success" *ngIf="course.status === 'Published'">{{ course.status }}</span>
-          <span class="badge bg-warning text-dark" *ngIf="course.status !== 'Published'">{{ course.status }}</span>
+        <td>
+          <span class="badge bg-success" *ngIf="course.status === 'Published'">
+            {{ course.status }}
+          </span>
+          <span class="badge bg-warning text-dark" *ngIf="course.status !== 'Published'">
+            {{ course.status }}
+          </span>
         </td>
 
         <!-- Actions -->
-        <td class="d-flex d-md-table-cell justify-content-between align-items-center">
-          <span class="fw-bold d-md-none">Actions:</span>
-          <div class="d-flex gap-2 flex-wrap justify-content-end">
-            <button class="btn btn-outline-info btn-sm shadow-sm px-3"
-                    (click)="goToEditCourse(course._id!)">Edit</button>
-            <button class="btn btn-outline-danger btn-sm shadow-sm px-3"
-                    (click)="deleteCourse(course._id!)">Delete</button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+<td class="text-center">
+  <div class="d-flex justify-content-center gap-2">
+    <button class="btn btn-sm btn-outline-info" (click)="goToEditCourse(course._id!)">
+      <i class="bi bi-pencil me-1"></i>Edit
+    </button>
+    <button class="btn btn-sm btn-outline-danger" (click)="deleteCourse(course._id!)">
+      <i class="bi bi-trash me-1"></i>Delete
+    </button>
+  </div>
+</td>
 
-    <!-- No Data -->
-    <tbody *ngIf="filteredData.length === 0">
-      <tr>
-        <td colspan="7" class="text-muted text-center py-4">
-          No courses available to display.
+      </tr>
+
+      <!-- Empty State -->
+      <tr *ngIf="paginatedData.length === 0">
+        <td colspan="7" class="text-center text-muted py-4">
+          <i class="bi bi-people fs-4 d-block mb-2"></i>
+          No courses found
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+
+
 
 
 
