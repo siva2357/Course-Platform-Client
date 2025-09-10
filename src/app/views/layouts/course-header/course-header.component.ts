@@ -156,20 +156,11 @@ export class CourseHeaderComponent implements OnInit {
     this.router.navigate(['/cart']);
   }
 
-  onLogout(): void {
-    const role = this.userRole;
-    this.authService.logout();
-    if (role === 'instructor') {
-      this.router.navigate(['/student/login-page']);
-    } else if (role === 'student') {
-      this.router.navigate(['/student/login-page']);
-    }
-     else if (role === 'admin') {
-      this.router.navigate(['/student/login-page']);
-    }
+onLogout(): void {
+  this.authService.logout();
+  this.router.navigate(['login-page']);
+}
 
-
-  }
 
   // 🔹 Cart
 // 🔹 Cart
