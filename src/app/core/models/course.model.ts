@@ -67,6 +67,7 @@ export interface Price {
   currency: string;
   pricingTier: string;
   amount: number;
+
 }
 
 
@@ -84,16 +85,21 @@ myCourses: CourseIntro[]}
 
 
 export interface CourseIntro {
-  _id: string;
+  purchaseId: string;
+  courseId: string; // string, not object
   title: string;
   description: string;
   thumbnail: string;
-  preview?: string;
-  createdByName: string;
-  createdAt: string;
+  preview: string;
+  category: string;
+  instructor: string;
+  purchasedAt: string;
   progressPercentage: number;
   isCourseCompleted: boolean;
+  certificateIssued: boolean;
 }
+
+
 
 
 
@@ -126,6 +132,8 @@ export interface CoursePreview {
   preview?: string;     // Optional (not used in card but part of API)
   createdByName?: string;
   createdAt?: string;
+    purchased?: boolean; // <-- add this
+
 }
 
 export interface Category {

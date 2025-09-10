@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Instructor, Student } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode' ;
 import { environment } from 'src/environments/environment';
+import { AdminDashboardStats } from '../models/stats.model';
 
 @Injectable({
   providedIn: 'root'
@@ -114,6 +115,16 @@ getStudentProfileById(id: string): Observable<any> {
   return this.http.get(`${this.baseUrl}/admin/student/${id}/profile-details`, { headers: this.getHeaders()}).pipe(catchError(error => this.handleError(error)));
 }
 
+
+  getCompleteStats(): Observable<AdminDashboardStats> {
+    return this.http
+      .get<{ success: boolean; data: AdminDashboardStats }>(`${this.baseUrl}/admin/stats`, { headers: this.getHeaders() })
+      .pipe(
+        catchError((error) => this.handleError(error)),
+        // map the response to return only the data
+        map((res) => res.data)
+      );
+  }
 
 
 }

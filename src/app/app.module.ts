@@ -31,6 +31,7 @@ import { PaymentSuccessComponent } from './views/pages/payment-success/payment-s
 import { PaymentFailureComponent } from './views/pages/payment-failure/payment-failure.component';
 import { FindCoursesComponent } from './views/pages/find-courses/find-courses.component';
 import { AboutPageComponent } from './views/pages/about-page/about-page.component';
+import { CheckoutPageComponent } from './views/pages/checkout-page/checkout-page.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { AboutPageComponent } from './views/pages/about-page/about-page.componen
     PaymentFailureComponent,
     FindCoursesComponent,
     AboutPageComponent,
+    CheckoutPageComponent
   ],
   imports: [
     BrowserModule,

@@ -160,25 +160,34 @@ export class CourseHeaderComponent implements OnInit {
     const role = this.userRole;
     this.authService.logout();
     if (role === 'instructor') {
-      this.router.navigate(['/instructor/login-page']);
+      this.router.navigate(['/student/login-page']);
     } else if (role === 'student') {
       this.router.navigate(['/student/login-page']);
     }
+     else if (role === 'admin') {
+      this.router.navigate(['/student/login-page']);
+    }
+
+
   }
 
   // 🔹 Cart
-  private loadCartItems(): void {
-    this.courseService.getFromCart().subscribe({
-      next: cart => {
-        this.cartItems = cart.items || [];
-        this.cartCount = this.cartItems.length;
-      },
-      error: () => {
-        this.cartItems = [];
-        this.cartCount = 0;
-      }
-    });
-  }
+// 🔹 Cart
+private loadCartItems(): void {
+  this.courseService.getFromCart().subscribe({
+    next: cart => {
+      // Only show items that are still "in-cart"
+      this.cartItems = (cart.items || []).filter((item: any) => item.purchaseStatus === 'in-cart');
+      this.cartCount = this.cartItems.length;
+    },
+    error: () => {
+      this.cartItems = [];
+      this.cartCount = 0;
+    }
+  });
+}
+
+
 
   // 🔹 Notifications (stubs to implement later)
   private loadNotifications(): void {}

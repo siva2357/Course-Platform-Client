@@ -31,7 +31,8 @@ loadCourses() {
         thumbnail: course.thumbnail,
         preview: course.preview,
         createdByName: course.createdByName,
-        createdAt: course.createdAt
+        createdAt: course.createdAt,
+        purchased: course.purchased // ✅ set purchased flag
       }));
 
       return {
@@ -45,6 +46,7 @@ loadCourses() {
 
 
 
+
 chunkCourses(courses: CoursePreview[], size: number): CoursePreview[][] {
   const chunks: CoursePreview[][] = [];
   for (let i = 0; i < courses.length; i += size) {
@@ -52,10 +54,6 @@ chunkCourses(courses: CoursePreview[], size: number): CoursePreview[][] {
   }
   return chunks;
 }
-
-
-
-
 
 
   getCarouselId(name: string): string {

@@ -26,10 +26,12 @@
         <div class="card-body p-2">
           <h6 class="card-title" (click)="goToCourseDetails(course)" style="cursor: pointer;">{{ course.title }}</h6>
           <p class="card-text small" [innerHTML]="course.description"></p>
-          <button class="btn btn-info btn-sm w-100"
-                  (click)="handleAddToCart(course._id)">
-            Add to Cart
-          </button>
+<button class="btn btn-info btn-sm w-100"
+        (click)="handleAddToCart(course._id)"
+        [disabled]="course.purchased">
+  {{ course.purchased ? 'Purchased' : 'Add to Cart' }}
+</button>
+
         </div>
       </div>
     </div>

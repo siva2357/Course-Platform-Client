@@ -151,29 +151,39 @@ removeFromWishlist(wishlistItemId: string): void {
   });
 }
 
-// buyNow(id: string) {
-//   this.router.navigate(['checkout', id]);
-// }
 
 buyNow(course: Course) {
+  if (!course || !course._id || !course.landingPage) return;
+
   const purchase: Purchase = {
-    courseId: course._id!,
+    courseId: course._id,
     courseTitle: course.landingPage.courseTitle,
-    amount: Number(course.price.amount) || 0, // ✅ force conversion to number
-    status: 'purchased' // optional, backend will default
+    courseThumbnail: course.landingPage.courseThumbnail || '',
+    amount: Number(course.price?.amount ?? 0),
+    status: 'purchased',
+    platformFee: 0,
+    revenueForInstructor: 0,
+    revenueForAdmin: 0,
+    refundCharges: 0,
+    taxCharges: Math.round(Number(course.price?.amount ?? 0) * 0.10), // 18% GST
+    purchasedAt: new Date().toISOString()
   };
 
   this.paymentService.createOrder(purchase).subscribe((response: any) => {
     if (response.status === 200) {
-      const paymentOrderId = response.data.id;
+      purchase.orderId = response.data.id;
       this.paymentService.setSelectedProductForCheckout(purchase);
-      console.log('Navigating to checkout with order id:', paymentOrderId);
-      this.router.navigate(['/checkout', paymentOrderId]);
+      this.router.navigate(['/checkout', purchase.orderId]);
+
     } else {
-      alert('Server side error, cannot process order');
+      alert('Server-side error, cannot process order.');
     }
   });
 }
+
+
+
+
 
 
   slugify(title: string): string {

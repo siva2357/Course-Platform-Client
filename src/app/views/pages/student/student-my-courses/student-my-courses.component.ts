@@ -14,14 +14,24 @@ import { Course, CourseIntro, CoursePreview, CoursesResponse } from 'src/app/cor
 
 export class StudentMyCoursesComponent  {
   courses:  CourseIntro[] = [];
-
+  studentId!: string;
+    errorMessage: string | null = null;
+      loading = true;
   constructor(
     public router: Router,
     public courseService: CourseService
   ) {}
 
-  ngOnInit() {
-    this.loadCourses();
+
+
+    ngOnInit() {
+    this.studentId = localStorage.getItem('userId') || '';
+    if (this.studentId) {
+      this.loadCourses();
+    } else {
+      this.errorMessage = 'Admin ID is missing. Please log in again.';
+      this.loading = false;
+    }
   }
 
   loadCourses() {
@@ -32,14 +42,14 @@ export class StudentMyCoursesComponent  {
   }
 
 goToCourse(course: CourseIntro): void {
-  if (!course?.title || !course?._id) {
+  if (!course?.title || !course?.courseId) {
     console.error('Course title or ID missing');
     return;
   }
 
   const slug = this.slugify(course.title);
   this.router.navigate(['/student/course/learning', slug, 'home'], {
-    queryParams: { courseId: course._id }
+    queryParams: { courseId: course.courseId } // ✅ use courseId here
   });
 }
 

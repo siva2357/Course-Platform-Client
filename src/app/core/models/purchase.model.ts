@@ -1,13 +1,22 @@
 export interface Purchase {
-  _id?: string;
-  courseId: string;
-  courseTitle: string; // 🟢 Match backend addition
-  orderId?: string;
-  paymentId?: string;
+  courseId: string | string[];
+  courseTitle: string;
+  courseThumbnail?: string;          // optional frontend-only thumbnail
   amount: number;
-  status?: 'purchased' | 'refunded' | 'non-refundable';
-  purchasedAt?: Date;
+  status: 'purchased' | 'refunded' | 'non-refundable';  // enum matches backend
+  platformFee: number;               // always sent by backend, default 0
+  revenueForInstructor: number;      // default 0
+  revenueForAdmin: number;           // default 0
+  refundCharges: number;             // default 0
+  taxCharges: number;                // default 0
+  purchasedAt: string;               // ISO date from backend
+  refundableUntil?: string;          // optional
+  paymentId?: string;                // optional
+  orderId?: string;                  // optional
+  purchasedById?: string;            // optional
 }
+
+
 
 
 

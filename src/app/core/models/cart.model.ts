@@ -6,6 +6,8 @@ export interface CartItem {
   courseThumbnail: string;
   courseDescription: string;
   amount: number;
+    purchaseStatus?: 'in-cart' | 'purchased' | 'refunded'; // ✅ Add this
+
 }
 
 
