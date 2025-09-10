@@ -14,12 +14,7 @@
   <!-- 🔎 Search Field -->
   <div class="col-12 col-md-4">
     <label class="form-label fw-medium mb-1 small">Search Course</label>
-    <input
-      type="text"
-      class="form-control form-control-sm shadow-sm"
-      [(ngModel)]="searchTerm"
-      placeholder="Search by title..."
-    />
+    <input type="text" class="form-control form-control-sm shadow-sm" [(ngModel)]="searchTerm" placeholder="Search by title..."/>
   </div>
 
   <!-- 📂 Category Filter -->
@@ -27,9 +22,7 @@
     <label class="form-label fw-medium mb-1 small">Filter by Category</label>
     <select
       class="form-select form-select-sm shadow-sm"
-      [(ngModel)]="selectedCategory"
-      (change)="filterByCategory()"
-    >
+      [(ngModel)]="selectedCategory">
       <option value="">All Categories</option>
       <option *ngFor="let category of availableCategories" [value]="category">
         {{ category }}
@@ -70,10 +63,10 @@
   </div>
 
 
-<div class="table-responsive rounded-4 shadow-sm mb-3 mt-3">
+<div class="table-responsive rounded-2 shadow-sm border border-dark mb-3 mt-3">
   <table class="table table-hover align-middle mb-0" style="font-size: 14px;">
-    <thead class="table-light fw-semibold">
-      <tr class="text-center">
+    <thead class="table-light fw-semibold text-center">
+      <tr>
         <th>S.No</th>
         <th>Course Title</th>
         <th>Category</th>
@@ -85,14 +78,12 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let course of paginatedData; let i = index">
+      <tr *ngFor="let course of paginatedData; let i = index" class="text-center">
         <!-- Index -->
-        <td class="text-center">
-          {{ (currentPage - 1) * itemsPerPage + i + 1 }}
-        </td>
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
 
         <!-- Title -->
-        <td class="fw-semibold text-truncate" >
+        <td class="fw-semibold text-truncate" style="max-width: 200px;">
           {{ course.landingPage.courseTitle }}
         </td>
 
@@ -105,21 +96,30 @@
 
         <!-- Status -->
         <td>
-          <span class="badge bg-success" *ngIf="course.status === 'Published'">
+          <span *ngIf="course.status === 'Published'"
+                class="badge rounded-pill"
+                style="background-color: #28a745; color: #fff;">
             {{ course.status }}
           </span>
-          <span class="badge bg-warning text-dark" *ngIf="course.status !== 'Published'">
+          <span *ngIf="course.status !== 'Published'"
+                class="badge rounded-pill"
+                style="background-color: #ffc107; color: #212529;">
             {{ course.status }}
           </span>
         </td>
 
         <!-- Actions -->
-<td class="text-center">
-  <div class="d-flex justify-content-center gap-2">
-    <button class="btn btn-sm btn-outline-info" (click)="goToEditCourse(course._id!)">
+<!-- Actions -->
+<td>
+  <div class="d-flex justify-content-center gap-2 flex-nowrap">
+    <button class="btn btn-sm btn-outline-info"
+            (click)="goToEditCourse(course._id!)"
+            style="min-width: 70px; white-space: nowrap;">
       <i class="bi bi-pencil me-1"></i>Edit
     </button>
-    <button class="btn btn-sm btn-outline-danger" (click)="deleteCourse(course._id!)">
+    <button class="btn btn-sm btn-outline-danger"
+            (click)="deleteCourse(course._id!)"
+            style="min-width: 70px; white-space: nowrap;">
       <i class="bi bi-trash me-1"></i>Delete
     </button>
   </div>
@@ -143,15 +143,18 @@
 
 
 
-<div class="d-flex align-items-center mb-3 border rounded shadow-sm bg-light  flex-nowrap flex-wrap">
-<div class="d-flex align-items-center flex-shrink-0 me-3" style="min-width: 100px;">
+
+<div class="d-flex align-items-center mb-3 border rounded shadow-sm bg-light flex-nowrap flex-wrap p-2">
+  <!-- Left: Items per page -->
+  <div class="d-flex align-items-center flex-shrink-0 me-3" style="min-width: 100px;">
     <label for="itemsPerPage" class="me-2 mb-0" style="white-space: nowrap;">Show</label>
-    <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updatePagination()" class="form-select form-select-sm" style="min-width: 50px; max-width: 60px;">
+    <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updatePagination()"
+            class="form-select form-select-sm" style="min-width: 50px; max-width: 60px;">
       <option *ngFor="let size of [5,10,20,50]" [value]="size">{{ size }}</option>
     </select>
   </div>
 
-
+  <!-- Center: Pagination -->
   <div class="flex-grow-1 d-flex justify-content-center overflow-auto">
     <ul class="pagination pagination-sm m-0 flex-nowrap">
       <li class="page-item" [class.disabled]="currentPage === 1">
@@ -170,40 +173,41 @@
   <div class="flex-shrink-0 ms-3" style="min-width: 100px; text-align: right;">
     <small class="text-muted">Page {{ currentPage }} of {{ totalPages }}</small>
   </div>
-
 </div>
 
 
 
-  <!-- ℹ️ Info Cards -->
-  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 px-2 px-md-4">
-    <div class="col" *ngFor="let card of [
-      { title: 'Create an Engaging Course', text: 'Outline and plan impactful content that keeps students engaged.', img: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg' },
-      { title: 'Get Started with Video', text: 'We’ll guide you on tools and tips to record high-quality lectures from home.', img: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg' },
-      { title: 'Build Your Audience', text: 'Get tips on growing your audience and reaching learners before going live.', img: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg' }
-    ]">
-      <div class="card h-100 border-0 rounded-4 shadow-sm"
-           style="background-color:#fcfcfc; border:1px solid #007bff;">
-        <img [src]="card.img" class="card-img-top rounded-top-4" [alt]="card.title">
-        <div class="card-body">
-          <h5 class="text-primary fw-semibold">{{ card.title }}</h5>
-          <p class="text-muted small">{{ card.text }}</p>
-        </div>
+
+<div class="row g-4  mt-5 justify-content-center">
+  <div class="col-12 col-md-12 col-xl-4" *ngFor="let card of [
+    { title: 'Create an Engaging Course', text: 'Outline and plan impactful content that keeps students engaged.', img: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg' },
+    { title: 'Get Started with Video', text: 'We’ll guide you on tools and tips to record high-quality lectures from home.', img: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg' },
+    { title: 'Build Your Audience', text: 'Get tips on growing your audience and reaching learners before going live.', img: 'https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169959/3d-render-online-education-survey-test-concept_107791-15665_dkwkmj.jpg' }
+  ]">
+    <div class="card h-100" style=" background-color: #ffffff; border: 1px solid #0d6efd; border-radius: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;  width: 100%;">
+      <img [src]="card.img" [alt]="card.title" style=" width: 100%; height: 220px; object-fit: cover; border-top-left-radius: 1rem; border-top-right-radius: 1rem; " >
+      <div class="card-body" style="padding: 1.5rem;">
+        <h5 style="color: #0d6efd; font-weight: 600; margin-bottom: 0.5rem;">{{ card.title }}</h5>
+        <p style="font-size: 0.875rem; color: #6c757d;">{{ card.text }}</p>
       </div>
     </div>
   </div>
+</div>
+
+
+
 
 </div>
 
 
 
 
-<div class="container-fluid py-5 bg-light">
+<div class="container py-5 bg-light">
 
   <!-- 🎯 Header -->
   <div class="text-center mb-5">
-    <h2 class="fw-bold text-primary">Start Your Course Creation Journey</h2>
-    <p class="text-secondary fs-6">We’ll guide you through every step to publish a high-quality learning experience.</p>
+    <h3 class="fw-semibold">Start Your Course Creation Journey</h3>
+    <p class="text-secondar" style="font-size: 14px;">We’ll guide you through every step to publish a high-quality learning experience.</p>
   </div>
 
   <!-- 🧭 Timeline -->

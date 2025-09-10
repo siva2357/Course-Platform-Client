@@ -48,10 +48,25 @@ this.courseService.getAllCourses().subscribe({
 
   }
 
-  performSearch() {
-  // You can implement your filtering logic here
-  console.log('Searching for:', this.searchTerm);
+performSearch() {
+  this.currentPage = 1;
+
+  this.filteredData = this.courses.filter(course => {
+    const matchesTitle =
+      !this.searchTerm ||
+      course.landingPage?.courseTitle?.toLowerCase().includes(this.searchTerm.toLowerCase());
+
+    const matchesCategory =
+      !this.selectedCategory ||
+      course.landingPage?.courseCategory === this.selectedCategory;
+
+    return matchesTitle && matchesCategory;
+  });
+
+  this.totalEntries = this.filteredData.length;
+  this.updatePagination();
 }
+
 
 
   applyFilters(): void {
@@ -67,26 +82,14 @@ filteredCourses(): Course[] {
   );
 }
 
-
-
-filterByCategory() {
-  this.currentPage = 1;
-  this.filteredData = this.courses.filter(course =>
-    (this.selectedCategory === '' || course.landingPage.courseCategory === this.selectedCategory) &&
-    (this.searchTerm === '' || course.landingPage.courseTitle.toLowerCase().includes(this.searchTerm.toLowerCase()))
-  );
+resetSearch(): void {
+  this.searchTerm = '';
+  this.selectedCategory = '';
+  this.filteredData = [...this.courses];
+  this.totalEntries = this.filteredData.length;
   this.updatePagination();
 }
 
-
-  onSearchChange(): void {
-    this.applyFilters();
-  }
-
-  resetSearch(): void {
-    this.searchTerm = '';
-    this.applyFilters();
-  }
 
   updatePagination(): void {
     this.totalPages = Math.max(Math.ceil(this.totalEntries / this.itemsPerPage), 1);
