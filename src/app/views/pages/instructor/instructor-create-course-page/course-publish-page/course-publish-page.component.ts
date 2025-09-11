@@ -31,7 +31,7 @@ export class CoursePublishPageComponent {
           this.successMessage = 'Profile submitted  successfully.';
 
           this.isUpdating = false;
-          this.router.navigate([`instructor/manage-courses`,]);
+          this.router.navigate([`instructor/course`,]);
         },
         error: (err) => {
           console.error('Update failed:', err);
@@ -44,7 +44,7 @@ export class CoursePublishPageComponent {
 
 
       previous() {
-      this.router.navigate([`instructor//course/${this.courseId}/create/course-pricing-page`]);
+      this.router.navigate([`instructor/course/${this.courseId}/create/course-pricing-page`]);
     }
 
 }

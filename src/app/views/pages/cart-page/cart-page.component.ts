@@ -12,12 +12,10 @@ import { PaymentService } from 'src/app/core/services/payment.service';
 })
 export class CartPageComponent implements OnInit {
   cartItems: CartItem[] = [];
-  totalItems: number = 0;
+  totalItems = 0;
   isLoading = false;
   errorMessage = '';
   successMessage = '';
-  couponCode = '';
-  studentId!: string;
 
   constructor(
     private courseService: CourseService,
@@ -26,20 +24,15 @@ export class CartPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.studentId = localStorage.getItem('userId') || '';
-    if (this.studentId) {
-      this.loadCart();
-    } else {
-      this.errorMessage = 'Student ID is missing. Please log in again.';
-    }
+    this.loadCart();
   }
 
   loadCart() {
     this.isLoading = true;
     this.courseService.getFromCart().subscribe({
       next: (res: any) => {
-        // Only include items that are not purchased
-        this.cartItems = res.items;
+        // Only include items that are still in-cart
+        this.cartItems = res.items.filter((i: CartItem) => i.purchaseStatus === 'in-cart');
         this.totalItems = this.cartItems.length;
         this.isLoading = false;
       },
@@ -68,56 +61,63 @@ export class CartPageComponent implements OnInit {
   }
 
   getCartTotal(): number {
-    // Sum only items that are not purchased
-    return this.cartItems
-      .filter(item => item.purchaseStatus === 'in-cart')
-      .reduce((sum, item) => sum + (item.amount || 0), 0);
+    return this.cartItems.reduce((sum, item) => sum + (item.amount || 0), 0);
   }
 
-  applyCoupon() {
-    if (!this.couponCode) return alert('Enter a coupon code');
-    alert(`Coupon "${this.couponCode}" applied!`);
-  }
+
 
   goToHome() {
     this.router.navigate(['/student']);
   }
 
-  proceedToCheckout(cartItem?: CartItem) {
-    const item = cartItem || this.cartItems.find(ci => ci.purchaseStatus === 'in-cart');
-    if (!item) return alert('No items available for checkout');
+proceedToCheckout(cartItem?: CartItem) {
+  const item = cartItem || this.cartItems[0];
+  if (!item) return alert('No items available for checkout');
 
-    const purchase: Purchase = {
-      courseId: item._id,
-      courseTitle: item.courseTitle,
-      courseThumbnail: item.courseThumbnail || '',
-      amount: item.amount,
-      status: 'purchased',
-      platformFee: 0,
-      revenueForInstructor: 0,
-      revenueForAdmin: 0,
-      refundCharges: 0,
-      taxCharges: Math.round(item.amount * 0.10),
-      purchasedAt: new Date().toISOString()
-    };
+  const purchase: Purchase = {
+    courseId: item.courseId,
+    courseTitle: item.courseTitle,
+    courseThumbnail: item.courseThumbnail || '',
+    amount: item.amount,
+    status: 'purchased',
+    platformFee: 0,
+    revenueForInstructor: 0,
+    revenueForAdmin: 0,
+    refundCharges: 0,
+    taxCharges: Math.round(item.amount * 0.10),
+    purchasedAt: new Date().toISOString()
+  };
 
-    this.isLoading = true;
-    this.paymentService.createOrder(purchase).subscribe({
-      next: (res: any) => {
-        if (res.status === 200) {
-          purchase.orderId = res.data.id;
-          this.paymentService.setSelectedProductForCheckout(purchase);
-          this.removeFromCart(item._id);
-          this.router.navigate(['/checkout', purchase.orderId]);
-        } else {
-          alert('Server error, cannot process order.');
-        }
-        this.isLoading = false;
-      },
-      error: () => {
-        this.errorMessage = 'Failed to create order';
-        this.isLoading = false;
+  this.isLoading = true;
+
+  // ✅ Create order on backend
+  this.paymentService.createOrder(purchase).subscribe({
+    next: (res: any) => {
+      if (res.status === 200) {
+        purchase.orderId = res.data.id;
+
+        // ✅ Save purchase for Checkout page
+        this.paymentService.setSelectedProductForCheckout(purchase);
+
+        // ✅ Navigate to checkout AFTER storing purchase
+        this.router.navigate(['/checkout', purchase.orderId]);
+
+        // ✅ Remove from cart only after order is successfully created
+        this.courseService.removeFromCart(item._id).subscribe({
+          next: () => this.courseService.triggerCartUpdate(),
+          error: () => console.error('Failed to remove item from cart')
+        });
+      } else {
+        alert('Server error, cannot process order.');
       }
-    });
-  }
+      this.isLoading = false;
+    },
+    error: () => {
+      this.errorMessage = 'Failed to create order';
+      this.isLoading = false;
+    }
+  });
+}
+
+
 }

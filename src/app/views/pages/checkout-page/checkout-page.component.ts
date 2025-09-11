@@ -30,20 +30,21 @@ export class CheckoutPageComponent implements OnInit {
     this.razorPayKey = this.paymentService.getRazorPayKey();
   }
 
-  listenSelectedProduct() {
-    const product = this.paymentService.getSelectedProductForCheckout();
-    if (product) {
-      this.selectedProduct = product;
-      // Calculate prices
-this.coursePrice = Number(product.amount);
-this.taxCharges = Number(product.taxCharges || 0);
-this.totalPaid = this.coursePrice + this.taxCharges;
+listenSelectedProduct() {
+  const product = this.paymentService.getSelectedProductForCheckout();
 
-    } else {
-      console.warn('No product found for checkout');
-      this.router.navigateByUrl('/courses');
-    }
+  if (!product) {
+    console.warn('No product found for checkout');
+    this.router.navigateByUrl('/student/cart'); // if coming from Cart
+    return;
   }
+
+  this.selectedProduct = product;
+  this.coursePrice = Number(product.amount);
+  this.taxCharges = Number(product.taxCharges || 0);
+  this.totalPaid = this.coursePrice + this.taxCharges;
+}
+
 
 getOrderId() {
   return this.route.snapshot.params['paymentOrderId'];

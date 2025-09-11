@@ -12,14 +12,13 @@
   <div *ngFor="let category of categories" class="mb-5">
     <h4 class="mb-3 fw-semibold">{{ category.name }}</h4>
 
-    <!-- ✅ Category carousel -->
     <div class="carousel slide" [attr.id]="getCarouselId(category.name)" data-bs-ride="carousel">
       <div class="carousel-inner">
 
         <div *ngFor="let chunk of category.courseChunks; let i = index" class="carousel-item" [class.active]="i === 0">
           <div class="row gx-3">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let course of chunk">
-              <div class="card shadow-sm   h-100 hover-shadow">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let course of chunk">
+              <div class="card shadow-sm h-100 hover-shadow">
                 <img [src]="course.thumbnail || 'assets/default-course.jpg'" class="card-img-top rounded-0" alt="course-img" style="height: 160px; object-fit: cover;" />
                 <div class="card-body d-flex flex-column justify-content-between p-2">
                   <h6 class="card-title mb-1 text-truncate" (click)="goToCourseDetails(course)"
@@ -28,11 +27,13 @@
                   </h6>
                   <p class="card-text small mb-2 text-truncate" [title]="course.description" [innerHTML]="course.description"></p>
 
-                  <button class="btn btn-sm w-100" [ngClass]="course.purchased ? 'btn-secondary' : 'btn-info'" (click)="handleAddToCart(course._id)">
+                  <button class="btn btn-sm w-100"
+                          [ngClass]="course.purchased ? 'btn-secondary' : 'btn-info'"
+                          [disabled]="course.purchased"
+                          (click)="handleAddToCart(course._id)">
                     {{ course.purchased ? 'Purchased' : 'Add to Cart' }}
                   </button>
                 </div>
-
               </div>
             </div>
           </div>
@@ -40,7 +41,6 @@
 
       </div>
 
-      <!-- Carousel Controls -->
       <button class="carousel-control-prev" [attr.data-bs-target]="'#' + getCarouselId(category.name)" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
       </button>
@@ -50,5 +50,4 @@
 
     </div>
   </div>
-
 </div>
