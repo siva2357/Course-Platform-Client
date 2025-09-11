@@ -50,12 +50,11 @@ public userRole: string | null = null;
 
 
 
-
-
+// Component fetch method
 fetchCoursePayments(): void {
   this.paymentService.getInstructorCoursesRevenue().subscribe({
-    next: (response: { purchases: InstructorPurchase[] }) => {
-      this.allPayments = response.purchases || [];
+    next: (response) => {
+      this.allPayments = response.data || [];  // now correctly uses `data` from backend
       this.updatePagination();
     },
     error: (error) => {
@@ -64,6 +63,7 @@ fetchCoursePayments(): void {
     }
   });
 }
+
 
 
 

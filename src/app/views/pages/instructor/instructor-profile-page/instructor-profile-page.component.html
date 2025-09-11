@@ -1,135 +1,158 @@
-<div class="container-fluid bg-body-secondary  mt-5">
+<div class="container mt-5 p-1">
+  <div class="card overflow-hidden shadow-lg rounded-4 mt-5">
 
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
+    <!-- 🔹 Banner -->
+    <div class="w-100"
+         style="background-image: url('https://firebasestorage.googleapis.com/v0/b/talent-platform-c6b73.firebasestorage.app/o/Websites%2Fpngtree-modern-design-vibrant-violet-fluid-space-screen-with-rainbow-texture-image_13913957.png?alt=media&token=f2f245c5-d65a-4640-8198-3ff16b39b739');
+                background-size: cover; background-position: center; height: 150px;">
+    </div>
 
+    <!-- 🔹 Client Identity -->
+    <div class="text-center" style="margin-top: -75px;">
+      <img [src]="instructorProfile?.profileDetails?.profileDetails?.profilePicture.url"
+           class="rounded-circle shadow border border-4 border-white img-fluid"
+           style="width: 120px; height: 120px; object-fit: cover; object-position: center;"
+           alt="Client Profile">
 
-          <div class="col position-relative d-flex align-items-center justify-content-center" style="background-image: url('https://res.cloudinary.com/dpp8aspqs/image/upload/v1740547685/gradient-FZRCWTCT_d2bqiv.jpg'); background-size: cover;  height: 15vh; width: 100%; border-radius: 10px;">
+      <h5 class="fw-bold mt-3 mb-1 text-truncate px-2">
+        {{ instructorProfile.profileDetails.profileDetails.fullName }}
+      </h5>
 
-            <!-- Profile Section (Left-Aligned on Top of Background) -->
-            <div class="profile text-center p-4 rounded position-absolute top-50 start-0 translate-middle-y "
-              style="margin-left: 30px;  border-radius: 10px; margin-top:50px; margin-left: 30px;">
-              <div class="profile-avatar rounded-circle mb-3">
-
-                <img id="avatarImage" [src]="userDetails.profileDetails.profilePicture.url" alt="Avatar"
-                  class="img-fluid">
-              </div>
-
-            </div>
-          </div>
-
-
-          <div class="row p-5 mt-5 g-4 text-dark d-flex align-items-start justify-content-start text-center">
-
-            <!-- Designation Section -->
-
-
-            <div class="col-auto d-flex flex-column mx-3">
-              <p class="fw-semibold mb-0 text-primary">Recruiter Name</p>
-              <p class="fw-semibold mb-0 text-start">{{userDetails.profileDetails.fullName}} </p>
-            </div>
+      <p class="text-muted fs-6 mb-0">
+        Client
+      </p>
+    </div>
+  </div>
+</div>
 
 
+<div class="container mt-4 p-1">
+  <div class="row g-4">
 
-            <!-- Job Posts Card -->
-            <div class="col-auto mx-3">
-              <div class="card rounded-5 shadow-sm" style="width: 12rem; height: auto;">
-                <div class="card-body d-flex align-items-center justify-content-center p-2">
+    <!-- 🔹 LEFT COLUMN -->
+    <div class="col-md-5">
 
-                  <!-- Circular Icon with Outline -->
-                  <div class="rounded-circle d-flex align-items-center justify-content-center border border-primary"
-                    style="width: 40px; height: 40px; background-color: transparent; margin-left: -20px;">
-                    <i class="bi bi-briefcase text-primary" style="font-size: 1.2rem;"></i>
-                  </div>
+      <!-- 👤 Client Info -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Client Information</h5>
 
-                  <!-- Number & Text Section -->
-                  <div class="d-flex flex-column text-start ms-3">
-                    <p class="fw-semibold mb-0" style="font-size: 14px;">10</p>
-                    <p class="fw-light mb-0" style="font-size: 14px;">Project uploads</p>
-                  </div>
+        <div class="mb-2 d-flex justify-content-between">
+          <span class="fw-semibold">Full Name</span>
+          <span>{{ instructorProfile.profileDetails.profileDetails.fullName }}</span>
+        </div>
 
-                </div>
-              </div>
-            </div>
+        <div class="mb-2 d-flex justify-content-between">
+          <span class="fw-semibold">Email</span>
+          <span>{{ instructorProfile.profileDetails.profileDetails.email }}</span>
+        </div>
 
+        <div class="mb-2 d-flex justify-content-between">
+          <span class="fw-semibold">Phone</span>
+          <span>{{ instructorProfile.profileDetails.profileDetails.phoneNumber }}</span>
+        </div>
 
-
-
-
-          </div>
-
-
-
-
-          <div class="container">
-            <h5>Basic Details</h5>
-            <hr class="mt-0">
-
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td style="width: 20%; border: none;">Full Name:</td>
-                  <td style="border: none;">{{userDetails.profileDetails.fullName}}</td>
-                </tr>
-
-                <tr>
-                  <td style="border: none;">Gender:</td>
-                  <td style="border: none;">{{userDetails.profileDetails.gender}}</td>
-                </tr>
-
-                <tr>
-                  <td style="border: none;">Bio-Data:</td>
-                  <td style="border: none; text-align: justify;" [innerHTML]="userDetails.profileDetails.bioDescription"></td>
-                </tr>
-
-              </tbody>
-            </table>
-
-
-
-
-          </div>
-
-
-
-
-          <div class="container ">
-            <h5>Contact details</h5>
-            <hr>
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td style="width: 20%; border: none;">Email:</td>
-                  <td style="border: none;">{{userDetails.profileDetails.email}}</td>
-                </tr>
-
-
-              </tbody>
-            </table>
-
-          </div>
-
-
-
-
-
-
-
+        <div class="d-flex justify-content-between">
+          <span class="fw-semibold">Location</span>
+          <span>{{ instructorProfile.profileDetails.profileDetails.location }}</span>
         </div>
       </div>
+
+
+
+      <!-- 🌍 Languages -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4"
+           *ngIf="instructorProfile?.profileDetails?.profileDetails?.languages?.length">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Languages</h5>
+
+        <div *ngFor="let lang of instructorProfile.profileDetails.profileDetails.languages"
+             class="d-flex justify-content-between mb-2">
+          <span>{{ lang.language }}</span>
+          <span class="text-muted">{{ lang.proficiency }}</span>
+        </div>
+      </div>
+
     </div>
 
 
+    <!-- 🔹 RIGHT COLUMN -->
+    <div class="col-md-7">
+
+      <!-- 🧾 About Client -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">About the Client</h5>
+        <p class="mb-0" [innerHTML]="instructorProfile.profileDetails.profileDetails.bioDescription"></p>
+      </div>
+
+      <!-- 🌐 Social Media -->
+      <div class="card p-3 shadow-sm rounded-4 mb-4"
+           *ngIf="instructorProfile.profileDetails.profileDetails.socialMedia.length">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Social Media</h5>
+        <div *ngFor="let link of instructorProfile.profileDetails.profileDetails.socialMedia"
+             class="mb-2 d-flex align-items-center">
+          <i [class]="getSocialIcon(link.platform) + ' me-2'"></i>
+          <a [href]="link.url" target="_blank" class="text-decoration-none text-dark">
+            {{ link.platform }}
+          </a>
+        </div>
+      </div>
+
+      <!-- 📋 Job Postings -->
+<!-- 📋 Courses -->
+<div class="card p-3 shadow-sm rounded-4 mb-5">
+  <h5 class="fw-bold mb-3" style="font-size: 16px;">Courses</h5>
+
+<div class="list-group list-group-flush">
+  <div class="list-group-item d-flex align-items-center px-2 py-2 border rounded-2 border-secondary"
+       *ngFor="let course of instructorProfile.courses">
+
+    <!-- Left: Thumbnail / Video -->
+<!-- Left: Video with Thumbnail Overlay -->
+<div class="position-relative me-3" style="width: 150px; height: 100px; flex-shrink: 0;">
+
+  <!-- Video -->
+  <video #courseVideo class="w-100 h-100 rounded"
+         [attr.controls]="!showOverlay ? true : null"
+         [src]="course.landingPage.coursePreview"></video>
+
+  <!-- Overlay: Thumbnail + Play Button -->
+  <div *ngIf="showOverlay"
+       class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center rounded"
+       style="cursor:pointer; background: rgba(0,0,0,0.2);"
+       (click)="playVideo()">
+
+    <img [src]="course.landingPage.courseThumbnail"
+         alt="Video thumbnail"
+         class="w-100 h-100 object-fit-cover rounded position-absolute top-0 start-0" />
+
+    <i class="bi bi-play-circle-fill text-white position-absolute"
+       style="font-size:2rem;"></i>
+  </div>
+
+</div>
+
+
+    <!-- Middle: Course Info -->
+    <div class="flex-grow-1">
+      <div class="fw-semibold">{{ course.landingPage.courseTitle }}</div>
+      <div class="text-muted">{{ course.landingPage.courseCategory }}</div>
+      <div class="text-muted mt-1">
+        Duration: {{ course.totalDuration }} | Revenue: ₹{{ course.revenue }} | Total Sales: ₹{{ course.totalSales }}
+      </div>
+    </div>
+
+    <!-- Right: Price & Status -->
+    <div class="text-end ms-3" style="min-width: 100px;">
+      <div>₹{{ course.price.amount }} ({{ course.price.pricingTier }})</div>
+      <span class="badge bg-success">{{ course.status }}</span>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
 
 
     </div>
   </div>
-
-
-
-
-
-
-
+</div>

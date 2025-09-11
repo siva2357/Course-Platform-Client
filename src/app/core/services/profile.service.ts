@@ -36,11 +36,11 @@ setUpdatedProfileImage(url: string) {
 }
 
 
-  getInstructorProfile(instructorId: string): Observable<InstructorProfile> {
+  getInstructorProfile(instructorId: string): Observable<any> {
     if (this.role === 'instructor' && this.userData._id === instructorId) {
       return of(this.userData);
     } else {
-      return this.http.get<InstructorProfile>(`${this.baseUrl}/instructor/${instructorId}/profile-details`, { headers: this.getHeaders() })
+      return this.http.get<any>(`${this.baseUrl}/instructor/${instructorId}/profile-details`, { headers: this.getHeaders() })
         .pipe(catchError(error => this.handleError(error)));
     }
   }

@@ -21,14 +21,16 @@ export interface Purchase {
 
 
 export interface InstructorPurchase {
-  _id: string;
-  purchasedAt: string;
-  studentName: string;
-  studentEmail: string;
+  purchaseId: string;
   courseTitle: string;
-  amount: number;
+  sellingPrice: number;
+  taxCharges: number;
+  platformFee: number;
+  revenueForInstructor: number;
+  purchasedAt: string;
   status: string;
 }
+
 
 
 export interface Learner {

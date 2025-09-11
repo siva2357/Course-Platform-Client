@@ -163,8 +163,9 @@ getAllCoursesPurchased(): Observable<{ total: number, data: any[] }> {
 
 
 
-getInstructorCoursesRevenue(): Observable<{ purchases: InstructorPurchase[] }> {
-  return this.httpClient.get<{ purchases: InstructorPurchase[] }>(
+// Instructor service
+getInstructorCoursesRevenue(): Observable<{ success: boolean; total: number; data: InstructorPurchase[] }> {
+  return this.httpClient.get<{ success: boolean; total: number; data: InstructorPurchase[] }>(
     `${this.baseUrl}/instructor/revenue`,
     { headers: this.getHeaders() }
   ).pipe(
