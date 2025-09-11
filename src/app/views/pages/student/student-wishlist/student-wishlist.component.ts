@@ -61,8 +61,41 @@ removeFromWishlist(wishlistItemId: string) {
 
 
 
-  goToCart() {
+  goToCart(courseId: string): void  {
+  this.courseService.addToCart(courseId).subscribe({
+    next: (res) => {
+      console.log('Cart add response:', res);
+      // 🔔 Notify header to refresh cart count
+      this.courseService.triggerCartUpdate(); // << ADD THIS LINE
+    },
+    error: (err) => {
+      console.error('Add to cart error:', err);
+    }
+  });
+}
+
+
+goToCourse(course: WishList): void {
+  if (!course?.courseTitle || !course?.courseId) {
+    console.error('Course title or ID missing');
+    return;
   }
+
+  const slug = this.slugify(course.courseTitle);
+  this.router.navigate(['/student/course/learning', slug, 'home'], {
+    queryParams: { courseId: course.courseId } // ✅ use courseId here
+  });
+}
+
+// Optional slugify function (basic)
+slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // replace non-alphanumeric with hyphens
+    .replace(/(^-|-$)+/g, '');   // remove leading/trailing hyphens
+}
+
+
 
 
     }

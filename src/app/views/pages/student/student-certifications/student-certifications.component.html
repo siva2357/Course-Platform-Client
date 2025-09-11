@@ -1,48 +1,49 @@
 
-<div class="container mt-4 p-3 mt-5">
+
+<div class="container mt-5 pt-5">
   <h2 class="fw-bold mb-4">🏅 My Certifications</h2>
 
-  <div *ngIf="courses.length === 0" class="text-muted">
-    No certifications available yet.
+  <!-- Empty State -->
+  <div *ngIf="courses.length === 0" class="text-center text-muted py-5">
+    <i class="bi bi-award fs-1 mb-3"></i>
+    <p class="mb-0">No certifications available yet.</p>
   </div>
 
+  <!-- Certification Cards -->
   <div *ngFor="let course of courses" class="card shadow-sm border-0 rounded-4 mb-4">
-    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+    <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
 
-      <!-- Course Info -->
-      <div class="d-flex gap-3 align-items-start">
-        <img [src]="course.thumbnail || 'assets/default-course.jpg'" alt="Course Thumbnail"
-             class="rounded" style="width: 100px; height: 70px; object-fit: cover;" />
+      <!-- Left Column: Course Info -->
+      <div class="d-flex gap-3 align-items-start flex-grow-1">
+        <img [src]="course.thumbnail || 'assets/default-course.jpg'"
+             alt="Course Thumbnail"
+             class="rounded"
+             style="width: 120px; height: 80px; object-fit: cover;" />
 
-        <div>
+        <div class="flex-grow-1">
           <h5 class="fw-semibold mb-1">{{ course.title }}</h5>
-          <p class="mb-1 text-muted small">Instructor: {{ course.instructor }}</p>
+          <p class="mb-2 text-muted small">Instructor: {{ course.instructor }}</p>
 
-          <!-- Progress -->
-          <div class="progress mb-2" style="height: 6px; width: 250px;">
+          <!-- Progress Bar -->
+          <div class="progress mb-1" style="height: 6px; max-width: 250px;">
             <div class="progress-bar bg-success" [style.width.%]="course.progress"></div>
           </div>
-          <small class="text-muted">
-            Progress: {{ course.progress }}% |
-            {{ course.progress}}
-          </small><br />
+          <small class="text-muted">Progress: {{ course.progress }}%</small>
 
-          <!-- Certificate Info -->
-          <ng-container *ngIf="course.certificateIssued && course.isCompleted">
-            <span class="badge bg-success-subtle text-success fw-medium mt-2">Certificate Issued</span>
-            <div class="text-muted small">Issued on: {{ course.createdAt | date: 'mediumDate' }}</div>
-          </ng-container>
+          <!-- Certificate Status -->
+          <div *ngIf="course.certificateIssued && course.isCompleted" class="mt-2">
+            <span class="badge bg-success-subtle text-success fw-medium">Certificate Issued</span>
+            <div class="text-muted small">Issued on: {{ course.createdAt | date:'mediumDate' }}</div>
+          </div>
         </div>
       </div>
 
-      <!-- Button -->
-      <div class="ms-auto mt-3 mt-md-0">
-        <button class="btn btn-outline-primary btn-sm"
-                (click)="viewCertificate(course.courseId)">
+      <!-- Right Column: View Certificate Button -->
+      <div class="mt-3 mt-md-0 d-flex align-items-center">
+        <button class="btn btn-outline-primary btn-sm" (click)="viewCertificate(course.courseId)">
           View Certificate
         </button>
       </div>
     </div>
   </div>
 </div>
-

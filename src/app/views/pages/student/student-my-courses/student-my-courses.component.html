@@ -1,28 +1,46 @@
-<div class="container-fluid mt-5">
+<div class="container pt-5 mt-5">
   <h2 class="fw-bold mb-4">My Learning</h2>
 
-  <div class="row g-4">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let course of courses">
-      <div class="card shadow-sm border-0 rounded-3 h-100">
-        <img [src]="course.thumbnail" class="card-img-top" alt="Course Thumbnail">
+  <div *ngIf="courses?.length === 0" class="text-center text-muted py-5">
+    You haven't started any courses yet.
+  </div>
 
-        <div class="card-body d-flex flex-column justify-content-between">
+  <div class="row g-4" *ngIf="courses?.length">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let course of courses">
+      <div class="card shadow-sm border-0 rounded-4 h-100 hover-shadow">
+
+        <!-- Course Thumbnail -->
+        <div class="position-relative">
+          <img [src]="course.thumbnail || 'assets/default-course.jpg'" class="card-img-top rounded-2" alt="Course Thumbnail" style="height: 180px; object-fit: cover;" />
+          <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center rounded-top-4"
+               *ngIf="!course.thumbnail">
+            <i class="bi bi-image fs-2 text-white"></i>
+          </div>
+        </div>
+
+        <div class="card-body d-flex flex-column justify-content-between p-3">
+          <!-- Course Info -->
           <div>
-            <h6 class="fw-semibold">{{ course.title }}</h6>
-            <div class="text-muted small" [innerHTML]="course.description"></div>
+            <h6 class="fw-semibold mb-1 text-truncate" [title]="course.title">{{ course.title }}</h6>
+            <p class="text-muted small mb-2 text-truncate" [title]="course.description" [innerHTML]="course.description"></p>
           </div>
 
+          <!-- Progress -->
           <div>
             <div class="progress mb-2" style="height: 8px;">
               <div class="progress-bar bg-info" [style.width.%]="course.progressPercentage"></div>
             </div>
             <small class="text-muted">Progress: {{ course.progressPercentage }}%</small>
+          </div>
 
-            <button class="btn btn-sm btn-primary w-100 mt-2" (click)="goToCourse(course)">
-              Go to Course
+          <!-- Go to Course Button -->
+          <div class="mt-3">
+            <button class="btn btn-primary btn-sm w-100" (click)="goToCourse(course)">
+              <i class="bi bi-play-circle me-2"></i> Continue Course
             </button>
           </div>
         </div>
+
       </div>
     </div>
   </div>

@@ -19,5 +19,6 @@ export interface WishList {
   courseThumbnail: string;
   courseDescription: string;
   amount: number;
+  isPurchased:boolean;
 }
 

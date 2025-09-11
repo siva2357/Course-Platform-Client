@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SOCIAL_ICONS, SocialPlatform } from 'src/app/core/enums/socialMedia.enum';
 import { StudentProfile } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
@@ -10,12 +11,12 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 })
 export class StudentProfilePageComponent implements OnInit{
 
-    public userDetails! :StudentProfile;
+    public userDetails! :any;
     public  userId!: string;
    public errorMessage: string | null = null;
 public userRole: string | null = null;
 public   loading: boolean = true;  // For managing loading state
-
+  socialIcons = SOCIAL_ICONS;
       constructor(
         private router: Router,
         private authService: AuthService,
@@ -54,6 +55,14 @@ public   loading: boolean = true;  // For managing loading state
 }
 
 
+  getSocialIcon(platform: string): string {
+    const normalized = Object.keys(SocialPlatform).find(
+      key => SocialPlatform[key as keyof typeof SocialPlatform].toLowerCase() === platform.toLowerCase()
+    );
+    return normalized
+      ? this.socialIcons[SocialPlatform[normalized as keyof typeof SocialPlatform]]
+      : 'bi bi-globe';
+  }
 
 handleError(error: any) {
     console.error('Error fetching user details:', error);

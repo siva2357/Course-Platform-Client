@@ -3,9 +3,11 @@
 
     <!-- Left: Certificate Details -->
     <div class="col-lg-6">
-      <div class="certificate-container h-100">
+      <div class="certificate-container p-4 shadow-sm rounded-4 h-100 bg-white">
+
+        <!-- User Info -->
         <div class="d-flex align-items-center mb-4">
-          <img [src]="profilePicture" alt="User Avatar" class="user-avatar me-3" />
+          <img [src]="profilePicture || 'assets/default-avatar.png'" alt="User Avatar" class="user-avatar rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;" />
           <div>
             <h5 class="mb-1 fw-semibold text-dark">{{ fullName }}</h5>
             <span class="text-muted small">
@@ -14,31 +16,31 @@
           </div>
         </div>
 
+        <!-- Course Details -->
         <p class="mb-2"><strong>Course Duration:</strong> {{ courseDuration }}</p>
         <p class="mb-3"><strong>Grade Achieved:</strong> A+</p>
-
         <hr />
 
         <!-- Learning Objectives -->
-        <div *ngIf="learningObjectives?.length">
-          <div class="section-heading">Learning Objectives</div>
-          <ul class="mb-3 ps-3">
+        <div *ngIf="learningObjectives?.length" class="mb-3">
+          <h6 class="fw-semibold mb-2 text-dark">Learning Objectives</h6>
+          <ul class="ps-3 mb-0">
             <li *ngFor="let item of learningObjectives">{{ item }}</li>
           </ul>
         </div>
 
         <!-- Course Requirements -->
-        <div *ngIf="courseRequirements?.length">
-          <div class="section-heading">Course Requirements</div>
-          <ul class="mb-3 ps-3">
+        <div *ngIf="courseRequirements?.length" class="mb-3">
+          <h6 class="fw-semibold mb-2 text-dark">Course Requirements</h6>
+          <ul class="ps-3 mb-0">
             <li *ngFor="let req of courseRequirements">{{ req }}</li>
           </ul>
         </div>
 
         <!-- Course Level -->
-        <div *ngIf="courseLevel?.length">
-          <div class="section-heading">Course Level</div>
-          <ul class="mb-3 ps-3">
+        <div *ngIf="courseLevel?.length" class="mb-3">
+          <h6 class="fw-semibold mb-2 text-dark">Course Level</h6>
+          <ul class="ps-3 mb-0">
             <li *ngFor="let lvl of courseLevel">{{ lvl }}</li>
           </ul>
         </div>
@@ -47,25 +49,28 @@
 
     <!-- Right: Certificate Preview -->
     <div class="col-lg-6">
-      <div class="certificate-container text-center">
-<div class="certificate-preview mb-4">
-  <div *ngIf="isGeneratingImage" class="text-center">
-    <div class="spinner-border text-primary" role="status"></div>
-    <p class="mt-2">Generating certificate preview...</p>
-  </div>
+      <div class="certificate-container p-4 shadow-sm rounded-4 bg-white text-center">
 
-  <img *ngIf="certificateImageUrl && !isGeneratingImage" [src]="certificateImageUrl" alt="Certificate" class="img-fluid" />
-</div>
+        <!-- Certificate Preview -->
+        <div class="certificate-preview mb-4">
+          <div *ngIf="isGeneratingImage" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2 mb-0">Generating certificate preview...</p>
+          </div>
 
+          <img *ngIf="certificateImageUrl && !isGeneratingImage" [src]="certificateImageUrl" alt="Certificate" class="img-fluid rounded border"style="max-height: 400px; object-fit: contain;" />
+        </div>
 
-        <div class="d-flex justify-content-center gap-3 action-buttons" *ngIf="isCourseCompleted">
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-center gap-3 mt-3" *ngIf="isCourseCompleted">
           <button class="btn btn-outline-primary" (click)="downloadCertificate()">
-            <i class="bi bi-download me-2"></i> Download Certificate
+            <i class="bi bi-download me-2"></i> Download
           </button>
           <button class="btn btn-outline-success">
-            <i class="bi bi-share me-2"></i> Share Certificate
+            <i class="bi bi-share me-2"></i> Share
           </button>
         </div>
+
       </div>
     </div>
 

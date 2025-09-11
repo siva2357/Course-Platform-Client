@@ -1,70 +1,54 @@
-<div class="container-fluid mt-5">
+<div class="container pt-5 mt-5">
+
   <!-- 🔍 Search Bar -->
   <div class="mb-4">
-    <form class="position-relative">
-      <input type="search" class="form-control ps-5 rounded-4 w-100 w-md-75"
-             placeholder="Search for anything" style="font-size: 14px;" />
+    <form class="position-relative w-100 w-md-75 mx-auto">
+      <input type="search" class="form-control ps-5 rounded-4" placeholder="Search for anything" style="font-size: 14px;" />
       <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
     </form>
   </div>
 
-
   <!-- ✅ CATEGORY LOOP -->
-<div *ngFor="let category of categories" class="mb-5">
-  <h4 class="mb-3">{{ category.name }}</h4>
+  <div *ngFor="let category of categories" class="mb-5">
+    <h4 class="mb-3 fw-semibold">{{ category.name }}</h4>
 
-  <!-- ✅ Category carousel -->
-  <div class="carousel slide" [attr.id]="getCarouselId(category.name)" data-bs-ride="carousel">
-    <div class="carousel-inner">
+    <!-- ✅ Category carousel -->
+    <div class="carousel slide" [attr.id]="getCarouselId(category.name)" data-bs-ride="carousel">
+      <div class="carousel-inner">
 
-      <div *ngFor="let chunk of category.courseChunks; let i = index"
-     class="carousel-item" [class.active]="i === 0">
-  <div class="row gx-3">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let course of chunk">
-      <div class="card h-100 shadow-sm rounded-3">
-        <img [src]="course.thumbnail" class="card-img-top" alt="course-img" />
-        <div class="card-body p-2">
-          <h6 class="card-title" (click)="goToCourseDetails(course)" style="cursor: pointer;">{{ course.title }}</h6>
-          <p class="card-text small" [innerHTML]="course.description"></p>
-<button class="btn btn-info btn-sm w-100"
-        (click)="handleAddToCart(course._id)"
-        [disabled]="course.purchased">
-  {{ course.purchased ? 'Purchased' : 'Add to Cart' }}
-</button>
+        <div *ngFor="let chunk of category.courseChunks; let i = index" class="carousel-item" [class.active]="i === 0">
+          <div class="row gx-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let course of chunk">
+              <div class="card shadow-sm   h-100 hover-shadow">
+                <img [src]="course.thumbnail || 'assets/default-course.jpg'" class="card-img-top rounded-0" alt="course-img" style="height: 160px; object-fit: cover;" />
+                <div class="card-body d-flex flex-column justify-content-between p-2">
+                  <h6 class="card-title mb-1 text-truncate" (click)="goToCourseDetails(course)"
+                      style="cursor: pointer;" [title]="course.title">
+                    {{ course.title }}
+                  </h6>
+                  <p class="card-text small mb-2 text-truncate" [title]="course.description" [innerHTML]="course.description"></p>
 
+                  <button class="btn btn-sm w-100" [ngClass]="course.purchased ? 'btn-secondary' : 'btn-info'" (click)="handleAddToCart(course._id)">
+                    {{ course.purchased ? 'Purchased' : 'Add to Cart' }}
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
+
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" [attr.data-bs-target]="'#' + getCarouselId(category.name)" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" [attr.data-bs-target]="'#' + getCarouselId(category.name)" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
     </div>
   </div>
-</div>
-
-
-    </div>
-
-    <!-- ✅ Controls -->
-<!-- Carousel Controls -->
-<!-- Prev -->
-<button class="carousel-control-prev custom-control"
-        [attr.data-bs-target]="'#' + getCarouselId(category.name)"
-        data-bs-slide="prev">
-  <span class="carousel-control-prev-icon"></span>
-</button>
-
-<!-- Next -->
-<button class="carousel-control-next custom-control"
-        [attr.data-bs-target]="'#' + getCarouselId(category.name)"
-        data-bs-slide="next">
-  <span class="carousel-control-next-icon"></span>
-</button>
-
-
-  </div>
-</div>
-
 
 </div>
-
-
-
-
-

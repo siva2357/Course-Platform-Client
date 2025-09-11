@@ -1,6 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentService } from 'src/app/core/services/payment.service';
-import { Purchase } from 'src/app/core/models/purchase.model';
+
+interface PurchaseItem {
+  purchaseId: string;
+  status: string;
+  statusLabel: string;
+  coursePrice: number;
+  taxCharges: number;
+  totalPaid: number;
+  purchasedAt: string;
+  refundCharges: number;
+  refundedAmount: number;
+  courseId: string;
+  courseTitle: string;
+  courseThumbnail: string;
+  courseCategory: string;
+  courseInstructor: string;
+}
 
 @Component({
   selector: 'app-student-purchases',
@@ -8,11 +24,9 @@ import { Purchase } from 'src/app/core/models/purchase.model';
   styleUrls: ['./student-purchases.component.css']
 })
 export class StudentPurchasesComponent implements OnInit {
-  coursePurchases: any[] = [];
+  coursePurchases: PurchaseItem[] = [];
   totalItems = 0;
   isLoading = false;
-  errorMessage = '';
-  successMessage = '';
 
   constructor(private paymentService: PaymentService) {}
 
@@ -20,48 +34,39 @@ export class StudentPurchasesComponent implements OnInit {
     this.loadStudentPurchases();
   }
 
-loadStudentPurchases(): void {
-  this.isLoading = true;
-  this.paymentService.getAllCoursesPurchased().subscribe({
-    next: (res) => {
-      this.coursePurchases = res.data || []; // 🔁 update to use `res.data`
-      this.totalItems = res.total || 0;
-      this.isLoading = false;
-    },
-    error: () => {
-      this.errorMessage = 'Failed to load purchased courses';
-      this.isLoading = false;
-    }
-  });
-}
-
+  loadStudentPurchases(): void {
+    this.isLoading = true;
+    this.paymentService.getAllCoursesPurchased().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.coursePurchases = res.data || [];
+          this.totalItems = res.total || this.coursePurchases.length;
+        }
+        this.isLoading = false;
+      },
+      error: () => this.isLoading = false
+    });
+  }
 
   onRefund(purchaseId: string): void {
-    if (!purchaseId) {
-      console.error('❌ Invalid purchase ID:', purchaseId);
-      alert('Invalid purchase ID for refund.');
-      return;
-    }
+    if (!purchaseId) return;
 
     this.paymentService.refundPurchase(purchaseId).subscribe({
       next: () => {
         alert('Refund successful');
         this.loadStudentPurchases();
       },
-      error: (err) => {
-        alert(err?.error?.message || 'Refund failed');
-      }
+      error: (err) => alert(err?.error?.message || 'Refund failed')
     });
   }
 
-  // ✅ Check if refund is allowed within 5 minutes
-  canRefund(item: Purchase): boolean {
+  canRefund(item: PurchaseItem): boolean {
     if (item.status !== 'purchased' || !item.purchasedAt) return false;
 
     const purchasedTime = new Date(item.purchasedAt).getTime();
     const now = Date.now();
     const diffMinutes = (now - purchasedTime) / 1000 / 60;
 
-    return diffMinutes <= 5;
+    return diffMinutes <= 5; // Refund allowed within 5 minutes
   }
 }
