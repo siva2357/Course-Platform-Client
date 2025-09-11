@@ -115,7 +115,11 @@ export interface CourseIntro {
 
 
 
-
+export interface UploadedFileData {
+  fileName: string;
+  url: string;
+  filePath: string;
+}
 
 
 

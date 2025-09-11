@@ -4,7 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { Category, Course, CoursePlan, CoursesResponse, Curriculum, LandingPage, Price } from '../models/course.model';
+import { Category, Course, CoursePlan, CoursesResponse, Curriculum, LandingPage, Price, UploadedFileData } from '../models/course.model';
 import { CartItem, WishList } from '../models/cart.model';
 import { Certificate } from '../models/certificate.model';
 import { CourseTracking } from '../models/courseTracking.model';
@@ -283,6 +283,30 @@ rejectCourse(courseId: string, adminId: string): Observable<any> {
     { headers: this.getHeaders() }
   ).pipe(catchError(this.handleError));
 }
+
+
+
+
+
+
+
+
+  // 🔹 Fetch all course files for an instructor's course
+// GET all files for instructor
+getInstructorCourseFiles(): Observable<{ courses: any[] }> {
+  return this.http.get<{ courses: any[] }>(
+    `${this.baseUrl}/course-files`,
+    { headers: this.getHeaders() }
+  ).pipe(
+    catchError(err => {
+      console.error('Failed to fetch instructor course files', err);
+      throw err;
+    })
+  );
+}
+
+
+
 
 
 
