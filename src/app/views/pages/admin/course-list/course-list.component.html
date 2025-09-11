@@ -2,7 +2,7 @@
 
   <!-- Section Heading -->
   <div class="mb-4">
-    <h5 class="fw-semibold">Course Management</h5>
+    <h4 class="fw-bold">Course Management</h4>
     <p class="text-muted" style="font-size: 14px;">View, filter, approve, and manage courses</p>
   </div>
 
@@ -10,7 +10,7 @@
   <div class="card border-0 shadow-sm rounded-4 mb-4">
     <div class="card-body">
       <form (ngSubmit)="applyFilter()" #filterForm="ngForm">
-        <div class="row g-3">
+        <div class="row g-3 align-items-end">
 
           <!-- Category -->
           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -33,9 +33,13 @@
           </div>
 
           <!-- Buttons -->
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex gap-2 align-items-end">
-            <button type="submit" class="btn btn-primary btn-sm flex-fill">Apply</button>
-            <button type="button" class="btn btn-outline-secondary btn-sm flex-fill" (click)="resetFilter()">Reset</button>
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary btn-sm w-50">
+              <i class="bi bi-funnel me-1"></i> Apply
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm w-50" (click)="resetFilter()">
+              <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+            </button>
           </div>
 
         </div>
@@ -46,36 +50,25 @@
   <!-- Courses Grid -->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <div class="col" *ngFor="let course of paginatedCourses">
-      <div class="card shadow-sm rounded-3 h-100 border border-dark">
+      <div class="card shadow-sm rounded-3 h-100 border border-dark ">
         <div class="card-body">
 
           <!-- Top: Thumbnail + Title -->
           <div class="d-flex align-items-center mb-3">
-            <img *ngIf="course.courseThumbnail" [src]="course.courseThumbnail"
-                 alt="Course Thumbnail"
-                 class="rounded border me-3"
-                 style="width:80px; height:60px; object-fit:cover; background:#fff;">
+            <img *ngIf="course.courseThumbnail" [src]="course.courseThumbnail" alt="Course Thumbnail" class="rounded border me-3" style="width:80px; height:60px; object-fit:cover;">
             <div>
               <div class="d-flex align-items-center gap-2 flex-wrap">
-                <strong>{{ course.courseTitle }}</strong>
-                <span class="badge"
-                      [ngClass]="{
-                        'bg-warning text-dark': course.status === 'Pending',
-                        'bg-success': course.status === 'Published',
-                        'bg-secondary': course.status === 'Draft',
-                        'bg-danger': course.status === 'Rejected'
-                      }">
-                  {{ course.status }}
-                </span>
+                <strong class="text-dark">{{ course.courseTitle }}</strong>
               </div>
+              <div  class="badge rounded-3 px-3 py-1" [ngClass]="{'bg-warning text-dark': course.status === 'Pending', 'bg-success': course.status === 'Published', 'bg-secondary': course.status === 'Draft', 'bg-danger': course.status === 'Rejected'}">{{ course.status }}</div>
               <div class="text-muted small">{{ course.courseCategory }}</div>
             </div>
           </div>
 
           <!-- Created By -->
-          <div class="mb-2" style="font-size: 14px;">
+          <div class="mb-2 small">
             <strong>Instructor:</strong> {{ course.createdBy.name }} <br>
-            <strong>Email:</strong> {{ course.createdBy.email }}
+            <span class="text-muted"> {{ course.createdBy.email }}</span>
           </div>
 
           <!-- Description -->
@@ -84,13 +77,13 @@
           <!-- Actions -->
           <div class="d-flex justify-content-start flex-wrap gap-2">
             <button *ngIf="course.status === 'Pending'" class="btn btn-sm btn-outline-success" (click)="approveCourse(course)">
-              <i class="bi bi-check-circle me-1 small"></i> Approve
+              <i class="bi bi-check-circle me-1"></i> Approve
             </button>
             <button *ngIf="course.status === 'Pending'" class="btn btn-sm btn-outline-danger" (click)="rejectCourse(course)">
-              <i class="bi bi-x-circle me-1 small"></i> Reject
+              <i class="bi bi-x-circle me-1"></i> Reject
             </button>
             <button class="btn btn-sm btn-primary" (click)="viewCourseDetails(course)">
-              <i class="bi bi-eye me-1 small"></i> View
+              <i class="bi bi-eye me-1"></i> View
             </button>
           </div>
 
@@ -100,33 +93,33 @@
   </div>
 
   <!-- Pagination -->
-  <div class="d-flex align-items-center mt-5 mb-5 border rounded-4 shadow-sm bg-white flex-nowrap flex-wrap">
+  <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 p-3 border rounded-4 shadow-sm bg-white">
+
     <!-- Left: Items per page -->
-    <div class="d-flex align-items-center flex-shrink-0 me-3" style="min-width: 100px;">
-      <label for="itemsPerPage" class="me-2 mb-0" style="white-space: nowrap;">Show</label>
+    <div class="d-flex align-items-center gap-2">
+      <label for="itemsPerPage" class="mb-0 small">Show</label>
       <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="updatePagination()"
-              class="form-select form-select-sm" style="min-width: 50px; max-width: 70px;">
+              class="form-select form-select-sm" style="width:70px;">
         <option *ngFor="let size of [5,10,20,50]" [value]="size">{{ size }}</option>
       </select>
+      <span class="small text-muted">per page</span>
     </div>
 
     <!-- Center: Pagination -->
-    <div class="flex-grow-1 d-flex justify-content-center overflow-auto">
-      <ul class="pagination pagination-sm m-0 flex-nowrap">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <a class="page-link" (click)="onPageChange(currentPage - 1)" href="javascript:void(0)">&laquo;</a>
-        </li>
-        <li *ngFor="let page of pageNumbers" class="page-item" [class.active]="page === currentPage">
-          <a class="page-link" (click)="onPageChange(page)" href="javascript:void(0)">{{ page }}</a>
-        </li>
-        <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <a class="page-link" (click)="onPageChange(currentPage + 1)" href="javascript:void(0)">&raquo;</a>
-        </li>
-      </ul>
-    </div>
+    <ul class="pagination pagination-sm mb-0">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="onPageChange(currentPage - 1)" href="javascript:void(0)">&laquo;</a>
+      </li>
+      <li *ngFor="let page of pageNumbers" class="page-item" [class.active]="page === currentPage">
+        <a class="page-link" (click)="onPageChange(page)" href="javascript:void(0)">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="onPageChange(currentPage + 1)" href="javascript:void(0)">&raquo;</a>
+      </li>
+    </ul>
 
     <!-- Right: Current page info -->
-    <div class="flex-shrink-0 ms-3" style="min-width: 120px; text-align: right;">
+    <div>
       <small class="text-muted">Page {{ currentPage }} of {{ totalPages }}</small>
     </div>
   </div>
