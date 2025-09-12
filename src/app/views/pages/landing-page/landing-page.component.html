@@ -36,9 +36,8 @@
   </p>
 </div>
 
-<section id="feature-section" >
 
-  <div class="container mt-5 mb-5 p-5" >
+  <div class="container mt-5 mb-5 p-2" >
   <p style="text-align:center; color:#111827; font-size:1.1rem; font-weight:600; margin-top:20px; margin-bottom:10px;">
     Immersive learning
   </p>
@@ -109,7 +108,7 @@
     </div>
   </div>
 
-</section>
+
 
 <div class="container-fluid" style="padding:60px 20px; background:#f8f9fa;">
   <section class="text-center mb-5">
@@ -138,96 +137,103 @@
   </div>
 
   <!-- Category-wise Carousel -->
-  <div *ngFor="let cat of categories" [hidden]="selectedCategory !== cat.id">
-    <div class="container mt-4 position-relative">
-      <div [id]="'carousel-' + cat.id" class="carousel slide" data-bs-ride="carousel" >
+<div *ngFor="let cat of categories" [hidden]="selectedCategory !== cat.id">
+  <div class="container mt-4 position-relative">
+    <div [id]="'carousel-' + cat.id" class="carousel slide" data-bs-ride="carousel">
 
-        <div class="carousel-inner">
+      <div class="carousel-inner">
 
-          <!-- Each slide (group of 4 cards) -->
-          <div *ngFor="let slide of getCarouselSlides(cat.id); let i = index" class="carousel-item" [class.active]="i === 0">
-            <div class="row justify-content-center">
-              <div class="col-md-3 mb-4" *ngFor="let course of slide">
-                <div class="card h-100 shadow-sm border-0" style="border-radius:16px; transition:all 0.3s ease; overflow:hidden; cursor:pointer;">
-                  <img [src]="course.imageUrl" class="card-img-top" alt="Course Image" style="object-fit:cover; height:180px; border-top-left-radius:16px; border-top-right-radius:16px;">
-                  <div class="card-body" style="padding:18px;">
-                    <h5 style="font-size:1.1rem; font-weight:600; margin-bottom:10px; color:#111827;">
-                      {{ course.title }}
-                    </h5>
-                    <p style="font-size:0.95rem; color:#6b7280; margin-bottom:15px; line-height:1.5;">
-                      {{ course.description }}
-                    </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <button class="btn btn-sm btn-outline-primary" (click)="goToCoursePage()" style="padding:6px 14px; border-radius:8px; font-weight:500;">
-                        View More
-                      </button>
-                      <span style="font-size:0.8rem; color:#9ca3af;">{{ course.time }}</span>
-                    </div>
+        <!-- Each slide -->
+        <div *ngFor="let slide of getCarouselSlides(cat.id, getCardsPerSlide()); let i = index"
+             class="carousel-item" [class.active]="i === 0">
+          <div class="row justify-content-center">
+
+            <div class="col-lg-3 col-md-4 col-sm-12 mb-4" *ngFor="let course of slide">
+              <div class="card h-100 shadow-sm border-0" style="border-radius:16px; transition:all 0.3s ease; overflow:hidden; cursor:pointer;">
+                <img [src]="course.imageUrl" class="card-img-top" alt="Course Image" style="object-fit:cover; height:180px; border-top-left-radius:16px; border-top-right-radius:16px;">
+                <div class="card-body" style="padding:18px;">
+                  <h5 style="font-size:1.1rem; font-weight:600; margin-bottom:10px; color:#111827;">
+                    {{ course.title }}
+                  </h5>
+                  <p style="font-size:0.95rem; color:#6b7280; margin-bottom:15px; line-height:1.5;">
+                    {{ course.description }}
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-sm btn-outline-primary" (click)="goToCoursePage()" style="padding:6px 14px; border-radius:8px; font-weight:500;">
+                      View More
+                    </button>
+                    <span style="font-size:0.8rem; color:#9ca3af;">{{ course.time }}</span>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
 
-
-
-                <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel-' + cat.id" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel-' + cat.id" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-
-
       </div>
-    </div>
-  </div>
 
-  <!-- Browse All CTA -->
-  <div class="text-center mt-3 d-flex flex-column flex-md-row justify-content-center gap-3">
-    <a href="courses">
-      <button class="btn btn-outline-primary px-4">
-        Browse All Courses
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel-' + cat.id" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
       </button>
-    </a>
-    <a href="signup">
-      <button class="btn btn-primary px-4">
-        Sign Up
+      <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel-' + cat.id" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
       </button>
-    </a>
+
+    </div>
   </div>
 </div>
 
-<div class="container py-5  px-sm-4">
-  <div class="row align-items-center  g-5 py-5">
+
+  <!-- Browse All CTA -->
+<div class="text-center mt-3 d-flex justify-content-center gap-3 flex-wrap">
+  <a href="courses" class="d-inline-block">
+    <button class="btn btn-outline-primary px-4">
+      Browse All Courses
+    </button>
+  </a>
+  <a href="signup" class="d-inline-block">
+    <button class="btn btn-primary px-4">
+      Sign Up
+    </button>
+  </a>
+</div>
+
+</div>
+
+<div class="container py-5 px-sm-4">
+  <div class="row align-items-center g-5 py-5">
 
     <!-- Image -->
-    <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto mx-lg-0">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744170029/26196026_top_management_15_qdqj4g.jpg" class="img-fluid d-block mx-auto" alt="Talent Platform" loading="lazy">
+    <div class="col-12 col-md-6 text-center text-md-start">
+      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744170029/26196026_top_management_15_qdqj4g.jpg"
+           class="img-fluid rounded-4 shadow-sm"
+           alt="Talent Platform"
+           loading="lazy">
     </div>
 
     <!-- Text Content -->
-    <div class="col-12 col-lg-6 text-center text-lg-start">
-      <h3 class=" display-md-5 fw-semibold text-body-emphasis lh-sm mb-3">
-      Guided by Experts. Built for You.
+    <div class="col-12 col-md-6 text-center text-md-start">
+      <h3 class="display-6 fw-semibold mb-3 text-dark lh-base">
+        Guided by Experts. Built for You.
       </h3>
-      <p class="lead fs-6 mb-4 px-2 px-sm-0">
+      <p class="lead text-muted mb-4">
         We empower learners to achieve success with real-world training, expert mentoring, and personalized feedback.
       </p>
 
- <div class="text-start">
-  <button type="button" class="btn btn-primary px-4" >Explore Programs</button>
-</div>
-
+      <div class="d-flex justify-content-center justify-content-md-start">
+        <button type="button" class="btn btn-primary  px-4 shadow-sm">
+          Explore Programs
+        </button>
+      </div>
     </div>
 
   </div>
 </div>
+
 
 
 

@@ -232,18 +232,24 @@ export class LandingPageComponent {
     this.router.navigateByUrl(`courses/courseName`);
 
   }
+
+  getCardsPerSlide(): number {
+  const width = window.innerWidth;
+  if (width >= 992) return 4; // large screens
+  if (width >= 768) return 3; // medium screens
+  return 1; // small screens
+}
+
 // ✅ Fix this function — make sure it refers to `this.courses`
-getCarouselSlides(categoryId: string): any[][] {
+getCarouselSlides(categoryId: string, cardsPerSlide: number): any[][] {
   const filtered = categoryId === 'all'
     ? this.courses
     : this.courses.filter(course => course.category === categoryId);
 
   const grouped: any[][] = [];
-
-  for (let i = 0; i < filtered.length; i += 4) {
-    grouped.push(filtered.slice(i, i + 4));
+  for (let i = 0; i < filtered.length; i += cardsPerSlide) {
+    grouped.push(filtered.slice(i, i + cardsPerSlide));
   }
-
   return grouped;
 }
 

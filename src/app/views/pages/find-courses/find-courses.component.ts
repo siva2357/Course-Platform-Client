@@ -72,15 +72,24 @@ export class FindCoursesComponent {
 
   selectedCategory: string = 'all';
 
-// Split courses into slides (4 per slide now)
-getCarouselSlides(courses: Course[]) {
-  const chunkSize = 4; // <-- updated from 3 to 4
-  const slides = [];
+getResponsiveSlides(courses: Course[]): Course[][] {
+  const slides: Course[][] = [];
+  const windowWidth = window.innerWidth;
+  let chunkSize = 4; // default for large screens
+
+  if (windowWidth < 768) {
+    chunkSize = 1; // small devices
+  } else if (windowWidth < 992) {
+    chunkSize = 3; // medium devices
+  }
+
   for (let i = 0; i < courses.length; i += chunkSize) {
     slides.push(courses.slice(i, i + chunkSize));
   }
+
   return slides;
 }
+
 
 
 }
