@@ -23,9 +23,9 @@ export class SignupPageComponent {
 
   navigateToRegistration() {
     if (this.selectedUserType === 'student') {
-      this.router.navigate(['student/registration-page']); // ✅ Student registration
+      this.router.navigate(['sign-up/student']); // ✅ Student registration
     } else if (this.selectedUserType === 'instructor') {
-      this.router.navigate(['instructor/registration-page']); // ✅ Instructor registration
+      this.router.navigate(['sign-up/instructor']); // ✅ Instructor registration
     }
   }
 }

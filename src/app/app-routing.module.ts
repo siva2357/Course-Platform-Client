@@ -43,8 +43,8 @@ const routes: Routes = [
 
   { path: 'sign-up', component: SignupPageComponent , title: 'Skills page' },
   { path: 'login', component: LoginPageComponent , title: 'Skills page' },
-  { path: 'instructor/registration-page', component:  InstructorSingupPageComponent, title: 'Course page' },
-  { path: 'student/registration-page', component:  StudentSignupPageComponent, title: 'Course page' },
+  { path: 'sign-up/instructor', component:  InstructorSingupPageComponent, title: 'Course page' },
+  { path: 'sign-up/student', component:  StudentSignupPageComponent, title: 'Course page' },
 
 
   { path: 'admin',loadChildren: () => import('./views/pages/admin/admin-pages.module').then((m) => m.AdminPageModule),canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'admin' }},
