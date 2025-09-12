@@ -7,8 +7,11 @@ export interface CourseStatusStats {
 
 export interface RevenueStats {
   totalSales: number;
+  totalRefundedAmount: number;
+ totalRefundCharges: number;
   totalRevenueForAdmin: number;
   totalInstructorEarnings: number;
+  totalTaxCollected: number;
 }
 
 export interface TopCourse {

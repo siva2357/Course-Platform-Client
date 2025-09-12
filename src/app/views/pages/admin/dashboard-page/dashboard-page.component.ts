@@ -69,6 +69,9 @@ export class DashboardPageComponent implements OnInit {
     this.revenueCards = [
       { title: 'Total Sales', amount: this.stats.revenueStats.totalSales },
       { title: 'Instructor Earnings', amount: this.stats.revenueStats.totalInstructorEarnings },
+      { title: 'Refund Amount', amount: this.stats.revenueStats.totalRefundedAmount },
+      { title: 'Refund Charges', amount: this.stats.revenueStats.totalRefundCharges },
+      { title: 'Tax Charges', amount: this.stats.revenueStats.totalTaxCollected },
       { title: 'Platform Revenue', amount: this.stats.revenueStats.totalRevenueForAdmin }
     ];
   }
