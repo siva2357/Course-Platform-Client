@@ -74,7 +74,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 
 
    login(): void {
-     this.router.navigate(['instructor/login-page']);
+     this.router.navigate(['login']);
    }
 
 
