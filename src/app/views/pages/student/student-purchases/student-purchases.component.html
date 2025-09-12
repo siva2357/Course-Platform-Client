@@ -19,38 +19,75 @@
   </div>
 
   <!-- Purchases List -->
-  <div *ngFor="let item of coursePurchases" class="card shadow-sm rounded-4 mb-4 border border-dark">
-    <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
+<!-- Purchases List -->
+<div *ngFor="let item of coursePurchases" class="card shadow-sm rounded-4 mb-4 border border-dark">
+  <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start gap-3" style="font-size: 14px;">
 
-      <!-- Left Column: Course Info -->
-      <div class="flex-grow-1">
-        <h5 class="fw-semibold mb-2">{{ item.courseTitle }}</h5>
-        <p class="mb-1 text-muted">Instructor: <strong>{{ item.courseInstructor }}</strong></p>
-        <p class="mb-2">
-          <strong>₹{{ item.totalPaid }}</strong>
-          <small class="text-muted">(₹{{ item.coursePrice }} + ₹{{ item.taxCharges }} tax)</small>
-        </p>
-        <span class="badge bg-light text-dark fw-medium mb-2">{{ item.statusLabel || item.status | titlecase }}</span>
-        <div class="text-muted small">Purchased at: {{ item.purchasedAt | date:'medium' }}</div>
+    <!-- Left Column: Course Info -->
+    <div class="flex-grow-1">
+      <h6 class="fw-semibold mb-2">{{ item.courseTitle }}</h6>
+      <p class="mb-1 text-muted"> Instructor: <strong>{{ item.courseInstructor }}</strong></p>
+
+      <ng-container *ngIf="item.status === 'purchased'">
+        <div class="small">
+          <p class="mb-1 text-muted">
+            Total Paid:  ₹{{ item.totalPaid }} = ₹{{ item.coursePrice }} + ₹{{ item.taxCharges }} tax
+          </p>
+        </div>
+      </ng-container>
+
+      <!-- Refunded Price Breakdown -->
+      <ng-container *ngIf="item.status === 'refunded'">
+        <div class="small">
+          <p class="mb-1 text-muted">
+            Total Paid:  ₹{{ item.totalPaid }} = ₹{{ item.coursePrice }} + ₹{{ item.taxCharges }} tax
+          </p>
+          <p class="mb-1 text-muted">
+            Refund Charges: ₹{{ item.refundCharges }}
+          </p>
+          <p class="mb-0 fw-semibold  text-muted">
+            Refunded Amount: ₹{{ item.totalPaid }} - ₹{{ item.taxCharges }} tax - ₹{{ item.refundCharges }} refund charges = ₹{{ item.refundedAmount }}
+          </p>
+        </div>
+      </ng-container>
+
+      <!-- Status Label -->
+      <span
+        class="badge fw-medium mb-2"
+        [ngClass]="{
+          'bg-success text-light': item.status === 'purchased',
+          'bg-danger text-light': item.status === 'refunded',
+          'bg-secondary text-light': item.status !== 'purchased' && item.status !== 'refunded'
+        }"
+      >
+        {{ item.statusLabel || (item.status | titlecase) }}
+      </span>
+
+      <div class="text-muted small">
+        Purchased at: {{ item.purchasedAt | date: 'medium' }}
       </div>
+    </div>
 
-      <!-- Right Column: Thumbnail + Refund -->
-      <div class="d-flex flex-column align-items-center text-center gap-2">
-        <img [src]="item.courseThumbnail" class="img-fluid rounded" width="180" height="100" style="object-fit: cover; border-radius: 0.5rem;" />
+    <!-- Right Column: Thumbnail + Refund -->
+    <div class="d-flex flex-column align-items-center text-center gap-2">
+      <img [src]="item.courseThumbnail" class="img-fluid rounded" width="180"  height="100" style="object-fit: cover; border-radius: 0.5rem;"/>
 
-        <!-- Refund Actions -->
-        <ng-container *ngIf="item.status === 'purchased'">
-          <button *ngIf="canRefund(item)" (click)="onRefund(item.purchaseId)" class="btn btn-danger btn-sm w-100">
-            Refund
-          </button>
-          <span *ngIf="!canRefund(item)" class="text-danger small">Non-refundable</span>
-        </ng-container>
+      <!-- Refund Actions -->
+      <ng-container *ngIf="item.status === 'purchased'">
+        <button *ngIf="canRefund(item)" (click)="onRefund(item.purchaseId)" class="btn btn-danger btn-sm w-100">
+          Refund
+        </button>
+        <span *ngIf="!canRefund(item)" class="text-danger small">Non-refundable</span>
+      </ng-container>
 
-        <!-- Refunded Status -->
-        <span *ngIf="item.status === 'refunded'" class="text-success fw-semibold">
-          Refunded successfully
-        </span>
+      <!-- Refunded State -->
+      <div *ngIf="item.status === 'refunded'" class="w-100 text-center">
+        <span class="text-success small">Refunded successfully</span>
       </div>
     </div>
   </div>
+</div>
+
+
+
 </div>
