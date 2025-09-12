@@ -14,7 +14,6 @@ import { AdminPageModule } from './views/pages/admin/admin-pages.module';
 import { StudentPageModule } from './views/pages/student/student-pages.module';
 import { InstructorPageModule } from './views/pages/instructor/instructor-pages.module';
 import { InstructorSingupPageComponent } from './views/pages/instructor-singup-page/instructor-singup-page.component';
-import { InstructorLoginPageComponent } from './views/pages/instructor-login-page/instructor-login-page.component';
 import { CartPageComponent } from './views/pages/cart-page/cart-page.component';
 import { AccountConfirmationPageComponent } from './views/pages/account-confirmation-page/account-confirmation-page.component';
 import { ForgotPasswordPageComponent } from './views/pages/forgot-password-page/forgot-password-page.component';
@@ -25,13 +24,15 @@ import { OtpVerificationComponent } from './views/pages/otp-verification/otp-ver
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
-import { StudentLoginPageComponent } from './views/pages/student-login-page/student-login-page.component';
 import { StudentSignupPageComponent } from './views/pages/student-signup-page/student-signup-page.component';
 import { PaymentSuccessComponent } from './views/pages/payment-success/payment-success.component';
 import { PaymentFailureComponent } from './views/pages/payment-failure/payment-failure.component';
 import { FindCoursesComponent } from './views/pages/find-courses/find-courses.component';
 import { AboutPageComponent } from './views/pages/about-page/about-page.component';
 import { CheckoutPageComponent } from './views/pages/checkout-page/checkout-page.component';
+import { SignupPageComponent } from './views/pages/signup-page/signup-page.component';
+import { LoginPageComponent } from './views/pages/login-page/login-page.component';
+
 
 
 @NgModule({
@@ -43,20 +44,20 @@ import { CheckoutPageComponent } from './views/pages/checkout-page/checkout-page
     LearningPageComponent,
     CourseCategoryComponent,
     InstructorSingupPageComponent,
-    InstructorLoginPageComponent,
     CartPageComponent,
     AccountConfirmationPageComponent,
     ForgotPasswordPageComponent,
     ResetPasswordPageComponent,
     ResetPasswordOtpPageComponent,
     OtpVerificationComponent,
-    StudentLoginPageComponent,
     StudentSignupPageComponent,
     PaymentSuccessComponent,
     PaymentFailureComponent,
     FindCoursesComponent,
     AboutPageComponent,
-    CheckoutPageComponent
+    CheckoutPageComponent,
+    SignupPageComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,

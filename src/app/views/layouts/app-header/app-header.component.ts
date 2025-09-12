@@ -90,11 +90,11 @@ goToCartPage(){
 
 
 goToSignupPage(){
-    this.router.navigate(['registration-page']);
+    this.router.navigate(['sign-up']);
 }
 
 goToLoginPage(){
-     this.router.navigate(['login-page']);
+     this.router.navigate(['login']);
 }
 
 

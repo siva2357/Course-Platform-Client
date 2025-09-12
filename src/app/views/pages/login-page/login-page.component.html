@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100" style="font-family: 'Poppins', sans-serif; background-color: #f8f9fa;">
+
+  <div class="col-11 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+    <div class="card shadow-lg border-primary rounded-3">
+
+      <div class="card-body p-4 p-md-5">
+
+        <!-- Logo -->
+        <div class="text-center mb-4">
+          <img src="https://firebasestorage.googleapis.com/v0/b/course-platform-247f5.firebasestorage.app/o/Website%2FLogo%201.jpg?alt=media&token=b7463ab0-2dee-41ae-87ec-d4d7610ae333"
+               alt="Logo"
+               class="img-fluid rounded-circle"
+               style="width: 120px; height: 120px; object-fit: cover; margin-bottom: 15px;">
+        </div>
+
+        <!-- Heading -->
+        <h4 class="text-center mb-4 poppins-bold">Welcome Back</h4>
+
+        <!-- Login Form -->
+        <form [formGroup]="loginDetails" (ngSubmit)="onSubmit()">
+
+          <!-- Email -->
+          <div class="mb-3">
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-envelope fs-5"></i></span>
+              <input [ngClass]="{'is-invalid': loginDetails.get('email')?.invalid && loginDetails.get('email')?.touched}"
+                     placeholder="Email Address"
+                     formControlName="email"
+                     type="email"
+                     class="form-control"
+                     style="height: 45px;">
+            </div>
+            <div *ngIf="loginDetails.get('email')?.touched">
+              <small *ngIf="loginDetails.get('email')?.errors?.['required']" class="text-danger">Email is required.</small>
+              <small *ngIf="loginDetails.get('email')?.errors?.['pattern']" class="text-danger">Invalid email format.</small>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock fs-5"></i></span>
+              <input [type]="showPassword ? 'text' : 'password'"
+                     [ngClass]="{'is-invalid': loginDetails.get('password')?.invalid && loginDetails.get('password')?.touched}"
+                     placeholder="Password"
+                     formControlName="password"
+                     class="form-control"
+                     style="height: 45px;">
+              <button type="button" class="btn btn-outline-secondary" (click)="showPassword = !showPassword">
+                <i class="bi" [ngClass]="showPassword ? 'bi-eye' : 'bi-eye-slash'"></i>
+              </button>
+            </div>
+            <div *ngIf="loginDetails.get('password')?.touched">
+              <small *ngIf="loginDetails.get('password')?.errors?.['required']" class="text-danger">Password is required.</small>
+              <small *ngIf="loginDetails.get('password')?.errors?.['pattern']" class="text-danger">Invalid password format.</small>
+            </div>
+          </div>
+
+          <!-- Forgot Password -->
+          <div class="text-end mb-3">
+            <span class="text-primary poppins-medium" style="cursor: pointer; font-size: 12px;" (click)="goToForgotPassword()">Forgot Password?</span>
+          </div>
+
+          <!-- Login Button -->
+          <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-outline-primary py-2 poppins-medium">Login</button>
+          </div>
+
+        </form>
+
+        <!-- Footer -->
+        <div class="text-center mt-2">
+          <p class="mb-0 poppins-medium">
+            New user?
+            <span class="text-primary poppins-medium" style="cursor: pointer;" (click)="goToSignupPage()">Create an account</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,62 @@
+<!-- Fullscreen Centered Wrapper -->
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light" style="font-family: 'Poppins', sans-serif;">
+
+  <!-- Card Container -->
+  <div class="card text-center shadow-lg w-100 mx-3 mx-sm-0" style="max-width: 380px; border-radius: 15px; border: 2px solid #007bff;">
+
+    <div class="card-body">
+
+      <!-- Logo -->
+      <div class="text-center mb-4">
+        <img src="https://firebasestorage.googleapis.com/v0/b/course-platform-247f5.firebasestorage.app/o/Website%2FLogo%201.jpg?alt=media&token=b7463ab0-2dee-41ae-87ec-d4d7610ae333"
+             alt="Main Logo" class="img-fluid" style="max-width: 120px; height: auto; object-fit: cover; border-radius: 50%;">
+      </div>
+
+      <!-- User Type Cards -->
+      <div class="d-flex flex-column gap-3">
+
+        <!-- Student -->
+        <input type="radio" id="studentRadio" name="userType" class="btn-check" (change)="selectUserType('student')" autocomplete="off">
+        <label for="studentRadio" class="card btn shadow-sm p-3 rounded-3 text-start"
+               [class.border-primary]="selectedUserType === 'student'" style="cursor: pointer;">
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-mortarboard-fill fs-2 text-primary"></i>
+            <div>
+              <h6 class="mb-1 poppins-medium">I'm a Student</h6>
+              <small class="text-muted">Learning new skills</small>
+            </div>
+          </div>
+        </label>
+
+        <!-- Instructor -->
+        <input type="radio" id="instructorRadio" name="userType" class="btn-check" (change)="selectUserType('instructor')" autocomplete="off">
+        <label for="instructorRadio" class="card btn shadow-sm p-3 rounded-3 text-start"
+               [class.border-success]="selectedUserType === 'instructor'" style="cursor: pointer;">
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-person-badge-fill fs-2 text-success"></i>
+            <div>
+              <h6 class="mb-1 poppins-medium">I'm an Instructor</h6>
+              <small class="text-muted">Sharing knowledge & teaching</small>
+            </div>
+          </div>
+        </label>
+
+      </div>
+
+      <!-- Signup Button -->
+      <div class="d-flex justify-content-center mt-4">
+        <button *ngIf="isUserTypeSelected" type="button" class="btn btn-outline-dark rounded-3 px-4 poppins-medium"
+                (click)="navigateToRegistration()">
+          Create Account
+        </button>
+      </div>
+
+      <!-- Login Text -->
+      <p class="mb-0 text-center mt-3 poppins-regular" style="font-size: 14px;">
+        Already have an account?
+        <span class="text-primary poppins-semibold" (click)="goToLoginPage()" style="cursor: pointer;">Login</span>
+      </p>
+
+    </div>
+  </div>
+</div>

@@ -158,7 +158,7 @@ export class CourseHeaderComponent implements OnInit {
 
 onLogout(): void {
   this.authService.logout();
-  this.router.navigate(['login-page']);
+  this.router.navigate(['login']);
 }
 
 

@@ -74,7 +74,7 @@ export class StudentSignupPageComponent  {
 
 
    login(): void {
-     this.router.navigate(['login-page']);
+     this.router.navigate(['login']);
    }
 
 
