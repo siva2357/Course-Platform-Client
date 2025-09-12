@@ -1,32 +1,161 @@
 <app-app-header></app-app-header>
 
-<div class="container-fluid col-xxl-8 p-5">
-  <div class="row flex-lg-row-reverse align-items-center g-5 p-5 mt-5 mb-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169895/9175118_6461_rmh637.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+<div class="container py-5  px-sm-4">
+  <div class="row align-items-center flex-lg-row-reverse g-5 py-5">
+
+    <!-- Image -->
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto mx-lg-0">
+      <img src="https://res.cloudinary.com/dpp8aspqs/image/upload/v1744169895/9175118_6461_rmh637.jpg" class="img-fluid d-block mx-auto" alt="Talent Platform" loading="lazy">
     </div>
-    <div class="col-lg-6">
-      <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-3">Come learn <br> with us</h1>
-      <p class="lead">Become an learner and update skills</p>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <button type="button" class="btn btn-primary  w-50 rouded-0" (click)="goToRegistrationPage()">Get Started</button>
-      </div>
+
+    <!-- Text Content -->
+    <div class="col-12 col-lg-6 text-center text-lg-start">
+      <h3 class=" display-md-5 fw-semibold text-body-emphasis lh-sm mb-3">
+        Come Learn With Us
+      </h3>
+      <p class="lead fs-6 mb-4 px-2 px-sm-0">
+        Become a learner and level up your skills with expert-led courses from top instructors.
+      </p>
+
+ <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
+  <button type="button" class="btn btn-primary px-4" (click)="goToRegistrationPage()">Get Started</button>
+</div>
+
     </div>
+
   </div>
 </div>
 
+<div id="benefits" class="container py-5 my-5 text-center">
 
+  <!-- Section Title -->
+  <h3 class="fw-bold mb-3" style="color:#111827;">Why Learn With Us?</h3>
+  <p class="fs-5 text-muted mb-5" style="max-width:650px; margin:auto;">
+    Join one of the world’s largest online learning communities and gain skills to advance your career.
+  </p>
 
+  <!-- Cards Row -->
+  <div class="row g-4 justify-content-center">
 
-<div class="container-fluid text-secondary px-4 py-5 my-5 text-center">
-  <div class="container p-5 mt-5 mb-5">
-    <h1 class="display-5 fw-bold">Become an learner today</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="fs-5 mb-4">Join one of the world’s largest online learning marketplaces.</p>
-      <div class=" d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-outline-primary w-50 px-4 me-sm-3 fw-bold" (click)="goToRegistrationPage()">Get Started</button>
+    <!-- Card 1 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
+      <div class="card border-2 border-dark text-center w-100 h-100 shadow-sm rounded-4 p-4"
+           style="transition: transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        <div class="mb-3" style="background:#e0f2fe; color:#2563eb; font-size:28px; display:flex; align-items:center; justify-content:center; width:70px; height:70px; border-radius:50%; margin:auto;">
+          <i class="bi bi-clock-fill"></i>
+        </div>
+        <h5 class="fw-semibold mb-2" style="color:#111827;">Learn at Your Own Pace</h5>
+        <p class="text-muted small mb-0">
+        Access courses anytime, anywhere, and progress according to your schedule.
+        </p>
       </div>
     </div>
+
+    <!-- Card 2 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
+      <div class="card border-2 border-dark text-center w-100 h-100 shadow-sm rounded-4 p-4"
+           style="transition: transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        <div class="mb-3" style="background:#e0f2fe; color:#2563eb; font-size:28px; display:flex; align-items:center; justify-content:center; width:70px; height:70px; border-radius:50%; margin:auto;">
+          <i class="bi bi-person-badge-fill"></i>
+        </div>
+        <h5 class="fw-semibold mb-2" style="color:#111827;">Expert Instructors</h5>
+        <p class="text-muted small mb-0">
+         Learn from industry professionals and gain practical skills for real-world success.
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
+      <div class="card border-2 border-dark text-center w-100 h-100 shadow-sm rounded-4 p-4"
+           style="transition: transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        <div class="mb-3" style="background:#e0f2fe; color:#2563eb; font-size:28px; display:flex; align-items:center; justify-content:center; width:70px; height:70px; border-radius:50%; margin:auto;">
+          <i class="bi bi-award-fill"></i>
+        </div>
+        <h5 class="fw-semibold mb-2" style="color:#111827;">Certifications & Career Growth</h5>
+        <p class="text-muted small mb-0">
+          Earn recognized certificates and enhance your career opportunities across industries.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA Button -->
+  <div class="mt-5">
+    <button type="button" class="btn btn-primary btn-lg px-5 fw-bold shadow-sm" (click)="goToRegistrationPage()">
+      Start Learning today
+    </button>
+  </div>
+
+</div>
+
+
+<div class="container py-5 my-5">
+  <h2 class="display-6 fw-bold mb-5 text-center">What Our Students Say</h2>
+
+  <div id="instructorCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-inner">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4 p-4 text-center h-100">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane Doe"
+                   class="rounded-circle mx-auto mb-3" width="100" height="100">
+              <h5 class="fw-semibold mb-1">Jane Doe</h5>
+              <p class="text-muted fs-6">
+                "Amazing platform! The interactive lessons and projects really helped me understand complex topics."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4 p-4 text-center h-100">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith"
+                   class="rounded-circle mx-auto mb-3" width="100" height="100">
+              <h5 class="fw-semibold mb-1">John Smith</h5>
+              <p class="text-muted fs-6">
+               "I love the flexibility and quality of the courses. The certifications really helped me boost my profile."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4 p-4 text-center h-100">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Clark"
+                   class="rounded-circle mx-auto mb-3" width="100" height="100">
+              <h5 class="fw-semibold mb-1">Emily Clark</h5>
+              <p class="text-muted fs-6">
+               "Amazing platform! The interactive lessons and projects really helped me understand complex topics."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#instructorCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bg-dark p-2" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#instructorCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon bg-dark  p-2" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 </div>
 
